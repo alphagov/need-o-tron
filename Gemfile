@@ -8,6 +8,7 @@ gem 'rails', '~> 3.1.0.rc3'
 gem 'sqlite3'
 gem 'devise'
 gem 'formtastic'
+gem 'inherited_resources'
 
 # Asset template engines
 gem 'sass-rails', "~> 3.1.0.rc"

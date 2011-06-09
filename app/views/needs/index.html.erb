@@ -1,0 +1,21 @@
+<h1>Listing needs</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @needs.each do |need| %>
+  <tr>
+    <td><%= link_to 'Show', need %></td>
+    <td><%= link_to 'Edit', edit_need_path(need) %></td>
+    <td><%= link_to 'Destroy', need, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Need', new_need_path %>
