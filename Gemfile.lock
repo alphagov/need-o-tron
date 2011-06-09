@@ -40,6 +40,7 @@ GEM
       activesupport (= 3.1.0.rc3)
     activesupport (3.1.0.rc3)
       multi_json (~> 1.0)
+    acts-as-taggable-on (2.0.6)
     arel (2.1.1)
     bcrypt-ruby (2.1.4)
     builder (3.0.0)
@@ -171,6 +172,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts-as-taggable-on
   coffee-script
   cucumber-rails
   devise

@@ -12,5 +12,8 @@
   <% end %>
 
   <%= f.inputs %>
+  <%= f.inputs :tag_list %>
+  <%= f.inputs :departments %>
+  <%= f.inputs :kind, :details, :for => :justifications, :name => 'Justifications' %>
   <%= f.buttons %>
 <% end %>
