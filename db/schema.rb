@@ -10,7 +10,28 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110609102631) do
+ActiveRecord::Schema.define(:version => 20110609110317) do
+
+  create_table "departments", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "departments_needs", :force => true do |t|
+    t.integer "department_id"
+    t.integer "need_id"
+  end
+
+  create_table "justifications", :force => true do |t|
+    t.string   "kind"
+    t.text     "details"
+    t.integer  "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "justifications", ["need_id"], :name => "index_justifications_on_need_id"
 
   create_table "kinds", :force => true do |t|
     t.string   "name"
