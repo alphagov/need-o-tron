@@ -11,9 +11,29 @@
     </div>
   <% end %>
 
-  <%= f.inputs %>
-  <%= f.inputs :tag_list %>
-  <%= f.inputs :departments %>
+  <%= f.inputs :title, :description, :tag_list, :id => 'overview' %>
+  <%= f.inputs :kind, :status, :url, :priority, :id => 'metadata', :name => 'Product decision' %>
+  <%= f.inputs :departments, :id => 'departments' %>
   <%= f.inputs :kind, :details, :for => :justifications, :name => 'Justifications' %>
   <%= f.buttons %>
 <% end %>
+
+<style type="text/css" media="screen">
+  #overview {
+    width: 60%;
+    float: left;
+  }
+  #metadata {
+    margin-left: 5%;
+    width: 30%;
+    float: left;
+  }
+    #metadata legend {
+      font-size: 150%;
+      font-weight: bold;
+      padding-bottom: 0.5em;
+    }
+  #departments {
+    clear: both;
+  }
+</style>
