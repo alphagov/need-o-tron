@@ -7,11 +7,28 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-  
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-  
-    <%= yield %>
+    <div id="container">
+      <div id="app-header">
+        <h1><%= link_to 'Need-O-Tron 5000', root_path %></h1>
+        <div role="navigation">
+          <ul id="admin-options">
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div id="main-content">
+      <div id="content-area">
+        <% flash.each do |k, v| %>
+        <p class="<%= k %> flash-<%= k %>"><%= v %></p>
+        <% end %>
 
+        <%= yield %>
+      </div>
+    </div>
+    <div id="footer">
+      &copy; 2010-<%= Date.today.year %> <a href="http://www.ketlai.co.uk">Ket Lai Ltd</a>.
+    </div>
+    <%= javascript_include_tag :defaults %>
+    <%= yield :extra_javascript %>
   </body>
 </html>
