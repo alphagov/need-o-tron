@@ -23,5 +23,6 @@ group :development, :test do
 end
 
 group :test do
+  gem 'mocha'
   gem 'cucumber-rails'
 end

@@ -99,6 +99,7 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.16)
+    mocha (0.9.12)
     multi_json (1.0.3)
     nokogiri (1.4.4)
     orm_adapter (0.0.5)
@@ -179,6 +180,7 @@ DEPENDENCIES
   formtastic
   inherited_resources
   jquery-rails
+  mocha
   rails (~> 3.1.0.rc3)
   rspec-rails
   sass-rails (~> 3.1.0.rc)
