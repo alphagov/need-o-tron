@@ -1,0 +1,19 @@
+#overview {
+  width: 60%;
+  float: left;
+}
+#metadata {
+  margin-left: 5%;
+  width: 30%;
+  float: left;
+  
+  legend {
+    font-size: 150%;
+    font-weight: bold;
+    padding-bottom: 0.5em;
+  }
+}
+
+#departments {
+  clear: both;
+}
