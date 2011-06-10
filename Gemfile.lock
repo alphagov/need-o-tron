@@ -156,6 +156,7 @@ GEM
       rubyzip
     sqlite3 (1.3.3)
     term-ansicolor (1.0.5)
+    therubyracer (0.8.2)
     thor (0.14.6)
     tilt (1.3.2)
     treetop (1.4.9)
@@ -186,4 +187,5 @@ DEPENDENCIES
   sass-rails (~> 3.1.0.rc)
   sprockets!
   sqlite3
+  therubyracer
   uglifier

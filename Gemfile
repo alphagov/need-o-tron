@@ -18,6 +18,10 @@ gem 'uglifier'
 
 gem 'jquery-rails'
 
+group :production do
+  gem 'therubyracer'
+end
+
 group :development, :test do
   gem 'rspec-rails'
 end
