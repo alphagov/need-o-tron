@@ -11,6 +11,8 @@ gem 'mysql2'
 gem 'rdiscount'
 
 gem 'devise'
+gem 'devise_invitable'
+
 gem 'formtastic'
 gem 'inherited_resources'
 gem 'acts-as-taggable-on'
