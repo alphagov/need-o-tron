@@ -6,6 +6,9 @@ gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'
 gem 'rails', '~> 3.1.0.rc3'
 
 gem 'sqlite3'
+
+gem 'mysql2'
+
 gem 'devise'
 gem 'formtastic'
 gem 'inherited_resources'
