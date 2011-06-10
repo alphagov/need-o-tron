@@ -1,19 +1,66 @@
-#overview {
+body {
+  background-color: #333;
+}
+
+h1 {
+  font-family: 'Cabin Sketch', arial, serif;
+  font-size: 1.5em
+}
+
+h1 a {
+  color: #fff;
+}
+
+#overview, #departments, #justifications {
+  padding-bottom: 1em;
+  margin-bottom: 2em;
   width: 60%;
+  border-bottom: dashed 2px #E5E5E5;
+}
+
+#overview {
   float: left;
 }
+
 #metadata {
+  padding: 1em;
+  margin-top: -2em;
   margin-left: 5%;
   width: 30%;
   float: left;
+  background: #F2F2F2;
   
   legend {
-    font-size: 150%;
+    font-size: 1.5em;
     font-weight: bold;
-    padding-bottom: 0.5em;
+    padding-top: 2em;
+    margin-bottom: 0.5em;
   }
 }
 
 #departments {
   clear: both;
+}
+
+#new_need textarea {
+  height: 7em;
+}
+
+form.formtastic fieldset.buttons:last-child {
+  padding: 1.5em 1.25em 0 1.25em;
+  margin-bottom: 0.5em;
+  background: #EEEFEE;
+}
+
+form.formtastic fieldset.buttons li.commit {
+  float: right;
+}
+
+form.formtastic fieldset.buttons li.commit input {
+  padding: 0.25em 0.5em;
+  font-weight: bold;
+  color: #fff;
+  background: #1d97ff;
+  border: 4px #0065C1 solid;
+  border-radius: 0.25em;
 }
