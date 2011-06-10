@@ -1,19 +1,47 @@
-#overview {
+body {
+  background-color: #333;
+}
+
+h1 {
+  font-family: 'Cabin Sketch', arial, serif;
+  font-size: 1.5em
+}
+
+h1 a {
+  color: #fff;
+}
+
+#overview, #departments, #justifications {
+  padding-bottom: 1em;
+  margin-bottom: 2em;
   width: 60%;
+  border-bottom: dashed 2px #E5E5E5;
+}
+
+#overview {
   float: left;
 }
+
 #metadata {
+  padding: 1em;
+  margin-top: -2em;
   margin-left: 5%;
   width: 30%;
   float: left;
+  background: #F2F2F2;
   
   legend {
-    font-size: 150%;
+    font-size: 1.5em;
     font-weight: bold;
-    padding-bottom: 0.5em;
+    padding-top: 2em;
+    margin-bottom: 0.5em;
   }
 }
 
 #departments {
   clear: both;
+}
+
+#new_need textarea {
+  height: 7em;
 }
