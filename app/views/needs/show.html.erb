@@ -1,5 +1,7 @@
 <h2><%= @need.title %></h2>
-<p><%= @need.description %></p>
+<p><%= markdown @need.description %></p>
+
+<p><%= link_to 'Edit need', [:edit, @need] %></p>
 
 <dl>
   <dt>Format Type</dt>
@@ -22,7 +24,7 @@
   <% @need.justifications.each do |justification| %>
   <div>
     <p><%= justification.kind %></p>
-    <p><%= justification.details %></p>
+    <p><%= markdown justification.details %></p>
     <p><%= link_to 'Edit', edit_need_justification_path(@need), :class => 'button' %></p>
   </div>
   <% end %>

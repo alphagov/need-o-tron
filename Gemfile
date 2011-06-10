@@ -8,6 +8,7 @@ gem 'rails', '~> 3.1.0.rc3'
 gem 'sqlite3'
 
 gem 'mysql2'
+gem 'rdiscount'
 
 gem 'devise'
 gem 'formtastic'
