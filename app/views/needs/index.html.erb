@@ -9,7 +9,7 @@
 
 <% @needs.each do |need| %>
   <tr>
-    <td><%= link_to 'Show', need %></td>
+    <td><%= link_to need.title, need %></td>
     <td><%= link_to 'Edit', edit_need_path(need) %></td>
     <td><%= link_to 'Destroy', need, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
