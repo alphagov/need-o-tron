@@ -14,6 +14,11 @@
   <%= f.inputs :title, :description, :tag_list, :id => 'overview' %>
   <%= f.inputs :kind, :status, :url, :priority, :id => 'metadata', :name => 'Product decision' %>
   <%= f.inputs :departments, :id => 'departments' %>
-  <%= f.inputs :kind, :details, :for => :justifications, :name => 'Justifications' %>
+
+  <% unless f.object.persisted? %>
+    <% f.object.justifications.build %>
+    <%= f.inputs :kind, :details, :for => :justifications, :name => 'Justifications' %>
+  <% end %>
+  
   <%= f.buttons %>
 <% end %>
