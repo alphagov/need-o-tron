@@ -45,3 +45,22 @@ h1 a {
 #new_need textarea {
   height: 7em;
 }
+
+form.formtastic fieldset.buttons:last-child {
+  padding: 1.5em 1.25em 0 1.25em;
+  margin-bottom: 0.5em;
+  background: #EEEFEE;
+}
+
+form.formtastic fieldset.buttons li.commit {
+  float: right;
+}
+
+form.formtastic fieldset.buttons li.commit input {
+  padding: 0.25em 0.5em;
+  font-weight: bold;
+  color: #fff;
+  background: #1d97ff;
+  border: 4px #0065C1 solid;
+  border-radius: 0.25em;
+}
