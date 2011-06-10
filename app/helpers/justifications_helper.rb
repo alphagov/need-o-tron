@@ -1,0 +1,2 @@
+module JustificationsHelper
+end

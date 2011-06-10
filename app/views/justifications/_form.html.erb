@@ -1,0 +1,16 @@
+<%= semantic_form_for([@need, @justification]) do |f| %>
+  <% if @justification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@justification.errors.count, "error") %> prohibited this justification from being saved:</h2>
+
+      <ul>
+      <% @justification.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.inputs :kind, :details %>
+  <%= f.buttons %>
+<% end %>
