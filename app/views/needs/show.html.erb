@@ -1,2 +1,30 @@
-<%= link_to 'Edit', edit_need_path(@need) %> |
-<%= link_to 'Back', needs_path %>
+<h2><%= @need.title %></h2>
+<p><%= @need.description %></p>
+
+<dl>
+  <dt>Format Type</dt>
+  <dd><%= @need.kind %></dd>
+  <dt>Created</dt>
+  <dd><%= @need.created_at %></dd>
+  <dt>Updated</dt>
+  <dd><%= @need.updated_at %></dd>
+  <dt>Added By</dt>
+  <dd>tbd</dd>
+  <dt>Priority</dt>
+  <dd><%= @need.priority %></dd>
+</dl>
+
+<p>Tagged: <%= @need.tag_list %></p>
+<p>Departments Interested: <%= @need.departments.collect(&:to_s).to_sentence %></p>
+
+<div id="justifications">
+  <h3>Justifications</h3>
+  <% @need.justifications.each do |justification| %>
+  <div>
+    <p><%= justification.kind %></p>
+    <p><%= justification.details %></p>
+  </div>
+  <% end %>
+  
+  <p><%# link_to 'Add justification', new_need_justification_path %></p>
+</div>
