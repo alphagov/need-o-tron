@@ -13,6 +13,8 @@ gem 'rdiscount'
 gem 'devise'
 gem 'devise_invitable'
 
+gem 'carrierwave'
+
 gem 'formtastic'
 gem 'inherited_resources'
 gem 'acts-as-taggable-on'
