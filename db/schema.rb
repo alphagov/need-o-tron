@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110610142708) do
+ActiveRecord::Schema.define(:version => 20110613091307) do
 
   create_table "departments", :force => true do |t|
     t.string   "name"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20110610142708) do
     t.integer  "need_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "file"
   end
 
   add_index "justifications", ["need_id"], :name => "index_justifications_on_need_id"
@@ -50,6 +51,9 @@ ActiveRecord::Schema.define(:version => 20110610142708) do
     t.text     "notes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "decision_maker_id"
+    t.datetime "decision_made_at"
+    t.text     "reason_for_decision"
   end
 
   add_index "needs", ["kind_id"], :name => "index_needs_on_kind_id"
