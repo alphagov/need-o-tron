@@ -26,11 +26,6 @@
   <% end %>
 
   <%= f.inputs :departments, :id => 'departments' %>
-
-  <% unless f.object.persisted? %>
-    <% f.object.justifications.build %>
-    <%= f.inputs :kind, :details, :for => :justifications, :id => 'justifications', :name => 'Justifications' %>
-  <% end %>
   
   <%= f.buttons %>
 <% end %>
