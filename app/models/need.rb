@@ -4,6 +4,7 @@ class Need < ActiveRecord::Base
   belongs_to :creator, :class_name => 'User'
   
   has_and_belongs_to_many :departments
+  has_and_belongs_to_many :audiences
   has_many :justifications
   
   scope :undecided, where(:decision_made_at => nil)

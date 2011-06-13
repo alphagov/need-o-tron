@@ -21,6 +21,10 @@
     <%= f.inputs :kind, :status, :url, :priority, :reason_for_decision, :id => 'metadata', :name => 'Product decision' %>
   <% end %>
 
+  <%= f.inputs do %>
+    <%= f.input :audiences, :as => :check_boxes %>
+  <% end %>
+
   <%= f.inputs :departments, :id => 'departments' %>
 
   <% unless f.object.persisted? %>
