@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110613093644) do
+ActiveRecord::Schema.define(:version => 20110613094912) do
 
   create_table "audiences", :force => true do |t|
     t.string   "name"
@@ -34,13 +34,21 @@ ActiveRecord::Schema.define(:version => 20110613093644) do
     t.integer "need_id"
   end
 
+  create_table "evidence_types", :force => true do |t|
+    t.string   "name"
+    t.integer  "weight"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "justifications", :force => true do |t|
-    t.string   "kind"
     t.text     "details"
     t.integer  "need_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "file"
+    t.integer  "evidence_type_id"
   end
 
   add_index "justifications", ["need_id"], :name => "index_justifications_on_need_id"
