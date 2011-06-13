@@ -24,11 +24,28 @@
 <p>Tagged: <%= @need.tag_list %></p>
 <p>Departments Interested: <%= @need.departments.collect(&:to_s).to_sentence %></p>
 
+<div id="services">
+  <h3>Existing Services</h3>
+  <% @need.existing_services.each do |existing_service| %>
+  <div>
+    <p><%= existing_service.kind %> <%= existing_service.government_run? ? 'Government run' : 'Not government run' %></p>
+    <p><%= markdown existing_service.description %></p>
+    <% if existing_service.link %>
+    <p><%= link_to existing_service.link, existing_service.link %></p>
+    <% end %>
+    <p><%= link_to 'Edit', edit_need_existing_service_path(@need), :class => 'button' %></p>
+  </div>
+  <% end %>
+  
+  <p><%= link_to 'Add service', new_need_existing_service_path(@need) %></p>
+</div>
+
+
 <div id="justifications">
   <h3>Evidence</h3>
   <% @need.justifications.each do |justification| %>
   <div>
-    <p><%= justification.kind %></p>
+    <p><%= justification.evidence_type %></p>
     <p><%= markdown justification.details %></p>
 
     <% if justification.file? %>
