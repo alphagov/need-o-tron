@@ -3,6 +3,11 @@
 
 <p><%= link_to 'Edit need', [:edit, @need] %></p>
 
+<% if @need.decision_made? %>
+<p>Decision made at <%= @need.decision_made_at %> by <%= @need.decision_maker %></p>
+<p><%= @need.reason_for_decision %></p>
+<% end %>
+
 <dl>
   <dt>Format Type</dt>
   <dd><%= @need.kind %></dd>

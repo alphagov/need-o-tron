@@ -16,7 +16,11 @@
     <%= f.input :description %>
     <%= f.input :tag_list, :hint => "separate tags with commas" %>
   <% end %>
-  <%= f.inputs :kind, :status, :url, :priority, :id => 'metadata', :name => 'Product decision' %>
+
+  <% if current_user.role == 'superuser'  %>
+    <%= f.inputs :kind, :status, :url, :priority, :reason_for_decision, :id => 'metadata', :name => 'Product decision' %>
+  <% end %>
+
   <%= f.inputs :departments, :id => 'departments' %>
 
   <% unless f.object.persisted? %>
