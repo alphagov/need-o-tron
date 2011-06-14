@@ -1,30 +1,45 @@
-<h2><%= @need.title %></h2>
-<p><%= markdown @need.description %></p>
+<div id="id-status" class="new">
+  <h3 id="id-number">#44</h3>
+  <h4 id="status">Ready for carding</h4>
+</div>
 
-<p><%= link_to 'Edit need', [:edit, @need] %></p>
+<div id="need-title-description" class="need-section">
+  <h1><%= @need.title %></h1>
+  <p><%= markdown @need.description %></p>
 
-<% if @need.decision_made? %>
-<p>Decision made at <%= @need.decision_made_at %> by <%= @need.decision_maker %></p>
-<p><%= @need.reason_for_decision %></p>
-<% end %>
+  <p><%= link_to 'Edit need', [:edit, @need] %></p>
+</div>
 
-<dl>
-  <dt>Format Type</dt>
-  <dd><%= @need.kind %></dd>
-  <dt>Created</dt>
-  <dd><%= @need.created_at %></dd>
-  <dt>Updated</dt>
-  <dd><%= @need.updated_at %></dd>
-  <dt>Added By</dt>
-  <dd>tbd</dd>
-  <dt>Priority</dt>
-  <dd><%= @need.priority %></dd>
-</dl>
+<div class="need-section">
+
+  <% if @need.decision_made? %>
+  <p>Decision made at <%= @need.decision_made_at %> by <%= @need.decision_maker %></p>
+  <p><%= @need.reason_for_decision %></p>
+  <% end %>
+
+  <dl>
+    <dt>Format Type</dt>
+    <dd><%= @need.kind %></dd>
+    <dt>Created</dt>
+    <dd><%= @need.created_at %></dd>
+    <dt>Updated</dt>
+    <dd><%= @need.updated_at %></dd>
+    <dt>Added By</dt>
+    <dd>tbd</dd>
+    <dt>Priority</dt>
+    <dd><%= @need.priority %></dd>
+  </dl>
+
+</div>
+
+<div class="need-section">
 
 <p>Tagged: <%= @need.tag_list %></p>
 <p>Departments Interested: <%= @need.departments.collect(&:to_s).to_sentence %></p>
 
-<div id="services">
+</div>
+
+<div class="need-section">
   <h3>Existing Services</h3>
   <% @need.existing_services.each do |existing_service| %>
   <div>
@@ -41,7 +56,7 @@
 </div>
 
 
-<div id="justifications">
+<div class="need-section">
   <h3>Evidence</h3>
   <% @need.justifications.each do |justification| %>
   <div>

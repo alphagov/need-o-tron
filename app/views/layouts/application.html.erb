@@ -4,12 +4,11 @@
     <title>Need-O-Tron</title>
     <%= stylesheet_link_tag    "application" %>
     <%= csrf_meta_tags %>
-    <link href='http://fonts.googleapis.com/css?family=Cabin+Sketch:bold' rel='stylesheet' type='text/css'>
   </head>
   <body>
     <div id="container">
       <div id="app-header">
-        <h1><%= link_to 'Need-O-Tron 5000', root_path %></h1>
+        <p id="logo"><%= link_to 'Need-O-Tron', root_path %></p>
         <div role="navigation">
           <ul id="admin-options">
             <%- unless user_signed_in? or controller_name != 'sessions' %>
@@ -27,6 +26,13 @@
           </ul>
           <% if user_signed_in? %>
           <ul class="navigation">
+            <li><a class="new" href="#">New</a><div class="arrow-right"></div></li>
+            <li><a class="ready-for-review" href="#">Ready for review</a></li>
+            <li><a class="ready-for-carding" href="#">Ready for carding</a></li>
+            <li><a class="done" href="#">Done</a></li>
+            <li><a class="bin" href="#">Bin</a></li>
+          </ul>
+          <ul class="navigation">
             <li><%= link_to 'Add Need', new_need_path %></li>
             <li><%= link_to 'View all needs', needs_path %></li>
           </ul>
@@ -34,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div id="main-content">
+    <div id="main-content" class="new">
       <div id="content-area">
         <% flash.each do |k, v| %>
         <p class="<%= k %> flash-<%= k %>"><%= v %></p>
