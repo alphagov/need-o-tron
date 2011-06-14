@@ -2,19 +2,74 @@ body {
   background-color: #333;
 }
 
-h1 {
-  font-family: 'Cabin Sketch', arial, serif;
-  font-size: 1.5em
+p#logo {
+  float: left;
+  font-family: arial, serif;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-h1 a {
+p#logo a {
   color: #fff;
 }
 
-#overview, #departments, #justifications {
+/* colours */
+
+.new {
+  background-color: #CC2323;
+}
+.ready-for-review {
+  background-color: #CC6231;  
+}
+.ready-for-carding {
+  background-color: #00B735;
+}
+.done {
+  background-color: #3171CC;
+}
+.bin {
+  background-color: #A09A9F;
+}
+
+#main-content {
+  &.new {
+    border-color: #CC2323;
+  }
+}
+
+/* arrow for menu */
+
+div.arrow-right {
+  width:0px; 
+  height:0px; 
+  border-bottom:5px solid transparent;  /* left arrow slant */
+  border-top:5px solid transparent; /* right arrow slant */
+  border-left:5px solid #000; /* bottom, add background color here */
+  font-size:0px;
+  line-height:0px;
+}
+
+#id-status {
+  float: right;
+  padding: 10px;
+  width: 140px;
+  color: #fff;
+}
+
+#id-number {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.need-section {
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: solid 2px #BFBFBF
+}
+
+/*#overview, #departments, #justifications {
   padding-bottom: 1em;
   margin-bottom: 2em;
-  width: 60%;
   border-bottom: dashed 2px #E5E5E5;
 }
 
@@ -40,16 +95,18 @@ h1 a {
 
 #departments {
   clear: both;
-}
+}*/
 
-#new_need textarea {
-  height: 7em;
+form.formtastic fieldset.inputs {
+/*  padding-bottom: 1em;
+  margin-bottom: 2em;
+  border-bottom: dashed 2px #E5E5E5;*/
 }
 
 form.formtastic fieldset.buttons:last-child {
-  padding: 1.5em 1.25em 0 1.25em;
-  margin-bottom: 0.5em;
-  background: #EEEFEE;
+/*  padding: 1.5em 1.25em 0 1.25em;*/
+/*  margin-bottom: 1em;*/
+/*  background: #EEEFEE;*/
 }
 
 form.formtastic fieldset.buttons li.commit {
@@ -58,6 +115,7 @@ form.formtastic fieldset.buttons li.commit {
 
 form.formtastic fieldset.buttons li.commit input {
   padding: 0.25em 0.5em;
+  cursor: pointer;
   font-weight: bold;
   color: #fff;
   background: #1d97ff;
