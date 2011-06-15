@@ -6,6 +6,6 @@ module ApplicationHelper
   
   def status_name(status = '')
     status ||= ""
-    status.gsub('-', '').capitalize
+    status.gsub('-', ' ').capitalize
   end
 end

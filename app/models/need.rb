@@ -21,6 +21,8 @@ class Need < ActiveRecord::Base
   before_save :set_creator, :on => :create
   
   validate :status, :in => STATUSES
+  validates_presence_of :reason_for_decision, :if => proc { |a| a.status == 'ready-for-carding' || a.status == 'bin' }
+  validates_presence_of :priority, :if => proc { |a| a.status == 'ready-for-carding' }
   
   def set_creator
     creator_id = Thread.current[:current_user]

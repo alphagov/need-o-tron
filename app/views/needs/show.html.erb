@@ -8,6 +8,15 @@
   <p><%= markdown @need.description %></p>
 
   <p><%= link_to 'Edit need', [:edit, @need] %></p>
+  
+  <% if @need.status == 'new' %>
+    <p>Is this ready for review? Has evidence been provided?</p>
+    <%= button_to 'Submit it now', need_path(@need, :need => {:status => 'ready-for-review'}), :method => :put %>
+  <% elsif @need.status == 'ready-for-review' and current_user.role == 'superuser' %>
+    <%= render 'decision' %>
+  <% elsif @need.status == 'ready-for-carding' and current_user.role == 'superuser' %>
+    <%= render 'mark_done' %>
+  <% end %>
 </div>
 
 <div class="need-section">

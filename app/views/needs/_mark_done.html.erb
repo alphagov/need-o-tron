@@ -1,0 +1,8 @@
+<h2>Mark as done</h2>
+<%= semantic_form_for(@need) do |f| %>
+  <%= f.inputs do %>
+    <%= f.input :status, :collection => ['ready-for-carding', 'done', 'bin'] %>
+    <%= f.input :url %>
+    <%= f.commit_button 'It is done' %>
+  <% end %>
+<% end %>
