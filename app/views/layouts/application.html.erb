@@ -26,9 +26,9 @@
           </ul>
           <% if user_signed_in? %>
           <ul class="navigation">
-            <li><a class="new" href="#">New</a><div class="arrow-right"></div></li>
-            <li><a class="ready-for-review" href="#">Ready for review</a></li>
-            <li><a class="ready-for-carding" href="#">Ready for carding</a></li>
+            <li><a class="new" href="#">New<div class="arrow-right"></div></a></li>
+            <li><a class="ready-for-review" href="#">Ready for review<div class="arrow-right"></div></a></li>
+            <li><a class="ready-for-carding" href="#">Ready for carding<div class="arrow-right"></div></a></li>
             <li><a class="done" href="#">Done</a></li>
             <li><a class="bin" href="#">Bin</a></li>
           </ul>
@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div id="main-content" class="new">
+    <div id="main-content">
       <div id="content-area">
         <% flash.each do |k, v| %>
         <p class="<%= k %> flash-<%= k %>"><%= v %></p>
