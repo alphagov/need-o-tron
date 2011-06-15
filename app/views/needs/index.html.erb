@@ -5,6 +5,9 @@
 <table>
   <tr>
     <th></th>
+    <% if params[:in_state] == 'bin' %>
+    <th></th>
+    <% end %>
     <th></th>
     <th></th>
   </tr>
@@ -12,6 +15,9 @@
 <% @needs.each do |need| %>
   <tr>
     <td><%= link_to need.title, need %></td>
+    <% if params[:in_state] == 'bin' %>
+    <td><%= need.reason_for_decision %></td>
+    <% end %>
     <td><%= link_to 'Edit', edit_need_path(need) %></td>
     <td><%= link_to 'Destroy', need, confirm: 'Are you sure?', method: :delete %></td>
   </tr>

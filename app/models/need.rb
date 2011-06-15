@@ -13,6 +13,7 @@ class Need < ActiveRecord::Base
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
   scope :in_state, proc { |s| where(:status => s) }
+  default_scope order('priority, title')
   
   accepts_nested_attributes_for :justifications, :reject_if => :all_blank
   acts_as_taggable
