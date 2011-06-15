@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110613100846) do
+ActiveRecord::Schema.define(:version => 20110615101938) do
 
   create_table "audiences", :force => true do |t|
     t.string   "name"
@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20110613100846) do
     t.string   "title"
     t.text     "description"
     t.integer  "kind_id"
-    t.string   "status"
+    t.string   "status",              :default => "new"
     t.string   "url"
     t.integer  "priority"
     t.integer  "creator_id"
