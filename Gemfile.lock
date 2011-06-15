@@ -190,6 +190,7 @@ DEPENDENCIES
   devise
   devise_invitable
   formtastic
+  has_scope
   inherited_resources
   jquery-rails
   mocha

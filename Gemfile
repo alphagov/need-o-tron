@@ -17,6 +17,8 @@ gem 'carrierwave'
 
 gem 'formtastic'
 gem 'inherited_resources'
+gem 'has_scope'
+
 gem 'acts-as-taggable-on'
 
 # Asset template engines

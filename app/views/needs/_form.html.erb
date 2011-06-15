@@ -18,7 +18,13 @@
   <% end %>
 
   <% if current_user.role == 'superuser'  %>
-    <%= f.inputs :kind, :status, :url, :priority, :reason_for_decision, :id => 'metadata', :name => 'Product decision' %>
+    <%= f.inputs :id => 'metadata', :name => 'Product decision' do %>
+      <%= f.input :kind %>
+      <%= f.input :status, :collection => Need::STATUSES %>
+      <%= f.input :url %>
+      <%= f.input :priority %>
+      <%= f.input :reason_for_decision %>
+    <% end %>
   <% end %>
 
   <%= f.inputs do %>

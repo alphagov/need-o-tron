@@ -1,4 +1,6 @@
 class Need < ActiveRecord::Base
+  STATUSES = ['new', 'ready-for-review', 'ready-for-carding', 'done', 'bin']
+  
   belongs_to :kind
   belongs_to :decision_maker, :class_name => 'User'
   belongs_to :creator, :class_name => 'User'
@@ -10,12 +12,15 @@ class Need < ActiveRecord::Base
   
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
+  scope :in_state, proc { |s| where(:status => s) }
   
   accepts_nested_attributes_for :justifications, :reject_if => :all_blank
   acts_as_taggable
   
   before_save :record_decision_info, :if => :reason_for_decision_changed?
   before_save :set_creator, :on => :create
+  
+  validate :status, :in => STATUSES
   
   def set_creator
     creator_id = Thread.current[:current_user]
