@@ -7,3 +7,9 @@ en:
     attributes:
       need:
         kind: Format Type
+  flash:
+    justifications:
+      update:
+        notice: "Evidence successfully updated"
+      create:
+        notice: "Evidence successfully created"
