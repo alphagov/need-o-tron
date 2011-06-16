@@ -19,7 +19,7 @@ gem 'formtastic'
 gem 'inherited_resources'
 gem 'has_scope'
 
-gem 'acts-as-taggable-on'
+# gem 'acts-as-taggable-on'
 
 # Asset template engines
 gem 'sass-rails', "~> 3.1.0.rc"

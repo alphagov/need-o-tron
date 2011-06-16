@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615101938) do
+ActiveRecord::Schema.define(:version => 20110616113944) do
 
   create_table "audiences", :force => true do |t|
     t.string   "name"
@@ -83,6 +83,7 @@ ActiveRecord::Schema.define(:version => 20110615101938) do
     t.integer  "decision_maker_id"
     t.datetime "decision_made_at"
     t.text     "reason_for_decision"
+    t.text     "tag_list"
   end
 
   add_index "needs", ["kind_id"], :name => "index_needs_on_kind_id"
