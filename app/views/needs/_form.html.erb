@@ -12,9 +12,9 @@
   <% end %>
 
   <%= f.inputs :id => 'overview' do %>
-    <%= f.input :title %>
-    <%= f.input :description %>
-    <%= f.input :tag_list, :hint => "separate tags with commas" %>
+    <%= f.input :title, :label => 'Need *' %>
+    <%= f.input :description, :label => 'Context', :hint => "provide some information about the circumstances surrounding this need" %>
+    <%= f.input :tag_list, :label => 'Tags', :hint => "separate tags with commas" %>
   <% end %>
 
   <% if current_user.role == 'superuser' and f.object.persisted? %>
@@ -30,8 +30,6 @@
   <%= f.inputs do %>
     <%= f.input :audiences, :as => :check_boxes %>
   <% end %>
-
-  <%= f.inputs :departments, :id => 'departments' %>
   
   <%= f.buttons %>
 <% end %>

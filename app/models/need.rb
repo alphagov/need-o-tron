@@ -5,7 +5,6 @@ class Need < ActiveRecord::Base
   belongs_to :decision_maker, :class_name => 'User'
   belongs_to :creator, :class_name => 'User'
   
-  has_and_belongs_to_many :departments
   has_and_belongs_to_many :audiences
   has_many :justifications
   has_many :existing_services

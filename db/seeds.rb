@@ -36,3 +36,5 @@ departments = ['Attorney General\'s Office', 'Cabinet Office', 'Department for B
   'Universities and Colleges Admission Service (UCAS)', 'Vehicle and Operator Services Agency (VOSA)', 'Vehicle Certification Agency (VCA)', 'Service Personnel & Veterans Agency (SPVA)', 
   'Veterinary Medicines Directorate', 'Wales Audit Office', 'Welsh Assembly Government', 'Whole of Government Accounts', 'Young People\'s Learning Agency', 'Youth Justice Board', 'Zoos Expert Committee']
 departments.each { |d| Department.find_or_create_by_name(d) }
+audiences = ['Businesses', 'Professionals', 'Politicians/Govt', 'Parents', 'Carers', 'Young people', 'Disabled people', 'Overseas', 'Older people']
+audiences.each { |a| Audience.find_or_create_by_name(a) }
