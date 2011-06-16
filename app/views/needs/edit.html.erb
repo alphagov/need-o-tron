@@ -1,3 +1,5 @@
 <h1>Editing need</h1>
 
 <%= render 'form' %>
+
+<% content_for :current_state, @need.status %>

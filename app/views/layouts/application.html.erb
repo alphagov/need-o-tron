@@ -40,7 +40,7 @@
         </div>
       </div>
     </div>
-    <div id="main-content" class="<%= params[:in_state] %>">
+    <div id="main-content" class="<%= yield :current_state %>">
       <div id="content-area">
         <% flash.each do |k, v| %>
         <p class="<%= k %> flash-<%= k %>"><%= v %></p>
