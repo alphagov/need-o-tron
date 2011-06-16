@@ -2,6 +2,16 @@ body {
   background-color: #333;
 }
 
+.two-thirds {
+  float: left;
+  width: 60%;
+}
+
+.one-third {
+  margin-left: 65%;
+  width: 35%;
+}
+
 p#logo {
   float: left;
   font-family: arial, serif;
@@ -20,6 +30,10 @@ p.hints, form.formtastic fieldset > ol > li p.inline-hints {
 p.hints {
     margin-bottom: 2em;
     color: #666;
+}
+
+br.clear {
+  clear: both;
 }
 
 /* colours */
@@ -103,16 +117,39 @@ a.bin div.arrow-right {
   font-weight: bold;
 }
 
-#id-status p {
-  padding: 8px;
+#id-status h3 {
   margin-bottom: 0;
-  background: #fff;
+}
+
+h1 small {
+  font-size: 0.5em;
 }
 
 .need-section {
   padding-bottom: 20px;
   margin-bottom: 20px;
   border-bottom: solid 2px #BFBFBF
+}
+
+.need-section h3 {
+  font-weight: bold;
+}
+
+#need-progress {
+  padding-top: 32px;
+  clear: both;
+  color: #fff;
+}
+
+#need-progress > div {
+  padding: 16px;
+}
+
+small.status-label {
+  margin-left: 8px;
+  padding: 2px 4px;
+  font-size: 0.7em;
+  color: #fff;
 }
 
 /*#overview, #departments, #justifications {

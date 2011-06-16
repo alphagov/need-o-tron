@@ -10,12 +10,12 @@
 
 <% @needs.each do |need| %>
   <tr>
-    <td><%= link_to need.title, need %></td>
+    <td><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></td>
     <% if params[:in_state] == 'bin' %>
     <td><%= need.reason_for_decision %></td>
     <% end %>
     <td><%= link_to 'Edit', edit_need_path(need) %></td>
-    <td><%= link_to 'Destroy', need, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
