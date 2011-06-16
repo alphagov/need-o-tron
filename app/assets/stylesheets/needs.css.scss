@@ -13,6 +13,15 @@ p#logo a {
   color: #fff;
 }
 
+p.hints, form.formtastic fieldset > ol > li p.inline-hints {
+    font-size: 0.85em;
+}
+
+p.hints {
+    margin-bottom: 2em;
+    color: #666;
+}
+
 /* colours */
 
 .new {
@@ -33,7 +42,19 @@ p#logo a {
 
 #main-content {
   &.new {
-    border-color: #CC2323;
+    border-top-color: #CC2323;
+  }
+  &.ready-for-review {
+  border-top-color: #CC6231;  
+  }
+  &.ready-for-carding {
+    border-top-color: #00B735;
+  }
+  &.done {
+    border-top-color: #3171CC;
+  }
+  &.bin {
+    border-top-color: #A09A9F;
   }
 }
 
@@ -73,13 +94,19 @@ a.bin div.arrow-right {
 #id-status {
   float: right;
   padding: 10px;
-  width: 140px;
+  width: 160px;
   color: #fff;
 }
 
 #id-number {
-  font-size: 30px;
+  font-size: 36px;
   font-weight: bold;
+}
+
+#id-status p {
+  padding: 8px;
+  margin-bottom: 0;
+  background: #fff;
 }
 
 .need-section {

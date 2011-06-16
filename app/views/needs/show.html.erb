@@ -1,16 +1,15 @@
 <div id="id-status" class="<%= @need.status %>">
-  <h3 id="id-number">#44</h3>
-  <h4 id="status"><%= status_name @need.status %></h4>
+  <h2 id="id-number">#44</h2>
+  <h3 id="status"><%= status_name @need.status %></h3>
+  <p><%= link_to 'Edit this need', [:edit, @need] %></p>
 </div>
 
 <div id="need-title-description" class="need-section">
   <h1><%= @need.title %></h1>
   <p><%= markdown @need.description %></p>
-
-  <p><%= link_to 'Edit need', [:edit, @need] %></p>
   
   <% if @need.status == 'new' %>
-    <p>Is this ready for review? Has evidence been provided?</p>
+    <p class="hints">Is this ready for review? Has evidence been provided?</p>
     <%= button_to 'Submit it now', need_path(@need, :need => {:status => 'ready-for-review'}), :method => :put %>
   <% elsif @need.status == 'ready-for-review' and current_user.role == 'superuser' %>
     <%= render 'decision' %>

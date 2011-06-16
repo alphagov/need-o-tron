@@ -33,14 +33,14 @@
             <li><a class="bin" href="<%= needs_url(:in_state => 'bin') %>">Bin</a></li>
           </ul>
           <ul class="navigation">
-            <li><%= link_to 'Add Need', new_need_path %></li>
+            <li><%= link_to 'Enter a new need', new_need_path %></li>
             <li><%= link_to 'View all needs', needs_path %></li>
           </ul>
           <% end %>
         </div>
       </div>
     </div>
-    <div id="main-content">
+    <div id="main-content" class="<%= params[:in_state] %>">
       <div id="content-area">
         <% flash.each do |k, v| %>
         <p class="<%= k %> flash-<%= k %>"><%= v %></p>
