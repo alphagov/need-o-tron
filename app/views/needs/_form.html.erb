@@ -14,7 +14,7 @@
   <%= f.inputs :id => 'overview' do %>
     <%= f.input :title, :label => 'Need *' %>
     <%= f.input :description, :label => 'Context', :hint => "provide some information about the circumstances surrounding this need" %>
-    <%= f.input :tag_list, :label => 'Tags', :hint => "separate tags with commas" %>
+    <%= f.input :tag_list, :as => :string, :label => 'Tags', :hint => "separate tags with commas" %>
   <% end %>
 
   <% if current_user.role == 'superuser' and f.object.persisted? %>
@@ -32,5 +32,4 @@
   <% end %>
   
   <%= f.buttons %>
-  <%= link_to 'Cancel', need_path(@need) %>
 <% end %>
