@@ -11,3 +11,7 @@ audiences.each { |a| Audience.find_or_create_by_name(a) }
 ["Search behaviour", "User request", "Legal framework", "Govt obligation", "Official channel", "Govt campaign"].each do |et_name|
   EvidenceType.find_or_create_by_name(et_name)
 end
+
+['Guide', 'Answer', 'Custom App', 'Decision Tree', 'Transaction (link)', 'Find nearest'].each do |kind|
+  Kind.find_or_create_by_name(kind)
+end
