@@ -23,6 +23,7 @@ class Need < ActiveRecord::Base
   validate :status, :in => STATUSES
   validates_presence_of :reason_for_decision, :if => proc { |a| a.status == 'ready-for-carding' || a.status == 'bin' }
   validates_presence_of :priority, :if => proc { |a| a.status == 'ready-for-carding' }
+  validates_presence_of :url, :if => proc { |a| a.status == 'done' }
   
   def set_creator
     creator_id = Thread.current[:current_user]
