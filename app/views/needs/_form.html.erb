@@ -22,7 +22,7 @@
       <%= f.input :kind %>
       <%= f.input :status, :collection => Need::STATUSES %>
       <%= f.input :url %>
-      <%= f.input :priority %>
+      <%= f.input :priority, :as => 'select', :collection => %W(low medium high) %>
       <%= f.input :reason_for_decision %>
     <% end %>
   <% end %>

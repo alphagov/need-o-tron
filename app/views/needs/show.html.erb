@@ -93,7 +93,7 @@
   
   <% if @need.status == 'new' %>
     <div class="ready-for-review">
-      <p>Is this ready for review? Has evidence been provided?</p>
+      <h3>Is this ready for review? Has evidence been provided?</h3>
       <%= button_to 'Submit for review', need_path(@need, :need => {:status => 'ready-for-review'}), :method => :put %>
     </div>
   <% elsif @need.status == 'ready-for-review' and current_user.role == 'superuser' %>
@@ -102,6 +102,7 @@
     <%= render 'mark_done' %>
   <% end %>
 
+  <%= render 'bin' %>
 </div><!-- end need-progress -->
 
 <br class="clear">
