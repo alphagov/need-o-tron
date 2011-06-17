@@ -211,3 +211,7 @@ form.formtastic fieldset.buttons li.commit input {
   border: 4px #0065C1 solid;
   border-radius: 0.25em;
 }
+
+#error_explanation {
+  background-color: red;
+}

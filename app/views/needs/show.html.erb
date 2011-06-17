@@ -90,6 +90,9 @@
 </div><!-- end need-meta -->
 
 <div id="need-progress">
+  <% if @need.errors.any? %>
+    <%= render 'errors' %>
+  <% end %>
   
   <% if @need.status == 'new' %>
     <div class="ready-for-review">
