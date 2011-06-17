@@ -24,11 +24,7 @@
 
   <div class="need-section">
     <h3>Audiences</h3>
-    <% @need.audiences.each do |audience| %>
-    <div>
-      blah
-    </div>
-    <% end %>
+    <%= @need.audiences.collect(&:to_s).to_sentence %>
   </div>
   
   <div class="need-section">
