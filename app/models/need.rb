@@ -25,6 +25,14 @@ class Need < ActiveRecord::Base
   validates_presence_of :priority, :if => proc { |a| a.status == 'ready-for-carding' }
   validates_presence_of :url, :if => proc { |a| a.status == 'done' }
   
+  validate :has_evidence_or_precendence, :if => proc { |a| a.status == 'ready-for-review' }
+  
+  def has_evidence_or_precendence
+    unless existing_services.count > 0 or justifications.count > 0
+      errors[:base] << "You must include evidence or an existing service to submit a need for review"
+    end
+  end
+  
   def set_creator
     creator_id = Thread.current[:current_user]
   end
