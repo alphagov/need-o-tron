@@ -29,29 +29,34 @@
             <li>
               <a class="new" href="<%= needs_url(:in_state => 'new') %>">
                 New
+                <span class="count">(<%= Need.in_state('new').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
             <li>
               <a class="ready-for-review" href="<%= needs_url(:in_state => 'ready-for-review') %>">
                 Ready for review
+                <span class="count">(<%= Need.in_state('ready-for-review').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
             <li>
               <a class="ready-for-carding" href="<%= needs_url(:in_state => 'ready-for-carding') %>">
                 Ready for carding
+                <span class="count">(<%= Need.in_state('ready-for-carding').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
             <li>
               <a class="done" href="<%= needs_url(:in_state => 'done') %>">
                 Done
+                <span class="count">(<%= Need.in_state('done').count %>)</span>
               </a>
             </li>
             <li>
               <a class="bin" href="<%= needs_url(:in_state => 'bin') %>">
                 Bin
+                <span class="count">(<%= Need.in_state('bin').count %>)</span>
               </a>
             </li>
           </ul>
