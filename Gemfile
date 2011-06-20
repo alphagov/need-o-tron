@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
-# https://github.com/rails/rails/issues/1538
-gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'
+gem 'sprockets'
 
 gem 'rails', '~> 3.1.0.rc3'
 
