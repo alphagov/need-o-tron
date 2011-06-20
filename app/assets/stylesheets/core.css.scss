@@ -131,14 +131,14 @@ tr {
 ul {
   &.navigation {
       float: left;
-      margin-right: 16px;
+      margin-right: 8px;
       margin-bottom: 0;
     li {
       position: relative;
       font-weight: bold;
     a {
       float: left;
-      padding: 8px 16px;
+      padding: 8px 12px;
       color: #fff;
   } } }
   &#admin-options {
@@ -150,7 +150,16 @@ ul {
       margin-left: 16px;
     }
     form {
-      float: right; } }
+      float: right; 
+    } } 
+}
+
+ul.navigation:last-child {
+  margin-right: 0;
+  font-size: 14px;
+  li {
+    font-weight: normal;
+  }
 }
 
 /*
