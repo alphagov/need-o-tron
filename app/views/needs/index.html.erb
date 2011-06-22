@@ -1,23 +1,30 @@
-<table>
-  <tr>
-    <th></th>
-    <% if params[:in_state] == 'bin' %>
-    <th></th>
-    <% end %>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @needs.each do |need| %>
-  <tr>
-    <td><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></td>
-    <% if params[:in_state] == 'bin' %>
-    <td><%= need.reason_for_decision %></td>
-    <% end %>
-    <td><%= link_to 'Edit', edit_need_path(need) %></td>
-    <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+<table id="needs-table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Tags</th>
+      <th>Last updated</th>
+      <% if params[:in_state] == 'bin' %>
+      <th></th>
+      <% end %>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @needs.each do |need| %>
+    <tr>
+      <td><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></td>
+      <td><%= need.tag_list %></td>
+      <td><%= time_ago_in_words(need.updated_at, true) %></td>
+      <% if params[:in_state] == 'bin' %>
+      <td><%= need.reason_for_decision %></td>
+      <% end %>
+      <td><%= link_to 'Edit', edit_need_path(need) %></td>
+      <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
+    </tr>
+  <% end %>
+  </tbody>
 </table>
 
 <% content_for :current_state, params[:in_state] %>

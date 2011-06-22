@@ -5,5 +5,5 @@
 // the compiled file.
 //
 //= require jquery
-//= require jquery_ujs
+//= require data_tables/jquery.dataTables
 //= require_tree .
