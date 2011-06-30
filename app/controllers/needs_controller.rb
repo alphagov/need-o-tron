@@ -1,6 +1,14 @@
+require 'needs_csv'
+
 class NeedsController < InheritedResources::Base
   has_scope :in_state
-  
+
+  def index
+    index! do |format|
+      format.csv { render :csv => NeedsCsv.new(collection, Time.zone.now) }
+    end
+  end
+
   def update
     update! do |success, failure|
       failure.html { 
