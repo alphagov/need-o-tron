@@ -36,6 +36,7 @@ group :development, :test do
 end
 
 group :test do
+  gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'mocha'
   gem 'cucumber-rails'
 end
