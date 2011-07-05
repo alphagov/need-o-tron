@@ -7,8 +7,6 @@ class User < ActiveRecord::Base
       user
     else # Create a user with a stub password. 
       user_params = auth_hash.dup.keep_if { |k,v| ['uid', 'email', 'name', 'version'].include?(k) }
-      puts "PARAMS: #{user_params.inspect}"
-      puts "AUTH_HASH: #{auth_hash.inspect}"
       User.create!(user_params) 
     end
   end
