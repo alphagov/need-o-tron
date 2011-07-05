@@ -9,8 +9,8 @@ gem 'sqlite3'
 gem 'mysql2'
 gem 'rdiscount'
 
-gem 'devise'
-gem 'devise_invitable'
+gem 'warden'
+gem "oa-oauth", :require => "omniauth/oauth"
 
 gem 'carrierwave'
 

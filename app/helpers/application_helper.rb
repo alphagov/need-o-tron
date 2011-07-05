@@ -8,4 +8,8 @@ module ApplicationHelper
     status ||= ""
     status.gsub('-', ' ').capitalize
   end
+  
+  def oauth_login_path
+    '/auth/gds'
+  end
 end

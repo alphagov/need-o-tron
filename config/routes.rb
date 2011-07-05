@@ -1,5 +1,7 @@
 NeedOTron::Application.routes.draw do
-  devise_for :users
+
+  match '/auth_start', :to => 'auth_start#index'
+  match '/auth/gds/callback', :to => 'auth_start#show'
 
   resources :needs do
     resources :justifications, :existing_services

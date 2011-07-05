@@ -11,18 +11,9 @@
         <p id="logo"><%= link_to 'Need-O-Tron', root_path %></p>
         <div role="navigation">
           <ul id="admin-options">
-            <%- unless user_signed_in? or controller_name != 'sessions' %>
-              <li><%= link_to "Sign in", new_session_path(resource_name) %></li>
+            <%- unless user_signed_in? or controller_name == 'auth_start' %>
+              <li><%= link_to "Sign in", oauth_login_path %></li>
             <% end -%>
-            <%- if ! user_signed_in? && devise_mapping.recoverable? && controller_name != 'passwords' %>
-              <li><%= link_to "Forgot your password?", new_password_path(resource_name) %></li>
-            <% end -%>
-            <% if user_signed_in? && current_user.role == 'superuser' %>
-            <li><%= link_to "Invite people", new_user_invitation_path %></li>
-            <% end %>
-            <% if user_signed_in? %>
-            <li><%= link_to 'Sign out', destroy_user_session_path %></li>
-            <% end %>
           </ul>
           <% if user_signed_in? %>
           <ul class="navigation">
