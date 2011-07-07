@@ -9,7 +9,7 @@ gem 'sqlite3'
 gem 'mysql2'
 gem 'rdiscount'
 
-gem "gds-sso",  :path => '../gds-sso'
+gem "gds-sso", :git => 'git@github.com:alphagov/gds-sso.git'
 
 gem 'carrierwave'
 
