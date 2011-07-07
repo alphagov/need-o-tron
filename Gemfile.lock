@@ -1,3 +1,11 @@
+PATH
+  remote: ../gds-sso
+  specs:
+    gds-sso (0.0.1)
+      oa-oauth
+      rails (>= 3.0.0)
+      warden
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -195,12 +203,12 @@ DEPENDENCIES
   coffee-script
   cucumber-rails
   formtastic
+  gds-sso!
   has_scope
   inherited_resources
   jquery-rails
   mocha
   mysql2
-  oa-oauth
   rails (~> 3.1.0.rc3)
   rdiscount
   rspec-rails
@@ -210,4 +218,3 @@ DEPENDENCIES
   sqlite3-ruby
   therubyracer
   uglifier
-  warden

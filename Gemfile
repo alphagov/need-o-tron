@@ -9,8 +9,7 @@ gem 'sqlite3'
 gem 'mysql2'
 gem 'rdiscount'
 
-gem 'warden'
-gem "oa-oauth", :require => "omniauth/oauth"
+gem "gds-sso",  :path => '../gds-sso'
 
 gem 'carrierwave'
 
