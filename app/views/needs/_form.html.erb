@@ -9,7 +9,7 @@
     <%= f.input :tag_list, :as => :string, :label => 'Tags', :hint => "separate tags with commas" %>
   <% end %>
 
-  <% if current_user.role == 'superuser' and f.object.persisted? %>
+  <% if f.object.persisted? %>
     <%= f.inputs :id => 'metadata', :name => 'Product decision' do %>
       <%= f.input :kind %>
       <%= f.input :status, :collection => Need::STATUSES %>

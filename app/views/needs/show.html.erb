@@ -99,9 +99,9 @@
       <h3>Is this ready for review? Has evidence been provided?</h3>
       <%= button_to 'Submit for review', need_path(@need, :need => {:status => 'ready-for-review'}), :method => :put %>
     </div>
-  <% elsif @need.status == 'ready-for-review' and current_user.role == 'superuser' %>
+  <% elsif @need.status == 'ready-for-review' %>
     <%= render 'decision' %>
-  <% elsif @need.status == 'ready-for-carding' and current_user.role == 'superuser' %>
+  <% elsif @need.status == 'ready-for-carding' %>
     <%= render 'mark_done' %>
   <% end %>
 
