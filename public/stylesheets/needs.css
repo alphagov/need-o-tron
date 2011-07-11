@@ -1,160 +1,133 @@
 body {
-  background-color: #333;
-}
+  background-color: #333; }
 
 .two-thirds {
   float: left;
-  width: 60%;
-}
+  width: 60%; }
 
 .one-third {
   margin-left: 65%;
-  width: 35%;
-}
+  width: 35%; }
 
 p#logo {
   float: left;
   font-family: arial, serif;
   font-weight: bold;
-  font-size: 18px;
-}
+  font-size: 18px; }
 
 p#logo a {
-  color: #fff;
-}
+  color: #fff; }
 
 p.hints, form.formtastic fieldset > ol > li p.inline-hints {
-    font-size: 0.85em;
-}
+  font-size: 0.85em; }
 
 p.hints {
-    margin-bottom: 2em;
-    color: #666;
-}
+  margin-bottom: 2em;
+  color: #666; }
 
 br.clear {
-  clear: both;
-}
+  clear: both; }
 
 /* colours */
-
 .new {
-  background-color: #CC2323;
-}
-.ready-for-review {
-  background-color: #CC6231;  
-}
-.ready-for-carding {
-  background-color: #00B735;
-}
-.done {
-  background-color: #3171CC;
-}
-.bin {
-  background-color: #A09A9F;
-}
+  background-color: #CC2323; }
 
-#main-content {
-  &.new {
-    border-top-color: #CC2323;
-  }
-  &.ready-for-review {
-  border-top-color: #CC6231;  
-  }
-  &.ready-for-carding {
-    border-top-color: #00B735;
-  }
-  &.done {
-    border-top-color: #3171CC;
-  }
-  &.bin {
-    border-top-color: #A09A9F;
-  }
-}
+.ready-for-review {
+  background-color: #CC6231; }
+
+.ready-for-carding {
+  background-color: #00B735; }
+
+.done {
+  background-color: #3171CC; }
+
+.bin {
+  background-color: #A09A9F; }
+
+#main-content.new {
+  border-top-color: #CC2323; }
+#main-content.ready-for-review {
+  border-top-color: #CC6231; }
+#main-content.ready-for-carding {
+  border-top-color: #00B735; }
+#main-content.done {
+  border-top-color: #3171CC; }
+#main-content.bin {
+  border-top-color: #A09A9F; }
 
 /* arrow for menu */
-
 div.arrow-right {
   position: absolute;
   right: -10px;
   top: 50%;
   margin-top: -10px;
-  width:0px; 
-  height:0px; 
-  border-bottom: 10px solid transparent;  /* left arrow slant */
-  border-top: 10px solid transparent; /* right arrow slant */
-  border-left: 10px solid #000; /* bottom, add background color here */
-  font-size:0px;
-  line-height:0px;
-  z-index: 1;
-}
+  width: 0px;
+  height: 0px;
+  border-bottom: 10px solid transparent;
+  /* left arrow slant */
+  border-top: 10px solid transparent;
+  /* right arrow slant */
+  border-left: 10px solid #000;
+  /* bottom, add background color here */
+  font-size: 0px;
+  line-height: 0px;
+  z-index: 1; }
 
 a.new div.arrow-right {
-  border-left-color: #CC2323;
-}
+  border-left-color: #CC2323; }
+
 a.ready-for-review div.arrow-right {
-  border-left-color: #CC6231;
-}
+  border-left-color: #CC6231; }
+
 a.ready-for-carding div.arrow-right {
-  border-left-color: #00B735;
-}
+  border-left-color: #00B735; }
+
 a.done div.arrow-right {
-  border-left-color: #3171CC;
-}
+  border-left-color: #3171CC; }
+
 a.bin div.arrow-right {
-  border-left-color: #A09A9F;
-}
+  border-left-color: #A09A9F; }
 
 #id-status {
   float: right;
   padding: 10px;
   width: 160px;
-  color: #fff;
-}
+  color: #fff; }
 
 #id-number {
   font-size: 36px;
-  font-weight: bold;
-}
+  font-weight: bold; }
 
 #id-status h3 {
-  margin-bottom: 0;
-}
+  margin-bottom: 0; }
 
 h1 small {
-  font-size: 0.5em;
-}
+  font-size: 0.5em; }
 
 .need-section {
   padding-bottom: 20px;
   margin-bottom: 20px;
-  border-bottom: solid 2px #BFBFBF
-}
+  border-bottom: solid 2px #BFBFBF; }
 
 .need-section h3 {
-  font-weight: bold;
-}
+  font-weight: bold; }
 
 #need-progress {
   padding-top: 32px;
   clear: both;
-  color: #fff;
-  h3 {
+  color: #fff; }
+  #need-progress h3 {
     font-weight: bold;
-    font-size: 18px;
-  }
-}
+    font-size: 18px; }
 
 #need-progress > div {
-  padding: 16px;
-}
+  padding: 16px; }
 
 small.status-label {
   margin-left: 8px;
   padding: 2px 4px;
   font-size: 0.7em;
-  color: #fff;
-}
+  color: #fff; }
 
 /*#overview, #departments, #justifications {
   padding-bottom: 1em;
@@ -185,22 +158,18 @@ small.status-label {
 #departments {
   clear: both;
 }*/
-
 form.formtastic fieldset.inputs {
-/*  padding-bottom: 1em;
-  margin-bottom: 2em;
-  border-bottom: dashed 2px #E5E5E5;*/
-}
+  /*  padding-bottom: 1em;
+    margin-bottom: 2em;
+    border-bottom: dashed 2px #E5E5E5;*/ }
 
 form.formtastic fieldset.buttons:last-child {
-/*  padding: 1.5em 1.25em 0 1.25em;*/
-/*  margin-bottom: 1em;*/
-/*  background: #EEEFEE;*/
-}
+  /*  padding: 1.5em 1.25em 0 1.25em;*/
+  /*  margin-bottom: 1em;*/
+  /*  background: #EEEFEE;*/ }
 
 form.formtastic fieldset.buttons li.commit {
-  float: right;
-}
+  float: right; }
 
 form.formtastic fieldset.buttons li.commit input {
   padding: 0.25em 0.5em;
@@ -209,9 +178,7 @@ form.formtastic fieldset.buttons li.commit input {
   color: #fff;
   background: #1d97ff;
   border: 4px #0065C1 solid;
-  border-radius: 0.25em;
-}
+  border-radius: 0.25em; }
 
 #error_explanation {
-  background-color: red;
-}
+  background-color: red; }

@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Need-O-Tron</title>
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag "/stylesheets/application", "/stylesheets/core", "/stylesheets/formtastic", "/stylesheets/needs" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
@@ -12,7 +12,7 @@
         <div role="navigation">
           <ul id="admin-options">
             <%- unless user_signed_in? or controller_name == 'auth_start' %>
-              <li><%= link_to "Sign in", gds_login_path %></li>
+              <li><%# link_to "Sign in", gds_login_path %></li>
             <% end -%>
           </ul>
           <% if user_signed_in? %>
@@ -71,7 +71,7 @@
     <div id="footer">
       &copy; <%= Date.today.year %> <a href="http://blog.alpha.gov.uk">The Team Formerly Known as Alphagov</a>.
     </div>
-    <%= javascript_include_tag "application" %>
+    <%= javascript_include_tag "/javascripts/application", "/javascripts/needs" %>
     <%= yield :extra_javascript %>
   </body>
 </html>
