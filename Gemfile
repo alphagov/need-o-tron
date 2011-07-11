@@ -1,8 +1,8 @@
 source 'http://rubygems.org'
 
-gem 'sprockets'
+gem 'sprockets', :git => 'git://github.com/sstephenson/sprockets.git'
 
-gem 'rails', '~> 3.1.0.rc3'
+gem 'rails', '~> 3.1.0.rc4'
 
 gem 'sqlite3'
 
