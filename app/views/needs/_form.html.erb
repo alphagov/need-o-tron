@@ -9,6 +9,8 @@
     <%= f.input :tag_list, :as => :string, :label => 'Tags', :hint => "separate tags with commas" %>
   <% end %>
 
+  <%= f.inputs :search_rank, :pairwise_rank, :traffic, :usage_volume, :interaction, :related_needs, :name => 'Metrics', :id => 'metrics'%>
+  
   <% if f.object.persisted? %>
     <%= f.inputs :id => 'metadata', :name => 'Product decision' do %>
       <%= f.input :kind %>
