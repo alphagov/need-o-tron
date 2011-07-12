@@ -9,7 +9,11 @@ gem 'sqlite3'
 gem 'mysql2'
 gem 'rdiscount'
 
-gem "gds-sso", :git => 'git@github.com:alphagov/gds-sso.git'
+if ENV['BUNDLE_ENV'] == 'DEV'
+  gem "gds-sso", :path => '../gds-sso'
+else
+  gem "gds-sso", :git => 'git@github.com:alphagov/gds-sso.git'
+end
 
 gem 'carrierwave'
 
