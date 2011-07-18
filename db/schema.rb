@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110711083002) do
+ActiveRecord::Schema.define(:version => 20110711131914) do
 
   create_table "audiences", :force => true do |t|
     t.string   "name"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20110711083002) do
     t.integer  "usage_volume"
     t.integer  "interaction"
     t.string   "related_needs"
+    t.boolean  "statutory"
   end
 
   add_index "needs", ["kind_id"], :name => "index_needs_on_kind_id"
