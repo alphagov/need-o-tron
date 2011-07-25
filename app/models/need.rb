@@ -21,10 +21,10 @@ class Need < ActiveRecord::Base
   before_save :set_creator, :on => :create
   
   validate :status, :in => STATUSES
-  validates_presence_of :reason_for_decision, :if => proc { |a| a.status == 'ready-for-carding' || a.status == 'bin' }
   validates_presence_of :priority, :if => proc { |a| a.status == 'ready-for-carding' }
   validates_presence_of :url, :if => proc { |a| a.status == 'done' }
   
+  # validates_presence_of :reason_for_decision, :if => proc { |a| a.status == 'ready-for-carding' || a.status == 'bin' }
   # validate :has_evidence_or_precendence, :if => proc { |a| a.status == 'ready-for-review' }
   # 
   # def has_evidence_or_precendence
