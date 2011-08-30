@@ -5,6 +5,7 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "active_resource/railtie"
+require "active_support/ordered_options"
 # require "rails/test_unit/railtie"
 
 # If you have a Gemfile, require the gems listed there, including any gems
@@ -43,5 +44,11 @@ module NeedOTron
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # Set up DG API user/password holder
+    # Set credentials in an env-specific config or initializer:
+    #     config.dg_api.user = "username"
+    #     config.dg_api.password = "password"
+    config.dg_api = ActiveSupport::OrderedOptions.new
   end
 end

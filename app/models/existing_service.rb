@@ -1,5 +1,5 @@
 class ExistingService < ActiveRecord::Base
-  validate :description, :presence => true
+  validates :description, :presence => true
   
   belongs_to :need
 end

@@ -36,4 +36,7 @@ NeedOTron::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  config.dg_api.user = "user"
+  config.dg_api.password = "pass"
 end

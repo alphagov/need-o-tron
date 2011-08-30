@@ -36,6 +36,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'webmock'
 end
 
 if ENV['RUBY_DEBUG']
