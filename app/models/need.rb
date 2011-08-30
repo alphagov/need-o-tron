@@ -1,11 +1,11 @@
 class Need < ActiveRecord::Base
   STATUSES = ['new', 'ready-for-review', 'ready-for-carding', 'done', 'bin']
-  
+  PRIORITIES_FOR_SELECT = [['low', 1], ['medium', 2], ['high', 3]]
+
   belongs_to :kind
   belongs_to :decision_maker, :class_name => 'User'
   belongs_to :creator, :class_name => 'User'
   
-  has_and_belongs_to_many :audiences
   has_many :justifications
   has_many :existing_services
   has_many :directgov_links

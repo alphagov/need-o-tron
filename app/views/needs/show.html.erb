@@ -20,11 +20,6 @@
   </div>
 
   <div class="need-section">
-    <h3>Audiences</h3>
-    <%= @need.audiences.collect(&:to_s).to_sentence %>
-  </div>
-
-  <div class="need-section">
     <h3>Existing Services</h3>
     <% @need.existing_services.each do |existing_service| %>
     <div>

@@ -9,22 +9,16 @@
     <%= f.input :tag_list, :as => :string, :label => 'Tags', :hint => "separate tags with commas" %>
   <% end %>
 
-  <%= f.inputs :search_rank, :pairwise_rank, :traffic, :usage_volume, :interaction, :related_needs, :name => 'Metrics', :id => 'metrics'%>
-  
   <% if f.object.persisted? %>
     <%= f.inputs :id => 'metadata', :name => 'Product decision' do %>
       <%= f.input :kind %>
       <%= f.input :status, :collection => Need::STATUSES %>
       <%= f.input :url %>
-      <%= f.input :priority, :as => 'select', :collection => [['low', 1], ['medium', 2], ['high', 3]] %>
-      <%= f.input :reason_for_decision %>
+      <%= f.input :priority, :as => 'select', :collection => Need::PRIORITIES_FOR_SELECT %>
+      <%= f.input :reason_for_decision, :label => "Reason for formatting decision" %>
     <% end %>
   <% end %>
 
-  <%= f.inputs do %>
-    <%= f.input :audiences, :as => :check_boxes %>
-  <% end %>
-  
   <%= f.buttons  %>
 
   <p style="text-align: right"><%= link_to raw('or return to list of needs without making changes &rarr;'), needs_path(:in_state => @need.status) %></p>
