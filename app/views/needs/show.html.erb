@@ -82,7 +82,7 @@
       <dt>Updated</dt>
       <dd><%= @need.updated_at %></dd>
       <dt>Added By</dt>
-      <dd>tbd</dd>
+      <dd><%= @need.creator.name if @need.creator %></dd>
       <dt>Priority</dt>
       <dd><%= @need.priority %></dd>
     </dl>

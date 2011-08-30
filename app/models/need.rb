@@ -35,7 +35,7 @@ class Need < ActiveRecord::Base
   # end
   
   def set_creator
-    creator_id = Thread.current[:current_user]
+    self.creator_id = Thread.current[:current_user]
   end
   
   def record_decision_info
