@@ -29,6 +29,6 @@ class DirectgovLink < ActiveRecord::Base
         self.title = body['article']['full_title'] if body.has_key?('article')
       end
     end
-    self.found
+    true
   end
 end
