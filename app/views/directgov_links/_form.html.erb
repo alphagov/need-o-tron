@@ -1,0 +1,19 @@
+<%= semantic_form_for([@need, @directgov_link]) do |f| %>
+  <% if @directgov_link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@directgov_link.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+      <% @directgov_link.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.inputs do %>
+    <%= f.input :directgov_id, :as => :string, :required => true %>
+    <%= f.input :title, :as => :string, :input_html => { :disabled => true } %>
+  <% end %>
+  <%= f.buttons %>
+<% end %>

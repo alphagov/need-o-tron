@@ -1,6 +1,6 @@
 NeedOTron::Application.routes.draw do
   resources :needs do
-    resources :justifications, :existing_services
+    resources :justifications, :existing_services, :directgov_links
   end
   
   root :to => "needs#index", :defaults => { :in_state => 'new' }

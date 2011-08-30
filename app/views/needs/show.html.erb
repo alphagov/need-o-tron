@@ -13,20 +13,17 @@
 <!-- end need-overview   -->
 
 <div id="need-details" class="two-thirds">
-  
+
   <div class="need-section">
-
     <h3>Tags</h3>
-
     <p><%= @need.tag_list %></p>
-
   </div>
 
   <div class="need-section">
     <h3>Audiences</h3>
     <%= @need.audiences.collect(&:to_s).to_sentence %>
   </div>
-  
+
   <div class="need-section">
     <h3>Existing Services</h3>
     <% @need.existing_services.each do |existing_service| %>
@@ -39,9 +36,22 @@
       <p><%= link_to 'Edit', edit_need_existing_service_path(@need, existing_service), :class => 'button' %></p>
     </div>
     <% end %>
-  
     <p><%= link_to 'Add service', new_need_existing_service_path(@need) %></p>
   </div>
+
+  <div class="need-section">
+    <h3>Directgov links</h3>
+    <% @need.directgov_links.each do |link| %>
+    <div>
+      <p>
+        <%= link_to link.url, link.url %> - <%= link.title %> -
+        <%= link_to 'Edit', edit_need_directgov_link_path(@need, link), :class => 'button' %>
+      </p>
+    </div>
+    <% end %>
+    <p><%= link_to 'Add link', new_need_directgov_link_path(@need) %></p>
+  </div>
+
 
   <div class="need-section">
     <h3>Evidence</h3>
@@ -49,22 +59,19 @@
     <div>
       <p><%= justification.evidence_type %></p>
       <p><%= markdown justification.details %></p>
-
       <% if justification.file? %>
         <p><%= link_to 'Download file', justification.file_url %></p>
       <% end %>
-    
       <p><%= link_to 'Edit', edit_need_justification_path(@need, justification), :class => 'button' %></p>
     </div>
     <% end %>
-  
     <p><%= link_to 'Add evidence', new_need_justification_path(@need) %></p>
   </div>
-  
+
 </div><!-- end need-details -->
 
 <div id="need-meta" class="one-third">
-  
+
   <div class="need-section">
 
     <% if @need.decision_made? %>
@@ -86,14 +93,14 @@
     </dl>
 
   </div>
-  
+
 </div><!-- end need-meta -->
 
 <div id="need-progress">
   <% if @need.errors.any? %>
     <%= render 'errors' %>
   <% end %>
-  
+
   <% if @need.status == 'new' %>
     <div class="ready-for-review">
       <h3>Is this ready for review? Has evidence been provided?</h3>

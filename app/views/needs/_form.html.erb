@@ -16,7 +16,7 @@
       <%= f.input :kind %>
       <%= f.input :status, :collection => Need::STATUSES %>
       <%= f.input :url %>
-      <%= f.input :priority, :as => 'select', :collection => %W(low medium high) %>
+      <%= f.input :priority, :as => 'select', :collection => [['low', 1], ['medium', 2], ['high', 3]] %>
       <%= f.input :reason_for_decision %>
     <% end %>
   <% end %>

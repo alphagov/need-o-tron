@@ -38,6 +38,10 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+if ENV['RUBY_DEBUG']
+  gem 'ruby-debug19'
+end
+
 group :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'mocha'

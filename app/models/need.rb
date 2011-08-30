@@ -8,6 +8,7 @@ class Need < ActiveRecord::Base
   has_and_belongs_to_many :audiences
   has_many :justifications
   has_many :existing_services
+  has_many :directgov_links
   
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
