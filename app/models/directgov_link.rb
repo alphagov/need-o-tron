@@ -1,3 +1,5 @@
+require 'net/http'
+
 class DirectgovLink < ActiveRecord::Base
   validates :directgov_id, :presence => true
   before_create :verify_dg!

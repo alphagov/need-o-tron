@@ -36,7 +36,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'webmock'
 end
 
 if ENV['RUBY_DEBUG']
@@ -47,4 +46,5 @@ group :test do
   gem 'sqlite3-ruby', :require => 'sqlite3'
   gem 'mocha'
   gem 'cucumber-rails'
+  gem 'webmock'
 end
