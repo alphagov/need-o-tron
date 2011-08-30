@@ -1,9 +1,10 @@
 <table id="needs-table">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Tags</th>
-      <th>Last updated</th>
+      <th scope="col">Title</th>
+      <th scope="col">Tags</th>
+      <th scope="col">Last updated</th>
+      <th scope="col">Created by</th>
       <% if params[:in_state] == 'bin' %>
       <th></th>
       <% end %>
@@ -14,9 +15,10 @@
   <tbody>
   <% @needs.each do |need| %>
     <tr>
-      <td><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></td>
+      <th scope="row"><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
       <td><%= need.tag_list %></td>
       <td><%= time_ago_in_words(need.updated_at, true) %></td>
+      <td><%= need.creator %></td>
       <% if params[:in_state] == 'bin' %>
       <td><%= need.reason_for_decision %></td>
       <% end %>
