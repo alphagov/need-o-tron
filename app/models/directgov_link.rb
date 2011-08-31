@@ -2,7 +2,7 @@ require 'net/http'
 
 class DirectgovLink < ActiveRecord::Base
   validates :directgov_id, :presence => true
-  before_create :verify_dg!
+  before_save :verify_dg!
 
   belongs_to :need
 

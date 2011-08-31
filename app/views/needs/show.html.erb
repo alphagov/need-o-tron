@@ -69,6 +69,11 @@
 
   <div class="need-section">
 
+    <% if @need.formatting_decision_made? %>
+    <p>Formatting decision made at <%= @need.formatting_decision_made_at %> by <%= @need.formatting_decision_maker %></p>
+    <p><%= @need.reason_for_formatting_decision %></p>
+    <% end %>
+
     <% if @need.decision_made? %>
     <p>Decision made at <%= @need.decision_made_at %> by <%= @need.decision_maker %></p>
     <p><%= @need.reason_for_decision %></p>
@@ -82,7 +87,7 @@
       <dt>Updated</dt>
       <dd><%= @need.updated_at %></dd>
       <dt>Added By</dt>
-      <dd><%= @need.creator.name if @need.creator %></dd>
+      <dd><%= @need.creator %></dd>
       <dt>Priority</dt>
       <dd><%= @need.priority %></dd>
     </dl>
@@ -96,14 +101,14 @@
     <%= render 'errors' %>
   <% end %>
 
-  <% if @need.status == 'new' %>
+  <% if @need.status == Need::NEW %>
     <div class="ready-for-review">
       <h3>Is this ready for review? Has evidence been provided?</h3>
-      <%= button_to 'Submit for review', need_path(@need, :need => {:status => 'ready-for-review'}), :method => :put %>
+      <%= button_to 'Submit for review', need_path(@need, :need => {:status => Need::READY_FOR_REVIEW}), :method => :put %>
     </div>
-  <% elsif @need.status == 'ready-for-review' %>
+  <% elsif @need.status == Need::READY_FOR_REVIEW %>
     <%= render 'decision' %>
-  <% elsif @need.status == 'ready-for-carding' %>
+  <% elsif @need.status == Need::FORMAT_ASSIGNED %>
     <%= render 'mark_done' %>
   <% end %>
 

@@ -32,9 +32,9 @@
               </a>
             </li>
             <li>
-              <a class="ready-for-carding" href="<%= needs_url(:in_state => 'ready-for-carding') %>">
-                Ready for carding
-                <span class="count">(<%= Need.in_state('ready-for-carding').count %>)</span>
+              <a class="format-assigned" href="<%= needs_url(:in_state => 'format-assigned') %>">
+                Format assigned
+                <span class="count">(<%= Need.in_state('format-assigned').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>

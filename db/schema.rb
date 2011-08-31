@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110830120000) do
+ActiveRecord::Schema.define(:version => 20110830160000) do
 
   create_table "audiences", :force => true do |t|
     t.string   "name"
@@ -82,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20110830120000) do
     t.string   "title"
     t.text     "description"
     t.integer  "kind_id"
-    t.string   "status",              :default => "new"
+    t.string   "status",                         :default => "new"
     t.string   "url"
     t.integer  "priority"
     t.integer  "creator_id"
@@ -100,6 +100,9 @@ ActiveRecord::Schema.define(:version => 20110830120000) do
     t.integer  "interaction"
     t.string   "related_needs"
     t.boolean  "statutory"
+    t.integer  "formatting_decision_maker_id"
+    t.datetime "formatting_decision_made_at"
+    t.text     "reason_for_formatting_decision"
   end
 
   add_index "needs", ["kind_id"], :name => "index_needs_on_kind_id"

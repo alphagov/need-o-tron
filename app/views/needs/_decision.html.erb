@@ -1,11 +1,11 @@
-<div class="ready-for-carding">
+<div class="format-assigned">
   <h3>Ready to make a decision?</h3>
   <%= semantic_form_for(@need) do |f| %>
     <%= f.inputs do %>
       <%= f.input :kind %>
-      <%= f.input :status, :value => 'ready-for-carding', :as => 'hidden' %>
-      <%= f.input :priority, :as => :select, :collection => %w(low medium high) %>
-      <%= f.input :reason_for_decision %>
+      <%= f.input :status, :value => 'format-assigned', :as => 'hidden' %>
+      <%= f.input :priority, :as => :select, :collection => Need::PRIORITIES_FOR_SELECT %>
+      <%= f.input :reason_for_formatting_decision %>
       <%= f.commit_button 'Decision made' %>
     <% end %>
   <% end %>

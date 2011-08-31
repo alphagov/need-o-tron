@@ -14,8 +14,9 @@
       <%= f.input :kind %>
       <%= f.input :status, :collection => Need::STATUSES %>
       <%= f.input :url %>
-      <%= f.input :priority, :as => 'select', :collection => Need::PRIORITIES_FOR_SELECT %>
-      <%= f.input :reason_for_decision, :label => "Reason for formatting decision" %>
+      <%= f.input :priority, :as => 'select', :collection => Need::PRIORITIES_FOR_SELECT if @need.format_assigned?%>
+      <%= f.input :reason_for_formatting_decision if @need.format_assigned?
+ %>
     <% end %>
   <% end %>
 
