@@ -21,6 +21,10 @@ describe ApplicationController do
         def update
           render :text => "woo", :status => 200
         end
+
+        def new
+          render :text => "woo", :status => 200
+        end
       end
 
       before(:each) do
@@ -32,6 +36,11 @@ describe ApplicationController do
       describe "Non-admin users" do
         it "can access :show" do
           get :show, :id => 1
+          response.code.should == "200"
+        end
+
+        it "can access :new" do
+          get :new
           response.code.should == "200"
         end
 
@@ -59,6 +68,11 @@ describe ApplicationController do
 
         it "can access :show" do
           get :show, :id => 1
+          response.code.should == "200"
+        end
+
+        it "can access :new" do
+          get :new
           response.code.should == "200"
         end
 

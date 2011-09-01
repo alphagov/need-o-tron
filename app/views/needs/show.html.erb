@@ -6,7 +6,7 @@
 </div>
 
   <div id="need-title-description" class="need-section">
-    <h1><%= @need.title %>   <small><%= link_to 'Edit', [:edit, @need] %></small></h1>
+    <h1><%= @need.title %>   <% if current_user.is_admin? %><small><%= link_to 'Edit', [:edit, @need] %></small><% end %></h1>
     <p><%= markdown @need.description %></p>
   </div>
 </div>
@@ -21,46 +21,59 @@
 
   <div class="need-section">
     <h3>Existing Services</h3>
+    <p>Link to existing services that satisfy this need, either on Government sites or elsewhere.</p>
+    <ul class="supporting-information">
     <% @need.existing_services.each do |existing_service| %>
-    <div>
-      <p><%= existing_service.kind %> <%= existing_service.government_run? ? 'Government run' : 'Not government run' %></p>
-      <p><%= markdown existing_service.description %></p>
-      <% if existing_service.link %>
-      <p><%= link_to existing_service.link, existing_service.link %></p>
+    <li>
+      <p>This service is an <strong><%= existing_service.kind %></strong> service, and is <strong><%= existing_service.government_run? ? 'government run' : 'not government run' %></strong>.</p>
+      <% unless existing_service.description.blank? %><%= markdown existing_service.description %><% end %>
+      <% if existing_service.link %><p><%= link_to existing_service.link, existing_service.link %></p><% end %>
+      <% if current_user.is_admin? %>
+        <p><%= link_to 'Edit', edit_need_existing_service_path(@need, existing_service), :class => 'button' %></p>
       <% end %>
-      <p><%= link_to 'Edit', edit_need_existing_service_path(@need, existing_service), :class => 'button' %></p>
-    </div>
+    </li>
     <% end %>
-    <p><%= link_to 'Add service', new_need_existing_service_path(@need) %></p>
+    </ul>
+    <p><%= link_to 'Add service', new_need_existing_service_path(@need), :class => 'button' %></p>
   </div>
 
   <div class="need-section">
     <h3>Directgov links</h3>
+    <p>Add the DG numbers of Directgov content which relate to this need</p>
+    <ul class="supporting-information">
     <% @need.directgov_links.each do |link| %>
-    <div>
+    <li>
       <p>
         <%= link_to link.url, link.url %> - <%= link.title %> -
-        <%= link_to 'Edit', edit_need_directgov_link_path(@need, link), :class => 'button' %>
+        <% if current_user.is_admin? %>
+          <%= link_to 'Edit', edit_need_directgov_link_path(@need, link), :class => 'button' %>
+        <% end %>
       </p>
-    </div>
+    </li>
     <% end %>
-    <p><%= link_to 'Add link', new_need_directgov_link_path(@need) %></p>
+    </ul>
+    <p><%= link_to 'Add link', new_need_directgov_link_path(@need), :class => 'button'%></p>
   </div>
 
 
   <div class="need-section">
     <h3>Evidence</h3>
+    <p>Add evidence which supports this need, such as analytics data, or explicit government policy or statutory requirement.</p>
+    <ul class="supporting-information">
     <% @need.justifications.each do |justification| %>
-    <div>
+    <li>
       <p><%= justification.evidence_type %></p>
       <p><%= markdown justification.details %></p>
       <% if justification.file? %>
         <p><%= link_to 'Download file', justification.file_url %></p>
       <% end %>
-      <p><%= link_to 'Edit', edit_need_justification_path(@need, justification), :class => 'button' %></p>
-    </div>
+      <% if current_user.is_admin? %>
+        <p><%= link_to 'Edit', edit_need_justification_path(@need, justification), :class => 'button' %></p>
+      <% end %>
+    </li>
     <% end %>
-    <p><%= link_to 'Add evidence', new_need_justification_path(@need) %></p>
+    </ul>
+    <p><%= link_to 'Add evidence', new_need_justification_path(@need), :class => 'button'  %></p>
   </div>
 
 </div><!-- end need-details -->
@@ -79,19 +92,28 @@
     <p><%= @need.reason_for_decision %></p>
     <% end %>
 
-    <dl>
-      <dt>Format Type</dt>
-      <dd><%= @need.kind %></dd>
-      <dt>Created</dt>
-      <dd><%= @need.created_at %></dd>
-      <dt>Updated</dt>
-      <dd><%= @need.updated_at %></dd>
-      <dt>Added By</dt>
-      <dd><%= @need.creator %></dd>
-      <dt>Priority</dt>
-      <dd><%= @need.priority %></dd>
-    </dl>
-
+    <table>
+      <tr>
+        <th>Format type</th>
+        <td><%= @need.kind %></td>
+      </tr>
+      <tr>
+        <th>Created</th>
+        <td><%= time_ago_in_words(@need.created_at) %></td>
+      </tr>
+      <tr>
+        <th>Updated</th>
+        <td><%= time_ago_in_words(@need.updated_at) %></td>
+      </tr>
+      <tr>
+        <th>Added By</th>
+        <td><%= @need.creator %></td>
+      </tr>
+      <tr>
+        <th>Priority</th>
+        <td><%= @need.priority %></td>
+      </tr>
+    </table>
   </div>
 
 </div><!-- end need-meta -->
@@ -101,18 +123,25 @@
     <%= render 'errors' %>
   <% end %>
 
-  <% if @need.status == Need::NEW %>
-    <div class="ready-for-review">
-      <h3>Is this ready for review? Has evidence been provided?</h3>
-      <%= button_to 'Submit for review', need_path(@need, :need => {:status => Need::READY_FOR_REVIEW}), :method => :put %>
-    </div>
-  <% elsif @need.status == Need::READY_FOR_REVIEW %>
-    <%= render 'decision' %>
-  <% elsif @need.status == Need::FORMAT_ASSIGNED %>
-    <%= render 'mark_done' %>
-  <% end %>
+  <% if current_user.is_admin? %>
+    <% if @need.status == Need::NEW %>
+      <div class="ready-for-review">
+        <h3>Is this ready for review? Has evidence been provided?</h3>
+        <%= button_to 'Submit for review', need_path(@need, :need => {:status => Need::READY_FOR_REVIEW}), :method => :put %>
+      </div>
+    <% elsif @need.status == Need::READY_FOR_REVIEW %>
+      <%= render 'decision' %>
+    <% elsif @need.status == Need::FORMAT_ASSIGNED %>
+      <%= render 'mark_done' %>
+    <% end %>
 
-  <%= render 'bin' %>
+    <%= render 'bin' %>
+  <% end %>
+  <% if !current_user.is_admin? %>
+    <div class="bin">
+      <h3>This need is being reviewed by our team</h3>
+    </div>
+  <% end %>
 </div><!-- end need-progress -->
 
 <br class="clear">

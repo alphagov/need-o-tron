@@ -171,7 +171,7 @@ form.formtastic fieldset.buttons:last-child {
 form.formtastic fieldset.buttons li.commit {
   float: right; }
 
-form.formtastic fieldset.buttons li.commit input {
+form.formtastic fieldset.buttons li.commit input, .button {
   padding: 0.25em 0.5em;
   cursor: pointer;
   font-weight: bold;
@@ -182,3 +182,42 @@ form.formtastic fieldset.buttons li.commit input {
 
 #error_explanation {
   background-color: red; }
+
+ul.supporting-information {
+  margin: 0;
+  padding: 0 0 16px 0; }
+
+ul.supporting-information li {
+  display: block;
+  padding: 8px 8px 1px 8px;
+  margin: 8px 0 0 0;
+  background-color: #f6f6f6; } 
+
+.button {
+  border-width: 1px; }
+
+#need-meta table {
+  font-size: 0.9em;
+  border: none;
+}
+#need-meta tr {
+  border: none;
+}
+#need-meta th {
+  font-weight: bold;
+  vertical-align: baseline;
+  padding: 4px 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid black;
+}
+#need-meta td {
+  vertical-align: baseline;
+  padding: 4px 0;
+  margin: 0;
+  border: 0;
+  border-top: 1px solid black;
+}
+#need-meta tr:first-child td, #need-meta tr:first-child th {
+  border-top: none;
+}
