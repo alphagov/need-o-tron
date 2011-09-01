@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110830160000) do
+ActiveRecord::Schema.define(:version => 20110901111440) do
 
   create_table "audiences", :force => true do |t|
     t.string   "name"
@@ -125,10 +125,11 @@ ActiveRecord::Schema.define(:version => 20110830160000) do
   end
 
   create_table "users", :force => true do |t|
-    t.string  "name",    :null => false
-    t.string  "uid",     :null => false
-    t.integer "version", :null => false
-    t.string  "email",   :null => false
+    t.string  "name",                        :null => false
+    t.string  "uid",                         :null => false
+    t.integer "version",                     :null => false
+    t.string  "email",                       :null => false
+    t.boolean "is_admin", :default => false
   end
 
 end

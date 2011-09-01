@@ -3,6 +3,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate_user!
   before_filter :set_current_user_in_thread, :if => :user_signed_in?
+  before_filter :ensure_user_is_admin!, :except => [:show, :create, :index]
+
+  def ensure_user_is_admin!
+    unless current_user.is_admin?
+      render :text => "Unauthorised!", :status => :unauthorized
+      return false
+    end
+  end
 
   protected
     def set_current_user_in_thread
