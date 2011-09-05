@@ -18,7 +18,7 @@
   <% @needs.each do |need| %>
     <tr>
       <th scope="row"><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
-      <td><%= need.format_assigned? ? need.kind : "-" %></td>
+      <td class="need"><%= need.format_assigned? ? need.kind : "-" %></td>
       <td><%= need.tag_list %></td>
       <td><%= time_ago_in_words(need.updated_at, true) %></td>
       <td><%= need.creator %></td>
@@ -38,4 +38,43 @@
   <%= file_field_tag :csv %>
   <%= submit_tag 'Upload', class: 'button' %>
 <% end %></p>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["treemap"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+    $(function() {
+      var quantities = {};
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Format');
+      data.addColumn('string', 'Parent');
+      data.addColumn('number', 'number of needs');
+
+      $('tbody tr td[class=need]').each(function() {
+        var format_name = $(this).text();
+        if (quantities[format_name] == undefined) {
+          quantities[format_name] = 0;
+        }
+        quantities[format_name]++;
+      });
+
+      var rows = [['Everything', null, 0]];
+      $.each(quantities, function(k, v) {
+        rows.push([k, 'Everything', v]);
+      });
+      data.addRows(rows);
+      // Create and draw the visualization.
+      var tree = new google.visualization.TreeMap($('#format-treemap')[0]);
+      tree.draw(data, {
+        minColor: '#f00',
+        midColor: '#ddd',
+        maxColor: '#0d0',
+        headerHeight: 15,
+        fontColor: 'black',
+        showScale: false});
+    });
+  }
+</script>
+<p id="format-treemap" style="width: 600px; height: 400px;">
+</p>
 <% content_for :current_state, params[:in_state] %>
