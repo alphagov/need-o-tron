@@ -33,11 +33,13 @@
   </tbody>
 </table>
 <p id="csv-download"><a class="button" href="<%= needs_path(:format => 'csv', :in_state => params[:in_state]) %>">Download as a CSV</a></p>
-<p id="csv-upload"><%= form_tag(importer_needs_path) do %>
+<% if current_user.is_admin? %>
+<p id="csv-upload"><%= form_tag(importer_needs_path, :multipart => true) do %>
   <%= label_tag :csv, 'CSV with updated priorities:' %>
   <%= file_field_tag :csv %>
   <%= submit_tag 'Upload', class: 'button' %>
 <% end %></p>
+<% end %>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
   google.load("visualization", "1", {packages:["treemap"]});
@@ -45,10 +47,6 @@
   function drawChart() {
     $(function() {
       var quantities = {};
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Format');
-      data.addColumn('string', 'Parent');
-      data.addColumn('number', 'number of needs');
 
       $('tbody tr td[class=need]').each(function() {
         var format_name = $(this).text();
@@ -62,6 +60,15 @@
       $.each(quantities, function(k, v) {
         rows.push([k, 'Everything', v]);
       });
+
+      if (rows.length > 1) {
+        $(
+      }
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Format');
+      data.addColumn('string', 'Parent');
+      data.addColumn('number', 'number of needs');
       data.addRows(rows);
       // Create and draw the visualization.
       var tree = new google.visualization.TreeMap($('#format-treemap')[0]);
