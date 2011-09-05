@@ -8,6 +8,7 @@ class Need < ActiveRecord::Base
 
   STATUSES = [NEW, READY_FOR_REVIEW, FORMAT_ASSIGNED, DONE, BIN]
   PRIORITIES_FOR_SELECT = [['low', 1], ['medium', 2], ['high', 3]]
+  PRIORITIES = {1 => 'low', 2 => 'medium', 3 => 'high'}
 
   belongs_to :kind
   belongs_to :decision_maker, :class_name => 'User'
@@ -71,5 +72,31 @@ class Need < ActiveRecord::Base
 
   def formatting_decision_made?
     formatting_decision_made_at.present?
+  end
+
+  def prioritised?
+    !priority.nil?
+  end
+
+  def named_priority
+    PRIORITIES[priority]
+  end
+
+  def priority=(name_or_value)
+    if PRIORITIES.keys.include?(name_or_value)
+      write_attribute(:priority, name_or_value)
+      return name_or_value
+    end
+    PRIORITIES_FOR_SELECT.each do |name, value|
+      if value.to_s == name_or_value
+        write_attribute(:priority, value)
+        return value
+      end
+      if name_or_value[0] == name[0]
+        write_attribute(:priority, value)
+        return named_priority
+      end
+    end
+    nil
   end
 end

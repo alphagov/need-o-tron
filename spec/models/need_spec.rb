@@ -31,4 +31,34 @@ describe Need do
     @need.record_formatting_decision_info
     @need.formatting_decision_made?.should be_true
   end
+
+  describe "priority" do
+    describe "displaying" do
+      it "renders 1 as 'low'" do
+        @need.priority = 1
+        @need.named_priority.should == 'low'
+      end
+
+      it "renders 2 as 'medium'" do
+        @need.priority = 2
+        @need.named_priority.should == 'medium'
+      end
+
+      it "renders 3 as 'high'" do
+        @need.priority = 3
+        @need.named_priority.should == 'high'
+      end
+    end
+
+    describe "setting" do
+      [[['l', 'low'], 1], [['m', 'medium'], 2], [['h', 'high'], 3]].each do |inputs, expected|
+        inputs.each do |input|
+          it "accepts '#{input}' for #{expected}" do
+            @need.priority = input
+            @need.priority.should == expected
+          end
+        end
+      end
+    end
+  end
 end

@@ -19,6 +19,22 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe NeedsController do
+  describe "POST :importer" do
+    before(:each) do
+      controller.stubs(:authenticate_user!)
+      controller.stubs(:ensure_user_is_admin!)
+      controller.stubs(:user_signed_in?).returns(false)
+    end
+    it "Should update the need" do
+      need = Need.new
+      need.expects(:save).returns(true)
 
+      Need.expects(:find_by_id).with('1').returns(need)
 
+      sample_csv = File.open(File.expand_path('../../fixtures/import_sample.csv', __FILE__), 'r')
+      post :importer, :csv => sample_csv
+
+      need.priority.should == 3
+    end
+  end
 end

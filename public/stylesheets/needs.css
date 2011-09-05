@@ -232,3 +232,8 @@ ul.supporting-information li {
 #need-meta tr:first-child td, #need-meta tr:first-child th {
   border-top: none;
 }
+
+#csv-download {
+  margin-top: 2em;
+  font-size: 0.8em;
+}
