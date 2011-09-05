@@ -55,6 +55,17 @@ br.clear {
 #main-content.bin {
   border-top-color: #A09A9F; }
 
+/* dataTable search box */
+#needs-table_filter {
+  background-color: #e5e5e5;
+  padding: 0.5em 0.5em 0.5em 0.25em;
+  margin-bottom: 1em;
+  float: left;
+}
+#needs-table {
+  clear: left;
+}
+
 /* arrow for menu */
 div.arrow-right {
   position: absolute;
