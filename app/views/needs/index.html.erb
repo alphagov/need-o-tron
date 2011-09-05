@@ -22,7 +22,7 @@
       <td><%= need.tag_list %></td>
       <td><%= time_ago_in_words(need.updated_at, true) %></td>
       <td><%= need.creator %></td>
-      <td><%= need.prioritised? ? need.priority.to_s : '-' %></td>
+      <td><%= need.prioritised? ? need.named_priority : '-' %></td>
       <% if params[:in_state] == 'bin' %>
       <td><%= need.reason_for_decision %></td>
       <% end %>
@@ -62,26 +62,24 @@
       });
 
       if (rows.length > 1) {
-        $(
+        $('#content-area').append('<p id="format-treemap" style="width: 600px; height: 400px;">');
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Format');
+        data.addColumn('string', 'Parent');
+        data.addColumn('number', 'number of needs');
+        data.addRows(rows);
+        // Create and draw the visualization.
+        var tree = new google.visualization.TreeMap($('#format-treemap')[0]);
+        tree.draw(data, {
+          minColor: '#f00',
+          midColor: '#ddd',
+          maxColor: '#0d0',
+          headerHeight: 15,
+          fontColor: 'black',
+          showScale: false});
       }
-
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Format');
-      data.addColumn('string', 'Parent');
-      data.addColumn('number', 'number of needs');
-      data.addRows(rows);
-      // Create and draw the visualization.
-      var tree = new google.visualization.TreeMap($('#format-treemap')[0]);
-      tree.draw(data, {
-        minColor: '#f00',
-        midColor: '#ddd',
-        maxColor: '#0d0',
-        headerHeight: 15,
-        fontColor: 'black',
-        showScale: false});
     });
   }
 </script>
-<p id="format-treemap" style="width: 600px; height: 400px;">
 </p>
 <% content_for :current_state, params[:in_state] %>
