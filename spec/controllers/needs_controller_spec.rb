@@ -30,9 +30,12 @@ describe NeedsController do
       need.expects(:save).returns(true)
 
       Need.expects(:find_by_id).with('1').returns(need)
+      uploaded_file = mock()
 
       sample_csv = File.open(File.expand_path('../../fixtures/import_sample.csv', __FILE__), 'r')
-      post :importer, :csv => sample_csv
+      uploaded_file.stubs(:open).returns(sample_csv)
+
+      post :importer, :csv => uploaded_file
 
       need.priority.should == 3
     end

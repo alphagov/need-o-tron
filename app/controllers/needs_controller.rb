@@ -26,7 +26,7 @@ class NeedsController < InheritedResources::Base
 
   def importer
     rows_changed = 0
-    CSV.open(params[:csv], :headers => true) do |csv|
+    CSV.open(params[:csv].open, :headers => true) do |csv|
       csv.each do |row|
         if row['Id'] && row['Priority']
           need = Need.find_by_id(row['Id'])
