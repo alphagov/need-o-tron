@@ -15,8 +15,16 @@
       <%= f.input :status, :collection => Need::STATUSES %>
       <%= f.input :url %>
       <%= f.input :priority, :as => 'select', :collection => Need::PRIORITIES_FOR_SELECT if @need.format_assigned?%>
-      <%= f.input :reason_for_formatting_decision if @need.format_assigned?
- %>
+      <%= f.input :reason_for_formatting_decision if @need.format_assigned? %>
+    <% end %>
+    <%= f.inputs(:id => 'fact_checkers', :name => 'Fact checkers') do %>
+      <ul id="fact_checkers_list">
+      <% @need.fact_checkers.each do |fact_checker| %>
+        <li class="existing"><%= fact_checker.contact.email %><%= hidden_field_tag("fact_checkers[#{fact_checker.id}]", fact_checker.id) %></li>
+      <% end %>
+        <li><%= email_field_tag('fact_checkers[n][email]') %></li>
+      </ul>
+
     <% end %>
   <% end %>
 

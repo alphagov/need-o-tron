@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110901111440) do
+ActiveRecord::Schema.define(:version => 20110907111450) do
+
+  create_table "accountabilities", :force => true do |t|
+    t.integer  "department_id"
+    t.integer  "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "audiences", :force => true do |t|
     t.string   "name"
@@ -23,15 +31,16 @@ ActiveRecord::Schema.define(:version => 20110901111440) do
     t.integer "need_id"
   end
 
-  create_table "departments", :force => true do |t|
-    t.string   "name"
+  create_table "contacts", :force => true do |t|
+    t.string   "email",      :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "departments_needs", :id => false, :force => true do |t|
-    t.integer "department_id"
-    t.integer "need_id"
+  create_table "departments", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "directgov_links", :force => true do |t|
@@ -56,6 +65,20 @@ ActiveRecord::Schema.define(:version => 20110901111440) do
     t.text     "link"
     t.boolean  "government_run"
     t.string   "kind"
+    t.integer  "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fact_checkers", :force => true do |t|
+    t.integer  "contact_id"
+    t.integer  "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "fact_checking_contacts_needs", :id => false, :force => true do |t|
+    t.integer  "fact_checking_contact_id"
     t.integer  "need_id"
     t.datetime "created_at"
     t.datetime "updated_at"

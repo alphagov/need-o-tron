@@ -1,0 +1,2 @@
+module FactCheckingContactsHelper
+end

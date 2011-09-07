@@ -4,5 +4,4 @@ require 'action_controller/metal/renderers'
 ActionController::Renderers.add :csv do |csv_data, options|
   send_data csv_data.to_csv, :type => :csv, :filename => csv_data.csv_filename(params)
 end
-
-Mime::Type.register_alias "text/csv", :csv
+#Mime::Type.register_alias "text/csv", :csv

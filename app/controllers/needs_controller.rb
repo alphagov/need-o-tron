@@ -23,21 +23,4 @@ class NeedsController < InheritedResources::Base
       }
     end
   end
-
-  def importer
-    rows_changed = 0
-    CSV.open(params[:csv].open, :headers => true) do |csv|
-      csv.each do |row|
-        if row['Id'] && row['Priority']
-          need = Need.find_by_id(row['Id'])
-          if need
-            need.priority = row['Priority']
-            need.save if need.changed?
-          end
-        end
-      end
-    end
-    flash[:notice] = "#{rows_changed} needs updated"
-    redirect_to(needs_path(:in_state => params[:in_state]))
-  end
 end

@@ -8,6 +8,10 @@ describe Need do
     @need = Need.create
   end
 
+  describe "associations" do
+    it { should have_many :fact_checkers }
+  end
+
   it "set creator when saved" do
     @need.creator.should == @user
   end
