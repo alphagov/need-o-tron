@@ -43,11 +43,12 @@ $(function() {
   $('#fact_checkers_list li[class!=existing]').each(function() {
     var button = $('<span class="button">+</span>');
     var contact_add_node = $(this);
-    var data = {fact_checker: {contact: {email: contact_add_node.find('input').val()}}};
     contact_add_node.append(button);
+    contact_add_node.find('input').autocomplete({source: create_fact_checker_url + '/search.json'});
     button.click(function() {
-      $.post(create_fact_checker_url + '.json', data, function(data) {
-        var fact_checker = data.fact_checker;
+      var form_data = {fact_checker: {contact: {email: contact_add_node.find('input').val()}}};
+      $.post(create_fact_checker_url + '.json', form_data, function(data) {
+        var fact_checker = data;
         var new_contact_node = $('<li class="existing">' + fact_checker.contact.email + '<input name="fact_checkers[' + fact_checker.id + ']" type="hidden" value="' + fact_checker.id + '">');
         contact_add_node.before(new_contact_node);
         set_up_existing_contact_li(new_contact_node);
