@@ -1,4 +1,5 @@
 class ImportsController < InheritedResources::Base
+  before_filter :ensure_user_is_admin!, :if => :user_signed_in?
   actions :new, :create
 
   def create

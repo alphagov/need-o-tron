@@ -7,6 +7,7 @@
       <th scope="col">Last updated</th>
       <th scope="col">Created by</th>
       <th scope="col">Priority</th>
+      <th scope="col">Fact checker</th>
       <% if params[:in_state] == 'bin' %>
       <th></th>
       <% end %>
@@ -23,6 +24,7 @@
       <td><%= time_ago_in_words(need.updated_at, true) %></td>
       <td><%= need.creator %></td>
       <td><%= need.prioritised? ? need.named_priority : '-' %></td>
+      <td><%= need.fact_checkers_for_csv %></td>
       <% if params[:in_state] == 'bin' %>
       <td><%= need.reason_for_decision %></td>
       <% end %>
@@ -34,11 +36,7 @@
 </table>
 <p id="csv-download"><a class="button" href="<%= needs_path(:format => 'csv', :in_state => params[:in_state]) %>">Download as a CSV</a></p>
 <% if current_user.is_admin? %>
-<p id="csv-upload"><%= form_for(Import.new, :multipart => true) do |f| %>
-  <%= f.label :csv, 'CSV with updated priorities:' %>
-  <%= f.file_field :csv %>
-  <%= f.submit 'Upload', class: 'button' %>
-<% end %></p>
+<p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
 <% end %>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">

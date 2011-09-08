@@ -25,4 +25,10 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  # Reset the Machinist cache before each spec.
+  config.before(:each) { Machinist.reset_before_test }
+
+  # include cutsom matchers
+  config.include(SetMatchers)
 end

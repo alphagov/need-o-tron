@@ -1,0 +1,17 @@
+<div id="csv-import">
+  <h2>Import a CSV and update Needs it refers to</h2>
+  <%= form_for(Import.new, :multipart => true) do |f| %>
+    <p id="csv-upload">
+      <%= f.label :csv, 'CSV file' %>
+      <%= f.file_field :csv %>
+    </p>
+    <h3>Update the following fields:</h3>
+    <p>Note that the <strong>column names in the CSV must match</strong> the names below</p>
+    <ul>
+      <% Import::IMPORT_OPTIONS.each do |import_option| %>
+        <li><%= f.label import_option %><%= f.check_box import_option %></li>
+      <% end %>
+    </ul>
+    <p><%= f.submit 'Upload', class: 'button' %></p>
+  <% end %>
+</div>

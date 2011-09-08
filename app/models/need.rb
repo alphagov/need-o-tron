@@ -100,4 +100,22 @@ class Need < ActiveRecord::Base
     end
     nil
   end
+
+  def current_fact_checker_emails
+    fact_checkers.collect { |f| f.contact.email }
+  end
+
+  def fact_checkers_for_csv
+    current_fact_checker_emails.join(', ')
+  end
+
+  def add_fact_checker_with_email(email)
+    fact_checkers.build(contact: Contact.find_or_initialize_by_email(email))
+  end
+
+  def remove_fact_checker_with_email(email)
+    fact_checkers.select { |fc| fc.contact.email == email }.each do |fc|
+      fact_checkers.destroy(fc)
+    end
+  end
 end
