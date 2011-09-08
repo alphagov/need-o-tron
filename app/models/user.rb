@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :uid, :version
 
   def self.find_for_gds_oauth(auth_hash)
-    puts "AUTH_HASH: #{auth_hash.inspect}"
+    logger.info "AUTH_HASH: #{auth_hash.inspect}"
     if user = User.find_by_email(auth_hash["uid"])
       user
     else # Create a user with a stub password. 
