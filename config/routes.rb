@@ -3,8 +3,13 @@ NeedOTron::Application.routes.draw do
     collection do
       resource :imports, :only => [:new, :create]
     end
-    resources :justifications, :existing_services, :directgov_links, :accountabilities
+    resources :justifications, :existing_services, :directgov_links
     resources :fact_checkers do
+      collection do
+        get :search
+      end
+    end
+    resources :accountabilities do
       collection do
         get :search
       end

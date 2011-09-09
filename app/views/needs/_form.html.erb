@@ -26,6 +26,15 @@
       </ul>
 
     <% end %>
+    <%= f.inputs(:id => 'accountabilities', :name => 'Accountabilities') do %>
+      <ul id="accountabilities_list">
+      <% @need.accountabilities.each do |accountability| %>
+        <li class="existing"><%= accountability.department.name %><%= hidden_field_tag("accountabilities[#{accountability.id}]", accountability.id) %></li>
+      <% end %>
+        <li><%= text_field_tag('accountabilities[n][name]') %></li>
+      </ul>
+
+    <% end %>
   <% end %>
 
   <%= f.buttons  %>
