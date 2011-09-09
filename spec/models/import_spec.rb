@@ -90,37 +90,67 @@ describe Import do
         Import::Updaters.fact_checker(need, {'Fact checker' => 'matt@alphagov.co.uk, ben@alphagov.co.uk'})
       end
     end
+  end
 
-    # before(:each) do
-    #   @need = Need.make
+  describe "importing Accountabilities" do
+    describe "reporting which Accountabilities to remove or add" do
+      it "correctly reports which Accountabilities to remove and which to add" do
+        current = ['HM Treasury', 'DoSAC']
+        updated = ['DoSAC', 'MAFF']
+        to_add, to_delete = Import::Updaters.accountability_changes(current, updated)
+        to_add.should equal_set(['MAFF'])
+        to_delete.should equal_set(['HM Treasury'])
+      end
 
-    #   @need.expects(:save).returns(true)
-    #   Need.expects(:find_by_id).with('1').returns(@need)
-    # end
+      it "correctly reports additions when there are no pre-existing fact-checkers" do
+        current = []
+        updated = ['DoSAC', 'MAFF']
+        to_add, to_delete = Import::Updaters.accountability_changes(current, updated)
+        to_add.should equal_set(['DoSAC', 'MAFF'])
+        to_delete.should  equal_set([])
+      end
 
-    # def do_import
-    #   import = Import.new :csv => csv('import_with_new_fact_checker.csv'), :fact_checker => '1'
-    #   import.save
-    # end
+      it "correctly reports no additions or deletions when there's no change" do
+        current = ['HM Treasury']
+        updated = ['HM Treasury']
+        to_add, to_delete = Import::Updaters.accountability_changes(current, updated)
+        to_add.should equal_set([])
+        to_delete.should  equal_set([])
+      end
 
-    # it "updates the need's Fact Checkers" do
-    #   do_import
+      it "correctly reports all deletions when fact checkers are removed from updated" do
+        current = ['HM Treasury']
+        updated = []
+        to_add, to_delete = Import::Updaters.accountability_changes(current, updated)
+        to_add.should equal_set([])
+        to_delete.should equal_set(['HM Treasury'])
+      end
+    end
 
-    #   @need.fact_checkers.length.should == 1
-    #   @need.fact_checkers.first.contact.email.should == 'matt@alphagov.co.uk'
-    # end
+    describe "extracting a list of Fact Checkers from the CSV" do
+      it "correctly extracts one" do
+        Import::Updaters.extract_accountabilities('HM Treasury').should == ['HM Treasury']
+      end
 
-    # it "removes excess Fact Checkers" do
-    #   @need.fact_checkers << FactChecker.make
+      it "correctly extracts two" do
+        Import::Updaters.extract_accountabilities('HM Treasury, DoSAC').should == ['HM Treasury', 'DoSAC']
+      end
 
-    #   do_import
+      it "correctly extracts none" do
+        Import::Updaters.extract_accountabilities('').should == []
+      end
+    end
 
-    #   @need.fact_checkers.length.should == 1
-    #   @need.fact_checkers.first.contact.email.should == 'matt@alphagov.co.uk'
-    # end
+    describe "modifying Fact Checkers" do
+      it "correctly orders the deletion and creation of fact checkers" do
+        need = mock()
 
-    # it "removes excess Fact Checkers" do
-    #   Import::Updaters.fact_checker(@need, {'Fact checker' => 
-    # end
+        need.expects(:current_accountability_names).returns(['HM Treasury', 'MAFF'])
+        need.expects(:add_accountability_with_name).with('DoSAC')
+        need.expects(:remove_accountability_with_name).with('MAFF')
+
+        Import::Updaters.accountability(need, {'Accountability' => 'HM Treasury, DoSAC'})
+      end
+    end
   end
 end

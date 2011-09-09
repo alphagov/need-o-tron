@@ -59,16 +59,24 @@ class Import
       need.priority = row['Priority'] if row['Priority']
     end
 
+    def self.calculate_changes(current, updates)
+     current = Set.new(current)
+     updates = Set.new(updates)
+     to_add = updates - current
+     to_remove = current - updates
+     [to_add, to_remove]
+    end
+
+    def self.extract_list(cell, separator = ',')
+      cell.split(separator).collect { |item| item.strip }
+    end
+
     def self.fact_checker_changes(current_checkers, updates)
-       current_checkers = Set.new(current_checkers)
-       updates = Set.new(updates)
-       checkers_to_add = updates - current_checkers
-       checkers_to_remove = current_checkers - updates
-       [checkers_to_add,checkers_to_remove]
+      calculate_changes(current_checkers, updates)
     end
 
     def self.extract_fact_checkers(csv_cell)
-      csv_cell.split(',').collect { |email| email.strip }
+      extract_list(csv_cell)
     end
 
     def self.fact_checker(need, row)
@@ -79,6 +87,25 @@ class Import
 
         fact_checkers_to_create.each { |email| need.add_fact_checker_with_email(email) }
         fact_checkers_to_delete.each { |email| need.remove_fact_checker_with_email(email) }
+      end
+    end
+
+    def self.accountability_changes(current_accountabilities, updates)
+      calculate_changes(current_accountabilities, updates)
+    end
+
+    def self.extract_accountabilities(csv_cell)
+      extract_list(csv_cell)
+    end
+
+    def self.accountability(need, row)
+      if row['Accountability']
+        updates = extract_accountabilities(row['Accountability'])
+        current = need.current_accountability_names
+        accountabilities_to_create, accountabilities_to_delete = accountability_changes(current, updates)
+
+        accountabilities_to_create.each { |name| need.add_accountability_with_name(name) }
+        accountabilities_to_delete.each { |name| need.remove_accountability_with_name(name) }
       end
     end
   end

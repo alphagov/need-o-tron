@@ -19,6 +19,7 @@ class Need < ActiveRecord::Base
   has_many :existing_services
   has_many :directgov_links
   has_many :fact_checkers
+  has_many :accountabilities
 
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
@@ -116,6 +117,24 @@ class Need < ActiveRecord::Base
   def remove_fact_checker_with_email(email)
     fact_checkers.select { |fc| fc.contact.email == email }.each do |fc|
       fact_checkers.destroy(fc)
+    end
+  end
+
+  def current_accountability_names
+    accountabilities.collect { |a| a.department.name }
+  end
+
+  def accountabilities_for_csv
+    current_accountability_names.join(', ')
+  end
+
+  def add_accountability_with_name(name)
+    accountabilities.build(department: Department.find_or_initialize_by_name(name))
+  end
+
+  def remove_accountability_with_name(name)
+    accountabilities.select { |a| a.department.name == name }.each do |a|
+      accountabilities.destroy(a)
     end
   end
 end

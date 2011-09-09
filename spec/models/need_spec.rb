@@ -10,6 +10,7 @@ describe Need do
 
   describe "associations" do
     it { should have_many :fact_checkers }
+    it { should have_many :accountabilities }
   end
 
   it "set creator when saved" do
@@ -38,10 +39,9 @@ describe Need do
 
   describe "handling fact checker updates" do
     it "can return all current Fact Checker's Contact emails" do
-      @need.stubs(:fact_checkers).returns([
-        FactChecker.new(contact: Contact.new(email: 'matt@alphagov.co.uk')),
-        FactChecker.new(contact: Contact.new(email: 'ben@alphagov.co.uk'))
-      ])
+      @need.fact_checkers.build(contact: Contact.new(email: 'matt@alphagov.co.uk'))
+      @need.fact_checkers.build(contact: Contact.new(email: 'ben@alphagov.co.uk'))
+
       @need.current_fact_checker_emails.should == ['matt@alphagov.co.uk', 'ben@alphagov.co.uk']
     end
 
@@ -66,6 +66,37 @@ describe Need do
     @need.fact_checkers.build(contact: Contact.new(email: 'ben@alphagov.co.uk'))
 
     @need.fact_checkers_for_csv.should == "matt@alphagov.co.uk, ben@alphagov.co.uk"
+  end
+
+  describe "handling accountability updates" do
+    it "can return all current Accountabilities' Department names" do
+      @need.accountabilities.build(department: Department.new(name: 'HM Treasury'))
+      @need.accountabilities.build(department: Department.new(name: 'DoSAC'))
+
+      @need.current_accountability_names.should == ['HM Treasury', 'DoSAC']
+    end
+
+    it "can create an accountability and department from its name" do
+      @need.add_accountability_with_name('HM Treasury')
+      @need.accountabilities.first.department.name.should == 'HM Treasury'
+    end
+
+    it "can remove a fact checker from its contact's email" do
+      a_to_be_removed = @need.accountabilities.build(department: Department.new(name: 'HM Treasury'))
+      a_to_remain = @need.accountabilities.build(department: Department.new(name: 'DoSAC'))
+
+      @need.remove_accountability_with_name('HM Treasury')
+
+      @need.accountabilities.length.should == 1
+      @need.accountabilities.first.should == a_to_remain
+    end
+  end
+
+  it "can report accountabilities so they can be included in a CSV" do
+    @need.accountabilities.build(department: Department.new(name: 'HM Treasury'))
+    @need.accountabilities.build(department: Department.new(name: 'DoSAC'))
+
+    @need.accountabilities_for_csv.should == "HM Treasury, DoSAC"
   end
 
   describe "priority" do
