@@ -5,7 +5,7 @@ class Import
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  IMPORT_OPTIONS = [:priority, :fact_checker]
+  IMPORT_OPTIONS = [:priority, :fact_checker, :accountability]
 
   attr_reader :opts
   attr_reader :errors
