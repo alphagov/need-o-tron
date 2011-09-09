@@ -8,7 +8,7 @@
   <body>
     <div id="container">
       <div id="app-header">
-        <p id="logo"><%= link_to 'Need-O-Tron', root_path %></p>
+        <p id="logo"><%= link_to 'Need-O-Tron', root_path %>, <small><%= current_user %></small></p>
         <div role="navigation">
           <ul id="admin-options">
             <%- unless user_signed_in? or controller_name == 'auth_start' %>
