@@ -8,6 +8,7 @@
       <th scope="col">Created by</th>
       <th scope="col">Priority</th>
       <th scope="col">Fact checker</th>
+      <th scope="col">Accountability</th>
       <% if params[:in_state] == 'bin' %>
       <th></th>
       <% end %>
@@ -25,6 +26,7 @@
       <td><%= need.creator %></td>
       <td><%= need.prioritised? ? need.named_priority : '-' %></td>
       <td><%= need.fact_checkers_for_csv %></td>
+      <td><%= need.accountabilities_for_csv %></td>
       <% if params[:in_state] == 'bin' %>
       <td><%= need.reason_for_decision %></td>
       <% end %>

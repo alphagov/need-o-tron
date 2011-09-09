@@ -4,10 +4,12 @@ require 'csv'
 class NeedsCsv < CsvRenderer
   def to_csv
     CSV.generate do |csv|
-      csv << ["Id", "Priority", "Title", "Format", "Tags", "Context", "Status", "Updated at", "Statutory", "Fact checker", "Interaction", "Related needs"]
+      csv << ["Id", "Priority", "Title", "Format", "Tags", "Context", "Status", "Updated at", "Statutory", "Fact checker", "Accountability", "Interaction", "Related needs"]
       @data.each do |need|
-        csv << [need.id, need.named_priority, need.title, need.kind.to_s, need.tag_list, need.description, need.status, need.updated_at.to_formatted_s(:db), 
-          need.statutory, need.fact_checkers_for_csv, need.interaction, need.related_needs]
+        csv << [need.id, need.named_priority, need.title, need.kind.to_s, need.tag_list, 
+                need.description, need.status, need.updated_at.to_formatted_s(:db), 
+                need.statutory, need.fact_checkers_for_csv, need.accountabilities_for_csv,
+                need.interaction, need.related_needs]
       end
     end
   end
