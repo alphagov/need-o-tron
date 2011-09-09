@@ -40,6 +40,9 @@ end
 group :development, :test do
   gem 'machinist', '~> 2.0.0.beta1'
   gem 'rspec-rails'
+  gem 'simplecov'
+  gem 'simplecov-rcov'
+  gem 'ci_reporter'
 end
 
 if ENV['RUBY_DEBUG']

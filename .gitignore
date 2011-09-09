@@ -5,3 +5,5 @@ tmp/
 .sass-cache/
 .DS_Store
 config/initializers/dg_api.rb
+coverage
+spec/reports
