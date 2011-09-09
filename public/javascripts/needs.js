@@ -35,14 +35,22 @@ $(function() {
   };
   var set_up_create_item_li = function(item_create_node, create_url, form_data_generator, item_creator, url_generator) {
     var button = $('<span class="button">+</span>');
+    var create_text_field_node = item_create_node.find('input');
     item_create_node.append(button);
-    item_create_node.find('input').autocomplete({source: create_url + '/search.json'});
-    button.click(function() {
+    create_text_field_node.autocomplete({source: create_url + '/search.json'});
+    var create_function = function() {
       $.post(create_url + '.json', form_data_generator(item_create_node), function(data) {
         var new_item_node = item_creator(data);
         item_create_node.before(new_item_node);
         set_up_existing_item_li(new_item_node, url_generator);
       }, 'json');
+    };
+    button.click(create_function);
+    create_text_field_node.keypress(function(e) {
+      if ( event.which == 13 ) {
+         event.preventDefault();
+         create_function();
+       }
     });
   }
 
@@ -78,7 +86,7 @@ $(function() {
     return $('<li class="existing">' + data.department.name + '<input name="accountabilities[' + data.id + ']" type="hidden" value="' + data.id + '">');
   }
   $('#accountabilities_list li.existing').each(function() {
-    set_up_existing_item_li($(this), accountability_url);
+    set_up_existing_item_li($(this), accountability_url_generator);
   });
   $('#accountabilities_list  li[class!=existing]').each(function() {
     set_up_create_item_li($(this), create_accountability_url, 

@@ -237,3 +237,57 @@ ul.supporting-information li {
   margin-top: 2em;
   font-size: 0.8em;
 }
+ul.ui-autocomplete {
+	background: none repeat scroll 0 0 #FFFFFF;
+	border: 1px solid #8F8F8F;
+	width:100px;
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+ul.ui-autocomplete li {
+	font-size: 0.75em;
+/*	margin: 0 0 0 26%;
+	padding: 0.5em 0.75em 0 0;
+	width: 64%;*/
+}
+ul.ui-autocomplete li {
+	border-top: 1px solid #DBDAD9;
+	list-style-type:none;
+	padding:0;
+	margin:0;
+	width:100%;
+}
+ul.ui-autocomplete.ui-menu .ui-menu-item a {
+	padding:0.5em;
+	display:block;
+}
+ul.ui-autocomplete li a em {
+	background-color: #FFE9A5;
+	font-style: normal;
+	font-weight: bold;
+	padding: 0.125em;
+}
+ul.ui-menu .ui-menu-item a.ui-state-hover,
+ul.ui-menu .ui-menu-item a.ui-state-active {
+	margin: 0;
+}
+
+ul.ui-autocomplete.ui-menu .ui-menu-item.search-site em {
+	font-style: italic;
+}
+
+form.formtastic ul.item-list {
+  margin-top: 0.25em;
+  padding-left: 1em;
+}
+form.formtastic ul.item-list li.existing {
+  display: list-item;
+  list-style: square;
+  margin-bottom: 0.5em;
+}
+ul.item-list li span.button {
+  line-height: 0.75em;
+  padding: 0 0.25em;
+  margin-left: 0.25em;
+}
