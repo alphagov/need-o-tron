@@ -1,69 +1,89 @@
 body {
-  background-color: #333; }
+  background-color: #333;
+}
 
 .two-thirds {
   float: left;
-  width: 60%; }
+  width: 60%;
+}
 
 .one-third {
   margin-left: 65%;
-  width: 35%; }
+  width: 35%;
+}
 
 p#logo {
   float: left;
-  font-family: arial, serif;
+  font-family: 'Helvetica Neue', Arial, Helvetica, sans-serif;
   font-weight: bold;
-  font-size: 18px; }
+  font-size: 1.125em;
+}
 
 p#logo a {
-  color: #fff; }
+  color: #fff;
+}
 
 p.hints, form.formtastic fieldset > ol > li p.inline-hints {
-  font-size: 0.85em; }
+  font-size: 0.85em;
+}
 
 p.hints {
+  color: #666;
   margin-bottom: 2em;
-  color: #666; }
+}
 
 br.clear {
-  clear: both; }
+  clear: both;
+}
 
 /* colours */
 .new {
-  background-color: #CC2323; }
+  background-color: #CC2323;
+}
+	#main-content.new {
+	  border-top-color: #CC2323;
+	}
 
 .ready-for-review {
-  background-color: #CC6231; }
+  background-color: #CC6231;
+}
+	#main-content.ready-for-review {
+	  border-top-color: #CC6231;
+	}
 
 .format-assigned {
-  background-color: #00B735; }
+  background-color: #00B735;
+}
+	#main-content.format-assigned {
+	  border-top-color: #00B735;
+	}
 
 .done {
-  background-color: #3171CC; }
+  background-color: #3171CC;
+}
+	#main-content.done {
+	  border-top-color: #3171CC;
+	}
 
 .bin {
-  background-color: #A09A9F; }
+  background-color: #A09A9F;
+}
+	#main-content.bin {
+	  border-top-color: #A09A9F;
+	}
 
-#main-content.new {
-  border-top-color: #CC2323; }
-#main-content.ready-for-review {
-  border-top-color: #CC6231; }
-#main-content.format-assigned {
-  border-top-color: #00B735; }
-#main-content.done {
-  border-top-color: #3171CC; }
-#main-content.bin {
-  border-top-color: #A09A9F; }
 
 /* dataTable search box */
 #needs-table_filter {
   background-color: #e5e5e5;
-  padding: 0.5em 0.5em 0.5em 0.25em;
+  /*float: left;*/
   margin-bottom: 1em;
-  float: left;
+  padding: 0.5em 0.5em 0.5em 0.25em;
 }
+
 #needs-table {
-  clear: left;
+  /*clear: left;*/
+	min-width: 60em;
 }
 
 /* needs table sorting icons */
@@ -82,82 +102,96 @@ br.clear {
 
 /* arrow for menu */
 div.arrow-right {
+  border-bottom: 0.625em solid transparent;
+  border-top: 0.625em solid transparent;
+  border-left: 0.625em solid #000;
+  font-size: 0;
+  height: 0;
+  line-height: 0;
+  margin-top: -0.625em;
   position: absolute;
-  right: -10px;
+  right: -0.625em;
   top: 50%;
-  margin-top: -10px;
-  width: 0px;
-  height: 0px;
-  border-bottom: 10px solid transparent;
-  /* left arrow slant */
-  border-top: 10px solid transparent;
-  /* right arrow slant */
-  border-left: 10px solid #000;
-  /* bottom, add background color here */
-  font-size: 0px;
-  line-height: 0px;
-  z-index: 1; }
+  width: 0;
+  z-index: 1;
+}
 
 a.new div.arrow-right {
-  border-left-color: #CC2323; }
+  border-left-color: #CC2323;
+}
 
 a.ready-for-review div.arrow-right {
-  border-left-color: #CC6231; }
+  border-left-color: #CC6231;
+}
 
 a.format-assigned div.arrow-right {
-  border-left-color: #00B735; }
+  border-left-color: #00B735;
+}
 
 a.done div.arrow-right {
-  border-left-color: #3171CC; }
+  border-left-color: #3171CC;
+}
 
 a.bin div.arrow-right {
-  border-left-color: #A09A9F; }
+  border-left-color: #A09A9F;
+}
 
 #id-status {
+  color: #fff;
   float: right;
-  padding: 10px;
-  width: 160px;
-  color: #fff; }
+  padding: 0.625em;
+  width: 10em;
+}
 
 #id-number {
-  font-size: 36px;
-  font-weight: bold; }
+  font-size: 2.250em;
+  font-weight: bold;
+}
 
 #id-status h3 {
-  margin-bottom: 0; }
+  margin-bottom: 0;
+}
 
 h1 small {
-  font-size: 0.5em; }
+  font-size: 0.5em;
+}
 
 .need-section {
-  padding-bottom: 20px;
-  margin-bottom: 20px;
-  border-bottom: solid 2px #BFBFBF; }
+  border-bottom: solid 0.125em #BFBFBF;
+  margin-bottom: 1.250em;
+  padding-bottom: 1.250em;
+}
 
 .need-section h3 {
-  font-weight: bold; }
+  font-weight: bold;
+}
 
 #need-progress {
-  padding-top: 32px;
+  color: #fff;
   clear: both;
-  color: #fff; }
+  padding-top: 2em;
+}
   #need-progress h3 {
     font-weight: bold;
-    font-size: 18px; }
+    font-size: 1.125em;
+}
 
 #need-progress > div {
-  padding: 16px; }
+  padding: 1em;
+}
 
 small.status-label {
-  margin-left: 8px;
-  padding: 2px 4px;
+  color: #fff;
   font-size: 0.7em;
-  color: #fff; }
+  margin-left: 0.5em;
+  padding: 0.125em 0.250em;
+}
 
-/*#overview, #departments, #justifications {
+/*
+#overview, #departments, #justifications {
   padding-bottom: 1em;
   margin-bottom: 2em;
-  border-bottom: dashed 2px #E5E5E5;
+  border-bottom: dashed 0.125em #E5E5E5;
 }
 
 #overview {
@@ -171,117 +205,131 @@ small.status-label {
   width: 30%;
   float: left;
   background: #F2F2F2;
-  
+	}
+
   legend {
     font-size: 1.5em;
     font-weight: bold;
     padding-top: 2em;
     margin-bottom: 0.5em;
   }
-}
 
 #departments {
   clear: both;
-}*/
+}
+*/
+
 form.formtastic fieldset.inputs {
   /*  padding-bottom: 1em;
     margin-bottom: 2em;
-    border-bottom: dashed 2px #E5E5E5;*/ }
+    border-bottom: dashed 2px #E5E5E5;*/
+}
 
 form.formtastic fieldset.buttons:last-child {
   /*  padding: 1.5em 1.25em 0 1.25em;*/
   /*  margin-bottom: 1em;*/
-  /*  background: #EEEFEE;*/ }
+  /*  background: #EEEFEE;*/
+}
 
 form.formtastic fieldset.buttons li.commit {
-  float: right; }
+  float: right;
+}
 
 form.formtastic fieldset.buttons li.commit input, .button {
-  padding: 0.25em 0.5em;
+  background: #1d97ff;
+  border: 0.250em #0065C1 solid;
+  border-radius: 0.25em;
+  color: #fff;
   cursor: pointer;
   font-weight: bold;
-  color: #fff;
-  background: #1d97ff;
-  border: 4px #0065C1 solid;
-  border-radius: 0.25em; }
+  padding: 0.25em 0.5em;
+}
 
 #error_explanation {
-  background-color: red; }
+  background-color: red;
+}
 
 ul.supporting-information {
   margin: 0;
-  padding: 0 0 16px 0; }
+  padding: 0 0 1em 0;
+	overflow: hidden;
+}
 
 ul.supporting-information li {
+  background-color: #f6f6f6;
   display: block;
-  padding: 8px 8px 1px 8px;
-  margin: 8px 0 0 0;
-  background-color: #f6f6f6; } 
+  margin: 0.5em 0 0 0;
+  padding: 0.5em 0.5em 0.063em 0.5em;
+}
 
 .button {
-  border-width: 1px; }
+  border-width: 0.063em;
+}
 
 #need-meta table {
-  font-size: 0.9em;
   border: none;
+  font-size: 0.9em;
 }
+
 #need-meta tr {
   border: none;
 }
-#need-meta th {
-  font-weight: bold;
-  vertical-align: baseline;
-  padding: 4px 0;
-  margin: 0;
-  border: 0;
-  border-top: 1px solid black;
-}
+
+#need-meta th,
 #need-meta td {
-  vertical-align: baseline;
-  padding: 4px 0;
-  margin: 0;
   border: 0;
-  border-top: 1px solid black;
+  border-top: 0.063em solid black;
+  margin: 0;
+  padding: 0.250em 0;
+  vertical-align: baseline;
 }
-#need-meta tr:first-child td, #need-meta tr:first-child th {
-  border-top: none;
-}
+	#need-meta td {
+	  font-weight: normal;
+	}
+
+	#need-meta tr:first-child td,
+	#need-meta tr:first-child th {
+	  border-top: none;
+	}
 
 #csv-download {
-  margin-top: 2em;
   font-size: 0.8em;
+  margin-top: 2em;
 }
+
 ul.ui-autocomplete {
-	background: none repeat scroll 0 0 #FFFFFF;
-	border: 1px solid #8F8F8F;
-	width:100px;
-	list-style-type:none;
-	padding:0;
-	margin:0;
+	background: none repeat scroll 0 0 #FFF;
+	border: 0.063em solid #8F8F8F;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 6.250em;
 }
+
 ul.ui-autocomplete li {
 	font-size: 0.75em;
-/*	margin: 0 0 0 26%;
-	padding: 0.5em 0.75em 0 0;
-	width: 64%;*/
 }
+
 ul.ui-autocomplete li {
-	border-top: 1px solid #DBDAD9;
-	list-style-type:none;
-	padding:0;
-	margin:0;
-	width:100%;
+	border-top: 0.063em solid #DBDAD9;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
 }
+
 ul.ui-autocomplete.ui-menu .ui-menu-item a {
-	padding:0.5em;
-	display:block;
+	padding: 0.5em;
+	display: block;
 }
+
 ul.ui-autocomplete li a em {
 	background-color: #FFE9A5;
 	font-style: normal;
 	font-weight: bold;
 	padding: 0.125em;
 }
+
 ul.ui-menu .ui-menu-item a.ui-state-hover,
 ul.ui-menu .ui-menu-item a.ui-state-active {
 	margin: 0;
@@ -295,14 +343,16 @@ form.formtastic ul.item-list {
   margin-top: 0.25em;
   padding-left: 1em;
 }
+
 form.formtastic ul.item-list li.existing {
   display: list-item;
   list-style: square;
   margin-bottom: 0.5em;
 }
+
 ul.item-list li span.button {
   line-height: 0.75em;
-  padding: 0 0.25em;
   margin-left: 0.25em;
+  padding: 0 0.25em;
 }
 
