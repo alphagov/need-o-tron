@@ -18,34 +18,34 @@
           <% if user_signed_in? %>
           <ul class="navigation">
             <li>
-              <a class="new" href="<%= needs_url(:in_state => 'new') %>">
+              <a class="new" href="<%= needs_path(:in_state => 'new') %>">
                 New
                 <span class="count">(<%= Need.in_state('new').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
             <li>
-              <a class="ready-for-review" href="<%= needs_url(:in_state => 'ready-for-review') %>">
+              <a class="ready-for-review" href="<%= needs_path(:in_state => 'ready-for-review') %>">
                 Ready for review
                 <span class="count">(<%= Need.in_state('ready-for-review').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
             <li>
-              <a class="format-assigned" href="<%= needs_url(:in_state => 'format-assigned') %>">
+              <a class="format-assigned" href="<%= needs_path(:in_state => 'format-assigned') %>">
                 Format assigned
                 <span class="count">(<%= Need.in_state('format-assigned').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
             <li>
-              <a class="done" href="<%= needs_url(:in_state => 'done') %>">
+              <a class="done" href="<%= needs_path(:in_state => 'done') %>">
                 Done
                 <span class="count">(<%= Need.in_state('done').count %>)</span>
               </a>
             </li>
             <li>
-              <a class="bin" href="<%= needs_url(:in_state => 'bin') %>">
+              <a class="bin" href="<%= needs_path(:in_state => 'bin') %>">
                 Bin
                 <span class="count">(<%= Need.in_state('bin').count %>)</span>
               </a>
