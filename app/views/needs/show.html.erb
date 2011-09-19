@@ -55,7 +55,6 @@
     <p><%= link_to 'Add link', new_need_directgov_link_path(@need), :class => 'button'%></p>
   </div>
 
-
   <div class="need-section">
     <h3>Evidence</h3>
     <p>Add evidence which supports this need, such as analytics data, or explicit government policy or statutory requirement.</p>
@@ -115,6 +114,12 @@
       </tr>
     </table>
   </div>
+
+  <% if @need.format_assigned? %>
+  <div class="need-section">
+    <p><%= start_work_link @need %></p>
+  </div>
+  <% end %>
 
 </div><!-- end need-meta -->
 

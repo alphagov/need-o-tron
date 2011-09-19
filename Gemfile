@@ -21,6 +21,8 @@ gem 'formtastic'
 gem 'inherited_resources'
 gem 'has_scope'
 
+gem 'plek'
+
 # gem 'acts-as-taggable-on'
 
 # Gems used only for assets and not required
