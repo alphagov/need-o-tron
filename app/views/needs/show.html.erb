@@ -115,7 +115,7 @@
     </table>
   </div>
 
-  <% if @need.format_assigned? %>
+  <% if current_user.is_admin && @need.format_assigned? %>
   <div class="need-section">
     <p><%= start_work_link @need %></p>
   </div>
