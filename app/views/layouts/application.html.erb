@@ -52,7 +52,9 @@
             </li>
           </ul>
           <ul class="navigation">
+            <% if current_user.is_admin? %>
             <li><%= link_to 'Enter a new need', new_need_path %></li>
+            <% end %>
             <li><%= link_to 'View all needs', needs_path %></li>
           </ul>
           <% end %>

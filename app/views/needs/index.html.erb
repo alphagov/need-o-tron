@@ -12,8 +12,10 @@
       <% if params[:in_state] == 'bin' %>
       <th></th>
       <% end %>
+      <% if current_user.is_admin? %>
       <th></th>
       <th></th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
@@ -30,8 +32,10 @@
       <% if params[:in_state] == 'bin' %>
       <td><%= need.reason_for_decision %></td>
       <% end %>
+      <% if current_user.is_admin? %>
       <td><%= link_to 'Edit', edit_need_path(need) %></td>
       <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
+      <% end %>
     </tr>
   <% end %>
   </tbody>
