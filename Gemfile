@@ -52,6 +52,7 @@ if ENV['RUBY_DEBUG']
 end
 
 group :test do
+  gem 'database_cleaner'
   gem 'shoulda'
   gem 'mocha'
   gem 'cucumber-rails'
