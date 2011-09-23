@@ -2,7 +2,7 @@ module NeedsHelper
   def start_work_link need
     start_work = "http://#{Plek.current.panopticon}/artefacts/new"
 
-    form_tag start_work, :html => { :method => 'get' } do
+    form_tag start_work, :method => 'get' do
       [
         hidden_field_tag("artefact[need_id]", need.id).html_safe,
         hidden_field_tag("artefact[kind]", need.kind.to_s.downcase).html_safe,
