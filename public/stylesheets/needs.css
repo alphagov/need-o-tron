@@ -235,7 +235,7 @@ form.formtastic fieldset.buttons li.commit {
   float: right;
 }
 
-form.formtastic fieldset.buttons li.commit input, .button {
+form.formtastic fieldset.buttons li.commit input, .button, .fulfill {
   background: #1d97ff;
   border: 0.250em #0065C1 solid;
   border-radius: 0.25em;
@@ -244,6 +244,8 @@ form.formtastic fieldset.buttons li.commit input, .button {
   font-weight: bold;
   padding: 0.25em 0.5em;
 }
+
+	.fulfill { border-width: 0.063em; font-size: 1em; }
 
 #error_explanation {
   background-color: red;
