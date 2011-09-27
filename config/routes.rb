@@ -14,7 +14,10 @@ NeedOTron::Application.routes.draw do
         get :search
       end
     end
+    member do
+    	get 'print'
+    end
   end
-
+  
   root :to => "needs#index", :defaults => { :in_state => 'new' }
 end

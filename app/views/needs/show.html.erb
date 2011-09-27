@@ -118,6 +118,7 @@
   <% if current_user.is_admin && @need.format_assigned? %>
   <div class="need-section">
     <p><%= start_work_link @need %></p>
+    <p><%= link_to 'Print', print_need_url(@need), :class => 'button' %></p>
   </div>
   <% end %>
 

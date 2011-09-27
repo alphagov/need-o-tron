@@ -9,6 +9,11 @@ class NeedsController < InheritedResources::Base
       format.csv { render :csv => NeedsCsv.new(collection, Time.zone.now) }
     end
   end
+  
+  def print
+    @need = Need.find params[:id]
+    render :layout => false
+  end
 
   def update
     update! do |success, failure|
