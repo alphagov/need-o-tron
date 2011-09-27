@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Need-O-Tron</title>
+	<title>Need-o-Tron</title>
 	<style type="text/css">
 	    body {margin:0; font-family:helvetica;}
 	    .bleed {padding-right:8mm; border-right:1px dashed #000; width:108mm; height:60mm;}
@@ -18,7 +18,7 @@
 <body onload="window.print();">
 	<div class="bleed">
 		<div class="label">
-			<h2>Guide - #<%= @need.id %></h2>
+			<h2><%= @need.kind %> - #<%= @need.id %></h2>
 			<h1><%= @need.title %></h1>
 			<p><%= markdown @need.description %></p>
 			<h3><%= @need.named_priority %></h3>
