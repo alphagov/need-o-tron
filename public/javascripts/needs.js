@@ -7,6 +7,7 @@ $(function() {
     null,
     null,
     null,
+    null,
     {sType: 'priority'},
     null,
     null,
