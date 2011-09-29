@@ -20,13 +20,29 @@ describe Import do
     end
 
     it "updates the need's priority" do
-      @need.expects(:save).returns(true)
+      @need.expects(:save!).returns(true)
       Need.expects(:find_by_id).with('1').returns(@need)
 
       import = Import.new :csv => csv('import_sample.csv'), :priority => '1'
       import.save
 
       @need.priority.should == 3
+    end
+  end
+  
+  describe "importing writing department" do
+    before(:each) do
+      @need = Need.make
+    end
+
+    it "updates the need's writing department" do
+      @need.expects(:save!).returns(true)
+      Need.expects(:find_by_id).with('1').returns(@need)
+
+      import = Import.new :csv => csv('import_with_writing_dept.csv'), :writing_dept => '1'
+      import.save
+
+      @need.writing_dept.should == "DoSAC"
     end
   end
 
@@ -141,15 +157,15 @@ describe Import do
       end
     end
 
-    describe "modifying Fact Checkers" do
-      it "correctly orders the deletion and creation of fact checkers" do
+    describe "modifying Accountability" do
+      it "correctly orders the deletion and creation of accountabilities (lead departments)" do
         need = mock()
 
         need.expects(:current_accountability_names).returns(['HM Treasury', 'MAFF'])
         need.expects(:add_accountability_with_name).with('DoSAC')
         need.expects(:remove_accountability_with_name).with('MAFF')
 
-        Import::Updaters.accountability(need, {'Accountability' => 'HM Treasury, DoSAC'})
+        Import::Updaters.lead_department(need, {'Lead department' => 'HM Treasury, DoSAC'})
       end
     end
   end
