@@ -1,6 +1,7 @@
 <table id="needs-table">
   <thead>
     <tr>
+      <th scope="col">ID</th>
       <th scope="col">Title</th>
       <th scope="col">Format</th>
       <th scope="col">Tags</th>
@@ -21,6 +22,7 @@
   <tbody>
   <% @needs.each do |need| %>
     <tr>
+      <td>>#<%= need.id %></td>
       <th scope="row"><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
       <td class="need"><%= need.format_assigned? ? need.kind : "-" %></td>
       <td><%= need.tag_list %></td>
