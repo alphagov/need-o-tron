@@ -112,6 +112,20 @@
         <th scope="row">Priority</th>
         <td><%= @need.named_priority %></td>
       </tr>
+      <tr>
+      	<th scope="row">Lead Dept</th>
+        <td><%= @need.accountabilities_for_csv %></td>
+      </tr>
+      <tr>
+      	<th scope="row">Fact checkers</th>
+        <td><%= @need.fact_checkers_for_csv %></td>
+      </tr>
+      <% if @need.writing_dept %>
+      <tr>
+	      <th scope="row">Writing Dept</th>
+        <td><%= @need.writing_dept %></td>
+      </tr>
+      <% end %>
     </table>
   </div>
 

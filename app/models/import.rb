@@ -1,11 +1,12 @@
 require 'active_model/naming'
 require 'set'
+require 'csv'
 
 class Import
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  IMPORT_OPTIONS = [:priority, :fact_checker, :accountability]
+  IMPORT_OPTIONS = [:priority, :fact_checker, :lead_department, :writing_dept]
 
   attr_reader :opts
   attr_reader :errors
@@ -47,7 +48,9 @@ class Import
             import_keys.each do |key|
               Updaters.send(key, need, row)
             end
-            need.save if need.changed?
+            #sort of assuming we need to save everything as the import
+            #has a rather large number of changes
+            need.save!
           end
         end
       end
@@ -57,6 +60,11 @@ class Import
   module Updaters
     def self.priority(need, row)
       need.priority = row['Priority'] if row['Priority']
+      
+    end
+    
+    def self.writing_dept(need, row)
+      need.writing_dept = row['Writing dept'] if row['Writing dept']
     end
 
     def self.calculate_changes(current, updates)
@@ -80,11 +88,11 @@ class Import
     end
 
     def self.fact_checker(need, row)
-      if row['Fact checker']
+      if row['Fact checker'] 
         updates = extract_fact_checkers(row['Fact checker'])
         current = need.current_fact_checker_emails
         fact_checkers_to_create, fact_checkers_to_delete = fact_checker_changes(current, updates)
-
+        
         fact_checkers_to_create.each { |email| need.add_fact_checker_with_email(email) }
         fact_checkers_to_delete.each { |email| need.remove_fact_checker_with_email(email) }
       end
@@ -98,9 +106,10 @@ class Import
       extract_list(csv_cell)
     end
 
-    def self.accountability(need, row)
-      if row['Accountability']
-        updates = extract_accountabilities(row['Accountability'])
+    def self.lead_department(need, row)
+      #note change in name - gone from accountability to lead_department
+      if row['Lead department']
+        updates = extract_accountabilities(row['Lead department'])
         current = need.current_accountability_names
         accountabilities_to_create, accountabilities_to_delete = accountability_changes(current, updates)
 

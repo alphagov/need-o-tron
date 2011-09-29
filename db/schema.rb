@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110907111450) do
+ActiveRecord::Schema.define(:version => 20110929105130) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(:version => 20110907111450) do
     t.integer  "formatting_decision_maker_id"
     t.datetime "formatting_decision_made_at"
     t.text     "reason_for_formatting_decision"
+    t.string   "writing_dept"
   end
 
   add_index "needs", ["kind_id"], :name => "index_needs_on_kind_id"
