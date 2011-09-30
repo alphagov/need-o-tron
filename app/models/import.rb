@@ -64,7 +64,11 @@ class Import
     end
     
     def self.writing_dept(need, row)
-      need.writing_dept = row['Writing dept'] if row['Writing dept']
+      if row['Writing dept'].blank?
+        need.writing_dept = "GDS"
+      else
+        need.writing_dept = row['Writing dept'] 
+      end
     end
 
     def self.calculate_changes(current, updates)
