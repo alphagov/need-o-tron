@@ -28,4 +28,5 @@ class NeedsController < InheritedResources::Base
       }
     end
   end
+
 end
