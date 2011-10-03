@@ -11,6 +11,7 @@ $(function() {
     {sType: 'priority'},
     null,
     null,
+    null,
     {bSortable: false, sSearch: ""},
     {bSortable: false, sSearch: ""}
   ];
