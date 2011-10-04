@@ -17,7 +17,7 @@ body {
   font-size: 1em;
   margin: 0 auto;
   padding: 0.5em 1em;
-	width: 90%;
+	width: 92.5%;
 }
 
 /*
@@ -71,7 +71,7 @@ table {
 	font-size: 0.875em;
   margin-bottom: 1em;
   text-align: left;
-  width: 100%;
+	width: 100%;
 }
 
 th {
@@ -85,9 +85,10 @@ th {
 }
 
 th[scope="row"] {
-  border-bottom: solid 0.063em #E5E5E5;
+  border-bottom: none;
 	min-width: 15.625em;
-  vertical-align: middle;
+	padding-top: 1em;
+  vertical-align: top;
 	white-space: normal;
 }
 
@@ -99,7 +100,7 @@ td {
 }
 
 tr {
-  border-bottom: solid 0.063em #E5E5E5;
+  border-bottom: solid 0.125em #E5E5E5;
 }
 	tr:nth-child(even) {
 		background-color: #fafafa;
@@ -128,8 +129,8 @@ tr {
   border-top-width: 1em;
   border-top-style: solid;
   border-top-color: #fff;
-  margin-left: -2em;
-  margin-right: -2em;
+	margin-left: -1em;
+	margin-right: -1em;
   min-height: 25em;
   position: relative;
 }
@@ -137,6 +138,78 @@ tr {
 #content-area {
   padding: 1em;
 }
+
+/*
+	filtering
+*/
+
+div.needs-content {
+  float: right;
+  width: 83%;
+
+	overflow: scroll;
+}
+
+div.search-filters {
+	border-right: solid 0.063em #eee;
+	float: left;
+  width: 15%;
+}
+
+ul.filter {
+  border-bottom: solid 0.063em #eee;
+}
+	ul.filter li {
+		line-height: 1.35em;
+	}
+
+	ul.filter li:last-child {
+		margin-bottom: 1em;
+	}
+
+dl.filter {
+  border-bottom: solid 0.063em #eee;
+	margin-bottom: 1em;
+	padding-bottom: 0.75em;
+}
+	dl.filter dt,
+	dl.filter dd {
+		display: inline-block;
+	}
+
+ul.tags {
+	margin-bottom: 0;
+	padding-left: 0;
+}
+
+	ul.tags li {
+		display: inline-block;
+		line-height: 1.5em;
+		margin-right: 0.75em;
+	}
+
+	ul.tags li a {
+	}
+
+.paginate {
+	margin: 1em 0;
+}
+	.paginate dt {
+		display: inline;
+	}
+	.paginate dd {
+		background: #1D97FF;
+		-webkit-border-radius: 0.25em;
+		-moz-border-radius: 0.25em;
+		border-radius: 0.25em;
+		display: inline;
+		padding: 0 0.5em 0.25em;
+	}
+	.paginate a {
+		color: #fff;
+		font-weight: bold;
+		vertical-align: middle;
+	}
 
 /*
 	header
@@ -222,3 +295,39 @@ ul.navigation:last-child li {
   border: solid 0.063em #00D400;
   color: #00D400;
 }
+
+/*
+	micro clearfix
+*/
+
+/* For modern browsers */
+.cf:before,
+.cf:after {
+    content:"";
+    display:table;
+}
+
+.cf:after {
+    clear:both;
+}
+
+/* For IE 6/7 (trigger hasLayout) */
+.cf {
+    zoom:1;
+}
+
+/* For image replacement */
+.ir { display: block; text-indent: -999em; overflow: hidden; background-repeat: no-repeat; text-align: left; direction: ltr; }
+.ir br { display: none; }
+
+/* Hide for both screenreaders and browsers */
+.hidden { display: none; visibility: hidden; }
+
+/* Hide only visually, but have it available for screenreaders */
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+/* Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard */
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+/* Hide visually and from screenreaders, but maintain layout */
+.invisible { visibility: hidden; }

@@ -62,7 +62,14 @@
       </div>
     </div>
     <div id="main-content" class="<%= yield :current_state %>">
-      <div id="content-area">
+      <div id="content-area" class="cf">
+
+        <dl class="filter cf">
+          <dt>Filter:</dt>
+          <dd><a href="#">MOJ</a></dd>
+          <dd><a href="#">High</a></dd>
+        </dl>
+
         <% flash.each do |k, v| %>
         <p class="<%= k %> flash-<%= k %>"><%= v %></p>
         <% end %>
@@ -70,7 +77,7 @@
         <%= yield %>
       </div>
     </div>
-    <div id="footer">
+    <div id="footer" class="cf">
       &copy; <%= Date.today.year %> <a href="http://blog.alpha.gov.uk">The Team Formerly Known as Alphagov</a>.
     </div>
     <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>

@@ -5,12 +5,12 @@ $(function() {
     null,
     null,
     null,
-    null,
-    null,
-    null,
     {sType: 'priority'},
     null,
     null,
+    // null,
+    // null,
+    // null,
     null,
     {bSortable: false, sSearch: ""},
     {bSortable: false, sSearch: ""}
@@ -55,8 +55,8 @@ $(function() {
       var data = {};
       data[csrf_param] = csrf_token;
       $.ajax(url_generator(item_node), {
-        data: data, dataType: 'text', type: 'DELETE', 
-        success: function() { 
+        data: data, dataType: 'text', type: 'DELETE',
+        success: function() {
           item_node.remove();
         }
       });
@@ -98,8 +98,8 @@ $(function() {
     set_up_existing_item_li($(this), fact_checker_url_generator);
   });
   $('#fact_checkers_list li[class!=existing]').each(function() {
-    set_up_create_item_li($(this), create_fact_checker_url, 
-                          fact_checker_create_data_generator, 
+    set_up_create_item_li($(this), create_fact_checker_url,
+                          fact_checker_create_data_generator,
                           fact_checker_item_creator, fact_checker_url_generator);
   });
 
@@ -118,8 +118,8 @@ $(function() {
     set_up_existing_item_li($(this), accountability_url_generator);
   });
   $('#accountabilities_list  li[class!=existing]').each(function() {
-    set_up_create_item_li($(this), create_accountability_url, 
-                          accountability_create_data_generator, 
+    set_up_create_item_li($(this), create_accountability_url,
+                          accountability_create_data_generator,
                           accountability_item_creator, accountability_url_generator);
   });
 });
