@@ -68,6 +68,12 @@ class Need < ActiveRecord::Base
     [FORMAT_ASSIGNED, DONE, BIN].include?(status)
   end
 
+  STATUSES.each do |status_label|
+    define_method "#{status_label}?" do
+      status == status_label
+    end
+  end
+
   def decision_made?
     decision_made_at.present?
   end

@@ -22,6 +22,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 
 gem 'plek'
+gem 'stomp', '1.1.9'
 
 # gem 'acts-as-taggable-on'
 
@@ -45,6 +46,8 @@ group :development, :test do
   gem 'simplecov', '0.4.2'
   gem 'simplecov-rcov'
   gem 'ci_reporter'
+  gem "factory_girl", "2.1.2"
+  gem "factory_girl_rails", "1.2.0"
 end
 
 if ENV['RUBY_DEBUG']
