@@ -1,6 +1,6 @@
 module NeedsHelper
   def start_work_link need
-    start_work = "http://#{Plek.current.panopticon}/artefacts/new"
+    start_work = "#{Plek.current.find("arbiter")}/artefacts/new"
 
     form_tag start_work, :method => 'get' do
       [
