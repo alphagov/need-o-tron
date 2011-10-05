@@ -51,16 +51,18 @@
   <p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
   <% end %>
 
-  <hr>
+  <div class="pagination">
+    <ul>
+      <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+      <li class="active"><a href="#">1</a></li>
+      <li><a href="#">2</a></li>
+      <li><a href="#">3</a></li>
+      <li><a href="#">4</a></li>
+      <li><a href="#">5</a></li>
+      <li class="next"><a href="#">Next &rarr;</a></li>
+    </ul>
+  </div>
 
-  <dl class="paginate cf">
-    <dt>Page</dt>
-    <dd><a href="#">1</a></dd>
-    <dd><a href="#">2</a></dd>
-    <dd><a href="#">3</a></dd>
-    <dd><a href="#">4</a></dd>
-    <dd><a href="#">5</a></dd>
-  </dl>
 </div>
 
 <div class="search-filters">
