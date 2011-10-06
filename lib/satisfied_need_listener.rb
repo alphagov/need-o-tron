@@ -15,7 +15,7 @@ class SatisfiedNeedListener
         need.update_attributes!(status: Need::DONE, url: panopticon.public_url)
       rescue JSON::ParserError => e
         Rails.logger.error("Unable to parse message #{message_body} because of #{e}")
-      rescue e
+      rescue => e
         Rails.logger.error("Unable to process message #{message_body} because of #{e}")
       end
     end

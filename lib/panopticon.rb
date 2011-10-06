@@ -1,3 +1,5 @@
+require 'open-uri'
+
 class Panopticon
   def initialize(panopticon_id)
     @panopticon_id = panopticon_id
