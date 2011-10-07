@@ -27,7 +27,8 @@ class Panopticon
   private :attributes
 
   def panopticon_uri
-    Plek.current.find("arbiter") + '/artefacts/' + @panopticon_id.to_s + '.js'
+    # TODO: we shouldn't hard code the port here.
+    Plek.current.find("arbiter") + ':8080/artefacts/' + @panopticon_id.to_s + '.js'
   end
   private :panopticon_uri
 end
