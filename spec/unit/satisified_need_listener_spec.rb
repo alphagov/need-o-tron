@@ -9,8 +9,11 @@ describe SatisfiedNeedListener do
   it 'marks a need as done and records the public url when a message received' do
     need = FactoryGirl.create(:need)
     panopticon_will_respond_with(need_id: need.id, slug: 'my_slug')
-    need_satisfied_message = stub(body: {panopticon_id: "any_old_thing"}.to_json)
-    stomp_client = stub(join: nil, close: nil)
+    need_satisfied_message = stub(
+      body: {panopticon_id: "any_old_thing"}.to_json,
+      headers: {'message-id' => '123'}
+    )
+    stomp_client = stub(join: nil, close: nil, acknowledge: nil)
     stomp_client.expects(:subscribe).yields(need_satisfied_message)
     SatisfiedNeedListener.client = stomp_client
     SatisfiedNeedListener.new.listen

@@ -5,5 +5,4 @@
 # protecting those connections do not. 
 STOMP_CONFIGURATION = {
   hosts: [{host: "localhost", port: 61613, :ssl => false}]
-
 }
