@@ -18,7 +18,10 @@ Need-o-tron designed to work as part of a suite of applications, authenticating
 against an OAuth provider such as [Sign-on-o-tron](https://github.com/alphagov/sign-on-o-tron)
 
 It does that via the [GDS-SSO](https://github.com/alphagov/gds-sso) gem. See that 
-project's README for configuration details. If you don't want to authenticate
+project's README for configuration details. It's an OAuth2 provider, and you could
+alternatively use any other OAuth2 provider.
+
+If you don't want to authenticate
 against a separate app there's also a basic strategy for development use that will
 simply use the first user in your database. To set that up you'll want something
 like:
