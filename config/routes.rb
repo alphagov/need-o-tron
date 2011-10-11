@@ -19,5 +19,6 @@ NeedOTron::Application.routes.draw do
     end
   end
   
-  root :to => "needs#index", :defaults => { :in_state => 'new' }
+  match '/search' => 'search#index', as: 'search'
+  root :to => "search#index"
 end

@@ -18,6 +18,12 @@
           <% if user_signed_in? %>
           <ul class="navigation">
             <li>
+              <a class="browse" href="<%= search_path %>">
+                Browse/search
+                <div class="arrow-right"></div>
+              </a>
+            </li>
+            <li>
               <a class="new" href="<%= needs_path(:in_state => 'new') %>">
                 New
                 <span class="count">(<%= Need.in_state('new').count %>)</span>
@@ -66,13 +72,6 @@
     </div>
     <div id="main-content" class="<%= yield :current_state %>">
       <div id="content-area" class="cf">
-
-        <dl class="filter cf">
-          <dt>Filter:</dt>
-          <dd><a href="#">MOJ</a></dd>
-          <dd><a href="#">High</a></dd>
-        </dl>
-
         <% flash.each do |k, v| %>
         <p class="<%= k %> flash-<%= k %>"><%= v %></p>
         <% end %>

@@ -2,9 +2,9 @@
   <div class="search">
     <form>
       <label>Search:
-        <input type="text" name="query">
+        <%= text_field_tag :query, params[:query] %>
       </label>
-      <input type="submit" value="Search">
+      <%= submit_tag "Search" %>
     </form>
   </div>
 
@@ -27,15 +27,9 @@
         <th scope="col">Tags</th>
         <th scope="col">Last updated</th>
         <th scope="col">Created by</th>
-        <!-- <th scope="col">Fact checker</th>
-        <th scope="col">Lead Dept</th>
-        <th scope="col">Writing Dept</th> -->
-        <% if params[:in_state] == 'bin' %>
-        <th></th>
-        <% end %>
         <% if current_user.is_admin? %>
-        <th></th>
-        <th></th>
+          <th></th>
+          <th></th>
         <% end %>
       </tr>
     </thead>
@@ -43,21 +37,15 @@
     <% @needs.each do |need| %>
       <tr>
         <td>#<%= need.id %></td>
-        <th scope="row"><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
+        <th scope="row"><%= link_to need.title, need_path(need.id) %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
         <td class="need"><%= need.format_assigned? ? need.kind : "-" %></td>
         <td><%= need.prioritised? ? need.named_priority : '-' %></td>
         <td><%= need.tag_list %></td>
-        <td><%= time_ago_in_words(need.updated_at, true) %></td>
+        <td><%= false && time_ago_in_words(need.updated_at, true) %></td>
         <td><%= need.creator %></td>
-        <!-- <td><%= need.fact_checkers_for_csv %></td>
-        <td><%= need.accountabilities_for_csv %></td>
-        <td><%= need.writing_dept %></td> -->
-        <% if params[:in_state] == 'bin' %>
-        <td><%= need.reason_for_decision %></td>
-        <% end %>
         <% if current_user.is_admin? %>
-        <td><%= link_to 'Edit', edit_need_path(need) %></td>
-        <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
+        <td><%= link_to 'Edit', edit_need_path(need.id) %></td>
+        <td><%= link_to 'Delete', need_path(need.id), confirm: 'Are you sure?', method: :delete %></td>
         <% end %>
       </tr>
     <% end %>
@@ -137,46 +125,5 @@
   </ul>
 </div>
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-  google.load("visualization", "1", {packages:["treemap"]});
-  google.setOnLoadCallback(drawChart);
-  function drawChart() {
-    $(function() {
-      var quantities = {};
-
-      $('tbody tr td[class=need]').each(function() {
-        var format_name = $(this).text();
-        if (quantities[format_name] == undefined) {
-          quantities[format_name] = 0;
-        }
-        quantities[format_name]++;
-      });
-
-      var rows = [['Everything', null, 0]];
-      $.each(quantities, function(k, v) {
-        rows.push([k, 'Everything', v]);
-      });
-
-      if (rows.length > 1) {
-        $('#needs-content').append('<p id="format-treemap" style="width: 600px; height: 400px;">');
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Format');
-        data.addColumn('string', 'Parent');
-        data.addColumn('number', 'number of needs');
-        data.addRows(rows);
-        // Create and draw the visualization.
-        var tree = new google.visualization.TreeMap($('#format-treemap')[0]);
-        tree.draw(data, {
-          minColor: '#f00',
-          midColor: '#ddd',
-          maxColor: '#0d0',
-          headerHeight: 15,
-          fontColor: 'black',
-          showScale: false});
-      }
-    });
-  }
-</script>
 </p>
 <% content_for :current_state, params[:in_state] %>

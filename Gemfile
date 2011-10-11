@@ -20,11 +20,13 @@ else
 end
 
 gem 'carrierwave'
+gem 'delsolr', :git => 'https://github.com/alphagov/delsolr.git'
 
 gem 'formtastic'
 gem 'inherited_resources'
 gem 'has_scope'
 
+gem 'pethau'
 gem 'plek'
 gem 'stomp', '1.1.9'
 
@@ -63,5 +65,7 @@ group :test do
   gem 'shoulda'
   gem 'mocha'
   gem 'cucumber-rails'
-  gem 'webmock'
+  gem 'webmock', require: false
+  gem 'capybara', '~> 1.1.1'
+  gem "capybara-webkit", require: false
 end
