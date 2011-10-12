@@ -1,5 +1,9 @@
 source 'http://rubygems.org'
 
+gem 'oauth2', '0.4.1'
+gem 'oa-core', '0.2.6'
+gem 'oa-oauth', '0.2.6'
+
 gem 'rails', '~> 3.1.0'
 
 gem 'sqlite3'
