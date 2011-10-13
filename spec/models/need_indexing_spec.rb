@@ -29,7 +29,8 @@ describe SolrNeedPresenter do
       notes: "These are the notes",
       decision_maker: stub(name: "Big Cheese", email: 'big.cheese@example.com'),
       created_at: Time.at(4),
-      decision_made_at: Time.at(5),
+      updated_at: Time.at(5),
+      decision_made_at: Time.at(6),
       reason_for_decision: "Just because",
       tag_list: "red,blue",
       search_rank: 3,
@@ -40,39 +41,33 @@ describe SolrNeedPresenter do
       related_needs: "Get a new passport",
       statutory: true,
       formatting_decision_maker: stub(name: "Mary", email: "mary@example.com"),
-      formatting_decision_made_at: Time.at(6),
+      formatting_decision_made_at: Time.at(7),
       reason_for_formatting_decision: "Another reason"
     )
     expected_document = DelSolr::Document.new.tap do |doc|
+      # Full text indexed fields
       doc.add_field "id", need.id
       doc.add_field "title", need.title
       doc.add_field "description", need.description
+      doc.add_field "notes", need.notes
+      doc.add_field "reason_for_decision", need.reason_for_decision
+      doc.add_field "reason_for_formatting_decision", need.reason_for_formatting_decision
+      doc.add_field "writing_dept", need.writing_dept
+      doc.add_field "tag", "red"
+      doc.add_field "tag", "blue"
+
+      # Faceted fields
       doc.add_field "kind", need.kind.name
       doc.add_field "status", need.status
       doc.add_field "priority", need.priority
-      doc.add_field "creator_name", need.creator.name
-      doc.add_field "creator_email", need.creator.email
-      doc.add_field "notes", need.notes
+
+      # Sorting fields
       doc.add_field "created_at", need.created_at.to_s
       doc.add_field "updated_at", need.updated_at.to_s
-      doc.add_field "decision_maker_name", need.decision_maker.name
-      doc.add_field "decision_maker_email", need.decision_maker.email
       doc.add_field "decision_made_at", need.decision_made_at
-      doc.add_field "reason_for_decision", need.reason_for_decision
-      doc.add_field "tag", "red"
-      doc.add_field "tag", "blue"
-      doc.add_field "search_rank", need.search_rank
-      doc.add_field "pairwise_rank", need.pairwise_rank
-      doc.add_field "traffic", need.traffic
-      doc.add_field "usage_volume", need.usage_volume
-      doc.add_field "interaction", need.interaction
-      doc.add_field "related_needs", need.related_needs
-      doc.add_field "statutory", need.statutory
-      doc.add_field "formatting_decision_maker_name", need.formatting_decision_maker.name
-      doc.add_field "formatting_decision_maker_email", need.formatting_decision_maker.email
       doc.add_field "formatting_decision_made_at", need.formatting_decision_made_at.to_s
-      doc.add_field "reason_for_formatting_decision", need.reason_for_formatting_decision
-      doc.add_field "writing_dept", need.writing_dept
+      
+      doc.add_field "rails_env", Rails.env
     end
     assert_equal expected_document.xml, SolrNeedPresenter.new(need).to_solr_document.xml
   end

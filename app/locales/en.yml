@@ -1,0 +1,17 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  field:
+    short:
+      tag: Tag
+      writing_dept: Writing Dept
+      status: Status
+      priority: Priority
+      kind: Kind
+    long:
+      tag: Tag
+      writing_dept: Writing Department
+      status: Status
+      priority: Priority
+      kind: Kind

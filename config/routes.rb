@@ -19,6 +19,7 @@ NeedOTron::Application.routes.draw do
     end
   end
   
-  match '/search' => 'search#index', as: 'search'
+  match 'search(/*filters)' => 'search#index', as: 'filtered_search'
+  match 'search' => 'search#index', as: 'search'
   root :to => "search#index"
 end

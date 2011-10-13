@@ -28,4 +28,46 @@ module NeedsHelper
       submit_tag('Assign need', :disable_with => 'Working...', :class => 'fulfill').html_safe
     end.html_safe
   end
+  
+  def search_link_with_added_filter(params, filters, additional_filters)
+    new_params = deep_copy(params.to_hash)
+    new_filters = deep_copy(filters.to_hash)
+    additional_filters.each do |field, value|
+      new_filters[field] ||= []
+      new_filters[field] << value
+    end
+    new_params["filters"] = filter_to_path(new_filters)
+    filtered_search_path(new_params)
+  end
+    
+  def search_link_with_removed_filter(params, filters, filters_to_remove)
+    new_params = deep_copy(params.to_hash)
+    new_filters = deep_copy(filters.to_hash)
+    filters_to_remove.each do |field, value|
+      next unless new_filters.has_key?(field)
+      new_filters[field].delete(value)
+    end
+    new_params["filters"] = filter_to_path(new_filters)
+    new_params.delete("filters") unless new_params["filters"]
+    filtered_search_path(new_params)
+  end
+  
+  def filter_to_path(filters_hash)
+    path = []
+    filters_hash.each do |field, values|
+      values.each do |value|
+        path.concat([field,value])
+      end
+    end
+    path
+  end
+  
+  def filtering_by?(field, value)
+    @filters[field] && @filters[field].include?(value)
+  end
+  
+  private
+    def deep_copy(object)
+      Marshal.restore(Marshal.dump(object))
+    end
 end

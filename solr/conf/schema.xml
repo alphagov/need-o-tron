@@ -29,16 +29,38 @@
   </types>
 
   <fields>
+    <!-- full text search -->
     <field stored="true" indexed="true" type="tint"   name="id"    required="true" />
     <field stored="true" indexed="true" type="text"   name="title" />
     <field stored="true" indexed="true" type="text"   name="description"/>
-    <field stored="true" indexed="true" type="text"   name="kind"/>
-    <field stored="true" indexed="true" type="text"   name="status"/>
+    <field stored="true" indexed="true" type="text"   name="notes"/>
+    <field stored="true" indexed="true" type="text"   name="reason_for_decision"/>
+    <field stored="true" indexed="true" type="text"   name="reason_for_formatting_decision"/>
     <field stored="true" indexed="true" type="text"   name="all" multiValued="true" />
-    <copyField source="*" dest="all"/>
+
+    <!-- fields which are both full text and faceted -->
+    <field stored="true" indexed="true" type="string" name="tag" multiValued="true" />
+    <field stored="true" indexed="true" type="string" name="writing_dept"/>
+    
+    <!-- facets -->
+    <field stored="true" indexed="true" type="string" name="kind" />
+    <field stored="true" indexed="true" type="string" name="status" />
+    <field stored="true" indexed="true" type="string" name="priority" />
+    
+    <!-- sorting fields -->
+    <field stored="true" indexed="true" type="string" name="created_at" />
+    <field stored="true" indexed="true" type="string" name="updated_at" />
+    <field stored="true" indexed="true" type="string" name="decision_made_at" />
+    <field stored="true" indexed="true" type="string" name="formatting_decision_made_at" />
+    
+    <!-- Allow segregation of data sets so test data can be cleared -->
+    <field stored="true" indexed="true" type="string" name="rails_env" />
+    
+    <!-- fields which are used for full text search by default -->
+    <copyField source="*" dest="all" />
   </fields>
 
   <uniqueKey>id</uniqueKey>
-  <defaultSearchField>title</defaultSearchField>
+  <defaultSearchField>all</defaultSearchField>
   <solrQueryParser defaultOperator="AND"/>
 </schema>

@@ -57,6 +57,12 @@ class Need < ActiveRecord::Base
     SolrIndexer.new($solr, indexable).execute
   end
   
+  def self.index_all
+    Need.find_each do |need|
+      need.update_search_index
+    end
+  end
+  
   def record_decision_info
     if self.decision_made_at.nil? and self.reason_for_decision.present?
       self.decision_made_at = Time.now
