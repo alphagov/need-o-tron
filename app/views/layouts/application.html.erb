@@ -18,12 +18,6 @@
           <% if user_signed_in? %>
           <ul class="navigation">
             <li>
-              <a class="browse" href="<%= search_path %>">
-                Browse/search
-                <div class="arrow-right"></div>
-              </a>
-            </li>
-            <li>
               <a class="new" href="<%= needs_path(:in_state => 'new') %>">
                 New
                 <span class="count">(<%= Need.in_state('new').count %>)</span>
