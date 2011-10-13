@@ -7,7 +7,7 @@ class NeedSearch
     @facet_by = options[:facet_by] || []
     @filters = options[:filters] || {}
   end
-  
+
   class Error < RuntimeError; end
 
   def execute
@@ -19,7 +19,7 @@ class NeedSearch
     }
     self.response = client.query 'standard', params
     if ! self.response
-      raise NeedSearch::Error, "Unable to search, maybe the search server is down.", context
+      raise NeedSearch::Error, "Unable to search, maybe the search server is down.", caller
     end
   end
 
@@ -36,7 +36,7 @@ class NeedSearch
   def facets
     response.present? && response.facet_fields
   end
-  
+
   def each_result &block
     results.each &block
   end
@@ -44,7 +44,7 @@ class NeedSearch
   def client
     $solr
   end
-  
+
   def filters
     Hash[
       @filters.map do |field, values|
@@ -52,7 +52,7 @@ class NeedSearch
       end
     ].merge(rails_env_filter)
   end
-  
+
   def rails_env_filter
     { rails_env: Rails.env }
   end
