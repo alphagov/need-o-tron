@@ -52,17 +52,18 @@ module NeedsHelper
     filtered_search_path(new_params)
   end
 
-  def search_link_for_page(params, filters, page)
+  def search_link_for_page(params, filters, page = nil)
     new_params = deep_copy(params.to_hash)
     new_params["filters"] = filter_to_path(filters)
-    new_params['page'] = page
+    new_params.delete('page')
+    new_params['page'] = page if page
     filtered_search_path(new_params)
   end
   
   def filter_to_path(filters_hash)
     path = []
     filters_hash.each do |field, values|
-      values.each do |value|
+      [*values].each do |value|
         path.concat([field,value])
       end
     end
@@ -71,6 +72,21 @@ module NeedsHelper
   
   def filtering_by?(field, value)
     @filters[field] && @filters[field].include?(value)
+  end
+  
+  def pagination_link(page_number, label, classes = [])
+    classes = classes.is_a?(String) ? classes.split(' ') : classes.clone
+    classes << 'disabled' unless @search.pages.include?(page_number)
+    classes << 'active' if @current_page == page_number
+    if (classes & %w{disabled active}).present?
+      content_tag(:li, class: classes) do
+        content_tag(:span, label)
+      end
+    else
+      content_tag(:li, class: classes) do
+        link_to label, search_link_for_page(params, @filters, page_number)
+      end
+    end
   end
   
   private

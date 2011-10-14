@@ -18,7 +18,7 @@ class SearchController < ApplicationController
   
   def per_page
     per_page = (params[:per_page] || 50).to_i
-    [10, per_page].max
+    [1, per_page].max
   end
   
   private

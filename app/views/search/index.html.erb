@@ -60,21 +60,17 @@
   <p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
   <% end %>
 
+  <% if @search.pages.count > 1 %>
   <div class="pagination">
     <ul>
-      <li class="prev <%= @current_page == @search.pages.first && 'disabled' %>">
-        <%= link_to '&larr; Previous'.html_safe, search_link_for_page(params, @filters, @current_page - 1) %>
-      </li>
+      <%= pagination_link(@current_page - 1, '&larr; Previous'.html_safe, 'prev') %>
       <% @search.pages.each do |page_num| %>
-        <li class="<%= @current_page == page_num && 'active' %>">
-          <%= link_to page_num.to_s, search_link_for_page(params, @filters, page_num) %>
-        </li>
+        <%= pagination_link(page_num, page_num) %>
       <% end %>
-      <li class="prev <%= @current_page == @search.pages.last && 'disabled' %>">
-        <%= link_to 'Next &rarr;'.html_safe, search_link_for_page(params, @filters, @current_page + 1) %>
-      </li>
+      <%= pagination_link(@current_page + 1, 'Next &rarr;'.html_safe, 'next') %>
     </ul>
   </div>
+  <% end %>
 
 </div>
 

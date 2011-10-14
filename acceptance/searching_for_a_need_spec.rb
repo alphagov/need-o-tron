@@ -30,7 +30,7 @@ describe 'Searching for a need' do
   it 'works when searching by title' do
     create_need "Replace passport"
 
-    click_link "Browse/search"
+    click_link "View all needs"
 
     search_for 'Replace passport'
     page.should have_css "#needs-table", text: 'Replace passport'
@@ -42,7 +42,7 @@ describe 'Searching for a need' do
   it 'works when searching for a word from the Writing department field' do
     create_need "Get a new passport", edit_form_fields: {"Writing dept" => "Ministry of Truth"}
     create_need "Get a new driving licence"
-    click_link "Browse/search"
+    click_link "View all needs"
     search_for 'Truth'
     within '#needs-table' do
       page.should have_content 'Get a new passport'
@@ -54,14 +54,14 @@ describe 'Searching for a need' do
     create_need "Get a new passport", tags: "red"
     create_need "Learn to drive", tags: "blue"
     
-    click_link "Browse/search"
+    click_link "View all needs"
     click_link "red"
     within '#needs-table' do
       page.should have_content 'Get a new passport'
       page.should have_no_content 'Learn to drive'
     end
     
-    click_link "Browse/search"
+    click_link "View all needs"
     click_link "blue"
     within '#needs-table' do
       page.should have_no_content 'Get a new passport'
@@ -74,7 +74,7 @@ describe 'Searching for a need' do
     create_need "Learn to drive", tags: "blue"
     create_need "Learn to walk", tags: "red"
     
-    click_link "Browse/search"
+    click_link "View all needs"
     click_link "blue"
     click_link "red"
     within '#needs-table' do

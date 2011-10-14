@@ -18,16 +18,14 @@
           </ul>
           <% if user_signed_in? %>
           <ul class="navigation">
+            <li><%= link_to 'View all needs', search_path %></li>
             <li>
-              <a class="new" href="<%= needs_path(:in_state => 'new') %>">
+              <a class="new" href="<%= search_link_for_page({}, {status: 'new'}, 1) %>">
                 New
                 <span class="count">(<%= Need.in_state('new').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
-          </ul>
-          <ul class="navigation">
-            <li><%= link_to 'View all needs', needs_path %></li>
             <% if current_user.is_admin? %>
             <li><%= link_to 'Enter a new need', new_need_path %></li>
             <li><%= link_to 'View analytics', 'https://www.google.com/analytics/web/#dashboard/default/a26179049w50705554p51337955/', :title => "Leave the Needotron and open Google Analytics" %></li>
