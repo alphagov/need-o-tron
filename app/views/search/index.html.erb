@@ -1,22 +1,14 @@
 <div class="filters">
-  <div class="search">
-    <form>
-      <label>Search:
-        <%= text_field_tag :query, params[:query] %>
-      </label>
-      <%= submit_tag "Search" %>
-    </form>
-  </div>
-
   <% if @filters.present? %>
   <dl class="filter cf">
-    <dt>Filter:</dt>
+    <dt>Filter applied:</dt>
     <% @filters.each do |field_name, values| %>
-      <dd><%= t("field.long.#{field_name}") %>:
+      <dd>
         <% values.each do |value| %>
-          <span class="filter_criterion">
-            <%= value %><%= link_to "X", search_link_with_removed_filter(params, @filters, field_name => value), class: 'remove' %>
-          </span>
+          <div class="btn">
+            <%= link_to "×", search_link_with_removed_filter(params, @filters, field_name => value), class: 'close' %>
+            <p><strong><%= t("field.long.#{field_name}") %>:</strong> <%= value %></p>
+          </div>
         <% end %>
       </dd>
     <% end %>
@@ -68,31 +60,34 @@
   <p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
   <% end %>
 
-  <div class="pagination">
-    <ul>
-      <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-      <li class="active"><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li><a href="#">5</a></li>
-      <li class="next"><a href="#">Next &rarr;</a></li>
-    </ul>
-  </div>
+  <!--
+    commenting out the pagination until it's wired in to save confusion - JM
 
+    <div class="pagination">
+      <ul>
+        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
+        <li class="active"><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li class="next"><a href="#">Next &rarr;</a></li>
+      </ul>
+    </div>
+  -->
 </div>
 
 <div class="search-filters">
   <% if @search.facets %>
   <% @facets.each do |facet| %>
-    <h3><span class="visuallyhidden">Filter by</span> <%= t("field.long.#{facet}") %>:</h3>
+    <h3><span class="visuallyhidden">Filter by</span> <%= t("field.long.#{facet}") %></h3>
     <ul class="filter">
       <% @search.facets[facet].each_slice(2) do |label, count| %>
         <% next if label.blank? %>
         <% if filtering_by?(facet, label) %>
           <li class="filtering">
             <%= label %> (<%= count %>)
-            <%= link_to('X', search_link_with_removed_filter(params, @filters, facet => label), class: 'remove') %>
+            <%= link_to('x', search_link_with_removed_filter(params, @filters, facet => label), class: 'remove') %>
           </li>
         <% else %>
           <li><%= link_to(label, search_link_with_added_filter(params, @filters, facet => label)) %></a> (<%= count %>)</li>
@@ -101,7 +96,6 @@
     </ul>
   <% end %>
   <% end %>
-
 </div>
 
 </p>
