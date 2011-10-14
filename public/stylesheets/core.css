@@ -76,7 +76,7 @@ table {
 
 th {
 	/* scope="col" */
-  border-bottom: solid 0.125em #BFBFBF;
+  border-bottom: solid 0.185em #BFBFBF;
   font-weight: normal;
   padding-right: 1em;
   padding-bottom: 0.5em;
@@ -143,21 +143,36 @@ tr {
 	filtering
 */
 
+div.search {
+  float: right;
+}
+
 div.needs-content {
+  /* needs search page */
   float: right;
   width: 83%;
 
 	overflow: scroll;
 }
 
+  div.needs-content.full {
+    float: none;
+    width: 100%;
+  }
+
+
 div.search-filters {
 	border-right: solid 0.063em #eee;
 	float: left;
   width: 15%;
 }
+  div.search-filters h3 {
+    font-weight: bold;
+  }
 
 ul.filter {
   border-bottom: solid 0.063em #eee;
+  font-size: 0.875em;
 }
 	ul.filter li {
 		line-height: 1.35em;
@@ -168,28 +183,50 @@ ul.filter {
 	}
 
 dl.filter {
-  border-bottom: solid 0.063em #eee;
+  background-color: #E5E5E5;
+  border: solid 0.063em #bbb;
+  -webkit-border-radius: 0.185em;
+  -moz-border-radius: 0.185em;
+  border-radius: 0.185em;
+  font-size: 0.875em;
 	margin-bottom: 1em;
-	padding-bottom: 0.75em;
+	padding: 0.5em 0.75em;
 }
-	dl.filter dt,
-	dl.filter dd {
-		display: inline-block;
+	dl.filter dt {
+		float: left;
+		margin-right: 0.5em;
+		padding-top: 0.25em;
 	}
+    dl.filter dd {
+  		display: inline-block;
+  		vertical-align: top;
+  	}
 
-ul.tags {
-	margin-bottom: 0;
-	padding-left: 0;
-}
+	dl.filter .btn {
+	  background-color: #00B735;
+	  -webkit-border-radius: 0.25em;
+	  -moz-border-radius: 0.25em;
+	  border-radius: 0.25em;
+	  color: #fff;
+	  float: left;
+		margin: 0 0.5em 0 0;
+		padding: 0.25em 0.45em;
+    position: relative;
+  }
 
-	ul.tags li {
-		display: inline-block;
-		line-height: 1.5em;
-		margin-right: 0.75em;
-	}
+	  dl.filter .btn p {
+	    clear: right;
+	    margin-bottom: 0;
+	    padding: 0 1em 0 0;
+    }
 
-	ul.tags li a {
-	}
+    dl.filter .btn a.close {
+      color: #fff;
+      position: absolute;
+      right: 3px;
+      top: 0;
+    }
+
 
 .paginate {
 	margin: 1em 0;
@@ -376,3 +413,4 @@ ul.navigation:last-child li {
 
 /* Hide visually and from screenreaders, but maintain layout */
 .invisible { visibility: hidden; }
+
