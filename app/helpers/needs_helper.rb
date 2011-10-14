@@ -51,6 +51,13 @@ module NeedsHelper
     new_params.delete("filters") unless new_params["filters"]
     filtered_search_path(new_params)
   end
+
+  def search_link_for_page(params, filters, page)
+    new_params = deep_copy(params.to_hash)
+    new_params["filters"] = filter_to_path(filters)
+    new_params['page'] = page
+    filtered_search_path(new_params)
+  end
   
   def filter_to_path(filters_hash)
     path = []

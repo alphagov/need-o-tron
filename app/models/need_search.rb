@@ -6,6 +6,8 @@ class NeedSearch
     @query = query
     @facet_by = options[:facet_by] || []
     @filters = options[:filters] || {}
+    @per_page = options[:per_page] || 10
+    @start = options[:start] || 0
   end
 
   class Error < RuntimeError; end
@@ -16,6 +18,8 @@ class NeedSearch
       filters: filters,
       facets: @facet_by.map { |facet| {field: facet} },
       fields: "*",
+      start: @start,
+      rows: @per_page
     }
     self.response = client.query 'standard', params
     if ! self.response
@@ -23,10 +27,22 @@ class NeedSearch
     end
   end
 
+  def pages
+    1..last_page
+  end
+  
+  def last_page
+    (count / @per_page.to_f).ceil
+  end
+  
   def nothing_found?
     response.blank?
   end
 
+  def count
+    response.total
+  end
+  
   def results
     response.docs.map { |doc|
       OpenStruct.new doc

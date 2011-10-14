@@ -2,11 +2,23 @@ class SearchController < ApplicationController
   before_filter :validate_filters
   
   def index
+    @current_page = (params[:page] || 1).to_i
     @facets = %w{tag writing_dept kind status priority}
-    @search = NeedSearch.new(params[:query], facet_by: @facets, filters: @filters)
+    @search = NeedSearch.new(
+      params[:query], 
+      facet_by: @facets, 
+      filters: @filters,
+      per_page: per_page,
+      start: (@current_page - 1) * per_page
+    )
     @search.execute
   rescue NeedSearch::Error => e
     flash.now[:error] = e.message
+  end
+  
+  def per_page
+    per_page = (params[:per_page] || 50).to_i
+    [10, per_page].max
   end
   
   private

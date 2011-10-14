@@ -60,21 +60,22 @@
   <p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
   <% end %>
 
-  <!--
-    commenting out the pagination until it's wired in to save confusion - JM
+  <div class="pagination">
+    <ul>
+      <li class="prev <%= @current_page == @search.pages.first && 'disabled' %>">
+        <%= link_to '&larr; Previous'.html_safe, search_link_for_page(params, @filters, @current_page - 1) %>
+      </li>
+      <% @search.pages.each do |page_num| %>
+        <li class="<%= @current_page == page_num && 'active' %>">
+          <%= link_to page_num.to_s, search_link_for_page(params, @filters, page_num) %>
+        </li>
+      <% end %>
+      <li class="prev <%= @current_page == @search.pages.last && 'disabled' %>">
+        <%= link_to 'Next &rarr;'.html_safe, search_link_for_page(params, @filters, @current_page + 1) %>
+      </li>
+    </ul>
+  </div>
 
-    <div class="pagination">
-      <ul>
-        <li class="prev disabled"><a href="#">&larr; Previous</a></li>
-        <li class="active"><a href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li class="next"><a href="#">Next &rarr;</a></li>
-      </ul>
-    </div>
-  -->
 </div>
 
 <div class="search-filters">

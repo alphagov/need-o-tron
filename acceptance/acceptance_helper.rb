@@ -15,6 +15,7 @@ RSpec.configure do |config|
   config.before :each do
     Machinist.reset_before_test
     DatabaseCleaner.clean
+    $solr.delete_by_query("rails_env:#{Rails.env}")
   end
   
   config.after :each do
@@ -22,7 +23,8 @@ RSpec.configure do |config|
   end
 end
 
-Capybara.default_driver = :selenium
+Capybara.default_driver = :rack_test
+Capybara.javascript_driver = :selenium
 Capybara.app = Rack::Builder.new do
   map "/" do
     run Capybara.app

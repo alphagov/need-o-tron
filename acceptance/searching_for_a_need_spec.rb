@@ -7,13 +7,19 @@ describe 'Searching for a need' do
     u.save!
   end
 
-  def create_need name, other_fields = {}
+  def create_need name, options = {}
     visit "/"
     click_link "Enter a new need"
     fill_in "Need", with: name
-    #TODO
-    other_fields
+    fill_in "Tags", with: options[:tags] if options.has_key?(:tags)
     click_button "Create Need"
+    if options.has_key?(:edit_form_fields)
+      click_link 'Edit'
+      options[:edit_form_fields].each do |field, value|
+        fill_in field, with: value
+      end
+      click_link_or_button "Update Need"
+    end
   end
 
   def search_for text
@@ -33,9 +39,69 @@ describe 'Searching for a need' do
     page.should have_content "Nothing found"
   end
 
-  it 'works when accessed by lead department' do
-    department = create_department "Ministry of Truth"
-    create_need "Get a new passport", "Department" => "Ministry of Truth"
+  it 'works when searching for a word from the Writing department field' do
+    create_need "Get a new passport", edit_form_fields: {"Writing dept" => "Ministry of Truth"}
     create_need "Get a new driving licence"
+    click_link "Browse/search"
+    search_for 'Truth'
+    within '#needs-table' do
+      page.should have_content 'Get a new passport'
+      page.should have_no_content 'Get a new driving license'
+    end
   end
+  
+  it 'allows filtering by facets' do
+    create_need "Get a new passport", tags: "red"
+    create_need "Learn to drive", tags: "blue"
+    
+    click_link "Browse/search"
+    click_link "red"
+    within '#needs-table' do
+      page.should have_content 'Get a new passport'
+      page.should have_no_content 'Learn to drive'
+    end
+    
+    click_link "Browse/search"
+    click_link "blue"
+    within '#needs-table' do
+      page.should have_no_content 'Get a new passport'
+      page.should have_content 'Learn to drive'
+    end
+  end
+
+  it 'allows filtering by a combination of facets' do
+    create_need "Get a new passport", tags: "red,blue"
+    create_need "Learn to drive", tags: "blue"
+    create_need "Learn to walk", tags: "red"
+    
+    click_link "Browse/search"
+    click_link "blue"
+    click_link "red"
+    within '#needs-table' do
+      page.should have_content 'Get a new passport'
+      page.should have_no_content 'Learn to drive'
+      page.should have_no_content 'Learn to walk'
+    end
+  end
+
+  it 'allows pagination' do
+    1.upto(15) do |i|
+      Need.create(title: "Need #{i}")
+    end
+    visit "/?per_page=10"
+    within '#needs-table' do
+      page.should have_no_content 'Need 11'
+    end
+    within '.pagination' do
+      click_link "2"
+    end
+    within '#needs-table' do
+      page.should have_no_content 'Need 10'
+      page.should have_content 'Need 11'
+    end
+  end
+  
+  it 'allows sorting' do
+  end
+  
 end
