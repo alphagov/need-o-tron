@@ -15,9 +15,10 @@
     <% @filters.each do |field_name, values| %>
       <dd>
         <% values.each do |value| %>
+          <% label = field_name == 'priority' ? t("priority_#{value}") : value %>
           <div class="btn">
             <%= link_to "×", search_link_with_removed_filter(params, @filters, field_name => value), class: 'close' %>
-            <p><strong><%= t("field.long.#{field_name}") %>:</strong> <%= value %></p>
+            <p><strong><%= t("field.long.#{field_name}") %>:</strong> <%= label %></p>
           </div>
         <% end %>
       </dd>
@@ -103,15 +104,16 @@
   <% @facets.each do |facet| %>
     <h3><span class="visuallyhidden">Filter by</span> <%= t("field.long.#{facet}") %></h3>
     <ul class="filter">
-      <% @search.facets[facet].each_slice(2) do |label, count| %>
-        <% next if label.blank? %>
-        <% if filtering_by?(facet, label) %>
+      <% @search.facets[facet].each_slice(2) do |value, count| %>
+        <% next if value.blank? %>
+        <% label = facet == 'priority' ? t("priority_#{value}") : value %>
+        <% if filtering_by?(facet, value) %>
           <li class="filtering">
             <%= label %> (<%= count %>)
-            <%= link_to('x', search_link_with_removed_filter(params, @filters, facet => label), class: 'remove') %>
+            <%= link_to('x', search_link_with_removed_filter(params, @filters, facet => value), class: 'remove') %>
           </li>
         <% else %>
-          <li><%= link_to(label, search_link_with_added_filter(params, @filters, facet => label)) %></a> (<%= count %>)</li>
+          <li><%= link_to(label, search_link_with_added_filter(params, @filters, facet => value)) %></a> (<%= count %>)</li>
         <% end %>
       <% end %>
     </ul>

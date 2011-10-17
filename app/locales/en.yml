@@ -20,3 +20,7 @@ en:
       status: Status
       priority: Priority
       kind: Format
+  priority_1: Low
+  priority_2: Medium
+  priority_3: High
+      
