@@ -4,14 +4,19 @@
 en:
   field:
     short:
+      id: ID
+      title: Title
+      kind: Format
+      updated_at: Last updated
+      creator: Created by
       tag: Tag
+      tags: Tags
       writing_dept: Writing Dept
       status: Status
       priority: Priority
-      kind: Kind
     long:
       tag: Tag
       writing_dept: Writing Department
       status: Status
       priority: Priority
-      kind: Kind
+      kind: Format

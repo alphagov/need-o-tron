@@ -84,6 +84,16 @@ th {
 	white-space: nowrap;
 }
 
+th.sorting-asc:after{
+  content: "\25B2";
+  margin-left: 1em;
+}
+
+th.sorting-desc:after{
+  content: "\25BC";
+  margin-left: 1em;
+}
+
 th[scope="row"] {
   border-bottom: none;
 	min-width: 15.625em;

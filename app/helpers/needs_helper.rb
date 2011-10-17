@@ -52,9 +52,11 @@ module NeedsHelper
     filtered_search_path(new_params)
   end
 
-  def search_link_for_page(params, filters, page = nil)
+  def search_link_for_page(params, filters = nil, page = nil)
     new_params = deep_copy(params.to_hash)
-    new_params["filters"] = filter_to_path(filters)
+    if filters
+      new_params["filters"] = filter_to_path(filters)
+    end
     new_params.delete('page')
     new_params['page'] = page if page
     filtered_search_path(new_params)
@@ -86,6 +88,19 @@ module NeedsHelper
       content_tag(:li, class: classes) do
         link_to label, search_link_for_page(params, @filters, page_number)
       end
+    end
+  end
+
+  def sortable_heading(field)
+    css_classes = []
+    new_sort_dir = 'asc'
+    if params[:sort_by] == field
+      raise "Bad sort dir" unless %w{asc desc}.include?(params[:sort_dir])
+      css_classes << "sorting-#{params[:sort_dir]}"
+      new_sort_dir = params[:sort_dir] == 'asc' ? 'desc' : 'asc'
+    end
+    content_tag(:th, :class => css_classes, :scope => 'col') do
+      link_to(t("field.short.#{field}"), search_link_for_page(params.merge(sort_by: field, sort_dir: new_sort_dir)))
     end
   end
   

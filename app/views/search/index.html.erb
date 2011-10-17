@@ -23,13 +23,13 @@
   <table id="needs-table">
     <thead>
       <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Title</th>
-        <th scope="col">Format</th>
-        <th scope="col">Priority</th>
-        <th scope="col">Tags</th>
-        <th scope="col">Last updated</th>
-        <th scope="col">Created by</th>
+        <%= sortable_heading('id') %>
+        <%= sortable_heading('title') %>
+        <%= sortable_heading('kind') %>
+        <%= sortable_heading('priority') %>
+        <th><%= t('field.short.tags') %></th>
+        <%= sortable_heading('updated_at') %>
+        <th><%= t('field.short.creator') %></th>
         <% if current_user.is_admin? %>
           <th></th>
           <th></th>

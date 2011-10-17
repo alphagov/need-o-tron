@@ -31,7 +31,8 @@
   <fields>
     <!-- full text search -->
     <field stored="true" indexed="true" type="tint"   name="id"    required="true" />
-    <field stored="true" indexed="true" type="text"   name="title" />
+    <field stored="true" indexed="true" type="string" name="title" />
+    <field stored="true" indexed="true" type="text"   name="title_t" />
     <field stored="true" indexed="true" type="text"   name="description"/>
     <field stored="true" indexed="true" type="text"   name="notes"/>
     <field stored="true" indexed="true" type="text"   name="reason_for_decision"/>
@@ -57,6 +58,7 @@
     <field stored="true" indexed="true" type="string" name="rails_env" />
     
     <!-- fields which are used for full text search by default -->
+    <copyField source="title" dest="title_t" />
     <copyField source="*" dest="all" />
   </fields>
 

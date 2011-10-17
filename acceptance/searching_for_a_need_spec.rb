@@ -85,23 +85,35 @@ describe 'Searching for a need' do
   end
 
   it 'allows pagination' do
-    1.upto(15) do |i|
+    11.upto(25) do |i|
       Need.create(title: "Need #{i}")
     end
     visit "/?per_page=10"
     within '#needs-table' do
-      page.should have_no_content 'Need 11'
+      page.should have_no_content 'Need 21'
     end
     within '.pagination' do
       click_link "2"
     end
     within '#needs-table' do
-      page.should have_no_content 'Need 10'
-      page.should have_content 'Need 11'
+      page.should have_no_content 'Need 20'
+      page.should have_content 'Need 21'
     end
   end
   
-  it 'allows sorting' do
+  it 'allows sorting, defaults to Title asc' do
+    create_need "Apples"
+    create_need "Carrots"
+    create_need "Bananas"
+    visit "/"
+    page.should have_css "#needs-table th.sorting-asc", "Title"
+    within '#needs-table' do
+      page.text.should =~ /Apples.*Bananas.*Carrots/m
+    end
+    click_link "Title"
+    within '#needs-table' do
+      page.text.should =~ /Carrots.*Bananas.*Apples/m
+    end
   end
   
 end

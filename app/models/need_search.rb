@@ -8,6 +8,7 @@ class NeedSearch
     @filters = options[:filters] || {}
     @per_page = options[:per_page] || 10
     @start = options[:start] || 0
+    @sort = options[:sort] || []
   end
 
   class Error < RuntimeError; end
@@ -21,6 +22,7 @@ class NeedSearch
       start: @start,
       rows: @per_page
     }
+    params[:sort] = [*@sort].join(',') if @sort.present?
     self.response = client.query 'standard', params
     if ! self.response
       raise NeedSearch::Error, "Unable to search, maybe the search server is down.", caller

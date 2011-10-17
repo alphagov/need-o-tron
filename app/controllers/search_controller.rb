@@ -1,5 +1,6 @@
 class SearchController < ApplicationController
   before_filter :validate_filters
+  before_filter :set_default_sort
   
   def index
     @current_page = (params[:page] || 1).to_i
@@ -9,7 +10,8 @@ class SearchController < ApplicationController
       facet_by: @facets, 
       filters: @filters,
       per_page: per_page,
-      start: (@current_page - 1) * per_page
+      start: (@current_page - 1) * per_page,
+      sort: sort_params
     )
     @search.execute
   rescue NeedSearch::Error => e
@@ -32,5 +34,22 @@ class SearchController < ApplicationController
         @filters[field] = [] unless @filters.has_key?(field)
         @filters[field] << value
       end
+    end
+    
+    def set_default_sort
+      if ! (params[:sort_by] && params[:sort_dir])
+        params[:sort_by] = 'title'
+        params[:sort_dir] = 'asc'
+      end
+    end
+      
+    def sort_params
+      sort = ["#{params[:sort_by]} #{params[:sort_dir]}"]
+      if params[:sort_by] == 'title'
+        sort << "id asc"
+      else
+        sort << "title asc"
+      end
+      sort
     end
 end
