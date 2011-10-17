@@ -64,8 +64,22 @@
   <div class="pagination">
     <ul>
       <%= pagination_link(@current_page - 1, '&larr; Previous'.html_safe, 'prev') %>
-      <% @search.pages.each do |page_num| %>
+      <% paginate_from = [@current_page - 2, 1].max %>
+      <% paginate_to = [[@current_page + 2, paginate_from + 4].max, @search.pages.last].min %>
+      <% if paginate_from > 1 %>
+        <%= pagination_link(1, 1) %>
+      <% end %>
+      <% if paginate_from > 2 %>
+        <span>&hellip;</span>
+      <% end %>
+      <% (paginate_from..paginate_to).each do |page_num| %>
         <%= pagination_link(page_num, page_num) %>
+      <% end %>
+      <% if paginate_to < @search.pages.last - 1 %>
+        <span>&hellip;</span>
+      <% end %>
+      <% if paginate_to < @search.pages.last %>
+        <%= pagination_link(@search.pages.last, @search.pages.last) %>
       <% end %>
       <%= pagination_link(@current_page + 1, 'Next &rarr;'.html_safe, 'next') %>
     </ul>
