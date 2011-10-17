@@ -212,30 +212,30 @@ dl.filter {
   		vertical-align: top;
   	}
 
-	dl.filter .btn {
-	  background-color: #00B735;
-	  -webkit-border-radius: 0.25em;
-	  -moz-border-radius: 0.25em;
-	  border-radius: 0.25em;
-	  color: #fff;
-	  float: left;
-		margin: 0 0.5em 0 0;
-		padding: 0.25em 0.45em;
-    position: relative;
+.btn {
+  background-color: #00B735;
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+  color: #fff;
+  float: left;
+	margin: 0 0.5em 0 0;
+	padding: 0.25em 0.45em;
+  position: relative;
+}
+
+  .btn p {
+    clear: right;
+    margin-bottom: 0;
+    padding: 0 1em 0 0;
   }
 
-	  dl.filter .btn p {
-	    clear: right;
-	    margin-bottom: 0;
-	    padding: 0 1em 0 0;
-    }
-
-    dl.filter .btn a.close {
-      color: #fff;
-      position: absolute;
-      right: 3px;
-      top: 0;
-    }
+  .btn a.close {
+    color: #fff;
+    position: absolute;
+    right: 3px;
+    top: 0;
+  }
 
 
 .paginate {

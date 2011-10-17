@@ -104,8 +104,7 @@ module NeedsHelper
     end
   end
   
-  private
-    def deep_copy(object)
-      Marshal.restore(Marshal.dump(object))
-    end
+  def deep_copy(object)
+    Marshal.restore(Marshal.dump(object))
+  end
 end
