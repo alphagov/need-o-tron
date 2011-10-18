@@ -170,6 +170,10 @@ div.needs-content {
     width: 100%;
   }
 
+div.results {
+  margin-bottom: 1.25em;
+  text-align: center;
+}
 
 div.search-filters {
 	border-right: solid 0.063em #eee;
@@ -180,34 +184,44 @@ div.search-filters {
     font-weight: bold;
   }
 
-ul.filter {
+div.search-filters ul {
   border-bottom: solid 0.063em #eee;
   font-size: 0.875em;
+  list-style-type: none;
+  padding-left: 0;
 }
-	ul.filter li {
+	div.search-filters li {
 		line-height: 1.35em;
 	}
 
-	ul.filter li:last-child {
+	div.search-filters li:last-child {
 		margin-bottom: 1em;
 	}
 
-dl.filter {
-  background-color: #E5E5E5;
-  border: solid 0.063em #bbb;
-  -webkit-border-radius: 0.185em;
-  -moz-border-radius: 0.185em;
-  border-radius: 0.185em;
-  font-size: 0.875em;
-	margin-bottom: 1em;
-	padding: 0.5em 0.75em;
+.filters {
+  background-color: #f5f5f5;
+  border: 1px solid #eee;
+  border: 1px solid rgba(0,0,0,0.05);
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  min-height: 20px;
+  padding: 10px;
 }
-	dl.filter dt {
+
+.filters dl {
+  font-size: 0.875em;
+}
+	.filters dt {
 		float: left;
 		margin-right: 0.5em;
 		padding-top: 0.25em;
 	}
-    dl.filter dd {
+    .filters dd {
   		display: inline-block;
   		vertical-align: top;
   	}
@@ -219,7 +233,7 @@ dl.filter {
   border-radius: 0.25em;
   color: #fff;
   float: left;
-	margin: 0 0.5em 0 0;
+	margin: 0 0.5em 0.5em 0;
 	padding: 0.25em 0.45em;
   position: relative;
 }
@@ -337,7 +351,7 @@ ul.navigation {
 		}
 ul#admin-options {
   text-align: right;
-  border-bottom: dotted 0.063em #bbb;
+  border-bottom: dotted 0.063em #444;
   height: 1.5em;
 }
   ul#admin-options li {

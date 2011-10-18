@@ -1,16 +1,17 @@
-<div class="filters cf">
+<% if @search %>
+<div class="results cf">
+  <p>Your search
   <% if params[:query].present? %>
-  Searching for 
-  <div class="btn">
-    <%= link_to "×", search_link_for_page(params.reject {|k,v| k=='query'}), class: 'close' %>
-    <p><strong><%= params[:query] %></strong></p>
-  </div>
+    for <strong><%= params[:query] %></strong>
   <% end %>
+  returned <%= pluralize(@search.count, 'result') %>. You can filter those results below.</p>
 </div>
+<% end %>
 
+
+<% if @filters.present? %>
 <div class="filters">
-  <% if @filters.present? %>
-  <dl class="filter cf">
+  <dl class="cf">
     <dt>Filter applied:</dt>
     <% @filters.each do |field_name, values| %>
       <dd>
@@ -24,8 +25,8 @@
       </dd>
     <% end %>
   </dl>
-  <% end %>
 </div>
+<% end %>
 
 <div id="needs-content" class="needs-content">
   <% if @search.nothing_found? %>
@@ -42,8 +43,8 @@
         <%= sortable_heading('updated_at') %>
         <th><%= t('field.short.creator') %></th>
         <% if current_user.is_admin? %>
-          <th></th>
-          <th></th>
+        <th></th>
+        <th></th>
         <% end %>
       </tr>
     </thead>
