@@ -5,7 +5,7 @@ development:
 
 test: &test
   server: localhost
-  path: /solr/need-o-tron
+  path: /solr
   port: 8983
 
 cucumber:
