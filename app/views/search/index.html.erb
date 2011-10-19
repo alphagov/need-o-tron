@@ -1,4 +1,4 @@
-<% if @search %>
+<% if @search && (params[:query] || params[:filter]) %>
 <div class="results cf">
   <p>Your search
   <% if params[:query].present? %>
