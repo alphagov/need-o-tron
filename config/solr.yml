@@ -1,0 +1,12 @@
+development:
+  server: localhost
+  path: /solr
+  port: 8983
+
+test: &test
+  server: localhost
+  path: /solr
+  port: 8983
+
+cucumber:
+  <<: *test

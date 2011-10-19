@@ -1,1 +1,4 @@
-$solr = DelSolr::Client.new(:server => 'localhost', :port => 8983, :logger => Rails.logger)
+$solr = lambda {
+  config = HashWithIndifferentAccess.new(YAML.load(File.read(Rails.root + 'config' +'solr.yml')))
+  DelSolr::Client.new(config[Rails.env].merge(:logger => Rails.logger))
+}.call
