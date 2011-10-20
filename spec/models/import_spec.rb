@@ -42,7 +42,7 @@ describe Import do
       import = Import.new :csv => csv('import_with_writing_dept.csv'), :writing_dept => '1'
       import.save
 
-      @need.writing_dept.should == "DoSAC"
+      @need.writing_department.to_s.should == "DoSAC"
     end
   end
 

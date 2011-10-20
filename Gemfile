@@ -62,6 +62,5 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda'
   gem 'mocha'
-  gem 'cucumber-rails'
   gem 'webmock'
 end
