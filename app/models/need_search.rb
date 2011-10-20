@@ -17,7 +17,7 @@ class NeedSearch
     params = {
       query: @query.present? ? "all:#{@query}" : "*:*",
       filters: filters,
-      facets: @facet_by.map { |facet| {field: facet} },
+      facets: @facet_by.map { |facet| {field: facet, mincount: 1} },
       fields: "*",
       start: @start,
       rows: @per_page

@@ -1,11 +1,11 @@
 development:
   server: localhost
-  path: /solr
+  path: /solr/need-o-tron
   port: 8983
 
 test: &test
   server: localhost
-  path: /solr
+  path: /solr/need-o-tron
   port: 8983
 
 cucumber:

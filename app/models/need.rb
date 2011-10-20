@@ -15,12 +15,16 @@ class Need < ActiveRecord::Base
   belongs_to :decision_maker, :class_name => 'User'
   belongs_to :formatting_decision_maker, :class_name => 'User'
   belongs_to :creator, :class_name => 'User'
+  belongs_to :writing_department, :class_name => 'Department'
 
   has_many :justifications
   has_many :existing_services
   has_many :directgov_links
   has_many :fact_checkers
+  has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
+  
   has_many :accountabilities
+  has_many :policy_departments, :through => :accountabilities, :source => :department
 
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')

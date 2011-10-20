@@ -16,7 +16,7 @@
       <%= f.input :url %>
       <%= f.input :priority, :as => 'select', :collection => Need::PRIORITIES_FOR_SELECT if @need.format_assigned?%>
       <%= f.input :reason_for_formatting_decision if @need.format_assigned? %>
-      <%= f.input :writing_dept %>
+      <%= f.input :writing_department %>
     <% end %>
     <%= f.inputs(:id => 'fact_checkers', :name => 'Fact checkers') do %>
       <ul class="item-list" id="fact_checkers_list">
@@ -27,7 +27,7 @@
       </ul>
 
     <% end %>
-    <%= f.inputs(:id => 'accountabilities', :name => 'Lead Departments') do %>
+    <%= f.inputs(:id => 'accountabilities', :name => 'Policy Department(s)') do %>
       <ul class="item-list" id="accountabilities_list">
       <% @need.accountabilities.each do |accountability| %>
         <li class="existing"><%= accountability.department.name %><%= hidden_field_tag("accountabilities[#{accountability.id}]", accountability.id) %></li>

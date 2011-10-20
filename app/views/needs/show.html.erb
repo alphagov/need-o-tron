@@ -29,7 +29,7 @@
       <% unless existing_service.description.blank? %><%= markdown existing_service.description %><% end %>
       <% if existing_service.link %><p><%= link_to existing_service.link, existing_service.link %></p><% end %>
       <% if current_user.is_admin? %>
-        <p><%= link_to 'Edit', edit_need_existing_service_path(@need, existing_service), :class => 'button' %></p>
+        <p><%= link_to 'Edit', edit_need_existing_service_path(@need, existing_service), :class => 'button' %> <%= button_to 'Delete', need_existing_service_path(@need, existing_service), :class => 'button', :method=>:delete %></p>
       <% end %>
     </li>
     <% end %>
@@ -46,7 +46,7 @@
       <p>
         <%= link_to link.url, link.url %> - <%= link.title %> -
         <% if current_user.is_admin? %>
-          <%= link_to 'Edit', edit_need_directgov_link_path(@need, link), :class => 'button' %>
+          <%= link_to 'Edit', edit_need_directgov_link_path(@need, link), :class => 'button' %> <%= button_to 'Delete', need_directgov_link_path(@need, link), :class => 'button', :method=>:delete %>
         <% end %>
       </p>
     </li>
@@ -113,17 +113,17 @@
         <td><%= @need.named_priority %></td>
       </tr>
       <tr>
-      	<th scope="row">Lead Dept</th>
+      	<th scope="row">Policy Dept</th>
         <td><%= @need.accountabilities_for_csv %></td>
       </tr>
       <tr>
       	<th scope="row">Fact checkers</th>
         <td><%= @need.fact_checkers_for_csv %></td>
       </tr>
-      <% if @need.writing_dept %>
+      <% if @need.writing_department %>
       <tr>
 	      <th scope="row">Writing Dept</th>
-        <td><%= @need.writing_dept %></td>
+        <td><%= @need.writing_department %></td>
       </tr>
       <% end %>
     </table>

@@ -64,8 +64,8 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda'
   gem 'mocha'
-  gem 'cucumber-rails'
   gem 'webmock', require: false
   gem 'capybara', '~> 1.1.1'
   gem "capybara-webkit", require: false
+  gem 'webmock'
 end

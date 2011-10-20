@@ -4,6 +4,8 @@ module NeedsHelper
 
     form_tag start_work, :method => 'get' do
       [
+        hidden_field_tag("artefact[name]", "CHANGE ME: #{need.title}").html_safe,
+        hidden_field_tag("artefact[owning_app]", "publisher").html_safe,
         hidden_field_tag("artefact[need_id]", need.id).html_safe,
         hidden_field_tag("artefact[kind]", need.kind.to_s.downcase).html_safe,
         hidden_field_tag("artefact[tags]", need.tag_list).html_safe
@@ -18,8 +20,8 @@ module NeedsHelper
 
     form_tag start_work, :method => 'post' do
       [
-        hidden_field_tag("artefact[name]", "[#{need.id}] I need to be changed").html_safe,
-        hidden_field_tag("artefact[slug]", "#{need.id}-i-need-to-be-changed").html_safe,
+        hidden_field_tag("artefact[name]", "CHANGE ME: #{need.title}").html_safe,
+        hidden_field_tag("artefact[slug]", "change-me-for-need-#{need.id}").html_safe,
         hidden_field_tag("artefact[owning_app]", "publisher").html_safe,
         hidden_field_tag("artefact[need_id]", need.id).html_safe,
         hidden_field_tag("artefact[kind]", need.kind.to_s.downcase).html_safe,

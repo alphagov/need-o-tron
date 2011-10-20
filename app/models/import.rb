@@ -64,11 +64,9 @@ class Import
     end
     
     def self.writing_dept(need, row)
-      if row['Writing dept'].blank?
-        need.writing_dept = "GDS"
-      else
-        need.writing_dept = row['Writing dept'] 
-      end
+      dept_name = row['Writing dept'].blank? ? 'GDS' : row['Writing dept']
+      the_dept = Department.find_or_create_by_name(dept_name)
+      need.writing_department = the_dept
     end
 
     def self.calculate_changes(current, updates)
