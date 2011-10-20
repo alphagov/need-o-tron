@@ -20,7 +20,10 @@ class Need < ActiveRecord::Base
   has_many :existing_services
   has_many :directgov_links
   has_many :fact_checkers
+  has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
+  
   has_many :accountabilities
+  has_many :policy_departments, :through => :accountabilities, :source => :department
 
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
