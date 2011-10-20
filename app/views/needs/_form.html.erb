@@ -16,7 +16,7 @@
       <%= f.input :url %>
       <%= f.input :priority, :as => 'select', :collection => Need::PRIORITIES_FOR_SELECT if @need.format_assigned?%>
       <%= f.input :reason_for_formatting_decision if @need.format_assigned? %>
-      <%= f.input :writing_dept %>
+      <%= f.input :writing_department %>
     <% end %>
     <%= f.inputs(:id => 'fact_checkers', :name => 'Fact checkers') do %>
       <ul class="item-list" id="fact_checkers_list">

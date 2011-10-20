@@ -14,6 +14,7 @@ class Need < ActiveRecord::Base
   belongs_to :decision_maker, :class_name => 'User'
   belongs_to :formatting_decision_maker, :class_name => 'User'
   belongs_to :creator, :class_name => 'User'
+  belongs_to :writing_department, :class_name => 'Department'
 
   has_many :justifications
   has_many :existing_services
