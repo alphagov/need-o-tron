@@ -71,4 +71,35 @@ describe SolrNeedPresenter do
     end
     assert_equal expected_document.xml, SolrNeedPresenter.new(need).to_solr_document.xml
   end
+
+  it 'should escape fields to make valid XML' do
+    need = stub_everything
+    need.stubs(
+      id: 123,
+      title: "Contains an ampersand & needs escaping",
+      description: "This is the description",
+      priority: 3,
+      kind: stub(name: 'example'),
+      creator: stub(name: "Bob", email: 'bob@example.com'),
+      notes: "These are the notes",
+      decision_maker: stub(name: "Big Cheese", email: 'big.cheese@example.com'),
+      created_at: Time.at(4),
+      updated_at: Time.at(5),
+      decision_made_at: Time.at(6),
+      reason_for_decision: "Just because",
+      tag_list: "red,blue",
+      search_rank: 3,
+      pairwise_rank: 4,
+      traffic: 5,
+      usage_volume: 6,
+      interaction: 7,
+      related_needs: "Get a new passport",
+      statutory: true,
+      formatting_decision_maker: stub(name: "Mary", email: "mary@example.com"),
+      formatting_decision_made_at: Time.at(7),
+      reason_for_formatting_decision: "Another reason"
+    )
+    doc = SolrNeedPresenter.new(need).to_solr_document.xml
+    doc.should match(/ampersand &amp; needs/)
+  end
 end
