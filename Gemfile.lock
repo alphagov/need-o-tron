@@ -242,6 +242,7 @@ DEPENDENCIES
   plek
   rails (~> 3.1.0)
   rdiscount
+  rspec
   rspec-rails
   sass-rails (~> 3.1.0)
   shoulda
