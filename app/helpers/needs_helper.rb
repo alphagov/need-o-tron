@@ -2,7 +2,7 @@ module NeedsHelper
   def start_work_link need
     start_work = "#{Plek.current.find("arbiter")}/artefacts/new"
 
-    form_tag start_work, :method => 'get' do
+    form_tag start_work, :method => 'get', :target => '_blank' do
       [
         hidden_field_tag("artefact[name]", "CHANGE ME: #{need.title}").html_safe,
         hidden_field_tag("artefact[owning_app]", "publisher").html_safe,
@@ -16,9 +16,9 @@ module NeedsHelper
 
   def assign_work_link need
     start_work =  "#{Plek.current.find("arbiter")}/artefacts"
-    start_work += "?return_to=#{Plek.current.find("needs")}#{request.fullpath}"
+    start_work += "?return_to=#{CGI.escape(request.url)}"
 
-    form_tag start_work, :method => 'post' do
+    form_tag start_work, :method => 'post', :target => '_blank' do
       [
         hidden_field_tag("artefact[name]", "CHANGE ME: #{need.title}").html_safe,
         hidden_field_tag("artefact[slug]", "change-me-for-need-#{need.id}").html_safe,
