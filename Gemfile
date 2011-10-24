@@ -46,6 +46,7 @@ end
 
 group :development, :test do
   gem 'machinist', '~> 2.0.0.beta1'
+  gem 'rspec'
   gem 'rspec-rails'
   gem 'simplecov', '0.4.2'
   gem 'simplecov-rcov'
