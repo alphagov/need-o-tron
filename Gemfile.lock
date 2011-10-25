@@ -136,19 +136,19 @@ GEM
     rdoc (3.11)
       json (~> 1.4)
     responders (0.6.4)
-    rspec (2.7.0)
-      rspec-core (~> 2.7.0)
-      rspec-expectations (~> 2.7.0)
-      rspec-mocks (~> 2.7.0)
-    rspec-core (2.7.1)
-    rspec-expectations (2.7.0)
+    rspec (2.6.0)
+      rspec-core (~> 2.6.0)
+      rspec-expectations (~> 2.6.0)
+      rspec-mocks (~> 2.6.0)
+    rspec-core (2.6.4)
+    rspec-expectations (2.6.0)
       diff-lcs (~> 1.1.2)
-    rspec-mocks (2.7.0)
-    rspec-rails (2.7.0)
+    rspec-mocks (2.6.0)
+    rspec-rails (2.6.1)
       actionpack (~> 3.0)
       activesupport (~> 3.0)
       railties (~> 3.0)
-      rspec (~> 2.7.0)
+      rspec (~> 2.6.0)
     sass (3.1.10)
     sass-rails (3.1.4)
       actionpack (~> 3.1.0)
@@ -210,7 +210,7 @@ DEPENDENCIES
   rails (~> 3.1.0)
   rdiscount
   rspec
-  rspec-core
+  rspec-core (= 2.6.4)
   rspec-rails
   sass-rails (~> 3.1.0)
   shoulda
