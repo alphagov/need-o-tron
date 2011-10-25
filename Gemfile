@@ -5,6 +5,8 @@ gem 'oa-core', '0.2.6'
 gem 'oa-oauth', '0.2.6'
 
 gem 'rails', '~> 3.1.0'
+gem 'rack', '1.3.5'
+gem 'rake', '0.9.2'
 
 gem 'sqlite3'
 #gem 'activerecord-sqlite3-adapter'
