@@ -4,7 +4,7 @@ class SearchController < ApplicationController
   
   def index
     @current_page = (params[:page] || 1).to_i
-    @facets = %w{tag writing_dept kind status priority}
+    @facets = %w{priority writing_dept status kind tag}
     @search = NeedSearch.new(
       params[:query], 
       facet_by: @facets, 
