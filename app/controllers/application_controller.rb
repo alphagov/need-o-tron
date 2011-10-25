@@ -16,6 +16,9 @@ class ApplicationController < ActionController::Base
 
   protected
     def set_current_user_in_thread
-      Thread.current[:current_user] = user_signed_in? ? current_user : nil
+      if user_signed_in?
+        Thread.current[:current_user] = current_user
+        params[:_signed_in_user] = current_user.name
+      end
     end
 end
