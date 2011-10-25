@@ -27,7 +27,7 @@ gem 'inherited_resources'
 gem 'has_scope'
 
 gem 'pethau'
-gem 'plek'
+gem 'plek', :git => 'git@github.com:alphagov/plek.git'
 gem 'stomp', '1.1.9'
 
 # gem 'acts-as-taggable-on'
