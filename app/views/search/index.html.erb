@@ -53,8 +53,8 @@
       <tr>
         <td>#<%= need.id %></td>
         <th scope="row"><%= link_to need.title, need_path(need.id) %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
-        <td class="need"><%= need.format_assigned? ? need.kind : "-" %></td>
-        <td><%= need.prioritised? ? need.named_priority : '-' %></td>
+        <td class="need"><%= need.kind %></td>
+        <td><%= need.named_priority %></td>
         <td><%= need.tag_list %></td>
         <td><%= false && time_ago_in_words(need.updated_at, true) %></td>
         <td><%= need.creator %></td>
