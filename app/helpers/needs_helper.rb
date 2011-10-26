@@ -66,6 +66,10 @@ module NeedsHelper
     filtered_search_path(new_params)
   end
 
+  def named_priority priority
+    Need::PRIORITIES[priority.to_i]
+  end
+
   def filter_to_path(filters_hash)
     path = []
     filters_hash.each do |field, values|
