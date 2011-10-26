@@ -30,9 +30,10 @@ module NeedsHelper
       submit_tag('Assign need', :disable_with => 'Working...', :class => 'fulfill').html_safe
     end.html_safe
   end
-  
+
   def search_link_with_added_filter(params, filters, additional_filters)
     new_params = deep_copy(params.to_hash)
+    new_params.delete('page')
     new_filters = deep_copy(filters.to_hash)
     additional_filters.each do |field, value|
       new_filters[field] ||= []
@@ -41,9 +42,10 @@ module NeedsHelper
     new_params["filters"] = filter_to_path(new_filters)
     filtered_search_path(new_params)
   end
-    
+
   def search_link_with_removed_filter(params, filters, filters_to_remove)
     new_params = deep_copy(params.to_hash)
+    new_params.delete('page')
     new_filters = deep_copy(filters.to_hash)
     filters_to_remove.each do |field, value|
       next unless new_filters.has_key?(field)
@@ -63,7 +65,7 @@ module NeedsHelper
     new_params['page'] = page if page
     filtered_search_path(new_params)
   end
-  
+
   def filter_to_path(filters_hash)
     path = []
     filters_hash.each do |field, values|
