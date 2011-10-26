@@ -52,7 +52,6 @@ describe SolrNeedPresenter do
       doc.add_field "notes", need.notes
       doc.add_field "reason_for_decision", need.reason_for_decision
       doc.add_field "reason_for_formatting_decision", need.reason_for_formatting_decision
-      doc.add_field "writing_dept", need.writing_dept
       doc.add_field "tag", "red"
       doc.add_field "tag", "blue"
 
