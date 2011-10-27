@@ -159,7 +159,9 @@ div.search {
 
 div.needs-content {
   /* needs search page */
+	border-left: dotted 0.063em #eee;
   float: right;
+  padding-left: 0.5em;
   width: 83%;
 
 	overflow: scroll;
@@ -176,16 +178,24 @@ div.results {
 }
 
 div.search-filters {
-	border-right: solid 0.063em #eee;
 	float: left;
+	padding-right: 0.5em;
   width: 15%;
 }
-  div.search-filters h3 {
-    font-weight: bold;
-  }
+
+div.search-filters h2 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+div.search-filters h3 {
+  font-weight: bold;
+  margin-bottom: 0;
+}
 
 div.search-filters ul {
-  border-bottom: solid 0.063em #eee;
+  border-bottom: dotted 0.125em #eee;
   font-size: 0.875em;
   list-style-type: none;
   padding-left: 0;
