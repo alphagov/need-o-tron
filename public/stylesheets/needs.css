@@ -249,8 +249,13 @@ ul.supporting-information li {
 	}
 
 #csv-download {
+  float: left;
   font-size: 0.8em;
-  margin-top: 2em;
+}
+
+#csv-upload {
+  float: right;
+  font-size: 0.8em;
 }
 
 ul.ui-autocomplete {
