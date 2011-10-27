@@ -187,57 +187,13 @@ small.status-label {
   padding: 0.125em 0.250em;
 }
 
-/*
-#overview, #departments, #justifications {
-  padding-bottom: 1em;
-  margin-bottom: 2em;
-  border-bottom: dashed 0.125em #E5E5E5;
-}
-
-#overview {
-  float: left;
-}
-
-#metadata {
-  padding: 1em;
-  margin-top: -2em;
-  margin-left: 5%;
-  width: 30%;
-  float: left;
-  background: #F2F2F2;
-	}
-
-  legend {
-    font-size: 1.5em;
-    font-weight: bold;
-    padding-top: 2em;
-    margin-bottom: 0.5em;
-  }
-
-#departments {
-  clear: both;
-}
-*/
-
-form.formtastic fieldset.inputs {
-  /*  padding-bottom: 1em;
-    margin-bottom: 2em;
-    border-bottom: dashed 2px #E5E5E5;*/
-}
-
-form.formtastic fieldset.buttons:last-child {
-  /*  padding: 1.5em 1.25em 0 1.25em;*/
-  /*  margin-bottom: 1em;*/
-  /*  background: #EEEFEE;*/
-}
-
 form.formtastic fieldset.buttons li.commit {
   float: right;
 }
 
-form.formtastic fieldset.buttons li.commit input, .button, .fulfill {
+form.formtastic fieldset.buttons li.commit input, p a.button, .fulfill, .button_to input[type="submit"] {
   background: #1d97ff;
-  border: 0.250em #0065C1 solid;
+  border: 0.125em #0065C1 solid;
   border-radius: 0.25em;
   color: #fff;
   cursor: pointer;
@@ -245,7 +201,9 @@ form.formtastic fieldset.buttons li.commit input, .button, .fulfill {
   padding: 0.25em 0.5em;
 }
 
-	.fulfill { border-width: 0.063em; font-size: 1em; }
+.button_to input[type="submit"], .fulfill { font-size: 1em; }
+
+.button_to input[type="submit"].button { background-color: #c00; border-color: #a00; }
 
 #error_explanation {
   background-color: red;
@@ -262,10 +220,6 @@ ul.supporting-information li {
   display: block;
   margin: 0.5em 0 0 0;
   padding: 0.5em 0.5em 0.063em 0.5em;
-}
-
-.button {
-  border-width: 0.063em;
 }
 
 #need-meta table {
