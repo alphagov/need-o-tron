@@ -10,7 +10,7 @@ describe SatisfiedNeedListener do
     need = FactoryGirl.create(:need)
     panopticon_will_respond_with(need_id: need.id, slug: 'my_slug')
     need_satisfied_message = stub(
-      body: {panopticon_id: "any_old_thing"}.to_json,
+      body: {answer:{panopticon_id: "any_old_thing"}}.to_xml,
       headers: {'message-id' => '123'}
     )
     stomp_client = stub(join: nil, close: nil, acknowledge: nil)
