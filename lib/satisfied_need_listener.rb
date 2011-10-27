@@ -6,28 +6,34 @@ class SatisfiedNeedListener
       client.close
       exit
     end
-    client.subscribe('/queue/need_satisfied', :ack => 'client') do |message|
-      Rails.logger.info("Message #{message.headers['message-id']} received")
+    
+    marples = Marples::Client.new client, "statisfied-need-listener-#{Process.pid}", logger
+    marples.when 'publisher', '*', 'published' do |publication|
+      logger.info "Found publication #{publication}"
       begin
-        payload = JSON.parse(message.body)
-        Rails.logger.info("Processing artefact #{payload['panopticon_id']}")
-        panopticon = Panopticon.find(payload['panopticon_id'])
-        Rails.logger.info("Getting need ID from Panopticon")
+        logger.info("Processing artefact #{publication['panopticon_id']}")
+        panopticon = Panopticon.find(publication['panopticon_id'])
+        logger.info("Getting need ID from Panopticon")
         need = Need.find(panopticon.need_id)
-        Rails.logger.info("Marking need #{need.id} as done")
+        logger.info("Marking need #{need.id} as done")
         need.update_attributes!(status: Need::DONE, url: panopticon.public_url)
-        Rails.logger.info("Marked as done; acking message")
-        client.acknowledge message
-      rescue JSON::ParserError => e
-        Rails.logger.error("Unable to parse message #{message.body} because of #{e}")
+        logger.info("Marked as done")
       rescue => e
-        Rails.logger.error("Unable to process message #{message.body} because of #{e}")
+        logger.error("Unable to process message #{publication}")
+        logger.error [ e.message, e.backtrace ].flatten.join("\n")
       end
-      Rails.logger.info "Finished processing message #{message.headers['message-id']}"
+      logger.info "Finished processing message #{publication}"
     end
-    Rails.logger.info "Listening for messages on /queue/need_satisfied"
-    client.join
-    client.close
+    logger.info "Listening for published objects in Publisher"
+    marples.join
+  end
+  
+  def logger
+      @logger ||= begin
+        logger = Logger.new STDOUT
+        logger.level = Logger::DEBUG
+        logger
+      end
   end
   
   def client
