@@ -6,7 +6,6 @@ class SatisfiedNeedListener
       client.close
       exit
     end
-    
     marples = Marples::Client.new client, "statisfied-need-listener-#{Process.pid}", logger
     marples.when 'publisher', '*', 'published' do |publication|
       logger.info "Found publication #{publication}"
@@ -29,11 +28,11 @@ class SatisfiedNeedListener
   end
   
   def logger
-      @logger ||= begin
-        logger = Logger.new STDOUT
-        logger.level = Logger::DEBUG
-        logger
-      end
+    @logger ||= begin
+      logger = Logger.new STDOUT
+      logger.level = Logger::DEBUG
+      logger
+    end
   end
   
   def client
