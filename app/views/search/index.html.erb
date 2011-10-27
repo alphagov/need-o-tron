@@ -100,6 +100,7 @@
 
 <div class="search-filters">
   <% if @search.facets %>
+  <h2>Search Filters</h2>
   <% @facets.each do |facet| %>
     <h3><span class="visuallyhidden">Filter by</span> <%= t("field.long.#{facet}") %></h3>
     <ul class="filter">
