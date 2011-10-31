@@ -27,7 +27,7 @@ gem 'has_scope'
 
 gem 'plek'
 gem 'stomp', '1.1.9'
-gem 'marples', '0.0.18'
+gem 'marples', '0.0.19'
 
 # gem 'acts-as-taggable-on'
 
