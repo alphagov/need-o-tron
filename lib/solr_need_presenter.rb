@@ -4,7 +4,7 @@ class SolrNeedPresenter
   end
   
   def to_solr_document
-    SolrDocument.new.tap do |doc|
+    DelSolr::Document.new.tap do |doc|
       # Full text indexed fields
       %w{id title description notes reason_for_decision
         reason_for_formatting_decision}.each do |field|
