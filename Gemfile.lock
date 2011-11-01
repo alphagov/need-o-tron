@@ -16,6 +16,7 @@ GIT
 GIT
   remote: https://github.com/alphagov/delsolr.git
   revision: 0e78228be3091bc2240aa0ba0b5c60791cad07c9
+  ref: 0e78228be3091bc2240aa0ba0b5c60791cad07c9
   specs:
     delsolr (0.1.5)
 
