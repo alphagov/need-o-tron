@@ -1,5 +1,5 @@
 class Need < ActiveRecord::Base
-  
+
   FORMAT_ASSIGNED = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
   BIN = "bin"
@@ -21,7 +21,7 @@ class Need < ActiveRecord::Base
   has_many :directgov_links
   has_many :fact_checkers
   has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
-  
+
   has_many :accountabilities
   has_many :policy_departments, :through => :accountabilities, :source => :department
 
