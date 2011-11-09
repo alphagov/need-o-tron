@@ -1,47 +1,4 @@
 $(function() {
-  var number_of_extra_cols = $('#needs-table > thead > tr > th').length - 2;
-  // it's horrid that this is hardcoded, I apologise.
-  var search_cols = [
-    null,
-    null,
-    null,
-    {sType: 'priority'},
-    null,
-    null,
-    // null,
-    // null,
-    // null,
-    null,
-    {bSortable: false, sSearch: ""},
-    {bSortable: false, sSearch: ""}
-  ];
-
-  var priority_parser = function(priority) {
-    var priority_sort_lookup = {
-      '-': 0,
-      'l': 1,
-      'm': 2,
-      'h': 3
-    }
-    return priority_sort_lookup[priority.charAt(0).toLowerCase()];
-  }
-  $.fn.dataTableExt.oSort['priority-asc']  = function(a,b) {
-    var x = priority_parser(a);
-    var y = priority_parser(b);
-    return ((x < y) ? -1 : ((x > y) ?  1 : 0));
-  };
-  $.fn.dataTableExt.oSort['priority-desc'] = function(a,b) {
-    var x = priority_parser(a);
-    var y = priority_parser(b);
-    return ((x < y) ?  1 : ((x > y) ? -1 : 0));
-  };
-
-  $('#needs-table').dataTable({
-    bJQueryUI: true,
-    bPaginate: false,
-    oSearch: {sSearch: ""},
-    aoColumns: search_cols
-  });
   // Fact-checking contacts
 
   var form_base_url = $('#fact_checkers_list').closest('form').attr('action'); // this is still true even for accountabilities

@@ -5,6 +5,8 @@ gem 'oa-core', '0.2.6'
 gem 'oa-oauth', '0.2.6'
 
 gem 'rails', '~> 3.1.0'
+gem 'rack', '1.3.5'
+gem 'rake', '0.9.2'
 
 gem 'sqlite3'
 #gem 'activerecord-sqlite3-adapter'
@@ -20,12 +22,15 @@ else
 end
 
 gem 'carrierwave'
+gem 'delsolr', :git => 'https://github.com/alphagov/delsolr.git',
+  :ref => '0e78228be3091bc2240aa0ba0b5c60791cad07c9'
 
 gem 'formtastic'
 gem 'inherited_resources'
 gem 'has_scope'
 
 gem 'plek', '0.1.5'
+gem 'pethau'
 gem 'stomp', '1.1.9'
 gem 'marples', '0.0.19'
 
@@ -65,5 +70,8 @@ group :test do
   gem 'database_cleaner'
   gem 'shoulda'
   gem 'mocha'
+  gem 'webmock', require: false
+  gem 'capybara', '~> 1.1.1'
+  gem "capybara-webkit", require: false
   gem 'webmock'
 end

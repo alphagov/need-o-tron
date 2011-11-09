@@ -1,4 +1,5 @@
 class Need < ActiveRecord::Base
+  class_attribute :index_command
 
   FORMAT_ASSIGNED = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
@@ -36,6 +37,7 @@ class Need < ActiveRecord::Base
   before_save :record_decision_info, :if => :reason_for_decision_changed?
   before_save :record_formatting_decision_info, :if => :reason_for_formatting_decision_changed?
   before_save :set_creator, :on => :create
+  after_save :update_search_index
 
   validate :status, :in => STATUSES
   validates_presence_of :priority, :if => proc { |a| a.status == FORMAT_ASSIGNED }
@@ -54,6 +56,17 @@ class Need < ActiveRecord::Base
     self.creator = Thread.current[:current_user]
   end
 
+  def update_search_index
+    indexable = SolrNeedPresenter.new(self)
+    SolrIndexer.new($solr, indexable).execute
+  end
+  
+  def self.index_all
+    Need.find_each do |need|
+      need.update_search_index
+    end
+  end
+  
   def record_decision_info
     if self.decision_made_at.nil? and self.reason_for_decision.present?
       self.decision_made_at = Time.now

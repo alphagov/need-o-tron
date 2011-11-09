@@ -2,13 +2,14 @@
 <html>
   <head>
     <title>Need-O-Tron</title>
-    <%= stylesheet_link_tag "/stylesheets/application", "/stylesheets/core", "/stylesheets/formtastic", "/stylesheets/needs", "/stylesheets/table-icons.css" %>
+    <%= stylesheet_link_tag "/stylesheets/core", "/stylesheets/formtastic", "/stylesheets/needs", "/stylesheets/table-icons.css" %>
     <%= csrf_meta_tags %>
   </head>
   <body>
     <div id="container">
       <div id="app-header">
-        <p id="logo"><%= link_to 'Need-O-Tron', root_path %>, <small><%= current_user %></small></p>
+        <p id="logo"><%= link_to 'Need-O-Tron', root_path %>. <small>Hello <%= current_user %>, you&rsquo;re looking lovely today.</small></p>
+
         <div role="navigation">
           <ul id="admin-options">
             <%- unless user_signed_in? or controller_name == 'auth_start' %>
@@ -17,62 +18,35 @@
           </ul>
           <% if user_signed_in? %>
           <ul class="navigation">
+            <li><%= link_to 'View all needs', search_path %></li>
             <li>
-              <a class="new" href="<%= needs_path(:in_state => 'new') %>">
+              <a class="new" href="<%= search_link_for_page({}, {status: 'new'}, 1) %>">
                 New
                 <span class="count">(<%= Need.in_state('new').count %>)</span>
                 <div class="arrow-right"></div>
               </a>
             </li>
-            <li>
-              <a class="ready-for-review" href="<%= needs_path(:in_state => 'ready-for-review') %>">
-                Ready for review
-                <span class="count">(<%= Need.in_state('ready-for-review').count %>)</span>
-                <div class="arrow-right"></div>
-              </a>
-            </li>
-            <li>
-              <a class="format-assigned" href="<%= needs_path(:in_state => 'format-assigned') %>">
-                Format assigned
-                <span class="count">(<%= Need.in_state('format-assigned').count %>)</span>
-                <div class="arrow-right"></div>
-              </a>
-            </li>
-            <li>
-              <a class="done" href="<%= needs_path(:in_state => 'done') %>">
-                Done
-                <span class="count">(<%= Need.in_state('done').count %>)</span>
-              </a>
-            </li>
-            <li>
-              <a class="bin" href="<%= needs_path(:in_state => 'bin') %>">
-                Bin
-                <span class="count">(<%= Need.in_state('bin').count %>)</span>
-              </a>
-            </li>
-          </ul>
-          <ul class="navigation">
             <% if current_user.is_admin? %>
             <li><%= link_to 'Enter a new need', new_need_path %></li>
-            <% end %>
-            <li><%= link_to 'View all needs', needs_path %></li>
-            <% if current_user.is_admin? %>
-            <li><%= link_to 'View analytics', 'https://www.google.com/analytics/web/#dashboard/default/a26179049w50705554p51337955/' %></li>
+            <li><%= link_to 'View analytics', 'https://www.google.com/analytics/web/#dashboard/default/a26179049w50705554p51337955/', :title => "Leave the Needotron and open Google Analytics" %></li>
             <% end %>
           </ul>
+
+          <div class="search">
+            <form action='/search'>
+              <label>Search for:
+                <%= text_field_tag :query, params[:query] %>
+              </label>
+              <%= submit_tag "Search" %>
+            </form>
+          </div>
+
           <% end %>
         </div>
       </div>
     </div>
     <div id="main-content" class="<%= yield :current_state %>">
       <div id="content-area" class="cf">
-
-        <dl class="filter cf">
-          <dt>Filter:</dt>
-          <dd><a href="#">MOJ</a></dd>
-          <dd><a href="#">High</a></dd>
-        </dl>
-
         <% flash.each do |k, v| %>
         <p class="<%= k %> flash-<%= k %>"><%= v %></p>
         <% end %>
@@ -81,11 +55,11 @@
       </div>
     </div>
     <div id="footer" class="cf">
-      &copy; <%= Date.today.year %> <a href="http://blog.alpha.gov.uk">The Team Formerly Known as Alphagov</a>.
+      &copy; <%= Date.today.year %> <a href="http://digital.cabinetoffice.gov.uk/"><abbr title="Government Digital Service">GDS</abbr></a>.
     </div>
     <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <%= javascript_include_tag "/javascripts/application", "/javascripts/data_tables/jquery.dataTables.min.js", "/javascripts/needs" %>
+    <%= javascript_include_tag "/javascripts/application","/javascripts/data_tables/jquery.dataTables.min.js", "/javascripts/needs" %>
     <%= yield :extra_javascript %>
   </body>
 </html>

@@ -1,0 +1,125 @@
+<% if @search && (params[:query] || params[:filter]) %>
+<div class="results cf">
+  <p>Your search
+  <% if params[:query].present? %>
+    for <strong><%= params[:query] %></strong>
+  <% end %>
+  returned <%= pluralize(@search.count, 'result') %>. You can filter those results below.</p>
+</div>
+<% end %>
+
+
+<% if @filters.present? %>
+<div class="filters">
+  <dl class="cf">
+    <dt>Filter applied:</dt>
+    <% @filters.each do |field_name, values| %>
+      <dd>
+        <% values.each do |value| %>
+          <% label = field_name == 'priority' ? t("priority_#{value}") : value %>
+          <div class="btn">
+            <%= link_to "×", search_link_with_removed_filter(params, @filters, field_name => value), class: 'close' %>
+            <p><strong><%= t("field.long.#{field_name}") %>:</strong> <%= label %></p>
+          </div>
+        <% end %>
+      </dd>
+    <% end %>
+  </dl>
+</div>
+<% end %>
+
+<div id="needs-content" class="needs-content">
+  <% if @search.nothing_found? %>
+  <p>Nothing found</p>
+  <% else %>
+  <table id="needs-table">
+    <thead>
+      <tr>
+        <%= sortable_heading('id') %>
+        <%= sortable_heading('title') %>
+        <%= sortable_heading('kind') %>
+        <%= sortable_heading('priority') %>
+        <th><%= t('field.short.tags') %></th>
+        <%= sortable_heading('updated_at') %>
+        <% if current_user.is_admin? %>
+        <th></th>
+        <th></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+    <% @search.each_result do |need| %>
+      <tr>
+        <td>#<%= need.id %></td>
+        <th scope="row"><%= link_to need.title, need_path(need.id) %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
+        <td class="need"><%= need.kind %></td>
+        <td><%= named_priority need.priority %></td>
+        <td><%= need.tag.join(', ') unless need.tag.blank? %></td>
+        <td><%= time_ago_in_words(need.updated_at, true) %></td>
+        <% if current_user.is_admin? %>
+        <td><%= link_to 'Edit', edit_need_path(need.id) %></td>
+        <td><%= link_to 'Delete', need_path(need.id), confirm: 'Are you sure?', method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+  <% end %>
+
+  <div class="cf">
+    <p id="csv-download"><a class="button" href="<%= needs_path(:format => 'csv', :in_state => params[:in_state]) %>">Download as a CSV</a></p>
+    <% if current_user.is_admin? %>
+    <p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
+    <% end %>
+  </div>
+
+  <% if @search.pages.count > 1 %>
+  <div class="pagination">
+    <ul>
+      <%= pagination_link(@current_page - 1, '&larr; Previous'.html_safe, 'prev') %>
+      <% paginate_from = [@current_page - 2, 1].max %>
+      <% paginate_to = [[@current_page + 2, paginate_from + 4].max, @search.pages.last].min %>
+      <% if paginate_from > 1 %>
+        <%= pagination_link(1, 1) %>
+      <% end %>
+      <% if paginate_from > 2 %>
+        <span>&hellip;</span>
+      <% end %>
+      <% (paginate_from..paginate_to).each do |page_num| %>
+        <%= pagination_link(page_num, page_num) %>
+      <% end %>
+      <% if paginate_to < @search.pages.last - 1 %>
+        <span>&hellip;</span>
+      <% end %>
+      <% if paginate_to < @search.pages.last %>
+        <%= pagination_link(@search.pages.last, @search.pages.last) %>
+      <% end %>
+      <%= pagination_link(@current_page + 1, 'Next &rarr;'.html_safe, 'next') %>
+    </ul>
+  </div>
+  <% end %>
+
+</div>
+
+<div class="search-filters">
+  <% if @search.facets %>
+  <h2>Search Filters</h2>
+  <% @facets.each do |facet| %>
+    <h3><span class="visuallyhidden">Filter by</span> <%= t("field.long.#{facet}") %></h3>
+    <ul class="filter">
+      <% @search.facets[facet].each_slice(2) do |value, count| %>
+        <% next if value.blank? %>
+        <% label = facet == 'priority' ? t("priority_#{value}") : value %>
+        <% if filtering_by?(facet, value) %>
+          <li class="filtering">
+            <%= label %> (<%= count %>)
+            <%= link_to('x', search_link_with_removed_filter(params, @filters, facet => value), class: 'remove') %>
+          </li>
+        <% else %>
+          <li><%= link_to(label, search_link_with_added_filter(params, @filters, facet => value)) %></a> (<%= count %>)</li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+  <% end %>
+</div>
