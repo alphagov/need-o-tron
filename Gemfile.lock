@@ -1,4 +1,10 @@
 GIT
+  remote: git@github.com:alphagov/daemonette.git
+  revision: 36ec7177c9d6d5c44b2ec772bf3daab69152b254
+  specs:
+    daemonette (0.1.0)
+
+GIT
   remote: git@github.com:alphagov/gds-sso.git
   revision: a9ec013c6d3bbbfbd1bafdfde0aa0384a129d03f
   specs:
@@ -230,6 +236,7 @@ DEPENDENCIES
   carrierwave
   ci_reporter
   coffee-rails (~> 3.1.0)
+  daemonette!
   database_cleaner
   delsolr!
   factory_girl (= 2.1.2)
