@@ -74,10 +74,18 @@ module NeedsHelper
     path = []
     filters_hash.each do |field, values|
       [*values].each do |value|
-        path.concat([field,value])
+        path.concat([field,parameterize_filter(value)])
       end
     end
     path
+  end                                                
+  
+  def parameterize_filter(param)
+    param.gsub("/","|")
+  end                    
+  
+  def self.deparameterize_filter(param) 
+    param.gsub("|","/")
   end
   
   def filtering_by?(field, value)
@@ -114,5 +122,5 @@ module NeedsHelper
   
   def deep_copy(object)
     Marshal.restore(Marshal.dump(object))
-  end
+  end                
 end

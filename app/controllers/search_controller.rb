@@ -1,7 +1,7 @@
 class SearchController < ApplicationController
   before_filter :validate_filters
-  before_filter :set_default_sort
-  
+  before_filter :set_default_sort  
+                            
   def index
     @current_page = (params[:page] || 1).to_i
     @facets = %w{priority writing_dept status kind tag}
@@ -25,7 +25,7 @@ class SearchController < ApplicationController
   
   private
     def validate_filters
-      filters = (params[:filters] || '').split('/')
+      filters = (params[:filters] || '').split('/').map{|item| NeedsHelper::deparameterize_filter(item) }   
       if (filters.size % 2) != 0
         raise ActionController::RoutingError.new('Not Found')
       end
@@ -51,5 +51,5 @@ class SearchController < ApplicationController
         sort << "title asc"
       end
       sort
-    end
+    end      
 end
