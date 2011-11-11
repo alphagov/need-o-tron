@@ -6,7 +6,8 @@
 development:
   adapter: mysql2
   database: needotron_development
-  username: needotron
+  username: root
+  password: alphagov
   encoding: utf8
 
 # Warning: The database defined as "test" will be erased and
