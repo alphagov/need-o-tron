@@ -23,7 +23,15 @@
           </div>
         <% end %>
       </dd>
-    <% end %>
+    <% end %> 
+	<% if params[:query] %>
+	  <dd>
+        <div class="btn">
+		   <%= link_to "×", search_link_with_removed_filter(params.reject{|key, value| key >= 'query'}, @filters, :query => params[:query]), class: 'close' %>
+           <p><strong>Search:</strong> <%= params[:query] %></p>
+         </div>
+      </dd>  
+	<% end %>
   </dl>
 </div>
 <% end %>

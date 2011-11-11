@@ -33,7 +33,7 @@
           </ul>
 
           <div class="search">
-            <form action='/search'>
+            <form action='<%= (controller_name == 'search') ? "" : "/search"  %>'>
               <label>Search for:
                 <%= text_field_tag :query, params[:query] %>
               </label>
