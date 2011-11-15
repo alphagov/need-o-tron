@@ -58,12 +58,20 @@ br.clear {
 	  border-top-color: #00B735;
 	}
 
+.in-progress {
+  background-color: #1F8175;
+}
+	#main-content.in-progress {
+	  border-top-color: #1F8175;
+	}         
+
+
 .done {
   background-color: #3171CC;
 }
 	#main-content.done {
 	  border-top-color: #3171CC;
-	}
+	}         
 
 .bin {
   background-color: #A09A9F;
