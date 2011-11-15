@@ -32,7 +32,7 @@ gem 'has_scope'
 gem 'plek', '0.1.5'
 gem 'pethau'
 gem 'stomp', '1.1.9'
-gem 'marples', '0.0.19'
+gem 'marples', '0.0.21'
 gem 'daemonette', :git => 'git@github.com:alphagov/daemonette.git'
 
 # gem 'acts-as-taggable-on'
