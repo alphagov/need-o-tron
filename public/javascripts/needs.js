@@ -33,8 +33,8 @@ $(function() {
     };
     button.click(create_function);
     create_text_field_node.keypress(function(e) {
-      if ( event.which == 13 ) {
-         event.preventDefault();
+      if ( e.which == 13 ) {
+         e.preventDefault();
          create_function();
        }
     });
