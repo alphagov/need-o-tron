@@ -5,7 +5,7 @@
 # protecting those connections do not.
 
 unless Rails.env.test?
-  stomp_url = "failover://(stomp://support.cluster:61613)"
+  stomp_url = "failover://(stomp://support.cluster:61613,stomp://support.cluster:61613)"
   NeedStateListener.logger = Rails.logger
 
   if defined?(PhusionPassenger)
