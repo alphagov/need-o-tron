@@ -14,6 +14,7 @@ class NeedStateListener
                     
     listen_on_published
     listen_on_created           
+    listen_on_deleted
     
     @marples.join
   end
@@ -48,15 +49,35 @@ class NeedStateListener
         need = Need.find(panopticon.need_id)
         logger.info("Marking need #{need.id} as in progress")
         need.update_attributes!(status: Need::IN_PROGRESS, url: panopticon.public_url)
-        logger.info("Marked as done")
+        logger.info("Marked as in progress")
       rescue => e
         logger.error("Unable to process message #{publication}")
         logger.error [ e.message, e.backtrace ].flatten.join("\n")
       end
       logger.info "Finished processing message #{publication}"
     end   
-    logger.info "Listening for published objects in Publisher"  
-  end        
+    logger.info "Listening for created objects in Publisher"  
+  end
+  
+  def listen_on_deleted
+    @marples.when 'publisher', '*', 'destroyed' do |publication|
+      logger.info "Found publication #{publication}"
+      begin
+        logger.info("Processing artefact #{publication['panopticon_id']}")
+        panopticon = Panopticon.find(publication['panopticon_id'])
+        logger.info("Getting need ID from Panopticon")
+        need = Need.find(panopticon.need_id)
+        logger.info("Marking need #{need.id} as format assigned")
+        need.update_attributes!(status: Need::FORMAT_ASSIGNED, url: panopticon.public_url)
+        logger.info("Marked as format assigned")
+      rescue => e
+        logger.error("Unable to process message #{publication}")
+        logger.error [ e.message, e.backtrace ].flatten.join("\n")
+      end
+      logger.info "Finished processing message #{publication}"
+    end         
+    logger.info "Listening for destroyed objects in Publisher"                      
+  end       
   
   def logger
     @logger ||= begin
