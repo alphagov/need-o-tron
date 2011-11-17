@@ -1,5 +1,7 @@
 class Need < ActiveRecord::Base
-  class_attribute :index_command
+  class_attribute :index_command   
+  
+  MAXIMUM_POLICY_DEPARTMENTS = 5
 
   FORMAT_ASSIGNED = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
@@ -16,15 +18,17 @@ class Need < ActiveRecord::Base
   belongs_to :decision_maker, :class_name => 'User'
   belongs_to :formatting_decision_maker, :class_name => 'User'
   belongs_to :creator, :class_name => 'User'
-  belongs_to :writing_department, :class_name => 'Department'
 
   has_many :justifications
   has_many :existing_services
   has_many :directgov_links
   has_many :fact_checkers
   has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
+  
+  belongs_to :writing_department                                            
 
-  has_many :accountabilities
+  has_many :accountabilities                                             
+  accepts_nested_attributes_for :accountabilities
   has_many :policy_departments, :through => :accountabilities, :source => :department
 
   scope :undecided, where(:decision_made_at => nil)

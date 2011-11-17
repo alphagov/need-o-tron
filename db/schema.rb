@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111020091445) do
+ActiveRecord::Schema.define(:version => 20111117144958) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"
@@ -154,6 +154,12 @@ ActiveRecord::Schema.define(:version => 20111020091445) do
     t.integer "version",                     :null => false
     t.string  "email",                       :null => false
     t.boolean "is_admin", :default => false
+  end
+
+  create_table "writing_departments", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

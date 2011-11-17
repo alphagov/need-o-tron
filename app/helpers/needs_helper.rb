@@ -119,9 +119,13 @@ module NeedsHelper
     content_tag(:th, :class => css_classes, :scope => 'col') do
       link_to(t("field.short.#{field}"), search_link_for_page(params.merge(sort_by: field, sort_dir: new_sort_dir)))
     end
-  end
+  end       
   
   def deep_copy(object)
     Marshal.restore(Marshal.dump(object))
-  end                
+  end       
+  
+  def accountabilities_for(need)
+    (0...Need::MAXIMUM_POLICY_DEPARTMENTS).map { |i| need.accountabilities.all[i] || need.accountabilities.build }
+  end         
 end
