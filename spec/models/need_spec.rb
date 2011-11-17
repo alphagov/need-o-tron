@@ -12,6 +12,7 @@ describe Need do
     describe "associations" do
       it { should have_many :fact_checkers }
       it { should have_many :accountabilities }
+      it { should belong_to :writing_department }
     end
 
     it "set creator when saved" do
