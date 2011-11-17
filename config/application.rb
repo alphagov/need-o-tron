@@ -55,4 +55,6 @@ module NeedOTron
       g.fixture_replacement :machinist
     end
   end
-end
+end            
+
+require 'open-uri'  
