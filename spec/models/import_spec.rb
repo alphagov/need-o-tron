@@ -8,6 +8,7 @@ describe Import do
   end
 
   describe "which things to import" do
+    pending("not maintaining csv import for now")
     it "only allows methods in IMPORT_OPTIONS and which are set as import keys" do
       import = Import.new(:priority => "1", :fact_checker => "0", :bad => "1")
       import.import_keys.should == [:priority]
@@ -15,6 +16,7 @@ describe Import do
   end
 
   describe "importing priorities" do
+    pending("not maintaining csv import for now")
     before(:each) do
       @need = Need.make
     end
@@ -31,6 +33,7 @@ describe Import do
   end
   
   describe "importing writing department" do
+    pending("not maintaining csv import for now")
     before(:each) do
       @need = Need.make
     end
@@ -47,6 +50,7 @@ describe Import do
   end
 
   describe "importing fact checkers" do
+    pending("not maintaining csv import for now")
     describe "reporting which Fact Checkers to remove or add" do
       it "correctly reports which Fact Checkers to remove and which to add" do
         current = ['matt@alphagov.co.uk', 'ben@alphagov.co.uk']
@@ -109,6 +113,7 @@ describe Import do
   end
 
   describe "importing Accountabilities" do
+    pending("not maintaining csv import for now")
     describe "reporting which Accountabilities to remove or add" do
       it "correctly reports which Accountabilities to remove and which to add" do
         current = ['HM Treasury', 'DoSAC']
