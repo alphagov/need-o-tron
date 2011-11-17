@@ -7,8 +7,6 @@ require 'active_record_ext'
 unless Rails.env.test?
   stomp_url = "failover://(stomp://support.cluster:61613,stomp://support.cluster:61613)"
   NeedStateListener.logger = Rails.logger
-  ActiveRecord::Base.marples_client_name = 'need-o-tron'
-  ActiveRecord::Base.marples_logger = Rails.logger
 
   if defined?(PhusionPassenger)
     PhusionPassenger.on_event(:starting_worker_process) do |forked|
