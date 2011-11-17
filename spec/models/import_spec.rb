@@ -38,7 +38,6 @@ describe Import do
       @need = Need.make
     end
 
-    pending("not maintaining csv import for now")
     it "updates the need's writing department" do
       @need.expects(:save!).returns(true)
       Need.expects(:find_by_id).with('1').returns(@need)
