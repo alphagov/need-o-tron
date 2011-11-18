@@ -32,24 +32,6 @@ describe Import do
     end
   end
   
-  describe "importing writing department" do
-    pending("not maintaining csv import for now")
-    before(:each) do
-      @need = Need.make
-    end
-
-    pending("not maintaining csv import for now")
-    it "updates the need's writing department" do
-      @need.expects(:save!).returns(true)
-      Need.expects(:find_by_id).with('1').returns(@need)
-
-      import = Import.new :csv => csv('import_with_writing_dept.csv'), :writing_dept => '1'
-      import.save
-
-      @need.writing_department.to_s.should == "DoSAC"
-    end
-  end
-
   describe "importing fact checkers" do
     pending("not maintaining csv import for now")
     describe "reporting which Fact Checkers to remove or add" do
