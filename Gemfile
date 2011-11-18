@@ -24,7 +24,8 @@ end
 gem 'carrierwave'
 gem 'delsolr', :git => 'https://github.com/alphagov/delsolr.git',
   :ref => '0e78228be3091bc2240aa0ba0b5c60791cad07c9'
-
+     
+gem 'rabl'
 gem 'formtastic'
 gem 'inherited_resources'
 gem 'has_scope'
