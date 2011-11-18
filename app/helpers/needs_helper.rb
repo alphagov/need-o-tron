@@ -1,6 +1,12 @@
 module NeedsHelper
   def start_work_link need
     start_work = "#{Plek.current.find("arbiter")}/artefacts/new"
+    
+    if need.status == 'in-progress' || need.status == 'done'
+      title = 'Continue work on this need'
+    else
+      title = 'Start work on this need'
+    end
 
     form_tag start_work, :method => 'get', :target => '_blank' do
       [
@@ -11,7 +17,7 @@ module NeedsHelper
         hidden_field_tag("artefact[tags]", need.tag_list).html_safe,
         hidden_field_tag("artefact[department]", need.writing_department).html_safe
       ].join.html_safe + \
-      submit_tag('Start work on this need', :disable_with => 'Working...', :class => 'fulfill').html_safe
+      submit_tag(title, :disable_with => 'Working...', :class => 'fulfill').html_safe
     end.html_safe
   end
 
