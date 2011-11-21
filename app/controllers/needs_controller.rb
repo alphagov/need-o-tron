@@ -6,17 +6,17 @@ class NeedsController < InheritedResources::Base
 
   def index
     index! do |format|
-      format.csv { render :csv => NeedsCsv.new(collection, Time.zone.now) } 
+      format.csv { render :csv => NeedsCsv.new(collection, Time.zone.now) }
     end
-  end                                                                       
-  
+  end
+
   def show
     show! do |format|
       format.json { # show.json.rabl
         }
     end
   end
-  
+
   def print
     @need = Need.find params[:id]
     render :layout => false
