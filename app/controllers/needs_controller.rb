@@ -3,6 +3,9 @@ require 'csv'
 
 class NeedsController < InheritedResources::Base
   has_scope :in_state
+  skip_before_filter :authenticate_user!, :if => lambda { |c|
+    c.action_name == 'show' && c.request.format.json?
+  }
 
   def index
     index! do |format|
