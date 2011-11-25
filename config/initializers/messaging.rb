@@ -4,7 +4,11 @@
 # that client connections get copied when passenger forks a process but the mutexes
 # protecting those connections do not.
 require 'active_record_ext'
-unless Rails.env.test?
+
+if Rails.env.test?                                                     
+  NeedStateListener.client = Marples::NullTransport.instance 
+  ActiveRecord::Base.marples_transport = Marples::NullTransport.instance
+else
   stomp_url = "failover://(stomp://support.cluster:61613,stomp://support.cluster:61613)"
   NeedStateListener.logger = Rails.logger
 
