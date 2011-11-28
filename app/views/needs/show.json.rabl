@@ -7,8 +7,8 @@ child :writing_department => :writing_team do
   attribute :id, :name
 end
 
-child :fact_check_contacts => :fact_checkers do
-  attribute :id, :email
+child :fact_checkers do
+  attribute :email
 end              
 
 child :policy_departments => :policy_owners do
