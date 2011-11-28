@@ -44,7 +44,8 @@ class Need < ActiveRecord::Base
 
   before_save :record_decision_info, :if => :reason_for_decision_changed?
   before_save :record_formatting_decision_info, :if => :reason_for_formatting_decision_changed?
-  before_save :set_creator, :on => :create
+  before_save :set_creator, :on => :create     
+  before_validation :delete_empty_fact_checkers
   after_save :update_search_index
 
   validate :status, :in => STATUSES
@@ -86,6 +87,12 @@ class Need < ActiveRecord::Base
     if self.formatting_decision_made_at.nil? and self.reason_for_formatting_decision.present?
       self.formatting_decision_made_at = Time.now
       self.formatting_decision_maker = Thread.current[:current_user]
+    end
+  end
+          
+  def delete_empty_fact_checkers                 
+    fact_checkers.each do |fc|
+      fc.mark_for_destruction if fc.email.blank?
     end
   end
 
