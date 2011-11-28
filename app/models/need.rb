@@ -92,6 +92,10 @@ class Need < ActiveRecord::Base
   def format_assigned?
     [FORMAT_ASSIGNED, IN_PROGRESS, DONE, BIN].include?(status)
   end
+  
+  def being_worked_on?
+    [FORMAT_ASSIGNED, IN_PROGRESS, DONE].include?(status)
+  end
 
   STATUSES.each do |status_label|
     define_method "#{status_label}?" do
