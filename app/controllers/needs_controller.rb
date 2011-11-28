@@ -11,6 +11,14 @@ class NeedsController < InheritedResources::Base
     index! do |format|
       format.csv { render :csv => NeedsCsv.new(collection, Time.zone.now) }
     end
+  end        
+
+  def edit
+    edit! do |format|
+      format.html {
+        @need.fact_checkers.build while @need.fact_checkers.size < 5
+      }
+    end
   end
 
   def show

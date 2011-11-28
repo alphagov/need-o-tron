@@ -41,31 +41,34 @@ describe Need do
 
     describe "handling fact checker updates" do
       it "can return all current Fact Checker's Contact emails" do
-        @need.fact_checkers.build(contact: Contact.new(email: 'matt@alphagov.co.uk'))
-        @need.fact_checkers.build(contact: Contact.new(email: 'ben@alphagov.co.uk'))
+        @need.fact_checkers.create(email: 'matt@alphagov.co.uk')
+        @need.fact_checkers.create(email: 'ben@alphagov.co.uk')
 
         @need.current_fact_checker_emails.should == ['matt@alphagov.co.uk', 'ben@alphagov.co.uk']
       end
 
       it "can create a fact checker and contact from its email" do
-        @need.add_fact_checker_with_email('matt@alphagov.co.uk')
-        @need.fact_checkers.first.contact.email.should == 'matt@alphagov.co.uk'
+        @need.fact_checkers.build(email: 'matt@alphagov.co.uk')
+        @need.fact_checkers.first.email.should == 'matt@alphagov.co.uk'
       end
 
       it "can remove a fact checker from its contact's email" do
-        fc_to_be_removed = @need.fact_checkers.build(contact: Contact.new(email: 'matt@alphagov.co.uk'))
-        fc_to_remain = @need.fact_checkers.build(contact: Contact.new(email: 'ben@alphagov.co.uk'))
+        fc_to_be_removed = @need.fact_checkers.create(email: 'matt@alphagov.co.uk')
+        fc_to_remain = @need.fact_checkers.create(email: 'ben@alphagov.co.uk')
 
-        @need.remove_fact_checker_with_email('matt@alphagov.co.uk')
+        @need.fact_checkers.length.should == 2
+                                                                      
+        factchecker = @need.fact_checkers.find_by_email(fc_to_be_removed.email)
+        factchecker.destroy       
 
-        @need.fact_checkers.length.should == 1
-        @need.fact_checkers.first.should == fc_to_remain
+        FactChecker.where(:need_id => @need.id).count.should == 1
+        FactChecker.where(:need_id => @need.id).first.should == fc_to_remain
       end
     end
 
     it "can report fact checkers so they can be included in a CSV" do
-      @need.fact_checkers.build(contact: Contact.new(email: 'matt@alphagov.co.uk'))
-      @need.fact_checkers.build(contact: Contact.new(email: 'ben@alphagov.co.uk'))
+      @need.fact_checkers.create(email: 'matt@alphagov.co.uk')
+      @need.fact_checkers.create(email: 'ben@alphagov.co.uk')
 
       @need.fact_checkers_for_csv.should == "matt@alphagov.co.uk, ben@alphagov.co.uk"
     end

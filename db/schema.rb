@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111117144958) do
+ActiveRecord::Schema.define(:version => 20111128145734) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(:version => 20111117144958) do
     t.integer  "need_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "email"
   end
 
   create_table "fact_checking_contacts_needs", :id => false, :force => true do |t|

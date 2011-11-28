@@ -22,17 +22,13 @@
         <%= accountability.input :department, :as => :select, :collection => Department.all, :label => (i == 0) ? 'Policy owner' : "&nbsp;" %>
         <% i += 1 %>
       <% end %>
-    <% end %>
-
-    <%= f.inputs(:id => 'fact_checkers', :name => 'Fact checkers') do %>
-      <ul class="item-list" id="fact_checkers_list">
-      <% @need.fact_checkers.each do |fact_checker| %>
-        <li class="existing"><%= fact_checker.contact.email %><%= hidden_field_tag("fact_checkers[#{fact_checker.id}]", fact_checker.id) %></li>
+      
+      <% i = 0 %><%= f.semantic_fields_for :fact_checkers do |fact_checker| %>                                                                       
+        <%= fact_checker.input :email, :required => false, :label => (i == 0) ? 'Fact checker' : "&nbsp;" %>
+        <% i += 1 %>
       <% end %>
-        <li><%= email_field_tag('fact_checkers[n][email]') %></li>
-      </ul>
 
-    <% end %>
+    <% end %>           
 
   <% end %>
 

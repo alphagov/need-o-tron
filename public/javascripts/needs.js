@@ -6,23 +6,10 @@ $(function() {
   var csrf_token = $('meta[name=csrf-token]').attr('content');
 
   var set_up_existing_item_li = function(item_node, url_generator) {
-    var button = $('<span class="button">-</span>');
-    button.appendTo(item_node);
-    button.click(function() {
-      var data = {};
-      data[csrf_param] = csrf_token;
-      $.ajax(url_generator(item_node), {
-        data: data, dataType: 'text', type: 'DELETE',
-        success: function() {
-          item_node.remove();
-        }
-      });
-    });
+
   };
   var set_up_create_item_li = function(item_create_node, create_url, form_data_generator, item_creator, url_generator) {
-    var button = $('<span class="button">+</span>');
     var create_text_field_node = item_create_node.find('input');
-    item_create_node.append(button);
     create_text_field_node.autocomplete({source: create_url + '/search.json'});
     var create_function = function() {
       $.post(create_url + '.json', form_data_generator(item_create_node), function(data) {
@@ -31,13 +18,6 @@ $(function() {
         set_up_existing_item_li(new_item_node, url_generator);
       }, 'json');
     };
-    button.click(create_function);
-    create_text_field_node.keypress(function(e) {
-      if ( e.which == 13 ) {
-         e.preventDefault();
-         create_function();
-       }
-    });
   }
 
   // Fact Checkers

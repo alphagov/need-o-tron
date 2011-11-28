@@ -2,7 +2,8 @@ class Need < ActiveRecord::Base
   class_attribute :index_command   
   
   MAXIMUM_POLICY_DEPARTMENTS = 5
-
+  MAXIMUM_FACT_CHECKERS = 5
+  
   FORMAT_ASSIGNED = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
   IN_PROGRESS = "in-progress"
@@ -22,14 +23,16 @@ class Need < ActiveRecord::Base
   has_many :justifications
   has_many :existing_services
   has_many :directgov_links
-  has_many :fact_checkers
-  has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
+  has_many :fact_checkers     
+  #has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
   
   belongs_to :writing_department                                            
 
   has_many :accountabilities                                             
-  accepts_nested_attributes_for :accountabilities
   has_many :policy_departments, :through => :accountabilities, :source => :department
+                                                                            
+  accepts_nested_attributes_for :accountabilities 
+  accepts_nested_attributes_for :fact_checkers, :reject_if => :all_blank
 
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
@@ -131,13 +134,13 @@ class Need < ActiveRecord::Base
   end
 
   def current_fact_checker_emails
-    fact_checkers.collect { |f| f.contact.email }
+    fact_checkers.collect { |f| f.email }
   end
 
   def fact_checkers_for_csv
     current_fact_checker_emails.join(', ')
   end
-
+          
   def add_fact_checker_with_email(email)
     fact_checkers.build(contact: Contact.find_or_initialize_by_email(email))
   end

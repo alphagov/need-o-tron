@@ -133,5 +133,6 @@ module NeedsHelper
   
   def accountabilities_for(need)
     (0...Need::MAXIMUM_POLICY_DEPARTMENTS).map { |i| need.accountabilities.all[i] || need.accountabilities.build }
-  end         
+  end 
+                                                                   
 end
