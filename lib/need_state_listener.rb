@@ -60,21 +60,18 @@ class NeedStateListener
   end
   
   def listen_on_deleted
-    @marples.when 'publisher', '*', 'destroyed' do |publication|
-      logger.info "Found publication #{publication}"
+    @marples.when 'panopticon', 'artefacts', 'destroyed' do |artefact|
+      logger.info "Artefact #{artefact} was deleted in Panopticon"
       begin
-        logger.info("Processing artefact #{publication['panopticon_id']}")
-        panopticon = Panopticon.find(publication['panopticon_id'])
-        logger.info("Getting need ID from Panopticon")
-        need = Need.find(panopticon.need_id)
+        need = Need.find artefact['need_id']
         logger.info("Marking need #{need.id} as format assigned")
-        need.update_attributes!(status: Need::FORMAT_ASSIGNED, url: panopticon.public_url)
+        need.update_attributes!(status: Need::FORMAT_ASSIGNED)
         logger.info("Marked as format assigned")
       rescue => e
-        logger.error("Unable to process message #{publication}")
+        logger.error("Unable to process message #{artefact}")
         logger.error [ e.message, e.backtrace ].flatten.join("\n")
       end
-      logger.info "Finished processing message #{publication}"
+      logger.info "Finished processing message #{artefact}"
     end         
     logger.info "Listening for destroyed objects in Publisher"                      
   end       
