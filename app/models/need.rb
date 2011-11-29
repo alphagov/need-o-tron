@@ -31,7 +31,7 @@ class Need < ActiveRecord::Base
   has_many :accountabilities                                             
   has_many :policy_departments, :through => :accountabilities, :source => :department
                                                                             
-  accepts_nested_attributes_for :accountabilities 
+  accepts_nested_attributes_for :accountabilities, :reject_if => :all_blank 
   accepts_nested_attributes_for :fact_checkers, :reject_if => :all_blank
 
   scope :undecided, where(:decision_made_at => nil)
@@ -45,7 +45,7 @@ class Need < ActiveRecord::Base
   before_save :record_decision_info, :if => :reason_for_decision_changed?
   before_save :record_formatting_decision_info, :if => :reason_for_formatting_decision_changed?
   before_save :set_creator, :on => :create     
-  before_validation :delete_empty_fact_checkers
+  before_validation :delete_empty_fact_checkers, :delete_empty_accountabilities
   after_save :update_search_index
 
   validate :status, :in => STATUSES
@@ -87,6 +87,12 @@ class Need < ActiveRecord::Base
     if self.formatting_decision_made_at.nil? and self.reason_for_formatting_decision.present?
       self.formatting_decision_made_at = Time.now
       self.formatting_decision_maker = Thread.current[:current_user]
+    end
+  end
+
+  def delete_empty_accountabilities                 
+    accountabilities.each do |ac|
+      ac.mark_for_destruction if ac.department_id.blank?
     end
   end
           
