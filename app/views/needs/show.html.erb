@@ -112,18 +112,18 @@
       <tr>
         <th scope="row">Priority</th>
         <td><%= @need.named_priority %></td>
-      </tr>                            
+      </tr>
       <tr>
-      	<th scope="row">Policy Owner</th>
+        <th scope="row">Policy Owner</th>
         <td><%= @need.accountabilities_for_csv rescue '' %></td>
       </tr>
       <tr>
-      	<th scope="row">Fact Checkers</th>
+        <th scope="row">Fact Checkers</th>
         <td><%= @need.fact_checkers_for_csv %></td>
       </tr>
       <% if @need.writing_department %>
       <tr>
-	      <th scope="row">Writing Team</th>
+        <th scope="row">Writing Team</th>
         <td><%= @need.writing_department.name %></td>
       </tr>
       <% end %>

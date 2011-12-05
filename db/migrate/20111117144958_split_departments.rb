@@ -1,5 +1,5 @@
 class SplitDepartments < ActiveRecord::Migration
-  def up                
+  def up
     create_table :writing_departments do |t|
       t.string :name
       t.timestamps
@@ -7,6 +7,6 @@ class SplitDepartments < ActiveRecord::Migration
   end
 
   def down
-    drop_table :writing_departments             
+    drop_table :writing_departments
   end
 end

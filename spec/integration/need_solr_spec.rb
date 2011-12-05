@@ -4,14 +4,14 @@ describe "Need integration with Solr" do
   describe "when a need is created" do
     before :each do
       $solr.delete_by_query("rails_env:#{Rails.env}")
-      @need = Factory :need, 
-        title: "Lorem ipsum dolor sit amet", 
+      @need = Factory :need,
+        title: "Lorem ipsum dolor sit amet",
         kind: Factory(:kind),
         priority: Need::PRIORITIES.values.first,
         tag_list: "red,blue"
     end
-      
-    it "is immediately findable in Solr" do 
+
+    it "is immediately findable in Solr" do
       search = NeedSearch.new "ipsum"
       search.execute
       search.results.should have(1).result

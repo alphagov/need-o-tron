@@ -15,10 +15,10 @@ NeedOTron::Application.routes.draw do
       end
     end
     member do
-    	get 'print'
+      get 'print'
     end
   end
-  
+
   match 'search(/*filters)' => 'search#index', as: 'filtered_search'
   match 'search' => 'search#index', as: 'search'
   root :to => "search#index"

@@ -60,9 +60,9 @@ class Import
   module Updaters
     def self.priority(need, row)
       need.priority = row['Priority'] if row['Priority']
-      
+
     end
-    
+
     def self.writing_dept(need, row)
       dept_name = row['Writing dept'].blank? ? 'GDS' : row['Writing dept']
       the_dept = Department.find_or_create_by_name(dept_name)
@@ -90,11 +90,11 @@ class Import
     end
 
     def self.fact_checker(need, row)
-      if row['Fact checker'] 
+      if row['Fact checker']
         updates = extract_fact_checkers(row['Fact checker'])
         current = need.current_fact_checker_emails
         fact_checkers_to_create, fact_checkers_to_delete = fact_checker_changes(current, updates)
-        
+
         fact_checkers_to_create.each { |email| need.add_fact_checker_with_email(email) }
         fact_checkers_to_delete.each { |email| need.remove_fact_checker_with_email(email) }
       end

@@ -1,7 +1,7 @@
 require "action_controller/metal"
 
 # Failure application that will be called every time :warden is thrown from
-# any strategy or hook. 
+# any strategy or hook.
 class FailureApp < ActionController::Metal
   include ActionController::RackDelegation
   include ActionController::UrlFor
@@ -12,12 +12,12 @@ class FailureApp < ActionController::Metal
     puts "OMGFAILLOL"
     action(:respond).call(env)
   end
-  
+
   def respond
     puts "OMGFAILLOL MORE"
     redirect
   end
-  
+
   def redirect
     store_location!
     redirect_to auth_start_path

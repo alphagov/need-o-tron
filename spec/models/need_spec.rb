@@ -57,9 +57,9 @@ describe Need do
         fc_to_remain = @need.fact_checkers.create(email: 'ben@alphagov.co.uk')
 
         @need.fact_checkers.length.should == 2
-                                                                      
+
         factchecker = @need.fact_checkers.find_by_email(fc_to_be_removed.email)
-        factchecker.destroy       
+        factchecker.destroy
 
         FactChecker.where(:need_id => @need.id).count.should == 1
         FactChecker.where(:need_id => @need.id).first.should == fc_to_remain

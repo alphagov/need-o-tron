@@ -32,11 +32,11 @@ class NeedSearch
   def pages
     1..last_page
   end
-  
+
   def last_page
     (count / @per_page.to_f).ceil
   end
-  
+
   def nothing_found?
     response.blank?
   end
@@ -44,7 +44,7 @@ class NeedSearch
   def count
     response.total
   end
-  
+
   def results
     response.docs.map { |doc|
       OpenStruct.new doc

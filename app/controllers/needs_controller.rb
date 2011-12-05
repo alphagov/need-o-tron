@@ -11,7 +11,7 @@ class NeedsController < InheritedResources::Base
     index! do |format|
       format.csv { render :csv => NeedsCsv.new(collection, Time.zone.now) }
     end
-  end        
+  end
 
   def edit
     edit! do |format|

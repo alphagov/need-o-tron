@@ -1,7 +1,7 @@
 module NeedsHelper
   def start_work_link need
     start_work = "#{Plek.current.find("arbiter")}/artefacts/new"
-    
+
     if need.status == 'in-progress' || need.status == 'done'
       title = 'Continue work on this need'
     else
@@ -85,20 +85,20 @@ module NeedsHelper
       end
     end
     path
-  end                                                
-  
+  end
+
   def parameterize_filter(param)
     param.gsub("/","|")
-  end                    
-  
-  def self.deparameterize_filter(param) 
+  end
+
+  def self.deparameterize_filter(param)
     param.gsub("|","/")
   end
-  
+
   def filtering_by?(field, value)
     @filters[field] && @filters[field].include?(value)
   end
-  
+
   def pagination_link(page_number, label, classes = [])
     classes = classes.is_a?(String) ? classes.split(' ') : classes.clone
     classes << 'disabled' unless @search.pages.include?(page_number)
@@ -125,14 +125,14 @@ module NeedsHelper
     content_tag(:th, :class => css_classes, :scope => 'col') do
       link_to(t("field.short.#{field}"), search_link_for_page(params.merge(sort_by: field, sort_dir: new_sort_dir)))
     end
-  end       
-  
+  end
+
   def deep_copy(object)
     Marshal.restore(Marshal.dump(object))
-  end       
-  
+  end
+
   def accountabilities_for(need)
     (0...Need::MAXIMUM_POLICY_DEPARTMENTS).map { |i| need.accountabilities.all[i] || need.accountabilities.build }
-  end 
-                                                                   
+  end
+
 end

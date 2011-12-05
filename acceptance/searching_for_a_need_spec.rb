@@ -49,18 +49,18 @@ describe 'Searching for a need' do
       page.should have_no_content 'Get a new driving license'
     end
   end
-  
+
   it 'allows filtering by facets' do
     create_need "Get a new passport", tags: "red"
     create_need "Learn to drive", tags: "blue"
-    
+
     click_link "View all needs"
     click_link "red"
     within '#needs-table' do
       page.should have_content 'Get a new passport'
       page.should have_no_content 'Learn to drive'
     end
-    
+
     click_link "View all needs"
     click_link "blue"
     within '#needs-table' do
@@ -73,7 +73,7 @@ describe 'Searching for a need' do
     create_need "Get a new passport", tags: "red,blue"
     create_need "Learn to drive", tags: "blue"
     create_need "Learn to walk", tags: "red"
-    
+
     click_link "View all needs"
     click_link "blue"
     click_link "red"
@@ -100,7 +100,7 @@ describe 'Searching for a need' do
       page.should have_content 'Need 21'
     end
   end
-  
+
   it 'allows sorting, defaults to Title asc' do
     create_need "Apples"
     create_need "Carrots"
@@ -115,5 +115,5 @@ describe 'Searching for a need' do
       page.text.should =~ /Carrots.*Bananas.*Apples/m
     end
   end
-  
+
 end

@@ -10,7 +10,7 @@ describe SolrIndexer do
 
     solr_client = stub_everything
     solr_client.expects(:update!).with(document, :commitWithin => 5.minutes*1000)
-    
+
     indexer = SolrIndexer.new(solr_client, need)
     indexer.execute
   end
@@ -65,7 +65,7 @@ describe SolrNeedPresenter do
       doc.add_field "updated_at", need.updated_at.to_s
       doc.add_field "decision_made_at", need.decision_made_at
       doc.add_field "formatting_decision_made_at", need.formatting_decision_made_at.to_s
-      
+
       doc.add_field "rails_env", Rails.env
     end
     assert_equal expected_document.xml, SolrNeedPresenter.new(need).to_solr_document.xml

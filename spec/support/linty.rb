@@ -12,4 +12,3 @@ shared_examples_for "ActiveModel" do
     subject
   end
 end
-

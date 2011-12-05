@@ -17,7 +17,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
     $solr.delete_by_query("rails_env:#{Rails.env}")
   end
-  
+
   config.after :each do
     DatabaseCleaner.clean
   end

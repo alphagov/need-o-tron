@@ -1,9 +1,9 @@
 class Need < ActiveRecord::Base
-  class_attribute :index_command   
-  
+  class_attribute :index_command
+
   MAXIMUM_POLICY_DEPARTMENTS = 5
   MAXIMUM_FACT_CHECKERS = 5
-  
+
   FORMAT_ASSIGNED = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
   IN_PROGRESS = "in-progress"
@@ -23,15 +23,15 @@ class Need < ActiveRecord::Base
   has_many :justifications
   has_many :existing_services
   has_many :directgov_links
-  has_many :fact_checkers     
+  has_many :fact_checkers
   #has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
-  
-  belongs_to :writing_department                                            
 
-  has_many :accountabilities                                             
+  belongs_to :writing_department
+
+  has_many :accountabilities
   has_many :policy_departments, :through => :accountabilities, :source => :department
-                                                                            
-  accepts_nested_attributes_for :accountabilities, :reject_if => :all_blank 
+
+  accepts_nested_attributes_for :accountabilities, :reject_if => :all_blank
   accepts_nested_attributes_for :fact_checkers, :reject_if => :all_blank
 
   scope :undecided, where(:decision_made_at => nil)
@@ -44,7 +44,7 @@ class Need < ActiveRecord::Base
 
   before_save :record_decision_info, :if => :reason_for_decision_changed?
   before_save :record_formatting_decision_info, :if => :reason_for_formatting_decision_changed?
-  before_save :set_creator, :on => :create     
+  before_save :set_creator, :on => :create
   before_validation :delete_empty_fact_checkers, :delete_empty_accountabilities
   after_save :update_search_index
 
@@ -69,13 +69,13 @@ class Need < ActiveRecord::Base
     indexable = SolrNeedPresenter.new(self)
     SolrIndexer.new($solr, indexable).execute
   end
-  
+
   def self.index_all
     Need.find_each do |need|
       need.update_search_index
     end
   end
-  
+
   def record_decision_info
     if self.decision_made_at.nil? and self.reason_for_decision.present?
       self.decision_made_at = Time.now
@@ -90,13 +90,13 @@ class Need < ActiveRecord::Base
     end
   end
 
-  def delete_empty_accountabilities                 
+  def delete_empty_accountabilities
     accountabilities.each do |ac|
       ac.mark_for_destruction if ac.department_id.blank?
     end
   end
-          
-  def delete_empty_fact_checkers                 
+
+  def delete_empty_fact_checkers
     fact_checkers.each do |fc|
       fc.mark_for_destruction if fc.email.blank?
     end
@@ -105,7 +105,7 @@ class Need < ActiveRecord::Base
   def format_assigned?
     [FORMAT_ASSIGNED, IN_PROGRESS, DONE, BIN].include?(status)
   end
-  
+
   def being_worked_on?
     [FORMAT_ASSIGNED, IN_PROGRESS, DONE].include?(status)
   end
@@ -157,7 +157,7 @@ class Need < ActiveRecord::Base
   def fact_checkers_for_csv
     current_fact_checker_emails.join(', ')
   end
-          
+
   def add_fact_checker_with_email(email)
     fact_checkers.build(contact: Contact.find_or_initialize_by_email(email))
   end

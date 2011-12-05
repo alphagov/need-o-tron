@@ -1,15 +1,15 @@
-<% content_for(:title) {                                      
-	if @filters.present? or params[:query]     
-		title_filters = @filters.map{ |field,val| t("field.long.#{field}").downcase + " '#{val.join(', ')}'" }.join(' and ')
-		if params[:query]
-			"Search results for '#{params[:query]}'" + ( @filters.present? ? " with #{title_filters}" : "")
-		else
-			"Needs with #{title_filters}"
-		end
-	else
-   		"All needs"
-	end
-	
+<% content_for(:title) {
+  if @filters.present? or params[:query]
+    title_filters = @filters.map{ |field,val| t("field.long.#{field}").downcase + " '#{val.join(', ')}'" }.join(' and ')
+    if params[:query]
+      "Search results for '#{params[:query]}'" + ( @filters.present? ? " with #{title_filters}" : "")
+    else
+      "Needs with #{title_filters}"
+    end
+  else
+       "All needs"
+  end
+
 } %>
 <% if @search && (params[:query] || params[:filter]) %>
 <div class="results cf">
@@ -36,15 +36,15 @@
           </div>
         <% end %>
       </dd>
-    <% end %> 
-	<% if params[:query] %>
-	  <dd>
+    <% end %>
+  <% if params[:query] %>
+    <dd>
         <div class="btn">
-		   <%= link_to "×", search_link_with_removed_filter(params.reject{|key, value| key >= 'query'}, @filters, :query => params[:query]), class: 'close' %>
+       <%= link_to "×", search_link_with_removed_filter(params.reject{|key, value| key >= 'query'}, @filters, :query => params[:query]), class: 'close' %>
            <p><strong>Search:</strong> <%= params[:query] %></p>
          </div>
-      </dd>  
-	<% end %>
+      </dd>
+  <% end %>
   </dl>
 </div>
 <% end %>

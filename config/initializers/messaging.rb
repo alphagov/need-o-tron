@@ -9,8 +9,8 @@ require 'messenger'
 ActiveRecord::Base.marples_client_name = 'need-o-tron'
 ActiveRecord::Base.marples_logger = Rails.logger
 
-if Rails.env.test?                                                     
-  NeedStateListener.client = Marples::NullTransport.instance 
+if Rails.env.test?
+  NeedStateListener.client = Marples::NullTransport.instance
   ActiveRecord::Base.marples_transport = Marples::NullTransport.instance
   Messenger.transport = Marples::NullTransport.instance
 else
@@ -21,7 +21,7 @@ else
     PhusionPassenger.on_event(:starting_worker_process) do |forked|
       if forked
         Messenger.transport = Stomp::Client.new stomp_url
-        NeedStateListener.client = Stomp::Client.new stomp_url    
+        NeedStateListener.client = Stomp::Client.new stomp_url
         ActiveRecord::Base.marples_transport = Stomp::Client.new stomp_url
       end
     end

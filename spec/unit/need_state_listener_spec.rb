@@ -5,7 +5,7 @@ describe NeedStateListener do
     stub_request(:get, %r{http://panopticon.*/artefacts/.*\.js}).
       to_return(:status => 200, :body => metadata.to_json)
   end
-  
+
   it 'marks a need as done and records the public url when a message received' do
     need = FactoryGirl.create(:need)
     panopticon_will_respond_with(need_id: need.id, slug: 'my_slug')

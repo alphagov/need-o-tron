@@ -4,15 +4,15 @@ class Panopticon
   def initialize(panopticon_id)
     @panopticon_id = panopticon_id
   end
-  
+
   def need_id
     attributes['need_id']
   end
-  
+
   def public_url
     Plek.current.find('frontend') + '/' + attributes['slug']
   end
-  
+
   def self.find(panopticon_id)
     new(panopticon_id)
   end

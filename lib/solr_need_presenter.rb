@@ -2,7 +2,7 @@ class SolrNeedPresenter
   def initialize(need)
     @need = need
   end
-  
+
   def to_solr_document
     DelSolr::Document.new.tap do |doc|
       # Full text indexed fields
@@ -25,7 +25,7 @@ class SolrNeedPresenter
         date = @need.send(date_field.to_sym)
         doc.add_field date_field, date.to_s if date
       end
-      
+
       # Facilitate clearing test data
       doc.add_field "rails_env", Rails.env
 

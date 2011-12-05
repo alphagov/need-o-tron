@@ -31,7 +31,7 @@ describe Import do
       @need.priority.should == 3
     end
   end
-  
+
   describe "importing fact checkers" do
     pending("not maintaining csv import for now")
     describe "reporting which Fact Checkers to remove or add" do

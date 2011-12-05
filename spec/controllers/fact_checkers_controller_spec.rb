@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe FactCheckersController do
   describe "GET :search" do
-    before(:each) do                              
+    before(:each) do
       @need = Need.create
       controller.stubs(:authenticate_user!).returns(true)
       controller.stubs(:user_signed_in?).returns(false)
