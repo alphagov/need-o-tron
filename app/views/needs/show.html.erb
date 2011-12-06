@@ -132,13 +132,8 @@
 
   <% if current_user.is_admin && @need.format_assigned? %>
   <div class="need-section">
-    <% # Temporary fix till we sort out LGSL code stuff %>
-    <% unless @need.kind_id == 6 %>
-      <p><%= start_work_link @need %></p>
-      <p><%= assign_work_link @need %></p>
-    <% else %>
-      <p><strong>You can't currently start work on Local Authority Transactions - sorry!</strong></p>
-    <% end %>
+    <p><%= start_work_link @need %></p>
+    <p><%= assign_work_link @need %></p>
     <p><%= link_to 'Print label', print_need_path(@need), :class => 'button', :target => '_new' %></p>
   </div>
   <% end %>
