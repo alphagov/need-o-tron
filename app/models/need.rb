@@ -54,9 +54,15 @@ class Need < ActiveRecord::Base
     self.creator = Thread.current[:current_user]
   end
 
+  attr_writer :indexer
+
+  def indexer
+    @indexer ||= SolrIndexer
+  end
+
   def update_search_index
     indexable = SolrNeedPresenter.new(self)
-    SolrIndexer.new($solr, indexable).execute
+    indexer.new($solr, indexable).execute
   end
 
   def self.index_all
