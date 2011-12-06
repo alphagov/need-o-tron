@@ -24,7 +24,6 @@ class Need < ActiveRecord::Base
   has_many :existing_services
   has_many :directgov_links
   has_many :fact_checkers
-  #has_many :fact_check_contacts, :through => :fact_checkers, :source => :contact
 
   belongs_to :writing_department
 
@@ -40,7 +39,6 @@ class Need < ActiveRecord::Base
   default_scope order('priority, title')
 
   accepts_nested_attributes_for :justifications, :reject_if => :all_blank
-  # acts_as_taggable
 
   before_save :record_decision_info, :if => :reason_for_decision_changed?
   before_save :record_formatting_decision_info, :if => :reason_for_formatting_decision_changed?
@@ -51,15 +49,6 @@ class Need < ActiveRecord::Base
   validate :status, :in => STATUSES
   validates_presence_of :priority, :if => proc { |a| a.status == FORMAT_ASSIGNED }
   validates_presence_of :url, :if => proc { |a| a.status == 'done' }
-
-  # validates_presence_of :reason_for_decision, :if => proc { |a| a.status == FORMAT_ASSIGNED || a.status == BIN }
-  # validate :has_evidence_or_precendence, :if => proc { |a| a.status == READY_FOR_REVIEW }
-  #
-  # def has_evidence_or_precendence
-  #   unless existing_services.count > 0 or justifications.count > 0
-  #     errors[:base] << "You must include evidence or an existing service to submit a need for review"
-  #   end
-  # end
 
   def set_creator
     self.creator = Thread.current[:current_user]
