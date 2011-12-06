@@ -9,7 +9,7 @@ require 'messenger'
 ActiveRecord::Base.marples_client_name = 'need-o-tron'
 ActiveRecord::Base.marples_logger = Rails.logger
 
-if Rails.env.test?
+if Rails.env.test? or ENV['NO_MESSENGER'].present?
   NeedStateListener.client = Marples::NullTransport.instance
   ActiveRecord::Base.marples_transport = Marples::NullTransport.instance
   Messenger.transport = Marples::NullTransport.instance
