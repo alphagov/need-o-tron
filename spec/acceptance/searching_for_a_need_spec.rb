@@ -40,7 +40,7 @@ describe 'Searching for a need' do
   end
 
   it 'works when searching for a word from the Writing department field' do
-    create_need "Get a new passport", edit_form_fields: {"Writing dept" => "Ministry of Truth"}
+    create_need "Get a new passport", edit_form_fields: {"Writing team" => "Ministry of Truth"}
     create_need "Get a new driving licence"
     click_link "View all needs"
     search_for 'Truth'
