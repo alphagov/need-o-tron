@@ -29,23 +29,36 @@ class NeedStateListener
     api = GdsApi::Panopticon.new(Plek.current.environment)
     api.artefact_for_slug(id_or_slug)
   end
+  
+  def act_on_changed_publication(publication, new_status)
+    artefact = load_artefact(publication['panopticon_id'])
+    need = Need.find(artefact.need_id)
+    need.update_attributes!(status: new_status, url: public_url(artefact))
+  rescue => e
+    logger.error("Unable to process message #{publication}")
+    logger.error [ e.message, e.backtrace ].flatten.join("\n")
+  end
+
+  def act_on_published(publication)
+    act_on_changed_publication(publication, Need::DONE)
+  end
+  
+  def act_on_created(publication)
+    act_on_changed_publication(publication, Need::IN_PROGRESS)
+  end
+
+  def act_on_deleted(artefact)
+    need = Need.find artefact['need_id']
+    need.update_attributes!(status: Need::FORMAT_ASSIGNED)
+  rescue => e
+    logger.error("Unable to process message #{artefact}")
+    logger.error [ e.message, e.backtrace ].flatten.join("\n")
+  end
 
   def listen_on_published
     @marples.when 'publisher', '*', 'published' do |publication|
       logger.info "Found publication #{publication}"
-      begin
-        logger.info("Processing artefact #{publication['panopticon_id']}")
-        artefact = load_artefact(publication['panopticon_id'])
-
-        logger.info("Getting need ID from Panopticon")
-        need = Need.find(artefact.need_id)
-        logger.info("Marking need #{need.id} as done")
-        need.update_attributes!(status: Need::DONE, url: public_url(artefact))
-        logger.info("Marked as done")
-      rescue => e
-        logger.error("Unable to process message #{publication}")
-        logger.error [ e.message, e.backtrace ].flatten.join("\n")
-      end
+      act_on_published(publication)
       logger.info "Finished processing message #{publication}"
     end
     logger.info "Listening for published objects in Publisher"
@@ -54,19 +67,7 @@ class NeedStateListener
   def listen_on_created
     @marples.when 'publisher', '*', 'created' do |publication|
       logger.info "Found publication #{publication}"
-      begin
-        logger.info("Processing artefact #{publication['panopticon_id']}")
-        artefact = load_artefact(publication['panopticon_id'])
-
-        logger.info("Getting need ID from Panopticon")
-        need = Need.find(artefact.need_id)
-        logger.info("Marking need #{need.id} as in progress")
-        need.update_attributes!(status: Need::IN_PROGRESS, url: public_url(artefact))
-        logger.info("Marked as in progress")
-      rescue => e
-        logger.error("Unable to process message #{publication}")
-        logger.error [ e.message, e.backtrace ].flatten.join("\n")
-      end
+      act_on_created(publication)
       logger.info "Finished processing message #{publication}"
     end
     logger.info "Listening for created objects in Publisher"
@@ -75,15 +76,7 @@ class NeedStateListener
   def listen_on_deleted
     @marples.when 'panopticon', 'artefacts', 'destroyed' do |artefact|
       logger.info "Artefact #{artefact} was deleted in Panopticon"
-      begin
-        need = Need.find artefact['need_id']
-        logger.info("Marking need #{need.id} as format assigned")
-        need.update_attributes!(status: Need::FORMAT_ASSIGNED)
-        logger.info("Marked as format assigned")
-      rescue => e
-        logger.error("Unable to process message #{artefact}")
-        logger.error [ e.message, e.backtrace ].flatten.join("\n")
-      end
+      act_on_deleted(publication)
       logger.info "Finished processing message #{artefact}"
     end
     logger.info "Listening for destroyed objects in Publisher"
