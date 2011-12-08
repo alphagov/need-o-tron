@@ -1,3 +1,5 @@
+require 'gds_api/panopticon'
+
 class NeedStateListener
 
   cattr_accessor :client, :logger
@@ -19,16 +21,26 @@ class NeedStateListener
     @marples.join
   end
 
+  def public_url(artefact)
+    Plek.current.find('frontend') + '/' + artefact.slug
+  end
+
+  def load_artefact(id_or_slug)
+    api = GdsApi::Panopticon.new(Plek.current.environment)
+    api.artefact_for_slug(id_or_slug)
+  end
+
   def listen_on_published
     @marples.when 'publisher', '*', 'published' do |publication|
       logger.info "Found publication #{publication}"
       begin
         logger.info("Processing artefact #{publication['panopticon_id']}")
-        panopticon = Panopticon.find(publication['panopticon_id'])
+        artefact = load_artefact(publication['panopticon_id'])
+
         logger.info("Getting need ID from Panopticon")
-        need = Need.find(panopticon.need_id)
+        need = Need.find(artefact.need_id)
         logger.info("Marking need #{need.id} as done")
-        need.update_attributes!(status: Need::DONE, url: panopticon.public_url)
+        need.update_attributes!(status: Need::DONE, url: public_url(artefact))
         logger.info("Marked as done")
       rescue => e
         logger.error("Unable to process message #{publication}")
@@ -44,11 +56,12 @@ class NeedStateListener
       logger.info "Found publication #{publication}"
       begin
         logger.info("Processing artefact #{publication['panopticon_id']}")
-        panopticon = Panopticon.find(publication['panopticon_id'])
+        artefact = load_artefact(publication['panopticon_id'])
+
         logger.info("Getting need ID from Panopticon")
-        need = Need.find(panopticon.need_id)
+        need = Need.find(artefact.need_id)
         logger.info("Marking need #{need.id} as in progress")
-        need.update_attributes!(status: Need::IN_PROGRESS, url: panopticon.public_url)
+        need.update_attributes!(status: Need::IN_PROGRESS, url: public_url(artefact))
         logger.info("Marked as in progress")
       rescue => e
         logger.error("Unable to process message #{publication}")
