@@ -95,7 +95,7 @@ GEM
     ffi (1.0.9)
     formtastic (2.0.2)
       rails (~> 3.0)
-    gds-api-adapters (0.0.5)
+    gds-api-adapters (0.0.6)
       plek
     has_scope (0.5.1)
     hike (1.2.1)
@@ -249,7 +249,7 @@ DEPENDENCIES
   factory_girl (= 2.1.2)
   factory_girl_rails (= 1.2.0)
   formtastic
-  gds-api-adapters (~> 0.0.5)
+  gds-api-adapters (~> 0.0.6)
   gds-sso!
   has_scope
   inherited_resources

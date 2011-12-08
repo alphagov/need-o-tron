@@ -37,4 +37,5 @@ RSpec.configure do |config|
 
   # include cutsom matchers
   config.include(SetMatchers)
+  config.include(GdsApi::TestHelpers::Panopticon)
 end

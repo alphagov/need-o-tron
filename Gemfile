@@ -15,7 +15,7 @@ gem 'mysql2'
 #gem 'activerecord-mysql2-adapter'
 gem 'rdiscount'
 
-gem 'gds-api-adapters', '~> 0.0.5'
+gem 'gds-api-adapters', '~> 0.0.6'
 
 if ENV['BUNDLE_ENV'] == 'DEV'
   gem "gds-sso", :path => '../gds-sso'
