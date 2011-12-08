@@ -1,22 +1,19 @@
 require 'spec_helper'
 
 describe NeedStateListener do
-  def panopticon_will_respond_with(metadata)
-    stub_request(:get, %r{http://panopticon.*/artefacts/.*\.js}).
-      to_return(:status => 200, :body => metadata.to_json)
+  before(:each) do
+    Need.any_instance.stubs(:update_search_index).returns(true)
+    stomp_client = stub(join: nil, close: nil, acknowledge: nil, subscribe: nil)
+    NeedStateListener.client = stomp_client
   end
 
   it 'marks a need as done and records the public url when a message received' do
-    need = FactoryGirl.create(:need)
-    panopticon_will_respond_with(need_id: need.id, slug: 'my_slug')
-    need_satisfied_message = stub(
-      body: {answer:{panopticon_id: "any_old_thing"}}.to_xml,
-      headers: {'message-id' => '123'}
-    )
-    stomp_client = stub(join: nil, close: nil, acknowledge: nil, subscribe: nil)
-    stomp_client.expects(:subscribe).yields(need_satisfied_message)
-    NeedStateListener.client = stomp_client
-    NeedStateListener.new.listen
+    need = FactoryGirl.create(:need, :indexer => NullIndexer)
+    panopticon_has_metadata('id' => 12345, 'need_id' => need.id, 'slug' => 'my_slug')
+
+    listener = NeedStateListener.new
+    listener.act_on_published({'panopticon_id' => 12345})
+    
     need.reload
     need.should be_done
     need.url.should =~ %r{/my_slug$}
