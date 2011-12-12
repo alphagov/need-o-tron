@@ -27,6 +27,7 @@ class NeedStateListener
 
   def load_artefact(id_or_slug)
     api = GdsApi::Panopticon.new(Plek.current.environment)
+    Rails.logger.warn "NSL TEST: #{Plek.current.environment} => #{api.send(:endpoint)}"
     api.artefact_for_slug(id_or_slug)
   end
   
@@ -34,9 +35,9 @@ class NeedStateListener
     artefact = load_artefact(publication['panopticon_id'])
     need = Need.find(artefact.need_id)
     need.update_attributes!(status: new_status, url: public_url(artefact))
-  # rescue => e
-  #   logger.error("Unable to process message #{publication}")
-  #   logger.error [ e.message, e.backtrace ].flatten.join("\n")
+  rescue => e
+    logger.error("Unable to process message #{publication}")
+    logger.error [ e.message, e.backtrace ].flatten.join("\n")
   end
 
   def act_on_published(publication)
