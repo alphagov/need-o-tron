@@ -25,7 +25,7 @@ describe NeedsController do
       it "should show each need in JSON" do
         get :show, format: 'json', id: @json_need.id
 
-        response.body.should == { need: { title: "Test", status: "new", url: 'http://test.alphagov.co.uk/', description: "Test", notes: "Testing", tag_list: nil, kind: 'none', writing_team: { id: 1, name: 'GDS' }, fact_checkers: [ { fact_checker: { email: "bob@alphagov.co.uk" } } ], policy_owners: [ { policy_owner: { id: 1, name: "GDS" } } ] }}.to_json
+        response.body.should == { need: { title: "Test", status: "new", url: 'http://test.alphagov.co.uk/', description: "Test", notes: "Testing", tag_list: nil, kind: 'none', writing_team: { id: WritingDepartment.first.id, name: 'GDS' }, fact_checkers: [ { fact_checker: { email: "bob@alphagov.co.uk" } } ], policy_owners: [ { policy_owner: { id: 1, name: "GDS" } } ] }}.to_json
       end
 
     end
