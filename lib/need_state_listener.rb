@@ -27,7 +27,6 @@ class NeedStateListener
 
   def load_artefact(id_or_slug)
     api = GdsApi::Panopticon.new(Plek.current.environment)
-    Rails.logger.warn "NSL TEST: #{Plek.current.environment} => #{api.send(:endpoint)}"
     api.artefact_for_slug(id_or_slug)
   end
   
