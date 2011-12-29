@@ -6,7 +6,7 @@ class ReportMailer < ActionMailer::Base
   def daily_analytics(daily, weekly, top_ten_pages)
     @daily = daily
     @weekly = weekly
-    @top_ten_pages = top_ten_table(top_ten_pages)
+    @top_ten_pages = top_ten_pages
 
     case Plek.current.environment
     when 'preview'

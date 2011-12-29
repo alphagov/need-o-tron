@@ -6,4 +6,10 @@ NEW VISITS LAST 7 DAYS: <%= @weekly[:new_visits] %> (<%= @weekly[:new_visits_cha
 
 TOP PAGES YESTERDAY
 
-<%= @top_ten_pages %>
+  Title (page views / unique page views / average time)
+
+<% @top_ten_pages.each do |page| %>
+  <%= page.page_title %> (<%= page.pageviews %> / <%= page.unique_pageviews %> / <%= page.avg_time_on_page.to_i %>)
+  <%= "https://www.gov.uk#{page.page_path}" %>
+
+<% end %>
