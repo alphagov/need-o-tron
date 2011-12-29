@@ -99,7 +99,8 @@ GEM
     garb (0.9.1)
       activesupport (>= 2.2.0)
       crack (>= 0.1.6)
-    gds-api-adapters (0.0.7)
+    gds-api-adapters (0.0.15)
+      null_logger
       plek
     has_scope (0.5.1)
     hike (1.2.1)
@@ -258,7 +259,7 @@ DEPENDENCIES
   factory_girl_rails (= 1.2.0)
   formtastic
   garb
-  gds-api-adapters (~> 0.0.7x)
+  gds-api-adapters (~> 0.0.15)
   gds-sso!
   has_scope
   inherited_resources
