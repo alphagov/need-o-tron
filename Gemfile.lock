@@ -141,7 +141,7 @@ GEM
       faraday (~> 0.6.1)
       multi_json (>= 0.0.5)
     pethau (0.0.3)
-    plek (0.1.8)
+    plek (0.1.14)
       builder
     polyglot (0.3.2)
     rabl (0.5.1)
