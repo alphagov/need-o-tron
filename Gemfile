@@ -15,7 +15,7 @@ gem 'mysql2'
 #gem 'activerecord-mysql2-adapter'
 gem 'rdiscount'
 
-gem 'gds-api-adapters', '~> 0.0.7'
+gem 'gds-api-adapters', '~> 0.0.7x'
 
 if ENV['BUNDLE_ENV'] == 'DEV'
   gem "gds-sso", :path => '../gds-sso'
@@ -48,6 +48,12 @@ group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
+end
+
+group :reporting do
+  gem 'garb'
+  gem 'oauth'
+  gem 'terminal-table'
 end
 
 gem 'jquery-rails'

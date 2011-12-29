@@ -1,0 +1,9 @@
+UNIQUE VISITS YESTERDAY: <%= @daily[:visitors] %> (<%= @daily[:visitors_change] %>%)
+NEW VISITS YESTERDAY: <%= @daily[:new_visits] %> (<%= @daily[:new_visits_change] %>%)
+
+UNIQUE VISITS LAST 7 DAYS: <%= @weekly[:visitors] %> (<%= @weekly[:visitors_change] %>%)
+NEW VISITS LAST 7 DAYS: <%= @weekly[:new_visits] %> (<%= @weekly[:new_visits_change] %>%)
+
+TOP PAGES YESTERDAY
+
+<%= @top_ten_pages %>
