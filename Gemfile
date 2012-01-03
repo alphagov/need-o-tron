@@ -9,12 +9,11 @@ gem 'rack', '1.3.5'
 gem 'rake', '0.9.2'
 
 gem 'sqlite3'
-#gem 'activerecord-sqlite3-adapter'
 
 gem 'mysql2'
-#gem 'activerecord-mysql2-adapter'
 gem 'rdiscount'
 
+gem 'aws-ses', :require => 'aws/ses'
 gem 'gds-api-adapters', '~> 0.0.15'
 
 if ENV['BUNDLE_ENV'] == 'DEV'
