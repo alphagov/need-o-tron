@@ -10,6 +10,7 @@ gem 'rake', '0.9.2'
 
 gem 'sqlite3'
 
+gem 'gelf'
 gem 'mysql2'
 gem 'rdiscount'
 
