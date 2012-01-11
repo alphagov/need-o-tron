@@ -29,30 +29,37 @@ end
 
 class AnalyticsInterface
 
-  attr_accessor :profile
+  attr_accessor :profile, :property
   
   def initialize(analytics_id)
     establish_garb_session
+    self.property = Garb::Management::WebProperty.all.detect { |p| p.id == analytics_id }
     self.profile = Garb::Management::Profile.all.detect { |p| p.web_property_id == analytics_id }
   end
   
   def weekly_stats
-    first_period = overview(7.days.ago, Date.today)
-    second_period = overview(14.days.ago, 7.days.ago)
+    yesterday = Date.yesterday
+    start_of_the_week = yesterday - 7.days
+    start_of_previous_week = start_of_the_week - 7.days
+
+    first_period = overview(start_of_the_week, yesterday)
+    second_period = overview(start_of_previous_week, start_of_the_week)
     describe_period(first_period, second_period, "this week", "last week")
   end
 
   def daily_stats
-    first_period = overview(1.days.ago, Date.today)
-    second_period = overview(2.days.ago, 1.days.ago)
+    yesterday = Date.yesterday
+    day_before_yesterday = Date.yesterday - 1.day
+
+    first_period = overview(yesterday, yesterday)
+    second_period = overview(day_before_yesterday, day_before_yesterday)
     describe_period(first_period, second_period, "yesterday", "the day before")
   end
 
   def main_visits_data
     profile.main_visits(
-      :filters => { :page_path.does_not_contain => 'admin' },
-      :start_date => 2.days.ago,
-      :end_date => 1.day.ago,
+      :start_date => Date.yesterday,
+      :end_date => Date.yesterday,
       :limit => 10,
       :sort => :unique_pageviews.desc
     )
