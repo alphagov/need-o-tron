@@ -92,9 +92,8 @@ private
       :access_token_path => '/accounts/OAuthGetAccessToken',
       :authorize_path => '/accounts/OAuthAuthorizeToken'
     })
-    token = '1/3kKwcr3qSDFFnDkNurMa0wS6RJpxZB-zHJzEDiiWu-o'
-    secret = 'aJMITPFTF8UyyDnzCOoJJFCH'
-    OAuth::AccessToken.new(consumer, token, secret)
+
+    OAuth::AccessToken.new(consumer, GOOGLE_OAUTH_TOKEN, GOOGLE_OAUTH_SECRET)
   end
   
   def establish_garb_session
