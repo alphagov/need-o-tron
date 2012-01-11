@@ -51,7 +51,7 @@ group :assets do
 end
 
 group :reporting do
-  gem 'garb'
+  gem 'garb', '~> 0.9.1'
   gem 'oauth'
   gem 'terminal-table'
   gem 'whenever', :require => false

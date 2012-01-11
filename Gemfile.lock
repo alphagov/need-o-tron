@@ -269,7 +269,7 @@ DEPENDENCIES
   factory_girl (= 2.1.2)
   factory_girl_rails (= 1.2.0)
   formtastic
-  garb
+  garb (~> 0.9.1)
   gds-api-adapters (~> 0.0.15)
   gds-sso!
   gelf
