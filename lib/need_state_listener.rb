@@ -1,7 +1,7 @@
-require 'gds_api/panopticon'
+require 'gds_api/helpers'
 
 class NeedStateListener
-
+  include GdsApi::Helpers
   cattr_accessor :client, :logger
 
   def initialize
@@ -26,8 +26,7 @@ class NeedStateListener
   end
 
   def load_artefact(id_or_slug)
-    api = GdsApi::Panopticon.new(Plek.current.environment)
-    api.artefact_for_slug(id_or_slug)
+    panopticon_api.artefact_for_slug(id_or_slug)
   end
   
   def act_on_changed_publication(publication, new_status)
