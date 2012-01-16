@@ -8,6 +8,8 @@ gem 'rails', '~> 3.1.0'
 gem 'rack', '1.3.5'
 gem 'rake', '0.9.2'
 
+gem 'gds-warmup-controller'
+
 gem 'sqlite3'
 
 gem 'gelf'
