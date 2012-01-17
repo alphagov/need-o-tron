@@ -11,11 +11,6 @@
         <p id="logo"><%= link_to 'Need-O-Tron', root_path %>. <small>Hello <%= current_user %>, you&rsquo;re looking lovely today.</small></p>
 
         <div role="navigation">
-          <ul id="admin-options">
-            <%- unless user_signed_in? or controller_name == 'auth_start' %>
-              <li><%# link_to "Sign in", gds_login_path %></li>
-            <% end -%>
-          </ul>
           <% if user_signed_in? %>
           <ul class="navigation">
             <li><%= link_to 'View all needs', search_path %></li>
