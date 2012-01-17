@@ -22,13 +22,13 @@ gem 'gds-api-adapters', '~> 0.0.15'
 if ENV['BUNDLE_ENV'] == 'DEV'
   gem "gds-sso", :path => '../gds-sso'
 else
-  gem "gds-sso", :git => 'git@github.com:alphagov/gds-sso.git'
+  gem "gds-sso", '~> 0.4.1'
 end
 
 gem 'carrierwave'
 gem 'delsolr', :git => 'https://github.com/alphagov/delsolr.git',
   :ref => '0e78228be3091bc2240aa0ba0b5c60791cad07c9'
-     
+
 gem 'rabl'
 gem 'formtastic'
 gem 'inherited_resources'
