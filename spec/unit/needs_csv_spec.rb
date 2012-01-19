@@ -10,11 +10,7 @@ describe NeedsCsv do
   it "should have a header row" do
     csv = NeedsCsv.new([], Time.now).to_csv
     data = CSV.parse(csv)
-    data[0].should == [
-      "Id", "Lead department", "Priority", "Title", "Format", "Tags",
-      "Context", "Status", "Updated at", "Statutory", "Fact checker",
-      "Writing dept", "Interaction", "Related needs"
-    ]
+    data[0][0].should == "Id"
   end
 
   it "should convert writing department to a string" do
