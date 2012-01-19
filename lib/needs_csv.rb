@@ -4,12 +4,15 @@ require 'csv'
 class NeedsCsv < CsvRenderer
   def to_csv
     CSV.generate do |csv|
-      csv << ["Id", "Lead department", "Priority", "Title", "Format", "Tags", "Context", "Status", "Updated at", "Statutory", "Fact checker", "Writing dept", "Interaction", "Related needs"]
+      csv << ["Id", "Lead department", "Priority", "Title", "Format", "Tags", "Context", "Status", "Updated at", "Statutory", "Fact checker", "Writing dept", "Interaction", "Related needs", "Reason for formatting decision", "Reason for decision", "DG Links", "Existing Services"]
       @data.each do |need|
         csv << [need.id, need.accountabilities_for_csv, need.named_priority, need.title, need.kind.to_s, need.tag_list,
                 need.description, need.status, need.updated_at.to_formatted_s(:db),
                 need.statutory, need.fact_checkers_for_csv, need.writing_department.to_s,
-                need.interaction, need.related_needs]
+                need.interaction, need.related_needs, need.reason_for_formatting_decision,
+                need.reason_for_decision, need.directgov_links.collect(&:directgov_id).join(','),
+                need.existing_services.collect(&:url).join(',')
+              ]
       end
     end
   end
