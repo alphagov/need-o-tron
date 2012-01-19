@@ -149,10 +149,6 @@ class Need < ActiveRecord::Base
     fact_checkers.collect { |f| f.email }
   end
 
-  def fact_checkers_for_csv
-    current_fact_checker_emails.join(', ')
-  end
-
   def add_fact_checker_with_email(email)
     fact_checkers.build(contact: Contact.find_or_initialize_by_email(email))
   end
@@ -165,10 +161,6 @@ class Need < ActiveRecord::Base
 
   def current_accountability_names
     accountabilities.collect { |a| a.department.name }
-  end
-
-  def accountabilities_for_csv
-    current_accountability_names.join(', ')
   end
 
   def add_accountability_with_name(name)

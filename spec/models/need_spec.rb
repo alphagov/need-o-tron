@@ -66,13 +66,6 @@ describe Need do
       end
     end
 
-    it "can report fact checkers so they can be included in a CSV" do
-      @need.fact_checkers.create(email: 'matt@alphagov.co.uk')
-      @need.fact_checkers.create(email: 'ben@alphagov.co.uk')
-
-      @need.fact_checkers_for_csv.should == "matt@alphagov.co.uk, ben@alphagov.co.uk"
-    end
-
     describe "handling accountability updates" do
       it "can return all current Accountabilities' Department names" do
         @need.accountabilities.build(department: Department.new(name: 'HM Treasury'))
@@ -95,13 +88,6 @@ describe Need do
         @need.accountabilities.length.should == 1
         @need.accountabilities.first.should == a_to_remain
       end
-    end
-
-    it "can report accountabilities so they can be included in a CSV" do
-      @need.accountabilities.build(department: Department.new(name: 'HM Treasury'))
-      @need.accountabilities.build(department: Department.new(name: 'DoSAC'))
-
-      @need.accountabilities_for_csv.should == "HM Treasury, DoSAC"
     end
 
     describe "priority" do
