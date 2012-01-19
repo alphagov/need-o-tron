@@ -115,11 +115,11 @@
       </tr>
       <tr>
         <th scope="row">Policy Owner</th>
-        <td><%= @need.accountabilities_for_csv rescue '' %></td>
+        <td><%= @need.current_accountability_names.join(', ') rescue '' %></td>
       </tr>
       <tr>
         <th scope="row">Fact Checkers</th>
-        <td><%= @need.fact_checkers_for_csv %></td>
+        <td><%= @need.current_fact_checker_emails.join(', ') %></td>
       </tr>
       <% if @need.writing_department %>
       <tr>

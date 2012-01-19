@@ -19,7 +19,7 @@ describe NeedsCsv do
     @need.fact_checkers.create(email: 'matt@alphagov.co.uk')
     @need.fact_checkers.create(email: 'ben@alphagov.co.uk')
 
-    csv = NeedsCsv.new([])
+    csv = NeedsCsv.new([], Time.now)
     csv.fact_checkers(@need) == "matt@alphagov.co.uk, ben@alphagov.co.uk"
   end
 
