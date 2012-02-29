@@ -12,6 +12,10 @@ need ruby and bundler installed. It should then just be a case of running:
 rake db:setup
 rails server`
 
+To make it work properly you'll need to be running a correctly configured
+instance of solr. We're working on opening up more of our configuration files
+but for now the best way to get the correct solr schema is via [this gist](https://gist.github.com/1942409)
+
 ## Authentication 
 
 Need-o-tron designed to work as part of a suite of applications, authenticating 
