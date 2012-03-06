@@ -65,7 +65,7 @@ class Import
 
     def self.writing_dept(need, row)
       dept_name = row['Writing dept'].blank? ? 'GDS' : row['Writing dept']
-      the_dept = Department.find_or_create_by_name(dept_name)
+      the_dept = WritingDepartment.find_or_create_by_name(dept_name)
       need.writing_department = the_dept
     end
 
