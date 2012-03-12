@@ -8,7 +8,7 @@
   <body>
     <div id="container">
       <div id="app-header">
-        <p id="logo"><%= link_to 'Need-O-Tron', root_path %>. <small>Hello <%= current_user %>, you&rsquo;re looking lovely today.</small></p>
+        <p id="logo"><%= link_to 'Need-O-Tron', root_path %>. <small>Hello <%= current_user.name.present? ? current_user.name : current_user.email %>, you&rsquo;re looking lovely today.</small></p>
 
         <div role="navigation">
           <% if user_signed_in? %>
