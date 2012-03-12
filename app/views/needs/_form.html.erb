@@ -19,7 +19,7 @@
       <%= f.input :writing_department, :label => 'Writing team' %>
 
       <% i = 0 %><%= f.semantic_fields_for :accountabilities, accountabilities_for(@need) do |accountability| %>
-        <%= accountability.input :department, :as => :select, :collection => Department.all, :label => (i == 0) ? 'Policy owner' : "&nbsp;" %>
+        <%= accountability.input :department, :as => :select, :collection => Department.order('name'), :label => (i == 0) ? 'Policy owner' : "&nbsp;" %>
         <% i += 1 %>
       <% end %>
 
