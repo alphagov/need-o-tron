@@ -35,7 +35,6 @@ gem 'inherited_resources'
 gem 'has_scope'
 
 gem 'plek', '~> 0'
-gem 'pethau'
 gem 'stomp', '1.1.9'
 gem 'marples', '~> 1.0'
 gem 'daemonette', :git => 'git://github.com/alphagov/daemonette.git'
