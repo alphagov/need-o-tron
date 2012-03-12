@@ -137,7 +137,7 @@ GEM
       null_logger
     metaclass (0.0.1)
     mime-types (1.17.2)
-    mocha (0.10.0)
+    mocha (0.10.5)
       metaclass (~> 0.0.1)
     multi_json (1.0.4)
     multi_xml (0.2.2)
