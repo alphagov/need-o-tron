@@ -1,6 +1,8 @@
 class Need < ActiveRecord::Base
   class_attribute :index_command
 
+  class CannotDeleteStartedNeed < Exception; end
+
   MAXIMUM_POLICY_DEPARTMENTS = 5
   MAXIMUM_FACT_CHECKERS = 5
 
@@ -45,6 +47,8 @@ class Need < ActiveRecord::Base
   before_save :set_creator, :on => :create
   before_validation :delete_empty_fact_checkers, :delete_empty_accountabilities
   after_save :update_search_index
+
+  before_destroy :check_need_is_not_started
 
   validate :status, :in => STATUSES
   validates_presence_of :priority, :if => proc { |a| a.status == FORMAT_ASSIGNED }
@@ -103,6 +107,10 @@ class Need < ActiveRecord::Base
 
   def being_worked_on?
     [FORMAT_ASSIGNED, IN_PROGRESS, DONE].include?(status)
+  end
+
+  def in_progress?
+    [IN_PROGRESS, DONE].include?(status)
   end
 
   STATUSES.each do |status_label|
@@ -171,5 +179,9 @@ class Need < ActiveRecord::Base
     accountabilities.select { |a| a.department.name == name }.each do |a|
       accountabilities.destroy(a)
     end
+  end
+
+  def check_need_is_not_started
+    raise(CannotDeleteStartedNeed.new) if in_progress?
   end
 end

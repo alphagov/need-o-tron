@@ -2,10 +2,18 @@ require 'needs_csv'
 require 'csv'
 
 class NeedsController < InheritedResources::Base
+
+  before_filter :ensure_user_is_admin!, :only => [:destroy]
+
   has_scope :in_state
   skip_before_filter :authenticate_user!, :if => lambda { |c|
     c.action_name == 'show' && c.request.format.json?
   }
+
+  rescue_from Need::CannotDeleteStartedNeed do
+    flash[:alert] = "A need which has been started can't be destroyed"
+    redirect_to @need
+  end
 
   def index
     index! do |format|

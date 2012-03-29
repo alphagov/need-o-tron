@@ -6,7 +6,7 @@ describe Need do
       @user = User.create(:name => "rod", :email => "rod@example.com", :uid => "rod", :version => 1)
       @user.should be_valid
       Thread.current[:current_user] = @user
-      @need = Need.create
+      @need = Need.create!
     end
 
     describe "associations" do
@@ -37,6 +37,29 @@ describe Need do
       @need.reason_for_formatting_decision = "fake reason"
       @need.record_formatting_decision_info
       @need.formatting_decision_made?.should be_true
+    end
+
+    describe "deleting a need" do
+      it "can delete a need which has not been started" do
+        @need = Need.create :status => Need::NEW
+        @need.reload
+
+        @need.destroy.should be_true
+      end
+
+      it "cannot delete a need which is in progress or done" do
+        @in_progress_need = Need.create! :status => Need::IN_PROGRESS
+        @in_progress_need.reload
+
+        expect{@in_progress_need.destroy}.to raise_error(Need::CannotDeleteStartedNeed)
+      end
+
+      it "cannot delete a need which is done" do
+        @done_need = Need.create! :status => Need::DONE, :url => "http://example.com/"
+        @done_need.reload
+
+        expect{@done_need.destroy}.to raise_error(Need::CannotDeleteStartedNeed)
+      end
     end
 
     describe "handling fact checker updates" do
