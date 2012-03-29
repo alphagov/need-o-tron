@@ -63,7 +63,7 @@ br.clear {
 }
 	#main-content.in-progress {
 	  border-top-color: #1F8175;
-	}         
+	}
 
 
 .done {
@@ -71,12 +71,12 @@ br.clear {
 }
 	#main-content.done {
 	  border-top-color: #3171CC;
-	}         
+	}
 
-.bin {
+.icebox {
   background-color: #A09A9F;
 }
-	#main-content.bin {
+	#main-content.icebox {
 	  border-top-color: #A09A9F;
 	}
 

@@ -163,10 +163,10 @@
       <%= render 'mark_done' %>
     <% end %>
 
-    <%= render 'bin' %>
+    <%= render 'icebox' %>
   <% end %>
   <% if !current_user.is_admin? %>
-    <div class="bin">
+    <div class="icebox">
       <h3>This need is being reviewed by our team</h3>
     </div>
   <% end %>

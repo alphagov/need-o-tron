@@ -9,11 +9,11 @@ class Need < ActiveRecord::Base
   FORMAT_ASSIGNED = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
   IN_PROGRESS = "in-progress"
-  BIN = "bin"
+  ICEBOX = "icebox"
   NEW = "new"
   DONE = "done"
 
-  STATUSES = [NEW, READY_FOR_REVIEW, FORMAT_ASSIGNED, IN_PROGRESS, DONE, BIN]
+  STATUSES = [NEW, READY_FOR_REVIEW, FORMAT_ASSIGNED, IN_PROGRESS, DONE, ICEBOX]
   PRIORITIES_FOR_SELECT = [['low', 1], ['medium', 2], ['high', 3]]
   PRIORITIES = {1 => 'low', 2 => 'medium', 3 => 'high'}
 
@@ -102,7 +102,7 @@ class Need < ActiveRecord::Base
   end
 
   def format_assigned?
-    [FORMAT_ASSIGNED, IN_PROGRESS, DONE, BIN].include?(status)
+    [FORMAT_ASSIGNED, IN_PROGRESS, DONE, ICEBOX].include?(status)
   end
 
   def being_worked_on?

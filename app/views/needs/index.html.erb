@@ -11,7 +11,7 @@
         <th scope="col">Tags</th>
         <th scope="col">Last updated</th>
         <th scope="col">Created by</th>
-        <% if params[:in_state] == 'bin' %>
+        <% if params[:in_state] == 'icebox' %>
         <th></th>
         <% end %>
         <% if current_user.is_admin? %>
@@ -30,7 +30,7 @@
         <td><%= need.tag_list %></td>
         <td><%= time_ago_in_words(need.updated_at, true) %></td>
         <td><%= need.creator %></td>
-        <% if params[:in_state] == 'bin' %>
+        <% if params[:in_state] == 'icebox' %>
         <td><%= need.reason_for_decision %></td>
         <% end %>
         <% if current_user.is_admin? %>
