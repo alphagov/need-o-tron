@@ -36,4 +36,24 @@ describe "Need integration with Solr" do
     end
 
   end
+
+  describe "when a need is destroyed" do
+    before :each do
+      $solr.delete_by_query("rails_env:#{Rails.env}")
+      @need = Factory :need,
+        title: "Lorem ipsum dolor sit amet",
+        kind: Factory(:kind),
+        priority: Need::PRIORITIES.values.first,
+        tag_list: "red,blue"
+
+      @need.reload
+      @need.destroy
+    end
+
+    it "is no longer finable in Solr" do
+      search = NeedSearch.new "ipsum"
+      search.execute
+      search.results.should have(0).result
+    end
+  end
 end

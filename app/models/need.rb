@@ -49,6 +49,7 @@ class Need < ActiveRecord::Base
   after_save :update_search_index
 
   before_destroy :check_need_is_not_started
+  after_destroy :remove_from_search_index
 
   validate :status, :in => STATUSES
   validates_presence_of :priority, :if => proc { |a| a.status == FORMAT_ASSIGNED }
@@ -67,6 +68,10 @@ class Need < ActiveRecord::Base
   def update_search_index
     indexable = SolrNeedPresenter.new(self)
     indexer.new($solr, indexable).execute
+  end
+
+  def remove_from_search_index
+    indexer.new($solr, self).delete
   end
 
   def self.index_all
@@ -184,4 +189,5 @@ class Need < ActiveRecord::Base
   def check_need_is_not_started
     raise(CannotDeleteStartedNeed.new) if in_progress?
   end
+
 end
