@@ -44,7 +44,7 @@ class NeedsController < InheritedResources::Base
   def update
     update! do |success, failure|
       failure.html {
-        if request.referer.match(/needs\/\d+/)
+        if request.referer.match(/needs\/\d+$/)
           @need.reload
           flash.now[:alert] = "We weren't able to save your changes. Please review the form below and try again"
           render :action => 'show'
@@ -56,6 +56,6 @@ class NeedsController < InheritedResources::Base
   end
 
   def collection
-    @needs ||= Need.includes(:directgov_links, :fact_checkers, :existing_services, :kind, :writing_department, {accountabilities: :department})
+    @needs ||= Need.includes(:directgov_links, :fact_checkers, :existing_services, :justifications, :kind, :writing_department, {accountabilities: :department})
   end
 end

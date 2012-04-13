@@ -1,0 +1,10 @@
+<li class="nested_item">
+  <fieldset class="inputs">
+    <ol>
+    <%= f.input :evidence_type %>
+    <%= f.input :details, :input_html => { :rows => "4" } %>
+    <%= f.input :file, :as => :file %>
+      <li class="delete-item"><%= link_to_remove_fields "Delete", f %></li>
+    </ol>
+  </fieldset>
+</li>

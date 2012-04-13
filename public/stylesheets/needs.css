@@ -195,6 +195,18 @@ small.status-label {
   padding: 0.125em 0.250em;
 }
 
+form.formtastic fieldset.nested_items ol {
+  border-bottom: solid 1px #EEE;
+  margin-bottom: 1.5em;
+}
+
+form.formtastic fieldset.inputs > legend {
+  font-size: 1.25em;
+  font-weight: bold;
+  padding: 0 0 1em;
+  width: 50%;
+}
+
 form.formtastic fieldset.buttons li.commit {
   float: right;
 }
@@ -205,8 +217,13 @@ form.formtastic fieldset.buttons li.commit input, p a.button, .fulfill, .button_
   border-radius: 0.25em;
   color: #fff;
   cursor: pointer;
+  display: inline-block;
   font-weight: bold;
   padding: 0.25em 0.5em;
+}
+
+form.formtastic .add_fields {
+  margin: 1em 0;
 }
 
 .button_to input[type="submit"], .fulfill { font-size: 1em; }
@@ -325,3 +342,58 @@ ul.item-list li span.button {
   padding: 0 0.25em;
 }
 
+/* Nested models on the edit need form */
+
+form.formtastic .nested_item {
+  background-color: rgba(226, 223, 215, 1);
+  border: 1px solid #bbb;
+  -webkit-border-radius: 0.25em;
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+  margin: 0 0 1em 0;
+  padding: 1em;
+  position: relative;
+}
+
+form.formtastic .nested_item > fieldset > ol {
+  margin: 0;
+  padding: 0.5em 0 0;
+}
+
+.nested_item input, .nested_item select {
+  margin: 0 0 0.75em 0;
+}
+
+.nested_item .delete-item {
+  position: absolute;
+  right: 0em;
+  top: 0.5em;
+}
+
+form.formtastic .nested_item.deleted {
+  border-color: #CCC;
+  height: 2em;
+  overflow: hidden;
+}
+
+.nested_items.deleted input, .nested_item.deleted select, .nested_item.deleted label {
+  opacity: 0.25;
+}
+
+form.formtastic .add-item {
+  text-align: right;
+  margin-top: 0;
+}
+
+form.formtastic .add-item .button {
+  margin-bottom: 0.25em;
+}
+
+form.formtastic .nested_item ol > li.boolean label {
+  padding-left: 25%;
+  width: auto;
+}
+
+form.formtastic fieldset > ol > li fieldset ol li.radio {
+  padding: 0.5em 0;
+}

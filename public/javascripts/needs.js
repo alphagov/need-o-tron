@@ -59,4 +59,17 @@ $(function() {
                           accountability_create_data_generator,
                           accountability_item_creator, accountability_url_generator);
   });
+
 });
+
+// Add/remove objects for nested forms
+function remove_fields(link) {
+  $(link).prev("input[type=hidden]").val("1");
+  $(link).closest("li.nested_item").hide();
+}
+
+function add_fields(link, association, content) {
+  var new_id = new Date().getTime();
+  var regexp = new RegExp("new_" + association, "g")
+  $(link).parent('li').before(content.replace(regexp, new_id));
+}

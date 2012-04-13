@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   # on the OmniAuth callback controller action, which is exceeding lethal
   before_filter :ensure_user_is_admin!, :except => [:show, :create, :index, :new], :if => :user_signed_in?
 
+  include NestedFormHelper
+
   def ensure_user_is_admin!
     unless current_user.is_admin?
       render :text => "Unauthorised!", :status => :unauthorized
