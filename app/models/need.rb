@@ -36,7 +36,7 @@ class Need < ActiveRecord::Base
   accepts_nested_attributes_for :fact_checkers, :allow_destroy => true, :reject_if => :all_blank
   accepts_nested_attributes_for :directgov_links, :allow_destroy => true, :reject_if => proc { |atts| atts['directgov_id'].blank? }
   accepts_nested_attributes_for :existing_services, :allow_destroy => true, :reject_if => :all_blank
-  accepts_nested_attributes_for :justifications, :allow_destroy => true, :reject_if => proc { |atts| atts['evidence_type'].blank? }
+  accepts_nested_attributes_for :justifications, :allow_destroy => true, :reject_if => :all_blank
 
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
