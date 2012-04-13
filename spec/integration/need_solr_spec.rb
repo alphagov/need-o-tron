@@ -45,6 +45,7 @@ describe "Need integration with Solr" do
         kind: Factory(:kind),
         priority: Need::PRIORITIES.values.first,
         tag_list: "red,blue"
+      @need.save!
 
       @need.reload
       @need.destroy
@@ -53,7 +54,7 @@ describe "Need integration with Solr" do
     it "is no longer finable in Solr" do
       search = NeedSearch.new "ipsum"
       search.execute
-      search.results.should have(0).result
+      search.results.should have(0).results
     end
   end
 end
