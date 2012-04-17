@@ -6,7 +6,7 @@ class Import
   extend ActiveModel::Naming
   include ActiveModel::Conversion
 
-  IMPORT_OPTIONS = [:priority, :fact_checker, :lead_department, :writing_dept]
+  IMPORT_OPTIONS = [:title, :priority, :fact_checker, :lead_department, :writing_dept]
 
   attr_reader :opts
   attr_reader :errors
