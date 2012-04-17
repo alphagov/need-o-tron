@@ -39,19 +39,25 @@ class Import
     row['Id'] || row['ID']
   end
 
+  def csv_data(&block)
+    if opts[:csv].respond_to?(:open)
+      CSV.open(opts[:csv].open, headers: true).each(&block)
+    else
+      CSV.parse(opts[:csv], headers: true, &block)
+    end
+  end
+
   def save
-    CSV.open(opts[:csv].open, :headers => true) do |csv|
-      csv.each do |row|
-        if id_from_row(row)
-          need = Need.find_by_id(id_from_row(row))
-          if need
-            import_keys.each do |key|
-              Updaters.send(key, need, row)
-            end
-            #sort of assuming we need to save everything as the import
-            #has a rather large number of changes
-            need.save!
+    csv_data do |row|
+      if id_from_row(row)
+        need = Need.find_by_id(id_from_row(row))
+        if need
+          import_keys.each do |key|
+            Updaters.send(key, need, row)
           end
+          # sort of assuming we need to save everything as the import
+          # has a rather large number of changes
+          need.save!
         end
       end
     end
@@ -60,7 +66,6 @@ class Import
   module Updaters
     def self.priority(need, row)
       need.priority = row['Priority'] if row['Priority']
-
     end
 
     def self.writing_dept(need, row)
@@ -106,6 +111,10 @@ class Import
 
     def self.extract_accountabilities(csv_cell)
       extract_list(csv_cell)
+    end
+
+    def self.title(need, row)
+      need.title = row['title']
     end
 
     def self.lead_department(need, row)

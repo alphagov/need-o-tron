@@ -1,4 +1,15 @@
 namespace :import do
+  desc "Import CSV specified by the file environment variable"
+  task :from_file => :environment do
+    path = ENV['file']
+    f = File.read(path)
+    opts = Import::IMPORT_OPTIONS.inject({}) { |h, k| h[k] = '1'; h }
+    opts[:csv] = f
+
+    i = Import.new(opts)
+    i.save
+  end
+
   desc "Import google doc (exported to CSV) specified by the file environment variable"
   task :google_doc_2011_10_20 => :environment do
     # Clean up departments data a little
