@@ -114,7 +114,7 @@ class Import
     end
 
     def self.title(need, row)
-      need.title = row['title']
+      need.title = row['Title']
     end
 
     def self.lead_department(need, row)
