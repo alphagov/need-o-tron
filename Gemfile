@@ -1,9 +1,5 @@
 source 'http://rubygems.org'
 
-gem 'oauth2', '0.4.1'
-gem 'oa-core', '0.2.6'
-gem 'oa-oauth', '0.2.6'
-
 gem 'rails', '~> 3.1.0'
 gem 'rack', '1.3.5'
 gem 'rake', '0.9.2'
@@ -22,7 +18,7 @@ gem 'gds-api-adapters', '~> 0.0.15'
 if ENV['BUNDLE_ENV'] == 'DEV'
   gem "gds-sso", :path => '../gds-sso'
 else
-  gem "gds-sso", '~> 0.4.1'
+  gem "gds-sso", '~> 0.5.1'
 end
 
 gem 'carrierwave'
