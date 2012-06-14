@@ -1,6 +1,6 @@
 class AllowVersionToBeNull < ActiveRecord::Migration
   def up
-    change_column :users, :version, :integer
+    change_column :users, :version, :integer, null: true
   end
 
   def down
