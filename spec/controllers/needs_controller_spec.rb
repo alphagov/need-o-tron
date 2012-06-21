@@ -61,11 +61,9 @@ describe NeedsController do
           @need = Need.create!(:status => Need::NEW)
           delete :destroy, id: @need.id
 
-          response.status.should == 401
+          response.status.should == 403
         end
       end
-
     end
-
   end
 end

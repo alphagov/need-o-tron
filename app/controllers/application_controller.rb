@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_user_is_admin!
     unless current_user.is_admin?
-      render :text => "Unauthorised!", :status => :unauthorized
+      render :text => "Forbidden!", :status => :forbidden
       return false
     end
   end

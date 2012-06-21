@@ -51,12 +51,12 @@ describe ApplicationController do
 
         it "cannot access :update" do
           put :update, :id => 1
-          response.code.should == "401"
+          response.code.should == "403"
         end
 
         it "cannot access :edit" do
           get :edit, :id => 1
-          response.code.should == "401"
+          response.code.should == "403"
         end
       end
 
