@@ -28,9 +28,6 @@ class SolrNeedPresenter
 
       # Facilitate clearing test data
       doc.add_field "rails_env", Rails.env
-
-      # Very basic logging
-      puts "Adding solr document #{@need.id}:#{@need.title}"
     end
   end
 end
