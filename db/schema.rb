@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111128145734) do
+ActiveRecord::Schema.define(:version => 20120621111108) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"
@@ -150,11 +150,12 @@ ActiveRecord::Schema.define(:version => 20111128145734) do
   end
 
   create_table "users", :force => true do |t|
-    t.string  "name",                        :null => false
-    t.string  "uid",                         :null => false
-    t.integer "version",                     :null => false
-    t.string  "email",                       :null => false
-    t.boolean "is_admin", :default => false
+    t.string  "name",                           :null => false
+    t.string  "uid",                            :null => false
+    t.integer "version"
+    t.string  "email",                          :null => false
+    t.boolean "is_admin",    :default => false
+    t.text    "permissions"
   end
 
   create_table "writing_departments", :force => true do |t|

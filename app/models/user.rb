@@ -1,6 +1,8 @@
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base  
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :uid, :version
+
+  serialize :permissions, Hash
 
   def self.find_for_gds_oauth(auth_hash)
     user = find_by_uid(auth_hash["uid"])
