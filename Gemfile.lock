@@ -217,7 +217,11 @@ GEM
       ffi (= 1.0.9)
       json_pure
       rubyzip
-    shoulda (2.11.3)
+    shoulda (3.0.1)
+      shoulda-context (~> 1.0.0)
+      shoulda-matchers (~> 1.0.0)
+    shoulda-context (1.0.0)
+    shoulda-matchers (1.0.0)
     simplecov (0.4.2)
       simplecov-html (~> 0.4.4)
     simplecov-html (0.4.5)
@@ -292,7 +296,7 @@ DEPENDENCIES
   rspec-core (= 2.6.4)
   rspec-rails
   sass-rails (~> 3.1.0)
-  shoulda
+  shoulda (= 3.0.1)
   simplecov (= 0.4.2)
   simplecov-rcov
   sqlite3

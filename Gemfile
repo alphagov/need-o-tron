@@ -78,7 +78,7 @@ end
 
 group :test do
   gem 'database_cleaner'
-  gem 'shoulda'
+  gem 'shoulda', '3.0.1'
   gem 'mocha'
   gem 'webmock', require: false
   gem 'capybara', '~> 1.1.1'
