@@ -7,7 +7,6 @@ DatabaseCleaner.strategy = :truncation
 
 RSpec.configure do |config|
   config.mock_with :mocha
-  config.fixture_path = "#{::Rails.root}/spec/fixtures"
   config.use_transactional_fixtures = false
   config.include(SetMatchers)
   config.include(Capybara::DSL)
