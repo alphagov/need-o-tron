@@ -33,9 +33,6 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 
-  # Reset the Machinist cache before each spec.
-  config.before(:each) { Machinist.reset_before_test }
-
   # include cutsom matchers
   config.include(SetMatchers)
   config.include(GdsApi::TestHelpers::Panopticon)

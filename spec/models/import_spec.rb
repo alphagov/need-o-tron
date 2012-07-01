@@ -18,7 +18,7 @@ describe Import do
   describe "importing priorities" do
     pending("not maintaining csv import for now")
     before(:each) do
-      @need = Need.make
+      @need = Factory.create(:need, priority: 1 )
     end
 
     it "updates the need's priority" do

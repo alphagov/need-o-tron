@@ -50,10 +50,6 @@ module NeedOTron
     #     config.dg_api.user = "username"
     #     config.dg_api.password = "password"
     config.dg_api = ActiveSupport::OrderedOptions.new
-
-    config.generators do |g|
-      g.fixture_replacement :machinist
-    end
   end
 end
 

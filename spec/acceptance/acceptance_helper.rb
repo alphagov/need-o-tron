@@ -13,7 +13,6 @@ RSpec.configure do |config|
   config.include(Capybara::DSL)
 
   config.before :each do
-    Machinist.reset_before_test
     DatabaseCleaner.clean
     $solr.delete_by_query("rails_env:#{Rails.env}")
   end
