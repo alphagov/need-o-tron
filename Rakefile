@@ -9,4 +9,4 @@ require 'ci/reporter/rake/rspec' if Rails.env.test?
 NeedOTron::Application.load_tasks
 
 Rake::Task[:default].clear_prerequisites if Rake::Task.task_defined?(:default)
-task :default => [ :spec, :cucumber, "spec:acceptance" ]
+task :default => [ :spec, "spec:acceptance" ]
