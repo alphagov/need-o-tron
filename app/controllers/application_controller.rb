@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   # the user_signed_in? if here is needed becaue otherwise we require an admin user
   # on the OmniAuth callback controller action, which is exceeding lethal
   before_filter :ensure_user_is_admin!, :except => [:show, :create, :index, :new], :if => :user_signed_in?
+  skip_before_filter :ensure_user_is_admin!, :if => lambda { |c|
+    c.controller_name == "authentications"
+  }
 
   include NestedFormHelper
 
