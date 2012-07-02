@@ -3,7 +3,7 @@ require 'spec_helper'
 describe NeedsController do
   describe "when signed in" do
     before(:each) do
-      @need_user = User.create!(:name => "Test User", :email => "rod@example.com", :uid => "rod", :version => 1)
+      @need_user = FactoryGirl.create(:user, :name => "Test User", :email => "rod@example.com", :uid => "rod")
       @need_user.should be_valid
 
       controller.stubs(:current_user).returns(@need_user)

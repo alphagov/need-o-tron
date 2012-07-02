@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include GDS::SSO::ControllerMethods
   protect_from_forgery
   before_filter :authenticate_user!
+  before_filter :require_signin_permission!
   before_filter :set_current_user_in_thread
   # the user_signed_in? if here is needed becaue otherwise we require an admin user
   # on the OmniAuth callback controller action, which is exceeding lethal
