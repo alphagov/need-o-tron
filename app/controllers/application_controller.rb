@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   def ensure_user_is_admin!
     unless current_user.is_admin?
-      render :text => "Forbidden!", :status => :forbidden
+      render :text => "You must be a need-o-tron admin to use this application", :status => :forbidden
       return false
     end
   end
