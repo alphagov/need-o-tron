@@ -1,12 +1,14 @@
 require File.expand_path('../boot', __FILE__)
 
 # Pick the frameworks you want:
-require "active_record/railtie"
-require "action_controller/railtie"
-require "action_mailer/railtie"
-require "active_resource/railtie"
-require "active_support/ordered_options"
+# require "active_record/railtie"
+# require "action_controller/railtie"
+# require "action_mailer/railtie"
+# require "active_resource/railtie"
+# require "active_support/ordered_options"
+
 # require "rails/test_unit/railtie"
+require "rails/all"
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
@@ -44,6 +46,8 @@ module NeedOTron
 
     # Enable the asset pipeline
     config.assets.enabled = true
+    config.assets.version = '1.0'
+    config.assets.prefix = '/vendor/assets'
 
     # Set up DG API user/password holder
     # Set credentials in an env-specific config or initializer:
