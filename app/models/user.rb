@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
   def to_s
     email
   end
+
+  def is_admin?
+    has_permission?(GDS::SSO::Config.default_scope, "admin")
+  end
+
+  def is_admin
+    is_admin?
+  end
 end

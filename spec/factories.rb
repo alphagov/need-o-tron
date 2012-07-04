@@ -6,6 +6,11 @@ FactoryGirl.define do
     version { 1 }
     permissions { Hash[GDS::SSO::Config.default_scope => ["signin"]] }
   end
+  factory :admin_user, parent: :user do
+    permissions do
+      Hash[GDS::SSO::Config.default_scope => ["admin", "signin"]]
+    end
+  end
   factory :need do
     status Need::NEW
   end
