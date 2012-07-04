@@ -1,52 +1,47 @@
-
-<div id="needs-content" class="needs-content full">
-
-  <table id="needs-table">
-    <thead>
-      <tr>
-        <th scope="col">ID</th>
-        <th scope="col">Title</th>
-        <th scope="col">Format</th>
-        <th scope="col">Priority</th>
-        <th scope="col">Tags</th>
-        <th scope="col">Last updated</th>
-        <th scope="col">Created by</th>
-        <% if params[:in_state] == 'icebox' %>
-        <th></th>
-        <% end %>
-        <% if current_user.is_admin? %>
-        <th></th>
-        <th></th>
-        <% end %>
-      </tr>
-    </thead>
-    <tbody>
-    <% @needs.each do |need| %>
-      <tr>
-        <td>#<%= need.id %></td>
-        <th scope="row"><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
-        <td class="need"><%= need.format_assigned? ? need.kind : "-" %></td>
-        <td><%= need.prioritised? ? need.named_priority : '-' %></td>
-        <td><%= need.tag_list %></td>
-        <td><%= time_ago_in_words(need.updated_at, true) %></td>
-        <td><%= need.creator %></td>
-        <% if params[:in_state] == 'icebox' %>
-        <td><%= need.reason_for_decision %></td>
-        <% end %>
-        <% if current_user.is_admin? %>
-        <td><%= link_to 'Edit', edit_need_path(need) %></td>
-        <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
-        <% end %>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-  <p id="csv-download"><a class="button" href="<%= needs_path(:format => 'csv', :in_state => params[:in_state]) %>">Download as a CSV</a></p>
-  <% if current_user.is_admin? %>
-  <p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
+<table id="needs-table" class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Title</th>
+      <th scope="col">Format</th>
+      <th scope="col">Priority</th>
+      <th scope="col">Tags</th>
+      <th scope="col">Last updated</th>
+      <th scope="col">Created by</th>
+      <% if params[:in_state] == 'icebox' %>
+      <th></th>
+      <% end %>
+      <% if current_user.is_admin? %>
+      <th></th>
+      <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+  <% @needs.each do |need| %>
+    <tr>
+      <td>#<%= need.id %></td>
+      <th scope="row"><%= link_to need.title, need %> <% if !params[:in_state] %><small class="label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
+      <td class="need"><%= need.format_assigned? ? need.kind : "-" %></td>
+      <td><%= need.prioritised? ? need.named_priority : '-' %></td>
+      <td><%= need.tag_list %></td>
+      <td><%= time_ago_in_words(need.updated_at, true) %></td>
+      <td><%= need.creator %></td>
+      <% if params[:in_state] == 'icebox' %>
+      <td><%= need.reason_for_decision %></td>
+      <% end %>
+      <% if current_user.is_admin? %>
+      <td><%= link_to 'Edit', edit_need_path(need) %></td>
+      <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
+      <% end %>
+    </tr>
   <% end %>
-
-</div>
+  </tbody>
+</table>
+<p id="csv-download"><a class="button" href="<%= needs_path(:format => 'csv', :in_state => params[:in_state]) %>">Download as a CSV</a></p>
+<% if current_user.is_admin? %>
+<p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
+<% end %>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">

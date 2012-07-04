@@ -1,10 +1,10 @@
-<div class="icebox">
+<div class="well">
   <h3>Want to icebox this?</h3>
   <%= semantic_form_for(@need) do |f| %>
     <%= f.inputs do %>
       <%= f.input :status, :value => 'icebox', :as => 'hidden' %>
       <%= f.input :reason_for_decision %>
-      <%= f.commit_button 'Icebox it' %>
+      <%= f.commit_button 'Icebox it', :class => "btn" %>
     <% end %>
   <% end %>
 </div>
