@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Need do
   describe "with the action being tested getting executed in the setup block" do
     before(:each) do
-      @user = User.create(:name => "rod", :email => "rod@example.com", :uid => "rod", :version => 1)
+      @user = FactoryGirl.create(:user, :name => "rod", :email => "rod@example.com", :uid => "rod")
       @user.should be_valid
       Thread.current[:current_user] = @user
       @need = Need.create!

@@ -5,6 +5,7 @@ describe ApplicationController do
     describe "ensure_user_is_admin!" do
       controller do
         skip_before_filter :authenticate_user!
+        skip_before_filter :require_signin_permission!
 
         def show
           render :text => "woo", :status => 200

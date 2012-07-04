@@ -5,6 +5,7 @@ describe FactCheckersController do
     before(:each) do
       @need = Need.create
       controller.stubs(:authenticate_user!).returns(true)
+      controller.stubs(:require_signin_permission!).returns(true)
       controller.stubs(:user_signed_in?).returns(false)
     end
 

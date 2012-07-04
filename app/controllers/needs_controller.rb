@@ -6,7 +6,7 @@ class NeedsController < InheritedResources::Base
   before_filter :ensure_user_is_admin!, :only => [:destroy]
 
   has_scope :in_state
-  skip_before_filter :authenticate_user!, :if => lambda { |c|
+  skip_before_filter [:authenticate_user!, :require_signin_permission!], :if => lambda { |c|
     c.action_name == 'show' && c.request.format.json?
   }
 

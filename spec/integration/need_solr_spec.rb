@@ -39,7 +39,7 @@ describe "Need integration with Solr" do
 
   describe "when a need is destroyed" do
     before :each do
-      @user = User.create(:name => "rod", :email => "rod@example.com", :uid => "rod", :version => 1)
+      @user = FactoryGirl.create(:user, :name => "rod", :email => "rod@example.com", :uid => "rod")
       @user.should be_valid
       Thread.current[:current_user] = @user
       $solr.delete_by_query("rails_env:#{Rails.env}")

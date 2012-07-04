@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :user do
+    uid { "ABC" }
+    name { "T Est" }
+    email { "test@example.com" }
+    version { 1 }
+    permissions { Hash[GDS::SSO::Config.default_scope => ["signin"]] }
+  end
   factory :need do
     status Need::NEW
   end
