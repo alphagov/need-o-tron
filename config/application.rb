@@ -47,7 +47,7 @@ module NeedOTron
     # Enable the asset pipeline
     config.assets.enabled = true
     config.assets.version = '1.0'
-    config.assets.prefix = '/vendor/assets'
+    config.assets.prefix = '/assets'
 
     # Set up DG API user/password holder
     # Set credentials in an env-specific config or initializer:
