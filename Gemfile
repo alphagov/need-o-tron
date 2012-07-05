@@ -27,7 +27,8 @@ gem 'delsolr', :git => 'https://github.com/alphagov/delsolr.git',
   :ref => '0e78228be3091bc2240aa0ba0b5c60791cad07c9'
 
 gem 'rabl'
-gem 'formtastic'
+gem "formtastic", "~> 2.1.1"
+gem "formtastic-bootstrap", "~> 1.2.0"
 gem 'inherited_resources'
 gem 'has_scope'
 
