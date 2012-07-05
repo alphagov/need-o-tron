@@ -13,7 +13,7 @@
 } %>
 
 <div class="row-fluid">
-  <div class="span2">
+  <div class="span3">
     <div class="well sidebar-nav">
 
       <!-- <h2>Search Filters</h2> -->
@@ -44,7 +44,7 @@
 
     </div><!--/.well -->
   </div><!--/span-->
-  <div class="span10">
+  <div class="span9">
 
     <div id="needs-content" class="needs-content">
       
@@ -114,8 +114,8 @@
             <td><%= need.tag.join(', ') unless need.tag.blank? %></td>
             <td><%= time_ago_in_words(need.updated_at, true) %></td>
             <% if current_user.is_admin? %>
-            <td><%= link_to 'Edit', edit_need_path(need.id) %></td>
-            <td><%= link_to 'Delete', need_path(need.id), confirm: 'Are you sure?', method: :delete %></td>
+            <td><%= link_to 'Edit', edit_need_path(need.id), :class => 'btn btn-mini' %></td>
+            <td><%= link_to 'Delete', need_path(need.id), confirm: 'Are you sure?', method: :delete, :class => 'btn btn-mini btn-danger' %></td>
             <% end %>
           </tr>
         <% end %>
