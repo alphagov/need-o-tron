@@ -10,7 +10,6 @@
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application" %>
-    <%= javascript_include_tag 'application' %>
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -29,33 +28,35 @@
             <span class="icon-bar"></span>
           </a>
           <%= link_to 'GOV.UK Need-O-Tron', root_path, :class => "brand" %>
-
-          <div class="search pull-right">
-            <form action='<%= (controller_name == 'search') ? "" : "/search"  %>'>
-              <label>Search for:
-                <%= text_field_tag :query, params[:query] %>
-              </label>
-              <%= submit_tag "Search" %>
-            </form>
-          </div>
-
-          <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> <%= current_user.name.present? ? current_user.name : current_user.email %>
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="#">Profile</a></li>
-              <li class="divider"></li>
-              <li><a href="#">Sign Out</a></li>
-            </ul>
-          </div>
-          <div class="nav-collapse">
+          <nav role="navigation" class="nav-collapse">
             <ul class="nav">
-              <li class="active"><a href="/">Home</a></li>
-              <li><a href="#about">About</a></li>
+              <li><a href="/">Home</a></li>
             </ul>
-          </div><!--/.nav-collapse -->
+
+            <ul class="nav pull-right">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services 
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a href="http://digital.cabinetoffice.gov.uk/">GDS blog</a></li>
+                  <li><a href="http://wiki.digital.cabinet-office.gov.uk/">GDS wiki</a></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Analytics', 'https://www.google.com/analytics/web/#dashboard/default/a26179049w50705554p51337955/'%></li>
+                  <li class="divider"></li>
+                  <li><%= link_to 'Sign out', gds_sign_out_path %></li>
+                </ul>
+              </li>
+            </ul>
+            <p class="navbar-text pull-right">Signed in as <a href="<%= Plek.current.find('signon') %>"><%= current_user %></a></p>
+
+            <form action='<%= (controller_name == 'search') ? "" : "/search"  %>' class="navbar-search">
+              <label class="visuallyhidden">Search for: </label>
+                <%= text_field_tag :query, params[:query], :class => "search-query pull-left", :placeholder => "Search" %>
+              <!-- %= submit_tag "Search", :class => "search-query" %>-->
+            </form>
+
+          </nav><!--/.nav-collapse -->
         </div>
       </div>
     </div>
@@ -78,7 +79,9 @@
 
     <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <%= javascript_include_tag "/javascripts/rails", "/javascripts/application","/javascripts/data_tables/jquery.dataTables.min.js", "/javascripts/needs" %>
+
+    <%= javascript_include_tag 'application' %>
+
     <%= yield :extra_javascript %>
 
   </body>
