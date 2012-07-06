@@ -130,14 +130,14 @@
     </table>
   </div>
 
-  <% if current_user.is_admin && @need.format_assigned? %>
+  <% if current_user.is_admin? && @need.format_assigned? %>
   <div class="need-section">
     <p><%= start_work_link @need %></p>
     <p><%= assign_work_link @need %></p>
     <p><%= link_to 'Print label', print_need_path(@need), :class => 'button', :target => '_new' %></p>
   </div>
   <% end %>
-  <% if current_user.is_admin && ! @need.in_progress? %>
+  <% if current_user.is_admin? && ! @need.in_progress? %>
   <div class="need-section">
     <p><%= button_to "Destroy need", @need, :method => :delete, :confirm => "Are you sure you want to permanently destroy this need?" %></p>
     <p style="font-size: 0.85em">(Please use sparingly. It's for cleaning up data rather than rejecting needs.)</p>
