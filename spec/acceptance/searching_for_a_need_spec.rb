@@ -2,8 +2,7 @@ require_relative 'acceptance_helper'
 
 describe 'Searching for a need' do
   before :each do
-    u = FactoryGirl.create(:user)
-    u.is_admin = true
+    u = FactoryGirl.create(:admin_user)
     u.save!
   end
 

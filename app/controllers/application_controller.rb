@@ -14,10 +14,7 @@ class ApplicationController < ActionController::Base
   include NestedFormHelper
 
   def ensure_user_is_admin!
-    unless current_user.is_admin?
-      render :text => "You must be a need-o-tron admin to do admin things in this application", :status => :forbidden
-      return false
-    end
+    authorise_user!(GDS::SSO::Config.default_scope, "admin")
   end
 
   protected
