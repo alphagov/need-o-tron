@@ -44,8 +44,10 @@ gem 'exception_notification'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
+  gem 'sass-rails', '~> 3.1'
+  gem 'coffee-rails', '~> 3.1.0'
+  gem 'bootstrap-sass', '~> 2.0.4.0'
+  gem 'jquery-rails'
   gem 'uglifier'
 end
 
@@ -55,8 +57,6 @@ group :reporting do
   gem 'terminal-table'
   gem 'whenever', :require => false
 end
-
-gem 'jquery-rails'
 
 group :production do
   gem 'therubyracer'

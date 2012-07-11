@@ -51,6 +51,7 @@ GEM
       mail (> 2.2.5)
       mime-types
       xml-simple
+    bootstrap-sass (2.0.4.0)
     builder (3.0.0)
     capybara (1.1.1)
       mime-types (>= 1.16)
@@ -265,6 +266,7 @@ PLATFORMS
 
 DEPENDENCIES
   aws-ses
+  bootstrap-sass (~> 2.0.4.0)
   capybara (~> 1.1.1)
   capybara-webkit
   carrierwave
@@ -299,7 +301,7 @@ DEPENDENCIES
   rspec
   rspec-core (= 2.6.4)
   rspec-rails
-  sass-rails (~> 3.1.0)
+  sass-rails (~> 3.1)
   shoulda (= 3.0.1)
   simplecov (= 0.4.2)
   simplecov-rcov
