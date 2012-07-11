@@ -5,8 +5,6 @@
     <meta charset="utf-8">
     <title><%= yield(:title) + " - " if content_for?(:title) %>GOV.UK Need-O-Tron</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag "application" %>
@@ -15,6 +13,10 @@
     <!--[if lt IE 9]>
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <%= javascript_include_tag 'application' %>
+
   </head>
 
   <body>
@@ -33,21 +35,6 @@
               <li><a href="/">Home</a></li>
             </ul>
 
-            <ul class="nav pull-right">
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services 
-                  <b class="caret"></b>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="http://digital.cabinetoffice.gov.uk/">GDS blog</a></li>
-                  <li><a href="http://wiki.digital.cabinet-office.gov.uk/">GDS wiki</a></li>
-                  <li class="divider"></li>
-                  <li><%= link_to 'Analytics', 'https://www.google.com/analytics/web/#dashboard/default/a26179049w50705554p51337955/'%></li>
-                  <li class="divider"></li>
-                  <li><%= link_to 'Sign out', gds_sign_out_path %></li>
-                </ul>
-              </li>
-            </ul>
             <p class="navbar-text pull-right">Signed in as <a href="<%= Plek.current.find('signon') %>"><%= current_user %></a></p>
 
             <form action='<%= (controller_name == 'search') ? "" : "/search"  %>' class="navbar-search">
@@ -76,11 +63,6 @@
       </footer>
 
     </div><!--/.fluid-container-->
-
-    <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-
-    <%= javascript_include_tag 'application' %>
 
     <%= yield :extra_javascript %>
 
