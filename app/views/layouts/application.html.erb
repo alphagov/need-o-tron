@@ -31,9 +31,21 @@
           </a>
           <%= link_to 'GOV.UK Need-O-Tron', root_path, :class => "brand" %>
           <nav role="navigation" class="nav-collapse">
-            <ul class="nav">
-              <li><a href="/">Home</a></li>
-            </ul>
+            <% if user_signed_in? %>
+              <ul class="nav">
+                <li><%= link_to 'View all needs', search_path %></li>
+                <li>
+                  <a href="<%= search_link_for_page({}, {status: 'new'}, 1) %>">
+                    New
+                    <span class="count">(<%= Need.in_state('new').count %>)</span>
+                  </a>
+                </li>
+                <% if current_user.is_admin? %>
+                <li><%= link_to 'Enter a new need', new_need_path %></li>
+                <% end %>
+                <li><%= link_to 'Sign out', gds_sign_out_path %></li>
+              </ul>
+            <% end %>
 
             <p class="navbar-text pull-right">Signed in as <a href="<%= Plek.current.find('signon') %>"><%= current_user %></a></p>
 
