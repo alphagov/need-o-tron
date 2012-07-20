@@ -99,7 +99,7 @@ GEM
       lrucache (~> 0.1.1)
       null_logger
       plek
-    gds-sso (0.7.9)
+    gds-sso (0.8.0)
       omniauth-gds (= 0.0.3)
       rack-accept (~> 0.4.4)
       rails (>= 3.0.0)
@@ -121,6 +121,8 @@ GEM
       thor (~> 0.14)
     json (1.7.3)
     json_pure (1.6.1)
+    jwt (0.1.5)
+      multi_json (>= 1.0)
     libv8 (3.3.10.2)
     lrucache (0.1.1)
       PriorityQueue (~> 0.1.2)
@@ -142,17 +144,19 @@ GEM
     nokogiri (1.5.0)
     null_logger (0.0.1)
     oauth (0.4.6)
-    oauth2 (0.6.0)
-      faraday (~> 0.7)
+    oauth2 (0.8.0)
+      faraday (~> 0.8)
       httpauth (~> 0.1)
+      jwt (~> 0.1.4)
       multi_json (~> 1.0)
+      rack (~> 1.2)
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
     omniauth-gds (0.0.3)
       omniauth-oauth2 (~> 1.0)
-    omniauth-oauth2 (1.0.2)
-      oauth2 (~> 0.6.0)
+    omniauth-oauth2 (1.1.0)
+      oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
     plek (0.1.22)
       builder
@@ -276,7 +280,7 @@ DEPENDENCIES
   formtastic
   garb (~> 0.9.1)
   gds-api-adapters (~> 0.0.15)
-  gds-sso (= 0.7.9)
+  gds-sso (= 0.8.0)
   gds-warmup-controller
   gelf
   has_scope
