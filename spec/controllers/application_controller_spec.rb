@@ -31,6 +31,7 @@ describe ApplicationController do
       before(:each) do
         @user = User.new
         controller.stubs(:user_signed_in?).returns(true)
+        controller.stubs(:authenticate_user!).returns(true)
         controller.stubs(:current_user).returns(@user)
       end
 
