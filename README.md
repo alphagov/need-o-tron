@@ -1,6 +1,5 @@
 # Welcome to Need-o-Tron
 
-
 For an overview of the need-o-tron visit [Richard Pope's introductory blog post](http://digital.cabinetoffice.gov.uk/introducing-the-needotron)
 
 ## Getting set up
