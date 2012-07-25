@@ -124,6 +124,9 @@ GEM
     jwt (0.1.5)
       multi_json (>= 1.0)
     libv8 (3.3.10.2)
+    lograge (0.0.6)
+      actionpack
+      activesupport
     lrucache (0.1.1)
       PriorityQueue (~> 0.1.2)
     mail (2.3.3)
@@ -286,6 +289,7 @@ DEPENDENCIES
   has_scope
   inherited_resources
   jquery-rails
+  lograge
   marples (~> 1.0)
   mocha
   mysql2

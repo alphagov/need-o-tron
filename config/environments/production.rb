@@ -53,4 +53,5 @@ NeedOTron::Application.configure do
   config.active_support.deprecation = :notify
   config.action_mailer.default_url_options = { :host => 'needotron.production.alphagov.co.uk' }
   config.action_mailer.delivery_method = :ses
+  config.lograge.enabled = true
 end

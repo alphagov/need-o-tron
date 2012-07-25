@@ -37,6 +37,7 @@ gem 'marples', '~> 1.0'
 gem 'daemonette', :git => 'git://github.com/alphagov/daemonette.git'
 
 gem 'exception_notification'
+gem 'lograge'
 
 # gem 'acts-as-taggable-on'
 
