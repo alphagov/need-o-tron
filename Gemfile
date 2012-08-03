@@ -2,8 +2,6 @@ source 'http://rubygems.org'
 source 'https://gems.gemfury.com/vo6ZrmjBQu5szyywDszE/'
 
 gem 'rails', '~> 3.1.0'
-gem 'rack', '1.3.5'
-gem 'rake', '0.9.2'
 
 gem 'gds-warmup-controller'
 
