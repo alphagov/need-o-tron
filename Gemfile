@@ -1,14 +1,14 @@
 source 'http://rubygems.org'
 source 'https://gems.gemfury.com/vo6ZrmjBQu5szyywDszE/'
 
-gem 'rails', '~> 3.1.0'
+gem 'rails', '3.1.7'
 
 gem 'gds-warmup-controller'
 
 gem 'sqlite3'
 
 gem 'gelf'
-gem 'mysql2'
+gem 'mysql2', '0.3.10'
 gem 'rdiscount'
 
 gem 'aws-ses', :require => 'aws/ses'
