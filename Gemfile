@@ -32,7 +32,7 @@ gem 'has_scope'
 gem 'plek', '0.1.22'
 gem 'stomp', '1.1.9'
 gem 'marples', '~> 1.0'
-gem 'daemonette', :git => 'git://github.com/alphagov/daemonette.git'
+gem 'daemonette', :git => 'https://github.com/alphagov/daemonette.git'
 
 gem 'exception_notification'
 gem 'lograge'
