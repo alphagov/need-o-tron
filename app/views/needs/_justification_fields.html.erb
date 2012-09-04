@@ -4,7 +4,7 @@
     <%= f.input :evidence_type %>
     <%= f.input :details, :input_html => { :rows => "4" } %>
 
-    <%= f.input :file, as: :file, disabled: true, hint: 'File upload is currently disabled' %>
+    <%= f.input :file, as: :file, input_html: {disabled: true}, hint: 'File upload is currently disabled' %>
 
     <li class="delete-item"><%= link_to_remove_fields "Delete", f %></li>
     </ol>

@@ -14,7 +14,7 @@
   <%= f.inputs do %>
     <%= f.input :evidence_type %>
     <%= f.input :details %>
-    <%= f.input :file, as: :file, disabled: true, hint: 'File upload is currently disabled' %>
+    <%= f.input :file, as: :file, input_html: {disabled: true}, hint: 'File upload is currently disabled' %>
   <% end %>
   <%= f.buttons %>
 <% end %>
