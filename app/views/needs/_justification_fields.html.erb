@@ -3,8 +3,11 @@
     <ol>
     <%= f.input :evidence_type %>
     <%= f.input :details, :input_html => { :rows => "4" } %>
+
+    <% if false # we're disabling file uploads for the time being %>
     <%= f.input :file, :as => :file %>
       <li class="delete-item"><%= link_to_remove_fields "Delete", f %></li>
+    <% end %>
     </ol>
   </fieldset>
 </li>
