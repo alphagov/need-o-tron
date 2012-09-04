@@ -65,7 +65,9 @@
       <p><%= justification.evidence_type %></p>
       <p><%= markdown justification.details %></p>
       <% if justification.file? %>
-        <p><%= link_to 'Download file', justification.file_url %></p>
+        <p>Evidence files not currently available.
+          <%# link_to 'Download file', justification.file_url %>
+        </p>
       <% end %>
       <% if current_user.is_admin? %>
         <p><%= link_to 'Edit', edit_need_justification_path(@need, justification), :class => 'button' %></p>
