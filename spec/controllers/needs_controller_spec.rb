@@ -35,7 +35,7 @@ describe NeedsController do
     end
 
     describe "editing a need" do
-      setup do
+      before(:each) do
         @need = Need.create!(:status => Need::NEW)
       end
 
