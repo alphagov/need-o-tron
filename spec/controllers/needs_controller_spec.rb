@@ -34,6 +34,19 @@ describe NeedsController do
       end
     end
 
+    describe "editing a need" do
+      before(:each) do
+        @need = Need.create!(:status => Need::NEW)
+      end
+
+      describe "as a regular user" do
+        it "should not let me see the full edit need page" do
+          get :edit, id: @need.id
+          response.status.should == 403
+        end
+      end
+    end
+
     describe "deleting a need" do
 
       describe "as an admin" do
@@ -61,6 +74,20 @@ describe NeedsController do
           @need = Need.create!(:status => Need::NEW)
           delete :destroy, id: @need.id
 
+          response.status.should == 403
+        end
+      end
+    end
+
+    describe "creating a need" do
+      describe "as a regular user" do
+        it "should not let me see the new need page" do
+          get :new
+          response.status.should == 403
+        end
+
+        it "should not let me post a new need" do
+          post :create, need: {title: 'Blah'}
           response.status.should == 403
         end
       end

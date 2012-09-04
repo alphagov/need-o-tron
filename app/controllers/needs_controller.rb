@@ -3,7 +3,7 @@ require 'csv'
 
 class NeedsController < InheritedResources::Base
 
-  before_filter :ensure_user_is_admin!, :only => [:destroy]
+  before_filter :ensure_user_is_admin!, :only => [:new, :edit, :create, :destroy]
 
   has_scope :in_state
   skip_before_filter [:authenticate_user!, :require_signin_permission!], :if => lambda { |c|

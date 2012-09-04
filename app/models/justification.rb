@@ -4,5 +4,7 @@ class Justification < ActiveRecord::Base
 
   validates :evidence_type, :presence => true
 
-  mount_uploader :file, EvidenceFileUploader
+  # This uploader has been disabled until we can do a bit more work on
+  # verifying the format of files and checking them for viruses
+  # mount_uploader :file, EvidenceFileUploader
 end
