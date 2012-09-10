@@ -12,7 +12,7 @@ gem 'mysql2', '0.3.10'
 gem 'rdiscount'
 
 gem 'aws-ses', :require => 'aws/ses'
-gem 'gds-api-adapters', '~> 0.0.15'
+gem 'gds-api-adapters', '1.8.0'
 
 if ENV['BUNDLE_ENV'] == 'DEV'
   gem "gds-sso", :path => '../gds-sso'
