@@ -1,6 +1,6 @@
 module NeedsHelper
-  def start_work_link need
-    start_work = "#{Plek.current.find("arbiter")}/artefacts/new"
+  def start_work_link(need)
+    start_work = "#{Plek.current.find("panopticon")}/artefacts/new"
 
     if need.status == 'in-progress' || need.status == 'done'
       title = 'Continue work on this need'
@@ -21,8 +21,8 @@ module NeedsHelper
     end.html_safe
   end
 
-  def assign_work_link need
-    start_work =  "#{Plek.current.find("arbiter")}/artefacts"
+  def assign_work_link(need)
+    start_work =  "#{Plek.current.find("panopticon")}/artefacts"
     start_work += "?return_to=#{CGI.escape(request.url)}"
 
     form_tag start_work, :method => 'post', :target => '_blank' do
