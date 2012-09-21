@@ -36,6 +36,7 @@ gem 'daemonette', :git => 'https://github.com/alphagov/daemonette.git'
 
 gem 'exception_notification'
 gem 'lograge'
+gem 'unicorn', '4.3.1'
 
 # gem 'acts-as-taggable-on'
 
