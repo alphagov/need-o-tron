@@ -29,7 +29,7 @@ gem 'formtastic'
 gem 'inherited_resources'
 gem 'has_scope'
 
-gem 'plek', '0.1.22'
+gem 'plek', '1.0.0'
 gem 'stomp', '1.1.9'
 gem 'marples', '~> 1.0'
 gem 'daemonette', :git => 'https://github.com/alphagov/daemonette.git'
