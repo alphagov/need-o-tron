@@ -64,7 +64,7 @@ describe ApplicationController do
 
       describe "Admin users" do
         before(:each) do
-          @user.permissions = { GDS::SSO::Config.default_scope => ["admin"] }
+          @user.permissions = ["admin"]
         end
 
         it "can access :show" do

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   include NestedFormHelper
 
   def ensure_user_is_admin!
-    authorise_user!(GDS::SSO::Config.default_scope, "admin")
+    authorise_user!("admin")
   end
 
   protected

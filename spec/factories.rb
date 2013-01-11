@@ -3,11 +3,11 @@ FactoryGirl.define do
     uid { "ABC" }
     name { "T Est" }
     email { "test@example.com" }
-    permissions { Hash[GDS::SSO::Config.default_scope => ["signin"]] }
+    permissions { ["signin"] }
   end
   factory :admin_user, parent: :user do
     permissions do
-      Hash[GDS::SSO::Config.default_scope => ["admin", "signin"]]
+      ["admin", "signin"]
     end
   end
   factory :need do

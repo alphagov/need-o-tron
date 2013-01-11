@@ -12,6 +12,6 @@ class User < ActiveRecord::Base
   end
 
   def is_admin?
-    has_permission?(GDS::SSO::Config.default_scope, "admin")
+    has_permission?("admin")
   end
 end
