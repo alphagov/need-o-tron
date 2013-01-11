@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723095757) do
+ActiveRecord::Schema.define(:version => 20130111103552) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"

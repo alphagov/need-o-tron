@@ -16,7 +16,7 @@ gem 'gds-api-adapters', '4.1.3'
 if ENV['BUNDLE_ENV'] == 'DEV'
   gem "gds-sso", :path => '../gds-sso'
 else
-  gem "gds-sso", '2.1.0'
+  gem "gds-sso", '3.0.0'
 end
 
 gem 'carrierwave'

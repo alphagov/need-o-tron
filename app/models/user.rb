@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :name, :uid
   attr_accessible :uid, :email, :name, :permissions, as: :oauth
 
-  serialize :permissions, Hash
+  serialize :permissions, Array
 
   def to_s
     email
