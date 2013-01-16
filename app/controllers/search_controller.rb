@@ -44,11 +44,12 @@ class SearchController < ApplicationController
     end
 
     def sort_params
-      sort = ["#{params[:sort_by]} #{params[:sort_dir]}"]
+      sort = []
+      sort << [params[:sort_by], params[:sort_dir]]
       if params[:sort_by] == 'title'
-        sort << "id asc"
+        sort << ["id", "asc"]
       else
-        sort << "title asc"
+        sort << ["title", "asc"]
       end
       sort
     end

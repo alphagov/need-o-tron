@@ -18,7 +18,7 @@ class NeedSearch
     @response = Need.search(:page => @page, :per_page => @per_page) do
       # query             { @query.present? ? "all:#{@query}" : "*:*" }
       # facet('timeline') { date   :published_on, :interval => 'month' }
-      # sort              { by     :published_on, 'desc' }
+      sort                { by [*@sort].map { |param, direction| { param.to_sym => direction.to_sym } } }
     end
     # params = {
     #   query: ,
