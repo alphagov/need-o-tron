@@ -8,25 +8,31 @@ class NeedSearch
     @filters = options[:filters] || {}
     @per_page = options[:per_page] || 10
     @start = options[:start] || 0
+    @page = options[:page] || 0
     @sort = options[:sort] || []
   end
 
   class Error < RuntimeError; end
 
   def execute
-    params = {
-      query: @query.present? ? "all:#{@query}" : "*:*",
-      filters: filters,
-      facets: @facet_by.map { |facet| {field: facet, mincount: 1} },
-      fields: "*",
-      start: @start,
-      rows: @per_page
-    }
-    params[:sort] = [*@sort].join(',') if @sort.present?
-    self.response = client.query 'standard', params
-    if ! self.response
-      raise NeedSearch::Error, "Unable to search, maybe the search server is down.", caller
+    @response = Need.search(:page => @page, :per_page => @per_page) do
+      # query             { @query.present? ? "all:#{@query}" : "*:*" }
+      # facet('timeline') { date   :published_on, :interval => 'month' }
+      # sort              { by     :published_on, 'desc' }
     end
+    # params = {
+    #   query: ,
+    #   filters: filters,
+    #   facets: @facet_by.map { |facet| {field: facet, mincount: 1} },
+    #   fields: "*",
+    #   start: @start,
+    #   rows: @per_page
+    # }
+    # params[:sort] = [*@sort].join(',') if @sort.present?
+    # self.response = client.query 'standard', params
+    # if ! self.response
+    #   raise NeedSearch::Error, "Unable to search, maybe the search server is down.", caller
+    # end
   end
 
   def pages
@@ -46,12 +52,11 @@ class NeedSearch
   end
 
   def results
-    response.docs.map { |doc|
-      OpenStruct.new doc
-    }
+    response
   end
 
   def facets
+    return Hash.new { [] }
     response.present? && response.facet_fields
   end
 

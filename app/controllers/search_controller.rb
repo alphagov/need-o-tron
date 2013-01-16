@@ -10,7 +10,7 @@ class SearchController < ApplicationController
       facet_by: @facets,
       filters: @filters,
       per_page: per_page,
-      start: (@current_page - 1) * per_page,
+      page: @current_page,
       sort: sort_params
     )
     @search.execute
