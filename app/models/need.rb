@@ -47,10 +47,8 @@ class Need < ActiveRecord::Base
   before_save :record_formatting_decision_info, :if => :reason_for_formatting_decision_changed?
   before_save :set_creator, :on => :create
   before_validation :delete_empty_fact_checkers, :delete_empty_accountabilities
-  after_save :update_search_index
 
   before_destroy :check_need_is_not_started
-  after_destroy :remove_from_search_index
 
   validate :status, :in => STATUSES
   validates_presence_of :priority, :if => proc { |a| a.status == FORMAT_ASSIGNED }
@@ -60,25 +58,31 @@ class Need < ActiveRecord::Base
     self.creator = Thread.current[:current_user]
   end
 
-  attr_writer :indexer
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
 
-  def indexer
-    @indexer ||= SolrIndexer
-  end
+  def to_indexed_json
+    standard_fields = %w(id title description notes reason_for_decision reason_for_formatting_decision status priority)
+    associations = %w(kind writing_department)
+    date_fields = %w{created_at updated_at decision_made_at formatting_decision_made_at}
 
-  def update_search_index
-    indexable = SolrNeedPresenter.new(self)
-    indexer.new($solr, indexable).execute
-  end
-
-  def remove_from_search_index
-    indexer.new($solr, self).delete
-  end
-
-  def self.index_all
-    Need.find_each do |need|
-      need.update_search_index
+    details = {}
+    standard_fields.each do |label|
+      value = send(label.to_sym)
+      details[label] = value if value.present?
     end
+
+    associations.each do |label|
+      details[label] = send(label.to_sym).name if send(label.to_sym)
+    end
+
+    details['tags'] = tag_list.split(/ *, */)
+
+    date_fields.each do |date_field|
+      value = send(date_field.to_sym)
+      details[date_field] = value.to_s if value.present?
+    end
+    details.to_json
   end
 
   def record_decision_info
