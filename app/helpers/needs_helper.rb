@@ -81,14 +81,14 @@ module NeedsHelper
     path = []
     filters_hash.each do |field, values|
       [*values].each do |value|
-        path.concat([field,parameterize_filter(value)])
+        path.concat([field, parameterize_filter(value)])
       end
     end
     path
   end
 
   def parameterize_filter(param)
-    param.gsub("/","|")
+    param.to_s.gsub("/","|")
   end
 
   def self.deparameterize_filter(param)
