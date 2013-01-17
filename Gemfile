@@ -25,7 +25,7 @@ gem 'delsolr', :git => 'https://github.com/alphagov/delsolr.git',
 
 gem 'tire'
 
-gem 'rabl'
+gem 'rabl', '0.5.1'
 gem 'formtastic'
 gem 'inherited_resources'
 gem 'has_scope'

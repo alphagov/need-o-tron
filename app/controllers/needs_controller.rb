@@ -31,8 +31,7 @@ class NeedsController < InheritedResources::Base
 
   def show
     show! do |format|
-      format.json { # show.json.rabl
-      }
+      format.json
     end
   end
 
