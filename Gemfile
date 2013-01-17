@@ -58,9 +58,7 @@ group :production do
 end
 
 group :development, :test do
-  gem 'rspec'
-  gem 'rspec-core', '2.6.4'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '2.12.2'
   gem 'simplecov', '0.4.2'
   gem 'simplecov-rcov'
   gem 'ci_reporter'
@@ -75,8 +73,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'shoulda', '3.0.1'
-  gem 'mocha'
+  gem 'mocha', require: false
   gem 'webmock', require: false
   gem 'capybara', '~> 1.1.1'
-  gem "capybara-webkit", require: false
 end
