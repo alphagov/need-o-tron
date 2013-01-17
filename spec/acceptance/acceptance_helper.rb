@@ -13,11 +13,13 @@ RSpec.configure do |config|
 
   config.before :each do
     DatabaseCleaner.clean
-    $solr.delete_by_query("rails_env:#{Rails.env}")
+    NeedSearch.delete_search_index
+    NeedSearch.create_search_index
   end
 
   config.after :each do
     DatabaseCleaner.clean
+    NeedSearch.delete_search_index
   end
 end
 

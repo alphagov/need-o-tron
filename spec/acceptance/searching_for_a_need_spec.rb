@@ -1,12 +1,12 @@
 require_relative 'acceptance_helper'
 
 describe 'Searching for a need' do
-  before :each do
+  before(:each) do
     u = FactoryGirl.create(:admin_user)
     u.save!
   end
 
-  def create_need name, options = {}
+  def create_need(name, options = {})
     visit "/"
     click_link "Enter a new need"
     fill_in "Need", with: name
@@ -21,7 +21,7 @@ describe 'Searching for a need' do
     end
   end
 
-  def search_for text
+  def search_for(text)
     fill_in "Search", with: text
     click_button "Search"
   end
@@ -115,5 +115,4 @@ describe 'Searching for a need' do
       page.text.should =~ /Carrots.*Bananas.*Apples/m
     end
   end
-
 end

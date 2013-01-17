@@ -1,6 +1,5 @@
-require 'ostruct'
 class NeedSearch
-  attr_accessor :response, :query, :facet_by, :filters
+  attr_accessor :es_response, :query, :facet_by, :filters
 
   def initialize(query, options = {})
     @query = query
@@ -8,11 +7,12 @@ class NeedSearch
     @filters = options[:filters] || {}
     @per_page = options[:per_page] || 10
     @start = options[:start] || 0
-    @page = options[:page] || 0
+    @page = options[:page] || 1
     @sort = options[:sort] || []
   end
 
   class Error < RuntimeError; end
+  class NotYetExecuted < RuntimeError; end
 
   def execute
     sort_params = [*@sort].map do |param, direction| 
@@ -58,7 +58,12 @@ class NeedSearch
       end
     end
 
-    @response = search.results
+    @es_response = search.results
+  end
+
+  def response
+    raise NotYetExecuted unless @es_response
+    @es_response
   end
 
   def pages

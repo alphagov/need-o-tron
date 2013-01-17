@@ -25,10 +25,7 @@ describe NeedsCsv do
 
   it "should convert writing department to a string" do
     wd = FactoryGirl.create(:writing_department, name: "Ministry of Magic")
-    need = FactoryGirl.create(:need,
-      indexer: NullIndexer,
-      writing_department: wd
-    )
+    need = FactoryGirl.create(:need, writing_department: wd)
     need.reload
     csv = NeedsCsv.new([need], Time.now).to_csv
     data = CSV.parse(csv)

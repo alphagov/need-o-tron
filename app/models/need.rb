@@ -76,7 +76,7 @@ class Need < ActiveRecord::Base
       details[label] = send(label.to_sym).name if send(label.to_sym)
     end
 
-    details['tags'] = tag_list.split(/ *, */)
+    details['tags'] = tag_list.to_s.split(/ *, */)
 
     date_fields.each do |date_field|
       value = send(date_field.to_sym)
