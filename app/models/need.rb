@@ -61,6 +61,7 @@ class Need < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
+  index_name("#{Rails.env}-needs")
   def to_indexed_json
     standard_fields = %w(id title description notes reason_for_decision reason_for_formatting_decision status priority)
     associations = %w(kind writing_department)

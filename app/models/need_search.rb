@@ -19,7 +19,7 @@ class NeedSearch
       { param.to_sym => direction.to_sym }
     end.flatten
 
-    search = Tire.search 'needs' do |search|
+    search = Tire.search(self.class.index.name) do |search|
       if @query.present?
         search.query do |query|
           query.string @query
@@ -94,19 +94,17 @@ class NeedSearch
     results.each &block
   end
 
-  def client
-    $solr
-  end
+  class <<self
+    def index
+      Need.index
+    end
 
-  def filters
-    Hash[
-      @filters.map do |field, values|
-        [field, [*values].map {|value| value.blank? ? nil : value}]
-      end
-    ].merge(rails_env_filter)
-  end
+    def create_search_index
+      index.create
+    end
 
-  def rails_env_filter
-    { rails_env: Rails.env }
+    def delete_search_index
+      index.delete
+    end
   end
 end
