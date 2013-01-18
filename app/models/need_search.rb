@@ -2,7 +2,7 @@ class NeedSearch
   attr_accessor :es_response, :query, :facet_by, :filters
 
   def initialize(query, options = {})
-    @query = query
+    @query = query.present? ? query : '*'
     @facet_by = options[:facet_by] || []
     @filters = options[:filters] || {}
     @per_page = options[:per_page] || 10
@@ -14,47 +14,37 @@ class NeedSearch
   class Error < RuntimeError; end
   class NotYetExecuted < RuntimeError; end
 
-  def execute
-    sort_params = [*@sort].map do |param, direction| 
-      { param.to_sym => direction.to_sym }
-    end.flatten
+  def sort_params
+    @sort.each_with_object({}) do |(param, direction), collection|
+      collection[param.to_sym] = direction.to_sym
+    end
+  end
 
+  def execute
     search = Tire.search(self.class.index.name) do |search|
-      if @query.present?
-        search.query do |query|
-          query.string @query
-        end
-      end
+      search.query  { |query| query.string @query }
 
       search.size   @per_page
       search.from   (@page - 1) * @per_page
 
-      if @filters.any?
-        @filters.each do |field, values|
-          search.filter :terms, field.to_sym => values
+      # search.sort do |sort|
+      #   sort.by sort_params
+      # end
+
+      @filters.each do |field, values|
+        search.filter :terms, {field.to_sym => values, :execution => 'and'}
+      end
+
+      # In order to have the facet counts reduced by our filters
+      # we need to define the filters for each facet as well as
+      # for the query as a whole
+      @facet_by.each do |facet_option|
+        search.facet facet_option do |facet|
+          facet.terms facet_option.to_sym
+          @filters.each do |field, values|
+            facet.facet_filter :terms, {field.to_sym => values, :execution => 'and'}
+          end
         end
-      end
-
-      # TODO: We're defining our list of facets in two places, here and
-      # in the controller. That's not so good.
-      search.facet 'priority' do
-        terms :priority
-      end
-
-      search.facet 'writing_dept' do
-        terms :writing_department
-      end
-
-      search.facet 'status' do
-        terms :status
-      end
-
-      search.facet 'kind' do
-        terms :kind
-      end
-
-      search.facet 'tag' do
-        terms :tags
       end
     end
 
@@ -97,6 +87,10 @@ class NeedSearch
   class <<self
     def index
       Need.index
+    end
+
+    def refresh_search_index
+      index.refresh
     end
 
     def create_search_index

@@ -4,7 +4,7 @@ RSpec.configure do |config|
     NeedSearch.create_search_index
   end
 
-  config.after :each do
+  config.after :all do
     NeedSearch.delete_search_index
   end
 end

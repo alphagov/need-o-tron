@@ -62,6 +62,24 @@ class Need < ActiveRecord::Base
   include Tire::Model::Callbacks
 
   index_name("#{Rails.env}-needs")
+  mapping do
+    indexes :id,          type: 'integer', index: :not_analyzed
+    indexes :title,       index: :not_analyzed
+    indexes :description, analyzer: 'snowball', :boost => 20
+    indexes :notes
+    indexes :reason_for_decision
+    indexes :reason_for_formatting_decision
+    indexes :status
+    indexes :priority
+    indexes :kind
+    indexes :writing_department
+    indexes :created_at
+    indexes :updated_at
+    indexes :decision_made_at
+    indexes :formatting_decision_made_at
+    indexes :tags #, type: 'array'
+  end
+
   def to_indexed_json
     standard_fields = %w(id title description notes reason_for_decision reason_for_formatting_decision status priority)
     associations = %w(kind writing_department)
