@@ -113,11 +113,7 @@ GEM
     jwt (0.1.5)
       multi_json (>= 1.0)
     kgio (2.7.4)
-<<<<<<< HEAD
-    libv8 (3.3.10.4)
-=======
     libv8 (3.11.8.13)
->>>>>>> b119b08... Remove delsolr gem and other solr specific code
     libwebsocket (0.1.7.1)
       addressable
       websocket
@@ -134,7 +130,7 @@ GEM
     mime-types (1.19)
     mocha (0.13.1)
       metaclass (~> 0.0.1)
-    multi_json (1.2.0)
+    multi_json (1.0.4)
     multipart-post (1.1.5)
     mysql2 (0.3.10)
     nokogiri (1.5.6)
@@ -157,9 +153,9 @@ GEM
     plek (0.1.22)
       builder
     polyglot (0.3.3)
-    rabl (0.7.9)
+    rabl (0.5.1)
       activesupport (>= 2.3.14)
-      multi_json (~> 1.0)
+      multi_json (~> 1.0.3)
     rack (1.3.9)
     rack-accept (0.4.5)
       rack (>= 0.4)
@@ -196,19 +192,17 @@ GEM
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
-    rspec (2.6.0)
-      rspec-core (~> 2.6.0)
-      rspec-expectations (~> 2.6.0)
-      rspec-mocks (~> 2.6.0)
-    rspec-core (2.6.4)
-    rspec-expectations (2.6.0)
-      diff-lcs (~> 1.1.2)
-    rspec-mocks (2.6.0)
-    rspec-rails (2.6.1)
-      actionpack (~> 3.0)
-      activesupport (~> 3.0)
-      railties (~> 3.0)
-      rspec (~> 2.6.0)
+    rspec-core (2.12.2)
+    rspec-expectations (2.12.1)
+      diff-lcs (~> 1.1.3)
+    rspec-mocks (2.12.1)
+    rspec-rails (2.12.2)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.12.0)
+      rspec-expectations (~> 2.12.0)
+      rspec-mocks (~> 2.12.0)
     rubyzip (0.9.9)
     sass (3.2.5)
     sass-rails (3.1.6)
@@ -298,7 +292,6 @@ DEPENDENCIES
   coffee-rails (~> 3.1.0)
   database_cleaner
   exception_notification
-  factory_girl (= 2.1.2)
   factory_girl_rails (= 1.2.0)
   formtastic
   garb (~> 0.9.1)
@@ -309,7 +302,7 @@ DEPENDENCIES
   inherited_resources
   jquery-rails
   lograge
-  mocha
+  mocha (= 0.13.1)
   mysql2 (= 0.3.10)
   oauth
   plek (= 0.1.22)

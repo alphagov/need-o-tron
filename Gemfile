@@ -37,9 +37,10 @@ gem 'unicorn', '4.3.1'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'sass-rails',   "~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
+  gem 'therubyracer'
 end
 
 group :reporting do
@@ -51,27 +52,19 @@ end
 
 gem 'jquery-rails'
 
-group :production do
-  gem 'therubyracer'
-end
-
-group :development, :test do
-  gem 'rspec-rails', '2.12.2'
-  gem 'simplecov', '0.4.2'
-  gem 'simplecov-rcov'
-  gem 'ci_reporter'
-  gem "factory_girl", "2.1.2"
-  gem "factory_girl_rails", "1.2.0"
-end
-
 if ENV['RUBY_DEBUG']
   gem 'ruby-debug19'
 end
 
 group :test do
+  gem 'rspec-rails', '2.12.2'
+  gem 'simplecov', '0.4.2'
+  gem 'simplecov-rcov'
+  gem 'ci_reporter'
+  gem "factory_girl_rails", "1.2.0"
   gem 'database_cleaner'
   gem 'shoulda', '3.0.1'
-  gem 'mocha', require: false
+  gem 'mocha', '0.13.1', require: false
   gem 'webmock', require: false
   gem 'capybara', '~> 1.1.1'
 end
