@@ -90,7 +90,7 @@ class NeedSearch
 
   class <<self
     def index
-      Need.index
+      @index ||= Tire::Index.new(Need.tire.index.name)
     end
 
     def refresh_search_index
@@ -98,7 +98,13 @@ class NeedSearch
     end
 
     def create_search_index
-      index.create
+      if index.create(mappings: Need.tire.mapping_to_hash, settings: Need.tire.settings)
+        true
+      else
+        Rails.logger.info "[ERROR] There has been an error when creating the index -- elasticsearch returned:",
+          index.response
+        false
+      end
     end
 
     def delete_search_index
