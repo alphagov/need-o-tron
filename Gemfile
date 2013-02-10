@@ -52,12 +52,11 @@ end
 
 gem 'jquery-rails'
 
-if ENV['RUBY_DEBUG']
-  gem 'ruby-debug19'
+group :development, :test do
+  gem 'rspec-rails', '2.12.2'
 end
 
 group :test do
-  gem 'rspec-rails', '2.12.2'
   gem 'simplecov', '0.4.2'
   gem 'simplecov-rcov'
   gem 'ci_reporter'
