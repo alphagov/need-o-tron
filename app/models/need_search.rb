@@ -16,7 +16,11 @@ class NeedSearch
 
   def sort_params
     @sort.each_with_object({}) do |(param, direction), collection|
-      collection[param.to_sym] = direction.to_sym
+      if param == 'title'
+        collection[:"title.exact"] = direction.to_sym
+      else
+        collection[param.to_sym] = direction.to_sym
+      end
     end
   end
 
@@ -27,9 +31,9 @@ class NeedSearch
       search.size   @per_page
       search.from   (@page - 1) * @per_page
 
-      # search.sort do |sort|
-      #   sort.by sort_params
-      # end
+      search.sort do |sort|
+        sort.by sort_params
+      end
 
       @filters.each do |field, values|
         search.filter :terms, {field.to_sym => values, :execution => 'and'}

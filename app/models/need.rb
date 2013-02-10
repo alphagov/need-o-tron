@@ -61,23 +61,28 @@ class Need < ActiveRecord::Base
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  index_name("#{Rails.env}-needs")
+  index_name("blah-#{Rails.env}-needs")
   mapping do
-    indexes :id,          type: 'integer', index: :not_analyzed
-    indexes :title,       index: :not_analyzed
-    indexes :description, analyzer: 'snowball', :boost => 20
+    indexes :id,          type: 'integer',     index: :not_analyzed
+    indexes :title,       type: 'multi_field', fields: {
+      :title            => { :type => "string",      :analyzer => "snowball" },
+      :"title.exact"    => { :type => "string",      :index => :not_analyzed }
+    }
+
+    indexes :description, analyzer: 'snowball', boost: 20
     indexes :notes
     indexes :reason_for_decision
     indexes :reason_for_formatting_decision
     indexes :status
-    indexes :priority
-    indexes :kind
+    indexes :priority, :index => :not_analyzed
+    indexes :kind, :index => :not_analyzed
     indexes :writing_department
     indexes :created_at
     indexes :updated_at
     indexes :decision_made_at
     indexes :formatting_decision_made_at
-    indexes :tags #, type: 'array'
+    indexes :tags
+    indexes :updated_at, :index => :not_analyzed
   end
 
   def to_indexed_json
