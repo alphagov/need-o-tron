@@ -6,16 +6,16 @@ class Need < ActiveRecord::Base
   MAXIMUM_POLICY_DEPARTMENTS = 5
   MAXIMUM_FACT_CHECKERS = 5
 
-  FORMAT_ASSIGNED = "format-assigned"
+  FORMAT_ASSIGNED  = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
-  IN_PROGRESS = "in-progress"
-  ICEBOX = "icebox"
-  NEW = "new"
-  DONE = "done"
+  IN_PROGRESS      = "in-progress"
+  ICEBOX           = "icebox"
+  NEW              = "new"
+  DONE             = "done"
 
-  STATUSES = [NEW, READY_FOR_REVIEW, FORMAT_ASSIGNED, IN_PROGRESS, DONE, ICEBOX]
+  STATUSES              = [NEW, READY_FOR_REVIEW, FORMAT_ASSIGNED, IN_PROGRESS, DONE, ICEBOX]
   PRIORITIES_FOR_SELECT = [['low', 1], ['medium', 2], ['high', 3]]
-  PRIORITIES = {1 => 'low', 2 => 'medium', 3 => 'high'}
+  PRIORITIES            = {1 => 'low', 2 => 'medium', 3 => 'high'}
 
   belongs_to :kind
   belongs_to :decision_maker, :class_name => 'User'
