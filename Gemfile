@@ -30,6 +30,14 @@ gem 'exception_notification', '3.0.0'
 gem 'lograge', '0.1.2'
 gem 'unicorn', '4.3.1'
 
+if ENV['BUNDLE_ENV']
+  gem "gds-sso", :path => '../gds-sso'
+else
+  gem "gds-sso", '3.0.2', :require => 'gds-sso'
+end
+
+gem 'omniauth-gds', :require => 'omniauth-gds'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
