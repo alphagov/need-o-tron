@@ -13,7 +13,7 @@ gem 'rdiscount'
 gem 'aws-ses', :require => 'aws/ses'
 gem 'gds-api-adapters', '4.1.3'
 
-if ENV['BUNDLE_ENV'] == 'DEV'
+if ENV['BUNDLE_ENV']
   gem "gds-sso", :path => '../gds-sso'
 else
   gem "gds-sso", '3.0.0'
@@ -40,7 +40,7 @@ group :assets do
   gem 'sass-rails',   "~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
-  gem 'therubyracer'
+  gem 'therubyracer', '~> 0.9.4'
 end
 
 group :reporting do
@@ -63,7 +63,7 @@ group :test do
   gem "factory_girl_rails", "1.2.0"
   gem 'database_cleaner'
   gem 'shoulda', '3.0.1'
-  gem 'mocha', '0.13.1', require: false
+  gem 'mocha'
   gem 'webmock', require: false
   gem 'capybara', '~> 1.1.1'
 end
