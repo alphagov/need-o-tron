@@ -4,13 +4,13 @@ class SearchController < ApplicationController
 
   def index
     @current_page = (params[:page] || 1).to_i
-    @facets = %w{priority writing_dept status kind tag}
+    @facets = %w{priority writing_department status kind tags}
     @search = NeedSearch.new(
       params[:query],
       facet_by: @facets,
       filters: @filters,
       per_page: per_page,
-      start: (@current_page - 1) * per_page,
+      page: @current_page,
       sort: sort_params
     )
     @search.execute
@@ -44,11 +44,10 @@ class SearchController < ApplicationController
     end
 
     def sort_params
-      sort = ["#{params[:sort_by]} #{params[:sort_dir]}"]
-      if params[:sort_by] == 'title'
-        sort << "id asc"
-      else
-        sort << "title asc"
+      sort = []
+      sort << [params[:sort_by], params[:sort_dir]]
+      unless params[:sort_by] == 'title'
+        sort << ["title", "asc"]
       end
       sort
     end

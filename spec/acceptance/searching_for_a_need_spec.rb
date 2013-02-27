@@ -1,14 +1,13 @@
 require_relative 'acceptance_helper'
 
 describe 'Searching for a need' do
-  before :each do
+  before(:each) do
     u = FactoryGirl.create(:admin_user)
     u.save!
   end
 
-  def create_need name, options = {}
-    visit "/"
-    click_link "Enter a new need"
+  def create_need(name, options = {})
+    visit "/needs/new"
     fill_in "Need", with: name
     fill_in "Tags", with: options[:tags] if options.has_key?(:tags)
     click_button "Create Need"             
@@ -21,13 +20,23 @@ describe 'Searching for a need' do
     end
   end
 
-  def search_for text
+  def search_for(text)
     fill_in "Search", with: text
     click_button "Search"
   end
 
+  # Our tests were non-deterministic because POSTing the new documents to
+  # elasticsearch is handled asynchronously, so we couldn't be sure all the
+  # needs were indexed before the rest of the test executed. Explicitly
+  # asking ES to refresh solves that at the cost of a potential slow-down
+  # to the tests.
+  def survive_es_asynchonicity
+    NeedSearch.refresh_search_index
+  end
+
   it 'works when searching by title' do
     create_need "Replace passport"
+    survive_es_asynchonicity
 
     click_link "View all needs"
 
@@ -42,6 +51,8 @@ describe 'Searching for a need' do
     WritingDepartment.create name: "Ministry of Truth"     
     create_need "Get a new passport", edit_form_fields: { "Writing team" => "Ministry of Truth"}
     create_need "Get a new driving licence"
+    survive_es_asynchonicity
+
     click_link "View all needs"
     search_for 'Truth'
     within '#needs-table' do
@@ -54,8 +65,11 @@ describe 'Searching for a need' do
     create_need "Get a new passport", tags: "red"
     create_need "Learn to drive", tags: "blue"
 
+    survive_es_asynchonicity
+
     click_link "View all needs"
     click_link "red"
+
     within '#needs-table' do
       page.should have_content 'Get a new passport'
       page.should have_no_content 'Learn to drive'
@@ -74,6 +88,8 @@ describe 'Searching for a need' do
     create_need "Learn to drive", tags: "blue"
     create_need "Learn to walk", tags: "red"
 
+    survive_es_asynchonicity
+
     click_link "View all needs"
     click_link "blue"
     click_link "red"
@@ -88,6 +104,9 @@ describe 'Searching for a need' do
     11.upto(25) do |i|
       Need.create(title: "Need #{i}")
     end
+
+    survive_es_asynchonicity
+
     visit "/?per_page=10"
     within '#needs-table' do
       page.should have_no_content 'Need 21'
@@ -105,6 +124,9 @@ describe 'Searching for a need' do
     create_need "Apples"
     create_need "Carrots"
     create_need "Bananas"
+
+    survive_es_asynchonicity
+
     visit "/"
     page.should have_css "#needs-table th.sorting-asc", "Title"
     within '#needs-table' do
@@ -115,5 +137,4 @@ describe 'Searching for a need' do
       page.text.should =~ /Carrots.*Bananas.*Apples/m
     end
   end
-
 end

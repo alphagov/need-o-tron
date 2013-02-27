@@ -2,9 +2,11 @@
   <h3>Is the implementation complete?</h3>
   <%= semantic_form_for(@need) do |f| %>
     <%= f.inputs do %>
-      <%= f.input :status, :value => 'done', :as => 'hidden' %>
+      <%= f.input :status, :input_html => {:value => 'done'}, :as => 'hidden' %>
       <%= f.input :url %>
-      <%= f.commit_button 'It is done' %>
+    <% end %>
+    <%= f.actions do %>
+      <%= f.action :submit, label: 'It is done' %>
     <% end %>
   <% end %>
 </div>

@@ -1,47 +1,50 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 source 'https://BnrJb6FZyzspBboNJzYZ@gem.fury.io/govuk/'
 
 gem 'rails', '3.1.10'
 
-gem 'gds-warmup-controller'
-
-gem 'sqlite3'
-
 gem 'mysql2', '0.3.10'
-gem 'rdiscount'
+gem 'rdiscount', '1.6.8'
 
-gem 'aws-ses', :require => 'aws/ses'
+gem 'aws-ses', '0.4.4', :require => 'aws/ses'
 gem 'gds-api-adapters', '4.1.3'
 
-if ENV['BUNDLE_ENV'] == 'DEV'
+if ENV['BUNDLE_ENV']
   gem "gds-sso", :path => '../gds-sso'
 else
-  gem "gds-sso", '3.0.0'
+  gem "gds-sso", '3.0.2'
 end
 
-gem 'carrierwave'
-gem 'delsolr', :git => 'https://github.com/alphagov/delsolr.git',
-  :ref => '0e78228be3091bc2240aa0ba0b5c60791cad07c9'
+gem 'carrierwave', '0.5.8'
 
-gem 'rabl'
-gem 'formtastic'
-gem 'inherited_resources'
-gem 'has_scope'
+gem 'tire', '0.5.3'
+
+gem 'rabl', '0.5.1'
+gem 'formtastic', '2.2.1'
+gem 'inherited_resources', '1.3.1'
+gem 'has_scope', '0.5.1'
 
 gem 'plek', '0.1.22'
 
-gem 'exception_notification'
-gem 'lograge'
+gem 'exception_notification', '3.0.0'
+gem 'lograge', '0.1.2'
 gem 'unicorn', '4.3.1'
 
-# gem 'acts-as-taggable-on'
+if ENV['BUNDLE_ENV']
+  gem "gds-sso", :path => '../gds-sso'
+else
+  gem "gds-sso", '3.0.2', :require => 'gds-sso'
+end
+
+gem 'omniauth-gds', :require => 'omniauth-gds'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails', "  ~> 3.1.0"
+  gem 'sass-rails',   "~> 3.1.0"
   gem 'coffee-rails', "~> 3.1.0"
   gem 'uglifier'
+  gem 'therubyracer', '~> 0.9.4'
 end
 
 group :reporting do
@@ -53,30 +56,19 @@ end
 
 gem 'jquery-rails'
 
-group :production do
-  gem 'therubyracer'
-end
-
 group :development, :test do
-  gem 'rspec'
-  gem 'rspec-core', '2.6.4'
-  gem 'rspec-rails'
-  gem 'simplecov', '0.4.2'
-  gem 'simplecov-rcov'
-  gem 'ci_reporter'
-  gem "factory_girl", "2.1.2"
-  gem "factory_girl_rails", "1.2.0"
-end
-
-if ENV['RUBY_DEBUG']
-  gem 'ruby-debug19'
+  gem 'rspec-rails', '2.12.2'
 end
 
 group :test do
+  gem 'sqlite3', '1.3.7'
+  gem 'simplecov', '0.4.2'
+  gem 'simplecov-rcov'
+  gem 'ci_reporter'
+  gem "factory_girl_rails", "1.2.0"
   gem 'database_cleaner'
   gem 'shoulda', '3.0.1'
   gem 'mocha'
   gem 'webmock', require: false
   gem 'capybara', '~> 1.1.1'
-  gem "capybara-webkit", require: false
 end
