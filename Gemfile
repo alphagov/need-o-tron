@@ -51,7 +51,6 @@ group :reporting do
   gem 'garb', '~> 0.9.1'
   gem 'oauth'
   gem 'terminal-table'
-  gem 'whenever', :require => false
 end
 
 gem 'jquery-rails'
