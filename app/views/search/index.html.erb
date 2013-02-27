@@ -128,7 +128,9 @@
   <% @facets.each do |facet| %>
     <h3><span class="visuallyhidden">Filter by</span> <%= t("field.long.#{facet}") %></h3>
     <ul class="filter">
-      <% @search.facets[facet].each_slice(2) do |value, count| %>
+      <% @search.facets[facet]['terms'].each do |details| %>
+      <% value = details['term'] %>
+      <% count = details['count'] %>
         <% next if value.blank? %>
         <% label = facet == 'priority' ? t("priority_#{value}") : value %>
         <% if filtering_by?(facet, value) %>

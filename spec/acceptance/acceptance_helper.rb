@@ -13,7 +13,6 @@ RSpec.configure do |config|
 
   config.before :each do
     DatabaseCleaner.clean
-    $solr.delete_by_query("rails_env:#{Rails.env}")
   end
 
   config.after :each do

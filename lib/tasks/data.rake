@@ -1,4 +1,6 @@
-task :move_from_ready_for_carding => :environment do
-  Need.where(:status => "ready-for-carding").each { |n| n.status =
-"format-assigned"; n.save! }
+namespace :data do
+  desc "Use tire to populate the elasticsearch index"
+  task :populate_search_index => :environment do
+    Need.find_each { |n| n.tire.update_index }
+  end
 end

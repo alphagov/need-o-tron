@@ -6,16 +6,16 @@ class Need < ActiveRecord::Base
   MAXIMUM_POLICY_DEPARTMENTS = 5
   MAXIMUM_FACT_CHECKERS = 5
 
-  FORMAT_ASSIGNED = "format-assigned"
+  FORMAT_ASSIGNED  = "format-assigned"
   READY_FOR_REVIEW = "ready-for-review"
-  IN_PROGRESS = "in-progress"
-  ICEBOX = "icebox"
-  NEW = "new"
-  DONE = "done"
+  IN_PROGRESS      = "in-progress"
+  ICEBOX           = "icebox"
+  NEW              = "new"
+  DONE             = "done"
 
-  STATUSES = [NEW, READY_FOR_REVIEW, FORMAT_ASSIGNED, IN_PROGRESS, DONE, ICEBOX]
+  STATUSES              = [NEW, READY_FOR_REVIEW, FORMAT_ASSIGNED, IN_PROGRESS, DONE, ICEBOX]
   PRIORITIES_FOR_SELECT = [['low', 1], ['medium', 2], ['high', 3]]
-  PRIORITIES = {1 => 'low', 2 => 'medium', 3 => 'high'}
+  PRIORITIES            = {1 => 'low', 2 => 'medium', 3 => 'high'}
 
   belongs_to :kind
   belongs_to :decision_maker, :class_name => 'User'
@@ -47,10 +47,8 @@ class Need < ActiveRecord::Base
   before_save :record_formatting_decision_info, :if => :reason_for_formatting_decision_changed?
   before_save :set_creator, :on => :create
   before_validation :delete_empty_fact_checkers, :delete_empty_accountabilities
-  after_save :update_search_index
 
   before_destroy :check_need_is_not_started
-  after_destroy :remove_from_search_index
 
   validate :status, :in => STATUSES
   validates_presence_of :priority, :if => proc { |a| a.status == FORMAT_ASSIGNED }
@@ -60,25 +58,55 @@ class Need < ActiveRecord::Base
     self.creator = Thread.current[:current_user]
   end
 
-  attr_writer :indexer
+  include Tire::Model::Search
+  include Tire::Model::Callbacks
 
-  def indexer
-    @indexer ||= SolrIndexer
+  index_name("blah-#{Rails.env}-needs")
+  mapping do
+    indexes :id,          type: 'integer',     index: :not_analyzed
+    indexes :title,       type: 'multi_field', fields: {
+      :title            => { :type => "string",      :analyzer => "snowball" },
+      :"title.exact"    => { :type => "string",      :index => :not_analyzed }
+    }
+
+    indexes :description, analyzer: 'snowball', boost: 20
+    indexes :notes
+    indexes :reason_for_decision
+    indexes :reason_for_formatting_decision
+    indexes :status
+    indexes :priority, :index => :not_analyzed
+    indexes :kind, :index => :not_analyzed
+    indexes :writing_department
+    indexes :created_at
+    indexes :updated_at
+    indexes :decision_made_at
+    indexes :formatting_decision_made_at
+    indexes :tags
+    indexes :updated_at, :index => :not_analyzed
   end
 
-  def update_search_index
-    indexable = SolrNeedPresenter.new(self)
-    indexer.new($solr, indexable).execute
-  end
+  def to_indexed_json
+    standard_fields = %w(id title description notes reason_for_decision reason_for_formatting_decision status priority)
+    associations = %w(kind writing_department)
+    date_fields = %w{created_at updated_at decision_made_at formatting_decision_made_at}
 
-  def remove_from_search_index
-    indexer.new($solr, self).delete
-  end
-
-  def self.index_all
-    Need.find_each do |need|
-      need.update_search_index
+    details = {}
+    standard_fields.each do |label|
+      value = send(label.to_sym)
+      details[label] = value if value.present?
     end
+
+    associations.each do |label|
+      details[label] = send(label.to_sym).name if send(label.to_sym)
+    end
+
+    details['tags'] = tag_list.to_s.split(/ *, */)
+
+    date_fields.each do |date_field|
+      value = send(date_field.to_sym)
+      details[date_field] = value.to_s if value.present?
+    end
+    details.to_json
   end
 
   def record_decision_info

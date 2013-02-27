@@ -3,7 +3,8 @@ require 'spec_helper'
 describe DirectgovLink do
   it "should provide access to the link on Directgov" do
     stub_request(:any, /.*syndication.innovate.direct.gov.uk.*/).to_return(:status => [404, "Not Found"])
-    link = DirectgovLink.create(:directgov_id => "bob").should be_true
+    link = DirectgovLink.create(:directgov_id => "bob")
+    link.should be_persisted
     link.url.should == DirectgovLink::DIRECTGOV_DOMAIN + link.directgov_id
   end
 
