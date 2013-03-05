@@ -47,12 +47,6 @@ group :assets do
   gem 'therubyracer', '~> 0.9.4'
 end
 
-group :reporting do
-  gem 'garb', '~> 0.9.1'
-  gem 'oauth'
-  gem 'terminal-table'
-end
-
 gem 'jquery-rails'
 
 group :development, :test do
