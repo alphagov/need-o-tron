@@ -24,7 +24,7 @@ gem 'formtastic', '2.2.1'
 gem 'inherited_resources', '1.3.1'
 gem 'has_scope', '0.5.1'
 
-gem 'plek', '0.1.22'
+gem 'plek', '1.3.1'
 
 gem 'exception_notification', '3.0.0'
 gem 'lograge', '0.1.2'
