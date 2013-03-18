@@ -111,14 +111,14 @@ class Need < ActiveRecord::Base
 
   def record_decision_info
     if self.decision_made_at.nil? and self.reason_for_decision.present?
-      self.decision_made_at = Time.now
+      self.decision_made_at = Time.zone.now
       self.decision_maker = Thread.current[:current_user]
     end
   end
 
   def record_formatting_decision_info
     if self.formatting_decision_made_at.nil? and self.reason_for_formatting_decision.present?
-      self.formatting_decision_made_at = Time.now
+      self.formatting_decision_made_at = Time.zone.now
       self.formatting_decision_maker = Thread.current[:current_user]
     end
   end
