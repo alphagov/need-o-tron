@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://BnrJb6FZyzspBboNJzYZ@gem.fury.io/govuk/'
 
-gem 'rails', '3.1.10'
+gem 'rails', '3.1.12'
 
 gem 'mysql2', '0.3.10'
 gem 'rdiscount', '1.6.8'
@@ -61,7 +61,7 @@ group :test do
   gem "factory_girl_rails", "1.2.0"
   gem 'database_cleaner'
   gem 'shoulda', '3.0.1'
-  gem 'mocha'
+  gem 'mocha', '0.13.3', require: false
   gem 'webmock', require: false
   gem 'capybara', '~> 1.1.1'
 end
