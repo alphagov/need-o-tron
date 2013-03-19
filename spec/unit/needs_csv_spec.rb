@@ -9,7 +9,7 @@ describe NeedsCsv do
   end
 
   it "should have a header row" do
-    csv = NeedsCsv.new([], Time.now).to_csv
+    csv = NeedsCsv.new([], Time.zone.now).to_csv
     data = CSV.parse(csv)
     data[0][0].should == "Id"
   end
@@ -19,7 +19,7 @@ describe NeedsCsv do
     @need.fact_checkers.create(email: 'matt@alphagov.co.uk')
     @need.fact_checkers.create(email: 'ben@alphagov.co.uk')
 
-    csv = NeedsCsv.new([], Time.now)
+    csv = NeedsCsv.new([], Time.zone.now)
     csv.fact_checkers(@need) == "matt@alphagov.co.uk, ben@alphagov.co.uk"
   end
 
@@ -27,7 +27,7 @@ describe NeedsCsv do
     wd = FactoryGirl.create(:writing_department, name: "Ministry of Magic")
     need = FactoryGirl.create(:need, writing_department: wd)
     need.reload
-    csv = NeedsCsv.new([need], Time.now).to_csv
+    csv = NeedsCsv.new([need], Time.zone.now).to_csv
     data = CSV.parse(csv)
     headers = data[0]
     rows = data[1..-1].map { |cols| Hash[headers.zip(cols)] }
