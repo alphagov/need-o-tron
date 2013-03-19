@@ -8,9 +8,9 @@ Need-o-Tron is a Rails 3.1 application. It is built with ruby 1.9.2 and isn't
 guaranteed to work with any previous versions. To get up and running you'll
 need ruby and bundler installed. It should then just be a case of running:
 
-`bundle install
-rake db:setup
-rails server`
+    bundle install
+    rake db:setup
+    rails server
 
 To make it work properly you'll need to be running a correctly configured
 instance of solr. We're working on opening up more of our configuration files
