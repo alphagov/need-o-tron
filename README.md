@@ -30,6 +30,6 @@ against a separate app there's also a basic strategy for development use that wi
 simply use the first user in your database. To set that up you'll want something
 like:
 
-`% rails console
-User.create(:name => 'First User', :email => 'first@user.com', :uid => 1)
-exit`
+    % rails console
+    User.create(:name => 'First User', :email => 'first@user.com', :uid => 1)
+    exit
