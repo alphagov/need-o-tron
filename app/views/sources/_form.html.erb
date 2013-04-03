@@ -1,0 +1,25 @@
+<%= semantic_form_for([@need, @source]) do |f| %>
+  <% if @source.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@source.errors.count, "error") %> prohibited this link from being saved:</h2>
+
+      <ul>
+      <% @source.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.inputs do %>
+    <%= f.input :title, :as => :string %>
+    <%= f.input :kind, :as => :select, :collection => Source::KINDS.map {|k| [k.humanize, k]} %>
+    <%= f.input :url, :label => "URL", :as => :string %>
+    <%= f.input :body, :label => "Notes", :as => :text, :rows => "4" %>
+  <% end %>
+  <%= f.actions %>
+
+<% end %>
+<% if @source.persisted? %>
+  <%= link_to "Delete this source", need_source_path(@need, @source), :method => :delete, :confirm => "Are you sure?" %>
+<% end %>

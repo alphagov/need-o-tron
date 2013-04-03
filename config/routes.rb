@@ -4,6 +4,7 @@ NeedOTron::Application.routes.draw do
       resource :imports, :only => [:new, :create]
     end
     resources :justifications, :existing_services, :directgov_links
+    resources :sources
     resources :fact_checkers do
       collection do
         get :search
