@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111103552) do
+ActiveRecord::Schema.define(:version => 20130402171639) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"
@@ -131,6 +131,16 @@ ActiveRecord::Schema.define(:version => 20130111103552) do
   end
 
   add_index "needs", ["kind_id"], :name => "index_needs_on_kind_id"
+
+  create_table "sources", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "kind"
+    t.text     "body"
+    t.integer  "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
