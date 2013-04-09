@@ -15,67 +15,27 @@
 
 <div id="need-details" class="two-thirds">
 
+  <div class="need-section sources">
+    <h3>Why are we doing this need?</h3>
+
+    <ul>
+      <% @need.sources.each do |source| %>
+      <li>
+        <h4>[<%= source.kind.humanize %>] &mdash; <%= source.title %> <%= link_to "edit", edit_need_source_path(@need, source) %></h4>
+        <p>
+          <% if source.url.present? %><%= link_to source.url, source.url %><br><% end %>
+          <% if source.body.present? %><%= source.body %><% end %>
+        </p>
+      </li>
+      <% end %>
+    </ul>
+
+    <p><%= link_to "Add a new source", new_need_source_path(@need), :class => 'button' %></p>
+  </div>
+
   <div class="need-section">
     <h3>Tags</h3>
     <p><%= @need.tag_list %></p>
-  </div>
-
-  <div class="need-section">
-    <h3>Existing Services</h3>
-    <p>Link to existing services that satisfy this need, either on Government sites or elsewhere.</p>
-    <ul class="supporting-information">
-    <% @need.existing_services.each do |existing_service| %>
-    <li>
-      <p>This service is an <strong><%= existing_service.kind %></strong> service, and is <strong><%= existing_service.government_run? ? 'government run' : 'not government run' %></strong>.</p>
-      <% unless existing_service.description.blank? %><%= markdown existing_service.description %><% end %>
-      <% if existing_service.link %><p><%= link_to existing_service.link, existing_service.link %></p><% end %>
-      <% if current_user.is_admin? %>
-        <p><%= link_to 'Edit', edit_need_existing_service_path(@need, existing_service), :class => 'button' %> <%= button_to 'Delete', need_existing_service_path(@need, existing_service), :class => 'button', :method=>:delete %></p>
-      <% end %>
-    </li>
-    <% end %>
-    </ul>
-    <p><%= link_to 'Add service', new_need_existing_service_path(@need), :class => 'button' %></p>
-  </div>
-
-  <div class="need-section">
-    <h3>Directgov links</h3>
-    <p>Add the DG numbers of Directgov content which relate to this need</p>
-    <ul class="supporting-information">
-    <% @need.directgov_links.each do |link| %>
-    <li>
-      <p>
-        <%= link_to link.url, link.url %> - <%= link.title %> -
-        <% if current_user.is_admin? %>
-          <%= link_to 'Edit', edit_need_directgov_link_path(@need, link), :class => 'button' %> <%= button_to 'Delete', need_directgov_link_path(@need, link), :class => 'button', :method=>:delete %>
-        <% end %>
-      </p>
-    </li>
-    <% end %>
-    </ul>
-    <p><%= link_to 'Add link', new_need_directgov_link_path(@need), :class => 'button'%></p>
-  </div>
-
-  <div class="need-section">
-    <h3>Evidence</h3>
-    <p>Add evidence which supports this need, such as analytics data, or explicit government policy or statutory requirement.</p>
-    <ul class="supporting-information">
-    <% @need.justifications.each do |justification| %>
-    <li>
-      <p><%= justification.evidence_type %></p>
-      <p><%= markdown justification.details %></p>
-      <% if justification.file? %>
-        <p>Evidence files not currently available.
-          <%# link_to 'Download file', justification.file_url %>
-        </p>
-      <% end %>
-      <% if current_user.is_admin? %>
-        <p><%= link_to 'Edit', edit_need_justification_path(@need, justification), :class => 'button' %></p>
-      <% end %>
-    </li>
-    <% end %>
-    </ul>
-    <p><%= link_to 'Add evidence', new_need_justification_path(@need), :class => 'button'  %></p>
   </div>
 
 </div><!-- end need-details -->

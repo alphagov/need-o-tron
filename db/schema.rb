@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130111103552) do
+ActiveRecord::Schema.define(:version => 20130409064039) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"
@@ -43,33 +43,6 @@ ActiveRecord::Schema.define(:version => 20130111103552) do
     t.datetime "updated_at"
   end
 
-  create_table "directgov_links", :force => true do |t|
-    t.text     "title"
-    t.string   "directgov_id",                    :null => false
-    t.integer  "need_id"
-    t.boolean  "found",        :default => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "evidence_types", :force => true do |t|
-    t.string   "name"
-    t.integer  "weight"
-    t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "existing_services", :force => true do |t|
-    t.text     "description"
-    t.text     "link"
-    t.boolean  "government_run"
-    t.string   "kind"
-    t.integer  "need_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "fact_checkers", :force => true do |t|
     t.integer  "contact_id"
     t.integer  "need_id"
@@ -84,17 +57,6 @@ ActiveRecord::Schema.define(:version => 20130111103552) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "justifications", :force => true do |t|
-    t.text     "details"
-    t.integer  "need_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "file"
-    t.integer  "evidence_type_id"
-  end
-
-  add_index "justifications", ["need_id"], :name => "index_justifications_on_need_id"
 
   create_table "kinds", :force => true do |t|
     t.string   "name"
@@ -131,6 +93,16 @@ ActiveRecord::Schema.define(:version => 20130111103552) do
   end
 
   add_index "needs", ["kind_id"], :name => "index_needs_on_kind_id"
+
+  create_table "sources", :force => true do |t|
+    t.string   "title"
+    t.string   "url"
+    t.string   "kind"
+    t.text     "body"
+    t.integer  "need_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "taggings", :force => true do |t|
     t.integer  "tag_id"
