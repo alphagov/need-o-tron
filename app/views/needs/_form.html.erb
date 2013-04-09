@@ -30,54 +30,6 @@
 
     <% end %>
 
-    <fieldset class="inputs" id="existing_services">
-      <ol>
-        <li class="input">
-          <fieldset class="inputs">
-            <legend>Existing Services</legend>
-              <ol>
-                <%= f.semantic_fields_for :existing_services do |builder| %>
-                  <%= render :partial => "existing_service_fields", :locals => { :f => builder } %>
-                <% end %>
-                <li class="add-item"><%= link_to_add_fields "Add an existing service", f, :existing_services %></li>
-              </ol>
-          </fieldset>
-        </li>
-      </ol>
-    </fieldset>
-
-    <fieldset class="inputs" id="directgov_links">
-      <ol>
-        <li class="input">
-          <fieldset class="inputs">
-            <legend>Directgov Links</legend>
-              <ol>
-                <%= f.semantic_fields_for :directgov_links do |builder| %>
-                  <%= render :partial => "directgov_link_fields", :locals => { :f => builder } %>
-                <% end %>
-                <li class="add-item"><%= link_to_add_fields "Add a Directgov link", f, :directgov_links %></li>
-              </ol>
-          </fieldset>
-        </li>
-      </ol>
-    </fieldset>
-
-    <fieldset class="inputs" id="justifications">
-      <ol>
-        <li class="input">
-          <fieldset class="inputs">
-            <legend>Evidence</legend>
-              <ol>
-                <%= f.semantic_fields_for :justifications do |builder| %>
-                  <%= render :partial => "justification_fields", :locals => { :f => builder } %>
-                <% end %>
-                <li class="add-item"><%= link_to_add_fields "Add evidence", f, :justifications %></li>
-              </ol>
-          </fieldset>
-        </li>
-      </ol>
-    </fieldset>
-
   <% end %>
 
   <%= f.actions %>
