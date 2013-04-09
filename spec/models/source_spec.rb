@@ -8,7 +8,7 @@ describe Source do
       @atts = {
         :title => "UK bank holidays and time off - Directgov",
         :url => "http://www.direct.gov.uk/en/DG_1234567",
-        :kind => "directgov",
+        :kind => "legacy_service",
         :body => "List of bank holidays for England and Wales, Scotland and Northern Ireland for 2012-2015",
       }
     end

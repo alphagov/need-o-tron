@@ -2,7 +2,7 @@ class Source < ActiveRecord::Base
   belongs_to :need
 
   KINDS = [
-    'directgov',
+    'legacy_service',
     'existing_service',
     'government_campaign',
     'government_obligation',

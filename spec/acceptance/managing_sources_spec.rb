@@ -16,7 +16,7 @@ describe "Managing sources to a need" do
       page.should have_selector("h1", :text => "Add source")
 
       page.should have_field("Title")
-      page.should have_select("Kind", :with_options => ["Directgov", "Existing service"])
+      page.should have_select("Kind", :with_options => ["Legacy service", "Existing service"])
       page.should have_field("URL")
       page.should have_field("Notes")
 
@@ -81,7 +81,7 @@ describe "Managing sources to a need" do
         page.should have_selector("h1", :text => "Edit source")
 
         page.should have_field("Title", :with => "Local authority online tools")
-        page.should have_select("Kind", :with_options => ["Directgov", "Existing service"], :selected => "Existing service")
+        page.should have_select("Kind", :with_options => ["Legacy service", "Existing service"], :selected => "Existing service")
         page.should have_field("URL", :with => "http://something.gov.uk/")
         page.should have_field("Notes")
 
@@ -102,7 +102,7 @@ describe "Managing sources to a need" do
 
       it "saves and redirects to the need given a valid source" do
         fill_in "Title", :with => "Local authority single tool"
-        select "Directgov", :from => "Kind"
+        select "Legacy service", :from => "Kind"
         click_on "Update Source"
 
         within("p.notice") do
@@ -110,7 +110,7 @@ describe "Managing sources to a need" do
         end
 
         within(".sources li:first-child") do
-          page.should have_content("Directgov")
+          page.should have_content("Legacy service")
           page.should have_content("Local authority single tool")
         end
       end
