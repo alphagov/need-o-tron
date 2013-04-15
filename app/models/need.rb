@@ -26,6 +26,7 @@ class Need < ActiveRecord::Base
   has_many :existing_services
   has_many :directgov_links
   has_many :fact_checkers
+  has_many :sources
 
   belongs_to :writing_department
 
