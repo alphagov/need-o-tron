@@ -4,17 +4,20 @@ For an overview of the need-o-tron visit [Richard Pope's introductory blog post]
 
 ## Getting set up
 
-Need-o-Tron is a Rails 3.1 application. It is built with ruby 1.9.2 and isn't 
-guaranteed to work with any previous versions. To get up and running you'll
-need ruby and bundler installed. It should then just be a case of running:
+Need-o-Tron is a Rails 3.1 application. It is built with ruby 1.9.2 and is only
+guaranteed to work with that and 1.9.3, though it should be compatible with ruby
+2.0
+
+To get up and running you'll need mysql, elasticsearch, ruby and bundler installed.
+On a mac we recommend using [homebrew](http://mxcl.github.io/homebrew/) to install
+the former two.
+
+Once those requirements are satisfied, getting the app up and running should just
+be a case of running:
 
     bundle install
     rake db:setup
     rails server
-
-To make it work properly you'll need to be running a correctly configured
-instance of solr. We're working on opening up more of our configuration files
-but for now the best way to get the correct solr schema is via [this gist](https://gist.github.com/1942409)
 
 ## Authentication 
 
