@@ -55,6 +55,6 @@ class NeedsController < InheritedResources::Base
   end
 
   def collection
-    @needs ||= Need.includes(:directgov_links, :fact_checkers, :existing_services, :justifications, :kind, :writing_department, {accountabilities: :department})
+    @needs ||= Need.includes(:fact_checkers, :sources, :kind, :writing_department, {accountabilities: :department})
   end
 end
