@@ -8,3 +8,16 @@
 .search {
   margin-top: 1em;
 }
+
+.search-filters {
+  h2 { font-size: 1.5em; line-height: 1.1em; }
+  h3 { font-size: 1em; line-height: 1.1em;  }
+}
+
+ul.filters {
+  margin-left: 0;
+  padding: 0.5em 1em;
+
+  h3 { display: inline-block; padding-right: 1em; font-size: 1em; line-height: 1em; }
+  li { display: inline-block; padding-right: 1em; list-type: none; }
+}
