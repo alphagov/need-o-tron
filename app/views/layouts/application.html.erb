@@ -2,7 +2,9 @@
 <html>
   <head>
     <title><%= yield(:title) + " - " if content_for?(:title) %>Need-O-Tron</title>
-    <%= stylesheet_link_tag "/stylesheets/core", "/stylesheets/formtastic", "/stylesheets/needs", "/stylesheets/table-icons.css" %>
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+
     <%= csrf_meta_tags %>
   </head>
   <body>
