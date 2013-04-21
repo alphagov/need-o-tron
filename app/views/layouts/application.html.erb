@@ -8,57 +8,51 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div id="container">
-      <div id="app-header">
-        <p id="logo"><%= link_to 'Need-O-Tron', root_path %>. <small>Hello <%= current_user.name.present? ? current_user.name : current_user.email %>, you&rsquo;re looking lovely today.</small></p>
-
-        <div role="navigation">
-          <% if user_signed_in? %>
-          <ul class="navigation">
-            <li><%= link_to 'View all needs', search_path %></li>
-            <li>
-              <a class="new" href="<%= search_link_for_page({}, {status: 'new'}, 1) %>">
-                New
-                <span class="count">(<%= Need.in_state('new').count %>)</span>
-                <div class="arrow-right"></div>
-              </a>
-            </li>
+    <header class="navbar navbar-static-top">
+      <div class="navbar-inner">
+        <%= link_to "GOV.UK Need-o-tron", root_path, :class => 'brand' %>
+        <nav role="navigation" class="nav-collapse">
+          <ul class="nav">
+            <li><%= link_to 'All needs', search_path %></li>
+            <li><a class="new" href="<%= search_link_for_page({}, {status: 'new'}, 1) %>">New needs (<%= Need.in_state('new').count %>)</a></li>
             <% if current_user.is_admin? %>
-            <li><%= link_to 'Enter a new need', new_need_path %></li>
-            <li><%= link_to 'View analytics', 'https://www.google.com/analytics/web/#dashboard/default/a26179049w50705554p51337955/', :title => "Leave the Needotron and open Google Analytics" %></li>
+              <li><%= link_to 'Enter a new need', new_need_path %></li>
             <% end %>
+          </ul>
+          <ul class="nav pull-right">
             <li><%= link_to 'Sign out', gds_sign_out_path %></li>
           </ul>
+          <p class="navbar-text pull-right">Hello, <a href="<%= Plek.current.find('signon') %>"><%= current_user.name %></a></p>
+        </nav>
+      </div>
+    </div>
 
+    <div id="main" class="container-fluid <%= yield :current_state %>">
+      <% flash.each do |k, v| %>
+        <p class="<%= k %> flash-<%= k %>"><%= v %></p>
+      <% end %>
+
+      <div class="row-fluid">
+        <div class="pull-right">
           <div class="search">
-            <form action='<%= (controller_name == 'search') ? "" : "/search"  %>'>
+            <%= form_tag search_path, :class => "form-search" do %>
               <label>Search for:
-                <%= text_field_tag :query, params[:query] %>
+                <%= text_field_tag :query, params[:query], :class => "input-medium search-query" %>
               </label>
-              <%= submit_tag "Search" %>
-            </form>
+              <%= submit_tag "Search", :class => "btn" %>
+            <% end %>
           </div>
-
-          <% end %>
         </div>
       </div>
-    </div>
-    <div id="main-content" class="<%= yield :current_state %>">
-      <div id="content-area" class="cf">
-        <% flash.each do |k, v| %>
-        <p class="<%= k %> flash-<%= k %>"><%= v %></p>
-        <% end %>
 
-        <%= yield %>
-      </div>
+      <%= yield %>
     </div>
+
     <div id="footer" class="cf">
       &copy; <%= Date.today.year %> <a href="http://digital.cabinetoffice.gov.uk/"><abbr title="Government Digital Service">GDS</abbr></a>. 
       Need-o-Tron release: <%= CURRENT_RELEASE_SHA %>
     </div>
-    <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <%= javascript_include_tag "/javascripts/rails", "/javascripts/application", "/javascripts/needs" %>
+
     <%= yield :extra_javascript %>
   </body>
 </html>
