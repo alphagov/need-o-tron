@@ -22,8 +22,3 @@ end
 
 Capybara.default_driver = :rack_test
 Capybara.javascript_driver = :selenium
-Capybara.app = Rack::Builder.new do
-  map "/" do
-    run Capybara.app
-  end
-end

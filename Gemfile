@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://BnrJb6FZyzspBboNJzYZ@gem.fury.io/govuk/'
 
-gem 'rails', '3.1.12'
+gem 'rails', '3.2.13'
 
 gem 'mysql2', '0.3.10'
 gem 'rdiscount', '1.6.8'
@@ -38,19 +38,19 @@ end
 
 gem 'omniauth-gds', :require => 'omniauth-gds'
 
+gem 'jquery-rails', '2.2.1'
+gem 'bootstrap-sass', '2.3.1.0'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   "~> 3.1.0"
-  gem 'coffee-rails', "~> 3.1.0"
-  gem 'uglifier'
-  gem 'therubyracer', '~> 0.9.4'
+  gem 'sass-rails',   '3.2.6'
+  gem 'uglifier', '2.0.1'
+  gem 'therubyracer', '0.11.4'
 end
 
-gem 'jquery-rails'
-
 group :development, :test do
-  gem 'rspec-rails', '2.12.2'
+  gem 'rspec-rails', '2.13.0'
 end
 
 group :test do
@@ -58,7 +58,7 @@ group :test do
   gem 'simplecov', '0.4.2'
   gem 'simplecov-rcov'
   gem 'ci_reporter'
-  gem "factory_girl_rails", "1.2.0"
+  gem "factory_girl_rails", "4.2.0"
   gem 'database_cleaner'
   gem 'shoulda', '3.0.1'
   gem 'mocha', '0.13.3', require: false
