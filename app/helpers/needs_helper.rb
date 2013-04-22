@@ -17,7 +17,7 @@ module NeedsHelper
         hidden_field_tag("artefact[tags]", need.tag_list).html_safe,
         hidden_field_tag("artefact[department]", need.writing_department).html_safe
       ].join.html_safe + \
-      submit_tag(title, :disable_with => 'Working...', :class => 'fulfill').html_safe
+      button_tag(title, :type => "submit", :disable_with => 'Working...', :class => 'btn btn-block btn-large btn-primary').html_safe
     end.html_safe
   end
 
@@ -34,7 +34,7 @@ module NeedsHelper
         hidden_field_tag("artefact[kind]", need.kind.to_s.downcase).html_safe,
         hidden_field_tag("artefact[tags]", need.tag_list).html_safe
       ].join.html_safe + \
-      submit_tag('Assign need', :disable_with => 'Working...', :class => 'fulfill').html_safe
+      submit_tag('Assign need', :disable_with => 'Working...', :class => 'btn btn-block btn-large').html_safe
     end.html_safe
   end
 
@@ -142,6 +142,7 @@ module NeedsHelper
     when %w{bin icebox} then ''
     when 'in-progress' then 'label-warning'
     when 'format-assigned' then 'label-info'
+    when 'ready-for-review' then 'label-review'
     end
   end
 

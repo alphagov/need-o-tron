@@ -41,11 +41,11 @@ describe "Managing sources to a need" do
       select "Existing service", :from => "Kind"
       click_on "Create Source"
 
-      within("p.notice") do
+      within(".alert") do
         page.should have_content("Source was successfully created")
       end
 
-      within("#need-details") do
+      within(".sources") do
         page.should have_content("An important source")
       end
     end
@@ -105,7 +105,7 @@ describe "Managing sources to a need" do
         select "Legacy service", :from => "Kind"
         click_on "Update Source"
 
-        within("p.notice") do
+        within(".alert") do
           page.should have_content("Source was successfully updated")
         end
 
@@ -124,7 +124,7 @@ describe "Managing sources to a need" do
       end
       click_on "Delete this source"
 
-      within("p.notice") do
+      within(".alert") do
         page.should have_content("Source was successfully destroyed")
       end
 
