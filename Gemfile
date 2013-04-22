@@ -21,6 +21,8 @@ gem 'tire', '0.5.3'
 
 gem 'rabl', '0.5.1'
 gem 'formtastic', '2.2.1'
+gem 'formtastic-bootstrap', '2.1.1'
+
 gem 'inherited_resources', '1.3.1'
 gem 'has_scope', '0.5.1'
 
@@ -29,12 +31,6 @@ gem 'plek', '1.3.1'
 gem 'exception_notification', '3.0.0'
 gem 'lograge', '0.1.2'
 gem 'unicorn', '4.3.1'
-
-if ENV['BUNDLE_ENV']
-  gem "gds-sso", :path => '../gds-sso'
-else
-  gem "gds-sso", '3.0.2', :require => 'gds-sso'
-end
 
 gem 'omniauth-gds', :require => 'omniauth-gds'
 
