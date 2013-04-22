@@ -12,6 +12,13 @@
 .search-filters {
   h2 { font-size: 1.5em; line-height: 1.1em; }
   h3 { font-size: 1em; line-height: 1.1em;  }
+
+  ul.facet li {
+    &.active {
+      padding: 0px 1em;
+      a.remove { display: inline-block; padding: 0.3em 0.5em; margin-left: 0.5em; }
+    }
+  }
 }
 
 ul.filters {

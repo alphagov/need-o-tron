@@ -135,4 +135,14 @@ module NeedsHelper
     (0...Need::MAXIMUM_POLICY_DEPARTMENTS).map { |i| need.accountabilities.all[i] || need.accountabilities.build }
   end
 
+  def label_for(status)
+    case status
+    when 'new' then 'label-inverse'
+    when 'done' then 'label-success'
+    when %w{bin icebox} then ''
+    when 'in-progress' then 'label-warning'
+    when 'format-assigned' then 'label-info'
+    end
+  end
+
 end

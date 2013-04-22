@@ -6,14 +6,12 @@
         <%= sortable_heading('title') %>
         <%= sortable_heading('kind') %>
         <%= sortable_heading('priority') %>
-        <th><%= t('field.short.tags') %></th>
         <%= sortable_heading('updated_at') %>
       <% else %>
         <th scope="col">ID</th>
         <th scope="col">Title</th>
         <th scope="col">Format</th>
         <th scope="col">Priority</th>
-        <th scope="col">Tags</th>
         <th scope="col">Last updated</th>
       <% end %>
 
@@ -27,10 +25,9 @@
     <% needs.each do |need| %>
       <tr>
         <td>#<%= need.id %></td>
-        <th scope="row"><%= link_to need.title, need %> <% if !params[:in_state] %><small class="status-label <%= need.status %>"><%= status_name need.status %></small><% end %></th>
-        <td class="need"><%= need.format_assigned? ? need.kind : "-" %></td>
-        <td><%= need.prioritised? ? need.named_priority : '-' %></td>
-        <td><%= need.tag_list %></td>
+        <th scope="row" style="width: 50%"><%= link_to need.title, need %> <% if !params[:in_state] %><span class="label <%= label_for need.status %>"><%= status_name need.status %></small><% end %></th>
+        <td class="need"><%= need.kind || "-" %></td>
+        <td><%= named_priority need.priority %></td>
         <td><%= time_ago_in_words(need.updated_at, true) %></td>
         <% if current_user.is_admin? %>
           <td><%= link_to 'Edit', edit_need_path(need) %></td>

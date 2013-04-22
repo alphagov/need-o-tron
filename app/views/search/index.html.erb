@@ -11,16 +11,6 @@
   end
 } %>
 
-<% if @search && (params[:query] || params[:filter]) %>
-<div class="results">
-  <p>Your search
-  <% if params[:query].present? %>
-    for <strong><%= params[:query] %></strong>
-  <% end %>
-  returned <%= pluralize(@search.count, 'result') %>. You can filter those results below.</p>
-</div>
-<% end %>
-
 <% if @filters.present? %>
 <ul class="filters well">
   <h3>Filter applied:</h3>
@@ -50,12 +40,12 @@
       <h2>Search Filters</h2>
       <% @facets.each do |facet| %>
         <h3><span class="visuallyhidden">Filter by</span> <%= t("field.long.#{facet}") %></h3>
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="facet nav nav-pills nav-stacked">
           <% @search.facets[facet]['terms'].each do |details| %>
             <% next if details['term'].blank? %>
             <% label = facet == 'priority' ? t("priority_#{details['term']}") : details['term'] %>
             <% if filtering_by?(facet, details['term']) %>
-              <li>
+              <li class="active">
                 <%= label %> (<%= details['count'] %>)
                 <%= link_to('x', search_link_with_removed_filter(params, @filters, facet => details['term']), class: 'remove') %>
               </li>
