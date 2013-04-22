@@ -29,7 +29,7 @@
 
     <div id="main" class="container-fluid <%= yield :current_state %>">
       <% flash.each do |k, v| %>
-        <p class="<%= k %> flash-<%= k %>"><%= v %></p>
+        <div class="alert" id="flash-<%= k %>"><%= v %></div>
       <% end %>
 
       <div class="row-fluid">
