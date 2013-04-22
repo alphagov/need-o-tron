@@ -75,13 +75,13 @@
           <%= pagination_link(1, 1) %>
         <% end %>
         <% if paginate_from > 2 %>
-          <span>&hellip;</span>
+          <li class="disabled"><span>&hellip;</span></li>
         <% end %>
         <% (paginate_from..paginate_to).each do |page_num| %>
           <%= pagination_link(page_num, page_num) %>
         <% end %>
         <% if paginate_to < @search.pages.last - 1 %>
-          <span>&hellip;</span>
+          <li class="disabled"><span>&hellip;</span></li>
         <% end %>
         <% if paginate_to < @search.pages.last %>
           <%= pagination_link(@search.pages.last, @search.pages.last) %>
