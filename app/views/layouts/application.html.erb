@@ -46,11 +46,12 @@
       </div>
 
       <%= yield %>
-    </div>
 
-    <div id="footer" class="cf">
-      &copy; <%= Date.today.year %> <a href="http://digital.cabinetoffice.gov.uk/"><abbr title="Government Digital Service">GDS</abbr></a>.
-      Need-o-Tron release: <%= CURRENT_RELEASE_SHA %>
+      <hr>
+
+      <footer>
+        <p>&copy; GDS. <span class="pull-right">Need-o-Tron release: <%= CURRENT_RELEASE_SHA %></span></p>
+      </footer>
     </div>
 
     <%= yield :extra_javascript %>
