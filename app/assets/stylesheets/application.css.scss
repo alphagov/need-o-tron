@@ -5,6 +5,26 @@
 
 @import "bootstrap";
 
+header.navbar .navbar-inner {
+  background: #111;
+  padding: 0.5rem 1rem;
+  font-family: "Gill Sans", Helvetica, Arial, sans-serif;
+
+  .brand {
+    background: image-url('header-crown.png') no-repeat left 5px;
+    color: #fff;
+    text-shadow: none;
+    padding: 9px 10px 1px 42px;
+    margin-left: 0;
+    font-weight: normal;
+  }
+
+  p, p a, .nav li {
+    font-size: 1.05rem;
+    a { color: #fff; text-shadow: none; }
+  }
+}
+
 .search {
   margin-top: 1em;
 }
