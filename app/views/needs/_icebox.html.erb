@@ -1,9 +1,9 @@
-<div class="icebox">
+<div class="icebox well">
   <h3>Want to icebox this?</h3>
   <%= semantic_form_for(@need) do |f| %>
     <%= f.inputs do %>
-      <%= f.input :status, :input_html => {:value => 'icebox'}, :as => 'hidden' %>
-      <%= f.input :reason_for_decision %>
+      <%= f.input :status, :input_html => {:value => 'icebox'}, :label => false, :as => 'hidden' %>
+      <%= f.input :reason_for_decision, :input_html => { :class => "input-block-level" } %>
     <% end %>
     <%= f.actions do %>
       <%= f.action :submit, label: 'Icebox it' %>

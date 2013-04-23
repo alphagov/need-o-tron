@@ -1,17 +1,20 @@
-<div id="csv-import">
+<section id="csv-import" class="span12 centred">
   <h2>Import a CSV and update Needs it refers to</h2>
-  <%= form_for(Import.new, :multipart => true) do |f| %>
-    <p id="csv-upload">
-      <%= f.label :csv, 'CSV file' %>
-      <%= f.file_field :csv %>
-    </p>
+  <%= semantic_form_for(Import.new, :multipart => true) do |f| %>
+    <%= f.label :csv, 'CSV file' %>
+    <%= f.file_field :csv %>
+
     <h3>Update the following fields:</h3>
     <p>Note that the <strong>column names in the CSV must match</strong> the names below</p>
-    <ul>
-      <% Import::IMPORT_OPTIONS.each do |import_option| %>
-        <li><%= f.label import_option %><%= f.check_box import_option %></li>
-      <% end %>
-    </ul>
-    <p><%= f.submit 'Upload', class: 'button' %></p>
+
+    <% Import::IMPORT_OPTIONS.each do |import_option| %>
+        <%= f.label import_option, :input_html => { :class => "checkbox" } do %>
+          <%= f.check_box import_option %> <%= import_option %>
+        <% end %>
+    <% end %>
+
+    <%= f.actions do %>
+      <%= f.submit "Upload", :class => "btn btn-primary" %>
+    <% end %>
   <% end %>
-</div>
+</section>

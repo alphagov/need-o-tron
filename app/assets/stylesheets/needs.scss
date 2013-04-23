@@ -1,0 +1,61 @@
+section#need {
+  h2.need-status-block {
+    background: #eee;
+    padding: 0.5em;
+    font-weight: normal;
+    display: block;
+    text-align: right;
+    color: #fff;
+    float: right;
+
+    p { margin: 0; }
+    .need-id { font-weight: bold; }
+    .need-status { font-size: 0.8em; }
+
+    &.done { background: #6eb248; }
+    &.format-assigned { background: #4990c0; }
+    &.in-progress { background: #ec973d; }
+    &.bin, &.icebox { color: #555; }
+    &.new { background: #333; }
+    &.ready-for-review { background: #8967a3; }
+  }
+
+  .need-decision {
+    border-left: 6px solid #ddd;
+    padding: 0.4em 0.6em;
+    line-height: 1.4em;
+    margin-bottom: 1em;
+    font-size: 1.2em;
+
+    &.done { border-color: #6eb248;}
+  }
+
+  .need-description {
+    font-size: 1em;
+    padding: 1em 0;
+
+    h1, h2 { font-size: 1.5em; line-height: 1.5em; }
+  }
+
+  .need-section {
+    padding: 1em;
+    background: #eee;
+    margin-bottom: 1em;
+    clear: right;
+
+    h2 { font-size: 1.4em; line-height: 1.4em; margin: 0 0 0.5em; }
+    ul {
+      margin: 1em 0 1em 0em;
+
+      li {
+        margin-bottom: 0.5em; list-style: none;
+        h3 { font-size: 1.2em; line-height: 1.2em; margin: 0 0 0.25em; font-weight: normal; }
+      }
+    }
+  }
+
+  .need-toolbox {
+    form, p { margin: 0 0 0.5em; }
+  }
+
+}

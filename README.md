@@ -4,7 +4,7 @@ For an overview of the need-o-tron visit [Richard Pope's introductory blog post]
 
 ## Getting set up
 
-Need-o-Tron is a Rails 3.1 application. It is built with ruby 1.9.2 and is only
+Need-o-Tron is a Rails 3.2 application. It is built with ruby 1.9.2 and is only
 guaranteed to work with that and 1.9.3, though it should be compatible with ruby
 2.0
 
@@ -19,12 +19,12 @@ be a case of running:
     rake db:setup
     rails server
 
-## Authentication 
+## Authentication
 
-Need-o-tron designed to work as part of a suite of applications, authenticating 
+Need-o-tron designed to work as part of a suite of applications, authenticating
 against an OAuth provider such as [Sign-on-o-tron](https://github.com/alphagov/sign-on-o-tron)
 
-It does that via the [GDS-SSO](https://github.com/alphagov/gds-sso) gem. See that 
+It does that via the [GDS-SSO](https://github.com/alphagov/gds-sso) gem. See that
 project's README for configuration details. It's an OAuth2 provider, and you could
 alternatively use any other OAuth2 provider.
 

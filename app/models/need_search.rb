@@ -84,7 +84,7 @@ class NeedSearch
     response.present? && response.facets
   end
 
-  def each_result &block
+  def each &block
     results.each &block
   end
 

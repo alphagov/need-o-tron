@@ -10,9 +10,9 @@ describe 'Searching for a need' do
     visit "/needs/new"
     fill_in "Need", with: name
     fill_in "Tags", with: options[:tags] if options.has_key?(:tags)
-    click_button "Create Need"             
+    click_button "Create Need"
     if options.has_key?(:edit_form_fields)
-      click_link 'Edit'                    
+      click_link 'Edit'
       options[:edit_form_fields].each do |field, value|
         (field == 'Writing team') ? select(value, from: field) : fill_in(field, with: value)
       end
@@ -38,27 +38,27 @@ describe 'Searching for a need' do
     create_need "Replace passport"
     survive_es_asynchonicity
 
-    click_link "View all needs"
+    click_link "All needs"
 
     search_for 'Replace passport'
     page.should have_css "#needs-table", text: 'Replace passport'
 
     search_for "Missing"
-    page.should have_content "Nothing found"
+    page.should have_content "No needs were found which match these criteria."
   end
 
-  it 'works when searching for a word from the Writing department field' do        
-    WritingDepartment.create name: "Ministry of Truth"     
+  it 'works when searching for a word from the Writing department field' do
+    WritingDepartment.create name: "Ministry of Truth"
     create_need "Get a new passport", edit_form_fields: { "Writing team" => "Ministry of Truth"}
     create_need "Get a new driving licence"
     survive_es_asynchonicity
 
-    click_link "View all needs"
+    click_link "All needs"
     search_for 'Truth'
     within '#needs-table' do
       page.should have_content 'Get a new passport'
       page.should have_no_content 'Get a new driving license'
-    end                
+    end
   end
 
   it 'allows filtering by facets' do
@@ -67,7 +67,7 @@ describe 'Searching for a need' do
 
     survive_es_asynchonicity
 
-    click_link "View all needs"
+    click_link "All needs"
     click_link "red"
 
     within '#needs-table' do
@@ -75,7 +75,7 @@ describe 'Searching for a need' do
       page.should have_no_content 'Learn to drive'
     end
 
-    click_link "View all needs"
+    click_link "All needs"
     click_link "blue"
     within '#needs-table' do
       page.should have_no_content 'Get a new passport'
@@ -90,7 +90,7 @@ describe 'Searching for a need' do
 
     survive_es_asynchonicity
 
-    click_link "View all needs"
+    click_link "All needs"
     click_link "blue"
     click_link "red"
     within '#needs-table' do

@@ -21,14 +21,6 @@ class NeedsController < InheritedResources::Base
     end
   end
 
-  def edit
-    edit! do |format|
-      format.html {
-        @need.fact_checkers.build while @need.fact_checkers.size < 5
-      }
-    end
-  end
-
   def show
     show! do |format|
       format.json
@@ -55,6 +47,6 @@ class NeedsController < InheritedResources::Base
   end
 
   def collection
-    @needs ||= Need.includes(:directgov_links, :fact_checkers, :existing_services, :justifications, :kind, :writing_department, {accountabilities: :department})
+    @needs ||= Need.includes(:fact_checkers, :sources, :kind, :writing_department, {accountabilities: :department})
   end
 end

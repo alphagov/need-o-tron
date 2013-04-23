@@ -1,0 +1,77 @@
+/*
+ *= require_self
+ *= require_tree .
+*/
+
+@import "bootstrap";
+
+header.navbar .navbar-inner {
+  background: #111;
+  padding: 0.5rem 1rem;
+  font-family: "Gill Sans", Helvetica, Arial, sans-serif;
+
+  .brand {
+    background: image-url('header-crown.png') no-repeat left 5px;
+    color: #fff;
+    text-shadow: none;
+    padding: 9px 10px 1px 42px;
+    margin-left: 0;
+    font-weight: normal;
+  }
+
+  p, p a, .nav li {
+    font-size: 1.05rem;
+    a { color: #fff; text-shadow: none; }
+  }
+}
+
+.search {
+  margin-top: 1em;
+}
+
+.search-filters {
+  h2 { font-size: 1.5em; line-height: 1.1em; }
+  h3 { font-size: 1em; line-height: 1.1em;  }
+
+  ul.facet li {
+    &.active {
+      padding: 0px 1em;
+      a.remove { display: inline-block; padding: 0.3em 0.5em; margin-left: 0.5em; }
+    }
+  }
+}
+
+ul.filters {
+  margin-left: 0;
+  padding: 0.5em 1em;
+
+  h3 { display: inline-block; padding-right: 1em; font-size: 1em; line-height: 1em; }
+  li { display: inline-block; padding-right: 1em; list-type: none; }
+}
+
+.label-review { background: #8967a3; }
+
+.centred {
+  margin: 0 auto;
+  float: none;
+}
+
+form.formtastic {
+  ul.nested_fields {
+    margin-left: 0;
+
+    li {
+      display: block;
+      list-style: none;
+    }
+    .control-group {
+      margin: 0;
+      display: inline-block;
+    }
+
+    .remove_nested_fields {
+      display: inline-block;
+      padding-left: 0.5em;
+    }
+  }
+}

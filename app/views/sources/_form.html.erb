@@ -12,10 +12,10 @@
   <% end %>
 
   <%= f.inputs do %>
-    <%= f.input :title, :as => :string %>
+    <%= f.input :title, :as => :string, :input_html => { :class => "input-block-level" } %>
     <%= f.input :kind, :as => :select, :collection => Source::KINDS.map {|k| [k.humanize, k]} %>
-    <%= f.input :url, :label => "URL", :as => :string %>
-    <%= f.input :body, :label => "Notes", :as => :text, :rows => "4" %>
+    <%= f.input :url, :label => "URL", :as => :string, :input_html => { :class => "input-block-level" } %>
+    <%= f.input :body, :label => "Notes", :as => :text, :rows => "4", :input_html => { :class => "input-block-level" } %>
   <% end %>
   <%= f.actions %>
 
