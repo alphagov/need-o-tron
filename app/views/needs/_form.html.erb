@@ -1,4 +1,4 @@
-<%= semantic_form_for(@need) do |f| %>
+<%= semantic_bootstrap_nested_form_for(@need) do |f| %>
   <% if @need.errors.any? %>
     <%= render 'errors' %>
   <% end %>
@@ -20,18 +20,31 @@
       <% end %>
       <%= f.input :writing_department, :label => 'Writing team' %>
 
-      <% i = 0 %><%= f.semantic_fields_for :accountabilities, accountabilities_for(@need) do |accountability| %>
-        <%= accountability.input :department, :as => :select, :collection => Department.order('name'), :label => (i == 0) ? 'Policy owner' : "&nbsp;" %>
-        <% i += 1 %>
+      <%= f.inputs "Policy owners" do %>
+        <ul class="nested_fields">
+          <%= f.semantic_fields_for :accountabilities do |accountability| %>
+            <li>
+              <%= accountability.input :department, :as => :select, :collection => Department.order('name'), :label => false %>
+              <%= accountability.link_to_remove "Remove" %>
+            </li>
+          <% end %>
+          <%= f.link_to_add "Add a policy owner", :accountabilities %>
+        </ul>
       <% end %>
 
-      <% i = 0 %><%= f.semantic_fields_for :fact_checkers do |fact_checker| %>
-        <%= fact_checker.input :email, :required => false, :label => (i == 0) ? 'Fact checker' : "&nbsp;" %>
-        <% i += 1 %>
+      <%= f.inputs "Fact checkers" do %>
+        <ul class="nested_fields">
+          <%= f.semantic_fields_for :fact_checkers do |fact_checker| %>
+            <li>
+              <%= fact_checker.input :email, :required => false, :label => false %>
+              <%= fact_checker.link_to_remove "Remove" %>
+            </li>
+          <% end %>
+          <%= f.link_to_add "Add a fact checker", :fact_checkers %>
+        </ul>
       <% end %>
 
     <% end %>
-
   <% end %>
 
   <%= f.actions %>

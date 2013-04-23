@@ -36,6 +36,7 @@ gem 'omniauth-gds', :require => 'omniauth-gds'
 
 gem 'jquery-rails', '2.2.1'
 gem 'bootstrap-sass', '2.3.1.0'
+gem 'nested_form', '0.3.2'
 
 # Gems used only for assets and not required
 # in production environments by default.
