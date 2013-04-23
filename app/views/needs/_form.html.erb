@@ -4,18 +4,20 @@
   <% end %>
 
   <%= f.inputs :id => 'overview' do %>
-    <%= f.input :title, :label => 'Need *' %>
-    <%= f.input :description, :label => 'Context', :hint => "provide some information about the circumstances surrounding this need" %>
-    <%= f.input :tag_list, :as => :string, :label => 'Tags', :hint => "separate tags with commas" %>
+    <%= f.input :title, :label => 'Need *', :input_html => { :class => "input-block-level" } %>
+    <%= f.input :description, :label => 'Context', :hint => "provide some information about the circumstances surrounding this need", :input_html => { :class => "input-block-level" } %>
+    <%= f.input :tag_list, :as => :string, :label => 'Tags', :hint => "separate tags with commas", :input_html => { :class => "input-block-level" } %>
   <% end %>
 
   <% if f.object.persisted? %>
     <%= f.inputs :id => 'metadata', :name => 'Product decision' do %>
       <%= f.input :kind %>
       <%= f.input :status, :collection => Need::STATUSES %>
-      <%= f.input :url %>
+      <%= f.input :url, :input_html => { :class => "input-block-level" } %>
       <%= f.input :priority, :as => 'select', :collection => Need::PRIORITIES_FOR_SELECT if @need.format_assigned?%>
-      <%= f.input :reason_for_formatting_decision if @need.format_assigned? %>
+      <% if @need.format_assigned? %>
+        <%= f.input :reason_for_formatting_decision, :input_html => { :class => "input-block-level" } %>
+      <% end %>
       <%= f.input :writing_department, :label => 'Writing team' %>
 
       <% i = 0 %><%= f.semantic_fields_for :accountabilities, accountabilities_for(@need) do |accountability| %>
