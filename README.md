@@ -4,7 +4,7 @@ For an overview of the need-o-tron visit [Richard Pope's introductory blog post]
 
 ## Getting set up
 
-Need-o-Tron is a Rails 3.1 application. It is built with ruby 1.9.2 and isn't 
+Need-o-Tron is a Rails 3.2 application. It is built with ruby 1.9.2 and isn't
 guaranteed to work with any previous versions. To get up and running you'll
 need ruby and bundler installed. It should then just be a case of running:
 
