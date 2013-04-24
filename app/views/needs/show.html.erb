@@ -1,139 +1,156 @@
 <% content_for(:title) { @need.title } %>
-<div id="need-overview">
+<section id="need" class="span12 centred">
+  <header>
+    <h2 class="need-status-block <%= @need.status %> span3">
+      <p class="need-id">#<%= @need.id %></p>
+      <p class="need-status"><%= status_name @need.status %></p>
+    </h2>
 
-<div id="id-status" class="<%= @need.status %>">
-  <h2 id="id-number">#<%= @need.id %></h2>
-  <h3 id="status"><%= status_name @need.status %></h3>
-</div>
-
-  <div id="need-title-description" class="need-section">
-    <h1><%= @need.title %>   <% if current_user.is_admin? %><small><%= link_to 'Edit', [:edit, @need] %></small><% end %></h1>
-    <p><%= markdown @need.description %></p>
-  </div>
-</div>
-<!-- end need-overview   -->
-
-<div id="need-details" class="two-thirds">
-
-  <div class="need-section sources">
-    <h3>Why are we doing this need?</h3>
-
-    <ul>
-      <% @need.sources.each do |source| %>
-      <li>
-        <h4>[<%= source.kind.humanize %>] &mdash; <%= source.title %> <%= link_to "edit", edit_need_source_path(@need, source) %></h4>
-        <p>
-          <% if source.url.present? %><%= link_to source.url, source.url %><br><% end %>
-          <% if source.body.present? %><%= source.body %><% end %>
-        </p>
-      </li>
-      <% end %>
-    </ul>
-
-    <p><%= link_to "Add a new source", new_need_source_path(@need), :class => 'button' %></p>
-  </div>
-
-  <div class="need-section">
-    <h3>Tags</h3>
-    <p><%= @need.tag_list %></p>
-  </div>
-
-</div><!-- end need-details -->
-
-<div id="need-meta" class="one-third">
-
-  <div class="need-section">
-
-    <% if @need.formatting_decision_made? %>
-    <p>Formatting decision made at <%= @need.formatting_decision_made_at %> by <%= @need.formatting_decision_maker %></p>
-    <p><%= @need.reason_for_formatting_decision %></p>
+    <h1><%= @need.title %></h1>
+    <% if current_user.is_admin? %>
+      <p class="need-actions"><%= link_to 'Edit', edit_need_path(@need) %></p>
     <% end %>
+  </header>
 
-    <% if @need.decision_made? %>
-    <p>Decision made at <%= @need.decision_made_at %> by <%= @need.decision_maker %></p>
-    <p><%= @need.reason_for_decision %></p>
-    <% end %>
-
-    <table>
-      <tr>
-        <th scope="row">Format type</th>
-        <td><%= @need.kind %></td>
-      </tr>
-      <tr>
-        <th scope="row">Created</th>
-        <td><%= time_ago_in_words(@need.created_at) %></td>
-      </tr>
-      <tr>
-        <th scope="row">Updated</th>
-        <td><%= time_ago_in_words(@need.updated_at) %></td>
-      </tr>
-      <tr>
-        <th scope="row">Added By</th>
-        <td><%= @need.creator %></td>
-      </tr>
-      <tr>
-        <th scope="row">Priority</th>
-        <td><%= @need.named_priority %></td>
-      </tr>
-      <tr>
-        <th scope="row">Policy Owner</th>
-        <td><%= @need.current_accountability_names.join(', ') rescue '' %></td>
-      </tr>
-      <tr>
-        <th scope="row">Fact Checkers</th>
-        <td><%= @need.current_fact_checker_emails.join(', ') %></td>
-      </tr>
-      <% if @need.writing_department %>
-      <tr>
-        <th scope="row">Writing Team</th>
-        <td><%= @need.writing_department.name %></td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
-
-  <% if current_user.is_admin? && @need.format_assigned? %>
-  <div class="need-section">
-    <p><%= start_work_link @need %></p>
-    <p><%= assign_work_link @need %></p>
-    <p><%= link_to 'Print label', print_need_path(@need), :class => 'button', :target => '_new' %></p>
-  </div>
+  <% if @need.decision_made? %>
+    <p class="need-decision">
+      <%= @need.reason_for_decision %> &mdash; decided by <%= @need.decision_maker.name %> on <%= @need.decision_made_at.strftime("%d %b %Y") %>
+    </p>
   <% end %>
-  <% if current_user.is_admin? && ! @need.in_progress? %>
-  <div class="need-section">
-    <p><%= button_to "Destroy need", @need, :method => :delete, :confirm => "Are you sure you want to permanently destroy this need?" %></p>
-    <p style="font-size: 0.85em">(Please use sparingly. It's for cleaning up data rather than rejecting needs.)</p>
-  </div>
+  <% if @need.status == Need::DONE and @need.url.present? %>
+    <p class="need-decision done">
+      This need is live &mdash; <%= link_to @need.url, @need.url %>
+    </p>
   <% end %>
 
-</div><!-- end need-meta -->
-
-<div id="need-progress">
-  <% if @need.errors.any? %>
-    <%= render 'errors' %>
-  <% end %>
-
-  <% if current_user.is_admin? %>
-    <% if @need.status == Need::NEW %>
-      <div class="ready-for-review">
-        <h3>Is this ready for review? Has evidence been provided?</h3>
-        <%= button_to 'Submit for review', need_path(@need, :need => {:status => Need::READY_FOR_REVIEW}), :method => :put %>
-      </div>
-    <% elsif @need.status == Need::READY_FOR_REVIEW %>
-      <%= render 'decision' %>
-    <% elsif @need.status == Need::FORMAT_ASSIGNED %>
-      <%= render 'mark_done' %>
-    <% end %>
-
-    <%= render 'icebox' %>
-  <% end %>
-  <% if !current_user.is_admin? %>
-    <div class="icebox">
-      <h3>This need is being reviewed by our team</h3>
+  <% if @need.description.present? %>
+    <div class="need-description">
+      <%= markdown @need.description %>
     </div>
   <% end %>
-</div><!-- end need-progress -->
 
-<br class="clear">
+  <% unless @need.status == Need::ICEBOX %>
+    <div class="need-section sources">
+      <h2>Why are we doing this need?</h2>
+
+      <ul>
+        <% @need.sources.each do |source| %>
+        <li>
+          <h3>[<%= source.kind.humanize %>] &mdash; <%= source.title %> <%= link_to "edit", edit_need_source_path(@need, source) %></h3>
+          <p>
+            <% if source.url.present? %><%= link_to source.url, source.url %><br><% end %>
+            <% if source.body.present? %><%= source.body %><% end %>
+          </p>
+        </li>
+        <% end %>
+      </ul>
+
+      <p><%= link_to "Add a new source", new_need_source_path(@need), :class => 'button' %></p>
+    </div>
+  <% end %>
+
+  <% if @need.formatting_decision_made? %>
+  <div class="need-section">
+    <% if @need.kind.present? %>
+      <h2>Why is this a <%= @need.kind %>?</h2>
+    <% else %>
+      <h2>What reasons for the formatting decision?</h2>
+    <% end %>
+
+    <p><%= @need.reason_for_formatting_decision %></p>
+    <p>Decided by <%= @need.formatting_decision_maker.name %> on <%= @need.formatting_decision_made_at.strftime("%d %b %Y") %>.</p>
+  </div>
+  <% end %>
+
+  <div id="need-meta" class="row">
+    <div class="span8">
+      <table class="table table-striped">
+        <tr>
+          <th scope="row">Format type</th>
+          <td><%= @need.kind %></td>
+        </tr>
+        <tr>
+          <th scope="row">Created</th>
+          <td><%= time_ago_in_words(@need.created_at) %> ago</td>
+        </tr>
+        <tr>
+          <th scope="row">Updated</th>
+          <td><%= time_ago_in_words(@need.updated_at) %> ago</td>
+        </tr>
+        <tr>
+          <th scope="row">Added By</th>
+          <td><% if @need.creator.present? %><%= @need.creator.name %><% else %>None<% end %></td>
+        </tr>
+        <tr>
+          <th scope="row">Tags</th>
+          <td><%= @need.tag_list %></td>
+        </tr>
+        <tr>
+          <th scope="row">Priority</th>
+          <td><%= @need.named_priority %></td>
+        </tr>
+        <tr>
+          <th scope="row">Policy Owner</th>
+          <td><%= @need.current_accountability_names.join(', ') rescue '' %></td>
+        </tr>
+        <tr>
+          <th scope="row">Fact Checkers</th>
+          <td><%= @need.current_fact_checker_emails.join(', ') %></td>
+        </tr>
+        <% if @need.writing_department %>
+        <tr>
+          <th scope="row">Writing Team</th>
+          <td><%= @need.writing_department.name %></td>
+        </tr>
+        <% end %>
+      </table>
+    </div>
+
+    <% if current_user.is_admin? %>
+    <div class="span4 need-toolbox">
+      <% if @need.status == Need::NEW %>
+        <%= button_to 'Submit for review', need_path(@need, :need => {:status => Need::READY_FOR_REVIEW}), :method => :put, :class => 'btn btn-block btn-primary btn-large' %>
+        <p style="font-size: 0.85em">Submit a need for review once evidence for the need has been provided.</p>
+      <% end %>
+
+      <% if @need.format_assigned? %>
+        <%= start_work_link @need %>
+        <%= assign_work_link @need %>
+        <p><%= link_to 'Print label', print_need_path(@need), :class => 'btn btn-block btn-large', :target => '_new' %></p>
+      <% end %>
+
+      <% if ! @need.in_progress? %>
+        <p><%= button_to "Destroy need", @need, :method => :delete, :confirm => "Are you sure you want to permanently destroy this need?", :class => "btn btn-large btn-block btn-danger" %></p>
+        <p style="font-size: 0.85em">(Please destroy sparingly &mdash; it's for cleaning up data rather than rejecting needs.)</p>
+      <% end %>
+    </div>
+    <% end %>
+
+  </div>
+
+  <div id="need-progress">
+    <% if @need.errors.any? %>
+      <%= render 'errors' %>
+    <% end %>
+
+    <% if current_user.is_admin? %>
+      <% if @need.status == Need::READY_FOR_REVIEW %>
+        <%= render 'decision' %>
+      <% elsif @need.being_worked_on? and @need.status != Need::DONE %>
+        <%= render 'mark_done' %>
+      <% end %>
+
+      <% unless [ Need::ICEBOX, Need::DONE ].include?(@need.status) %>
+        <%= render 'icebox' %>
+      <% end %>
+    <% else %>
+      <div class="icebox">
+        <h3>This need is being reviewed by our team</h3>
+      </div>
+    <% end %>
+  </div><!-- end need-progress -->
+
+  <br class="clear">
+</section>
 
 <% content_for :current_state, @need.status %>

@@ -14,6 +14,7 @@ describe NeedsController do
     describe "GET show.json" do
 
       describe "when loading show json" do
+        render_views
 
         before(:each) do
           @json_need = Need.new(

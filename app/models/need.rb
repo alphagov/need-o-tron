@@ -41,7 +41,7 @@ class Need < ActiveRecord::Base
 
   scope :undecided, where(:decision_made_at => nil)
   scope :decided, where('decision_made_at IS NOT NULL')
-  scope :in_state, proc { |s| where(:status => s).includes([:fact_checkers, :accountabilities, :creator, :kind, :directgov_links, :existing_services, :justifications, :writing_department]) }
+  scope :in_state, proc { |s| where(:status => s).includes([:fact_checkers, :accountabilities, :creator, :kind, :sources, :writing_department]) }
   default_scope order('priority, title')
 
   before_save :record_decision_info, :if => :reason_for_decision_changed?

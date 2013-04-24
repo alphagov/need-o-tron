@@ -1,0 +1,44 @@
+<table id="needs-table" class="table table-striped">
+  <thead>
+    <tr>
+      <% if local_assigns[:sortable_columns] %>
+        <%= sortable_heading('id') %>
+        <%= sortable_heading('title') %>
+        <%= sortable_heading('kind') %>
+        <%= sortable_heading('priority') %>
+        <%= sortable_heading('updated_at') %>
+      <% else %>
+        <th scope="col">ID</th>
+        <th scope="col">Title</th>
+        <th scope="col">Format</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Last updated</th>
+      <% end %>
+
+      <% if current_user.is_admin? %>
+        <th></th>
+        <th></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% needs.each do |need| %>
+      <tr>
+        <td>#<%= need.id %></td>
+        <th scope="row" style="width: 50%"><%= link_to need.title, need %> <% if !params[:in_state] %><span class="label <%= label_for need.status %>"><%= status_name need.status %></small><% end %></th>
+        <td class="need"><%= need.kind || "-" %></td>
+        <td><%= named_priority need.priority %></td>
+        <td><%= time_ago_in_words(need.updated_at, true) %></td>
+        <% if current_user.is_admin? %>
+          <td><%= link_to 'Edit', edit_need_path(need) %></td>
+          <td><%= link_to 'Delete', need, confirm: 'Are you sure?', method: :delete %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p id="csv-download"><a class="button" href="<%= needs_path(:format => 'csv', :in_state => params[:in_state]) %>">Download as a CSV</a></p>
+<% if current_user.is_admin? %>
+  <p id="csv-upload"><%= link_to("Import a CSV with updated data", new_imports_path) %></p>
+<% end %>

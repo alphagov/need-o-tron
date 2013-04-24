@@ -1,11 +1,11 @@
-<div class="format-assigned">
+<div class="format-assigned well">
   <h3>Ready to make a decision?</h3>
   <%= semantic_form_for(@need) do |f| %>
     <%= f.inputs do %>
       <%= f.input :kind %>
-      <%= f.input :status, :input_html => {:value => 'format-assigned'}, :as => 'hidden' %>
+      <%= f.input :status, :input_html => {:value => 'format-assigned'}, :as => 'hidden', :label => false %>
       <%= f.input :priority, :as => :select, :collection => Need::PRIORITIES_FOR_SELECT %>
-      <%= f.input :reason_for_formatting_decision %>
+      <%= f.input :reason_for_formatting_decision, :input_html => { :class => "input-block-level" } %>
     <% end %>
     <%= f.actions do %>
       <%= f.action :submit, label: 'Decision made' %>
