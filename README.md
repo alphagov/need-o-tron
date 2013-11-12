@@ -34,5 +34,8 @@ simply use the first user in your database. To set that up you'll want something
 like:
 
     % rails console
-    User.create(:name => 'First User', :email => 'first@user.com', :uid => 1)
+    u = User.new(:name => 'First User', :email => 'first@user.com', :uid => 1)
+    u.permissions = ["signin", "admin"]
+    u.save
+
     exit
