@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 source 'https://BnrJb6FZyzspBboNJzYZ@gem.fury.io/govuk/'
 
-gem 'rails', '3.2.13'
+gem 'rails', '3.2.16'
 
 gem 'mysql2', '0.3.10'
 gem 'rdiscount', '1.6.8'
