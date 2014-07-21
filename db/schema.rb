@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130409064039) do
+ActiveRecord::Schema.define(:version => 20140721092948) do
 
   create_table "accountabilities", :force => true do |t|
     t.integer  "department_id"
@@ -127,6 +127,7 @@ ActiveRecord::Schema.define(:version => 20130409064039) do
     t.string  "email",                                  :null => false
     t.text    "permissions"
     t.boolean "remotely_signed_out", :default => false
+    t.string  "organisation_slug"
   end
 
   create_table "writing_departments", :force => true do |t|
