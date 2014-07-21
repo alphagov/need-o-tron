@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-source 'https://BnrJb6FZyzspBboNJzYZ@gem.fury.io/govuk/'
 
 gem 'rails', '3.2.17'
 
@@ -12,14 +11,14 @@ gem 'gds-api-adapters', '4.1.3'
 if ENV['BUNDLE_ENV']
   gem "gds-sso", :path => '../gds-sso'
 else
-  gem "gds-sso", '3.0.2'
+  gem "gds-sso", '9.3.0'
 end
 
 gem 'carrierwave', '0.5.8'
 
 gem 'tire', '0.5.3'
 
-gem 'rabl', '0.5.1'
+gem 'rabl', '~> 0.6.14'
 gem 'formtastic', '2.2.1'
 gem 'formtastic-bootstrap', '2.1.1'
 
@@ -28,11 +27,9 @@ gem 'has_scope', '0.5.1'
 
 gem 'plek', '1.3.1'
 
-gem 'exception_notification', '3.0.0'
+gem 'exception_notification', '3.0.1'
 gem 'lograge', '0.1.2'
 gem 'unicorn', '4.3.1'
-
-gem 'omniauth-gds', :require => 'omniauth-gds'
 
 gem 'jquery-rails', '2.2.1'
 gem 'bootstrap-sass', '2.3.1.0'

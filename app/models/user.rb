@@ -1,9 +1,8 @@
-class User < ActiveRecord::Base  
+class User < ActiveRecord::Base
   include GDS::SSO::User
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :name, :uid
-  attr_accessible :uid, :email, :name, :permissions, as: :oauth
 
   serialize :permissions, Array
 
